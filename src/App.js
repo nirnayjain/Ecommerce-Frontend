@@ -17,9 +17,9 @@ function App() {
       <Productrow />
       <Categorybanner />
       <Newproducts />
-      <Categorybanner/>
-      <Bottombanner/>
-      <Footer/>
+      <Categorybanner />
+      <Bottombanner />
+      <Footer />
     </div>
   );
 }

@@ -1,8 +1,20 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 import { API } from "../API";
+import { useState } from "react";
 
 function Navigation() {
+  let [category, setCategory] = useState([]);
+  useEffect(() => {
+    async function getCategory() {
+      let categories = await axios.get(`${API}/api/category`);
+      localStorage.setItem("category", JSON.stringify(categories?.data));
+      setCategory(categories?.data);
+    }
+
+    getCategory();
+  }, []);
+
   return (
     <div id="ntheader" className="ntheader header_4 h_icon_iccl">
       <div className="ntheader_wrapper pr z_200">
@@ -20,101 +32,27 @@ function Navigation() {
                         className="row lazy_menu lazyload"
                         data-jspackery='{ "itemSelector": ".sub-column-item","gutter": 0,"percentPosition": true,"originLeft": true }'
                       >
-                        <div className="type_mn_link menu-item sub-column-item col-3">
-                          <a href="#">Face</a>
-                          <ul className="sub-column not_tt_mn">
-                            <li className="menu-item">
-                              <a href="#">
-                                Face Primer
-                                <span className="lbc_nav lb_menu_hot ml__5">
+                        {category.map((item) => {
+                          return (
+                            <div className="type_mn_link menu-item sub-column-item col-3">
+                              <a href="#">{item.category}</a>
+                              <ul className="sub-column not_tt_mn">
+                                {item.subCategory.map((subCate) => {
+                                  return (
+                                    <li className="menu-item">
+                                      <a href="#">
+                                        {subCate.category}
+                                        {/* <span className="lbc_nav lb_menu_hot ml__5">
                                   Hot
-                                </span>
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">
-                                Concealer
-                                <span className="lbc_nav lb_menu_hot ml__5">
-                                  Hot
-                                </span>
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Foundation</a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Compact</a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Contour</a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="type_mn_link menu-item sub-column-item col-3">
-                          <a href="#">Eyes</a>
-                          <ul className="sub-column not_tt_mn">
-                            <li className="menu-item">
-                              <a href="#">Kajal</a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Eyeliner</a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Mascara</a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Eyeshadows</a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Eye brow enhancers</a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="type_mn_link menu-item sub-column-item col-3">
-                          <a href="#">Lips</a>
-                          <ul className="sub-column not_tt_mn">
-                            <li className="menu-item">
-                              <a href="#">Lipstick</a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Liquid Lipstick</a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Lip crayon</a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Lip gloss</a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Lip liner</a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="type_mn_link menu-item sub-column-item col-3">
-                          <a href="#">Nails</a>
-                          <ul className="sub-column not_tt_mn">
-                            <li className="menu-item">
-                              <a href="#">
-                                Nail polish
-                                <span className="lbc_nav lb_menu_hot ml__5">
-                                  hot
-                                </span>
-                              </a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Nail art kits</a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Nail polish sets</a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Nail care</a>
-                            </li>
-                            <li className="menu-item">
-                              <a href="#">Nail polish remover</a>
-                            </li>
-                          </ul>
-                        </div>
+                                </span> */}
+                                      </a>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>

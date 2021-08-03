@@ -1,1 +1,1 @@
-export const API = "http://api.tellytell.info";
+export const API = "https://popstoreeee.herokuapp.com";

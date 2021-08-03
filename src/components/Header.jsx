@@ -1,7 +1,44 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { API } from "../API";
 import Toplabel from "./Toplabel";
 
 function Header() {
+  let [configuration, setConfiguration] = useState([]);
+  let [address, setAddress] = useState([]);
+  let [featuredProd, setFeaturedProd] = useState([]);
+  let [logo, setLogo] = useState("");
+  let [facebookUrl, setfacebookUrl] = useState("");
+  let [instagramUrl, setinstagramUrl] = useState("");
+  let [twiiterUrl, settwiiterUrl] = useState("");
+  let [linkedinUrl, setlinkedinUrl] = useState("");
+
+  useEffect(() => {
+    async function getFeatured() {
+      const featuredProduct = await axios.get(`${API}/api/featured`);
+      localStorage.setItem(
+        "Featured",
+        JSON.stringify(featuredProduct?.data.featured)
+      );
+    }
+    async function getConfig() {
+      const config = await axios.get(`${API}/api/config`);
+      localStorage.setItem(
+        "configuration",
+        JSON.stringify(config?.data.result[0])
+      );
+      setLogo(config?.data.result[0].logo);
+      setfacebookUrl(config?.data.result[0].socialMedia[0].facebook);
+      setinstagramUrl(config?.data.result[0].socialMedia[0].instagram);
+      settwiiterUrl(config?.data.result[0].socialMedia[0].twitter);
+      setlinkedinUrl(config?.data.result[0].socialMedia[0].linkedin);
+    }
+    getConfig();
+    getFeatured();
+  }, []);
+
   return (
     <>
       <Toplabel />
@@ -27,22 +64,31 @@ function Header() {
               </a>
               <div className="dn db_lg cus_txt_h">
                 <div className="nt-social">
-                  <a href="#" className="facebook cb ttip_nt tooltip_top_right">
+                  <a
+                    href={facebookUrl}
+                    className="facebook cb ttip_nt tooltip_top_right"
+                  >
                     <span className="tt_txt">Follow on Facebook</span>
                     <i className="facl facl-facebook"></i>
                   </a>
-                  <a href="#" className="twitter cb ttip_nt tooltip_top_right">
+                  <a
+                    href={twiiterUrl}
+                    className="twitter cb ttip_nt tooltip_top_right"
+                  >
                     <span className="tt_txt">Follow on Twitter</span>
                     <i className="facl facl-twitter"></i>
                   </a>
                   <a
-                    href="#"
+                    href={instagramUrl}
                     className="instagram cb ttip_nt tooltip_top_right"
                   >
                     <span className="tt_txt">Follow on Instagram</span>
                     <i className="facl facl-instagram"></i>
                   </a>
-                  <a href="#" className="linkedin cb ttip_nt tooltip_top_right">
+                  <a
+                    href={linkedinUrl}
+                    className="linkedin cb ttip_nt tooltip_top_right"
+                  >
                     <span className="tt_txt">Follow on Linkedin</span>
                     <i className="facl facl-linkedin"></i>
                   </a>
@@ -61,7 +107,7 @@ function Header() {
                 <a className="dib" href="index.html">
                   <img
                     className="w__100 logo_normal dn db_lg max-width__160px"
-                    src="assets/images/home-cosmetics/kalles-green-01.png"
+                    src={logo[0]?.Headerlogo}
                   />
                   <img
                     className="w__100 logo_sticky dn max-width__160px"
