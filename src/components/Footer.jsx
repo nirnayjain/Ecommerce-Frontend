@@ -1,9 +1,26 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { API } from "../API";
 
 function Footer() {
-  let configuration = JSON.parse(localStorage.getItem("configuration"));
-  let category = JSON.parse(localStorage.getItem("category"));
-  console.log(category);
+  const [configuration, setConfiguration] = useState("");
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    async function getCategory() {
+      let categories = await axios.get(`${API}/api/category`);
+      setCategory(categories?.data);
+    }
+    async function getConfiguration() {
+      const configuration = await axios.get(`${API}/api/config`);
+      setConfiguration(configuration.data.result);
+    }
+    getConfiguration();
+    getCategory();
+  }, []);
+  console.log(configuration);
   return (
     <div id="nt_wrapper">
       <footer id="nt_footer" className="bgbl footer-1">
@@ -26,7 +43,7 @@ function Footer() {
                           <a className="db" href="index.html">
                             <img
                               className="w__100 mb__15 lz_op_ef lazyload max-width__95px"
-                              src={configuration.logo[0].Footerlogo}
+                              src={configuration[0]?.logo[0].Footerlogo}
                               data-src="assets/images/svg/pop.svg"
                             />
                           </a>
@@ -34,42 +51,42 @@ function Footer() {
                         <p>
                           <i className="pegk pe-7s-map-marker"> </i>
                           <span>
-                            {configuration.address[0].address}
+                            {configuration[0]?.address[0].address}
                             <br />
                             <span className="pl__30">
                               {" "}
-                              {`${configuration.address[0].city} , ${configuration.address[0].country}`}
+                              {`${configuration[0]?.address[0].city} , ${configuration[0]?.address[0].country}`}
                             </span>
                           </span>
                         </p>
                         <p>
                           <i className="pegk pe-7s-call"></i>{" "}
-                          <span>{configuration.address[0].contact} </span>
+                          <span>{configuration[0]?.address[0].contact} </span>
                         </p>
                         <div className="nt-social">
                           <a
-                            href={configuration.socialMedia[0].facebook}
+                            href={configuration[0]?.socialMedia[0].facebook}
                             className="facebook cb ttip_nt tooltip_top"
                           >
                             <span className="tt_txt">Follow on Facebook</span>
                             <i className="facl facl-facebook"></i>
                           </a>
                           <a
-                            href={configuration.socialMedia[0].twitter}
+                            href={configuration[0]?.socialMedia[0].twitter}
                             className="twitter cb ttip_nt tooltip_top"
                           >
                             <span className="tt_txt">Follow on Twitter</span>
                             <i className="facl facl-twitter"></i>
                           </a>
                           <a
-                            href={configuration.socialMedia[0].instagram}
+                            href={configuration[0]?.socialMedia[0].instagram}
                             className="instagram cb ttip_nt tooltip_top"
                           >
                             <span className="tt_txt">Follow on Instagram</span>
                             <i className="facl facl-instagram"></i>
                           </a>
                           <a
-                            href={configuration.socialMedia[0].linkedin}
+                            href={configuration[0]?.socialMedia[0].linkedin}
                             className="linkedin cb ttip_nt tooltip_top"
                           >
                             <span className="tt_txt">Follow on Linkedin</span>
@@ -203,7 +220,10 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div id="kalles-section-footer_bot" className="kalles-section footer__bot">
+        <div
+          id="kalles-section-footer_bot"
+          className="kalles-section footer__bot"
+        >
           <div className="footer__bot_wrap pt__20 pb__20">
             <div className="container pr tc">
               <div className="row">
