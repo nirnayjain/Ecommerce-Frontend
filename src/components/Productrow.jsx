@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Productrow() {
   return (
@@ -60,9 +61,9 @@ function Productrow() {
                 </div>
                 <div class="product-info mt__15">
                   <h3 class="product-title pr fs__14 mg__0 fwm">
-                    <a class="cd chp" href="product-detail.html">
+                    <Link class="cd chp" to="/productDetails">
                       Skin Medical HA5
-                    </a>
+                    </Link>
                   </h3>
                   <span class="price dib mb__5">
                     <span class="money">Rs. 29.00</span>{" "}

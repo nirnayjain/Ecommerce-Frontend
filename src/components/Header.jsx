@@ -104,7 +104,7 @@ function Header() {
             </div>
             <div className="col-lg-6 col-md-6 col-6 tc">
               <div className="branding ts__05 lh__1">
-                <a className="dib" href="index.html">
+                <a className="dib" href="/">
                   <img
                     className="w__100 logo_normal dn db_lg max-width__160px"
                     src={logo[0]?.Headerlogo}
