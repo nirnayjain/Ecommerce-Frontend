@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { API } from "../API";
+import Popform from "./Popform";
 import Toplabel from "./Toplabel";
 
 function Header() {
@@ -166,6 +167,7 @@ function Header() {
           </div>
         </div>
       </div>
+      <Popform />
     </>
   );
 }

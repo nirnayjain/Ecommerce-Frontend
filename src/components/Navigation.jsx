@@ -15,6 +15,8 @@ function Navigation() {
     getCategory();
   }, []);
 
+  console.log(category);
+
   return (
     <div id="ntheader" className="ntheader header_4 h_icon_iccl">
       <div className="ntheader_wrapper pr z_200">
@@ -22,68 +24,35 @@ function Navigation() {
           <div className="header__bot border_true dn db_lg">
             <nav className="nt_navigation tc hover_side_up nav_arrow_false">
               <ul id="nt_menu_id" className="nt_menu in_flex wrap al_center">
-                <li className="type_mega menu_wid_cus menu-item has-children menu_has_offsets menu_center pos_center">
-                  <a className="lh__1 flex al_center pr" href="#">
-                    Makeup
-                  </a>
-                  <div className="cus sub-menu">
-                    <div className="container megamenu-content-1000px">
-                      <div
-                        className="row lazy_menu lazyload"
-                        data-jspackery='{ "itemSelector": ".sub-column-item","gutter": 0,"percentPosition": true,"originLeft": true }'
-                      >
-                        {category.map((item) => {
-                          return (
-                            <div className="type_mn_link menu-item sub-column-item col-3">
-                              <a href="#">{item.category}</a>
-                              <ul className="sub-column not_tt_mn">
-                                {item.subCategory.map((subCate) => {
-                                  return (
-                                    <li className="menu-item">
-                                      <a href="#">
-                                        {subCate.category}
-                                        {/* <span className="lbc_nav lb_menu_hot ml__5">
-                                  Hot
-                                </span> */}
-                                      </a>
-                                    </li>
-                                  );
-                                })}
-                              </ul>
-                            </div>
-                          );
-                        })}
+                {category.map((cate, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className="type_mega menu_wid_cus menu-item has-children menu_has_offsets menu_center pos_center"
+                    >
+                      <div class="dropdown type_mn_link menu-item sub-column-item col-3">
+                        <a
+                          href="#"
+                          style={{ color: "black", whiteSpace: "nowrap" }}
+                        >
+                          {cate.category}
+                        </a>
+
+                        <div class="dropdown-content">
+                          {cate.subCategory.map((subcate) => {
+                            return (
+                              <a className="lh__1 flex al_center pr kalles-lbl__nav-sale">
+                                {subcate.category}
+                              </a>
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </li>
-                <li className="type_mega menu_wid_cus menu-item has-children menu_has_offsets menu_center pos_center">
-                  <a className="lh__1 flex al_center pr" href="#">
-                    {" "}
-                    Skin<span className="lbc_nav">New</span>
-                  </a>
-                </li>
-                <li className="type_mega menu_wid_cus menu-item has-children menu_has_offsets menu_center pos_center">
-                  <a className="lh__1 flex al_center pr" href="#">
-                    Hair
-                  </a>
-                </li>
-                <li className="type_mega menu_wid_cus menu-item has-children menu_has_offsets menu_center pos_center">
-                  <a className="lh__1 flex al_center pr" href="#">
-                    Health & Wellness
-                  </a>
-                </li>
-                <li className="type_mega menu_wid_cus menu-item has-children menu_has_offsets menu_center pos_center">
-                  <a className="lh__1 flex al_center pr" href="#">
-                    Men
-                  </a>
-                </li>
-                <li className="type_mega menu_wid_cus menu-item has-children menu_has_offsets menu_center pos_center">
-                  <a className="lh__1 flex al_center pr" href="#">
-                    Fragrance
-                  </a>
-                </li>
-                <li className="type_mega menu_wid_cus menu-item has-children menu_has_offsets menu_center pos_center">
+                    </li>
+                  );
+                })}
+
+                {/* <li className="type_mega menu_wid_cus menu-item has-children menu_has_offsets menu_center pos_center">
                   <a
                     className="lh__1 flex al_center pr kalles-lbl__nav-sale"
                     href="#"
@@ -403,8 +372,8 @@ function Navigation() {
                         </div>
                       </div>
                     </div>
-                  </div>
-                </li>
+                  </div> 
+                </li>*/}
               </ul>
             </nav>
           </div>

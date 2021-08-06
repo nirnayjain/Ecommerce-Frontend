@@ -1,6 +1,29 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { API } from "../API";
 
 function Categorybanner() {
+  let [featuredCategory, setFeaturedCategory] = useState([]);
+  let featuredCategoryList = [];
+
+  useEffect(() => {
+    async function getCategory() {
+      let category = await axios.get(`${API}/api/category`);
+
+      if (category) {
+        category.data.map((cate) => {
+          if (cate.featured) {
+            featuredCategoryList.push(cate);
+          }
+        });
+        setFeaturedCategory(featuredCategoryList);
+      }
+    }
+    getCategory();
+  }, []);
+
   return (
     <div classNameName="container">
       <div className="kalles-section nt_section type_collection_list">
@@ -19,7 +42,35 @@ function Categorybanner() {
             <span className="section-subtitle db tc sub-title"></span>
           </div>
           <div className="mt__30 nt_cats_holder row equal_nt hoverz_true cat_size_4 cat_lay4_2 cat_lay5_1 cat_space_30 cat_design_1">
-            <div className="col-md-6 col-12">
+            {featuredCategory.map((item, index) => {
+              return (
+                <div className="col-md-6 col-12" key={index}>
+                  <div className="row">
+                    <div
+                      className={`cat_grid_item cat_space_item cat_grid_item_1 col-12`}
+                    >
+                      <div className="cat_grid_item__content pr oh">
+                        <a
+                          href="shop-left-sidebar.html"
+                          className="db cat_grid_item__link"
+                        >
+                          <div
+                            className="cat_grid_item__overlay item__position nt_bg_lz lazyload center"
+                            data-bgset={item.image}
+                          ></div>
+                        </a>
+                        <div className={`cat_grid_item__wrapper pe_none`}>
+                          <div className="cat_grid_item__title">
+                            {item.category}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            {/* <div className="col-md-6 col-12">
               <div className="row">
                 <div className="cat_grid_item cat_space_item cat_grid_item_1 col-12">
                   <div className="cat_grid_item__content pr oh">
@@ -54,8 +105,8 @@ function Categorybanner() {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-6 col-12">
+            </div> */}
+            {/* <div className="col-md-6 col-12">
               <div className="row">
                 <div className="cat_grid_item cat_space_item cat_grid_item_2 col-12">
                   <div className="cat_grid_item__content pr oh">
@@ -90,7 +141,7 @@ function Categorybanner() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

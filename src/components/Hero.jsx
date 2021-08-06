@@ -1,16 +1,6 @@
 import React from "react";
+import { useEffect } from "react";
 
-let data = [
-  {
-    name: "Nihal",
-  },
-  {
-    name: "Nayan",
-  },
-  {
-    name: "Nipun",
-  },
-];
 let featured = JSON.parse(localStorage.getItem("Featured"));
 
 function Hero() {
@@ -21,9 +11,12 @@ function Hero() {
           className="fade_flick_1 slideshow row no-gutters equal_nt nt_slider js_carousel prev_next_0 btn_owl_1 dot_owl_2 dot_color_3 btn_vi_2"
           data-flickity='{ "fade":0,"cellAlign": "center","imagesLoaded": 0,"lazyLoad": 0,"freeScroll": 0,"wrapAround": true,"autoPlay" : 0,"pauseAutoPlayOnHover" : true, "rightToLeft": false, "prevNextButtons": false,"pageDots": true, "contain" : 1,"adaptiveHeight" : 1,"dragThreshold" : 5,"percentPosition": 1 }'
         >
-          {featured?.map((item) => {
+          {featured?.map((item, index) => {
             return (
-              <div className="col-12 slideshow__slide kalles-cosmetics__main-slide__layout-01">
+              <div
+                key={index}
+                className="col-12 slideshow__slide kalles-cosmetics__main-slide__layout-01"
+              >
                 <div className="oh pr nt_img_txt bg-transparent">
                   <div className="js_full_ht4 img_slider_block dek_img_slide">
                     <div
@@ -50,7 +43,7 @@ function Hero() {
                         <div className="slt4_space kalles-cosmetics__main-slide-01__br-02"></div>
                         <a
                           className="slt4_btn button pe_auto round_false btn_icon_false kalles-cosmetics__main-slide-01__btn"
-                          href="#"
+                          href={`/productDetails/${item._id}`}
                         >
                           SHOP NOW
                         </a>

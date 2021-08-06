@@ -21,7 +21,6 @@ function Routes() {
           <Productrow />
           <Categorybanner />
           <Newproducts />
-          <Categorybanner />
           <Bottombanner />
           <Footer />
         </Route>

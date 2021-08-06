@@ -16,6 +16,7 @@ function Producdetails() {
   useEffect(() => {
     async function getProduct() {
       const product = await axios.get(`${API}/api/product/${id}`);
+      console.log(product);
       setproductDetailes(product.data.product);
     }
     getProduct();
@@ -60,9 +61,9 @@ function Producdetails() {
                             class="img_ptw p_ptw js-sl-item p-item sp-pr-gallery__img w__100 nt_bg_lz lazyload media_id_001 padding-top__127_571"
                             data-mdid="001"
                             data-mdtype="image"
-                            data-bgset={productDetailes.image}
+                            data-bgset={productDetailes?.image}
                             data-ratio="0.7838776928422516"
-                            data-src={productDetailes.image}
+                            data-src={productDetailes?.image}
                             data-width="1128"
                             data-height="1439"
                             data-cap="Short Sleeved Hoodie"
@@ -107,16 +108,16 @@ function Producdetails() {
                     <div class="theiaStickySidebar">
                       <div class="kalles-section-pr_summary kalles-section summary entry-summary mt__30">
                         <h1 class="product_title entry-title fs__16">
-                          {productDetailes.title}
+                          {productDetailes?.title}
                         </h1>
                         <div class="flex wrap fl_between al_center price-review">
                           <p class="price_range" id="price_ppr">
-                            <del>Rs. {productDetailes.sale_price}</del>
-                            <ins>Rs. {productDetailes.price}</ins>
+                            <del>Rs. {productDetailes?.sale_price}</del>
+                            <ins>Rs. {productDetailes?.price}</ins>
                           </p>
                         </div>
                         <div class="pr_short_des">
-                          <p class="mg__0">{productDetailes.description}</p>
+                          <p class="mg__0">{productDetailes?.description}</p>
                         </div>
                         <div class="btn-atc atc-slide btn_des_1 btn_txt_3">
                           <div id="callBackVariant_ppr">
@@ -206,7 +207,7 @@ function Producdetails() {
                           <span class="sku_wrapper">
                             <span class="cb">SKU:</span>{" "}
                             <span class="sku value cg d-inline-block">
-                              {productDetailes.sku}
+                              {productDetailes?.sku}
                             </span>
                           </span>
                           <span class="posted_in">
