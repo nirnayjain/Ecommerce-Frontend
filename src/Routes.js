@@ -9,6 +9,8 @@ import Navigation from "./components/Navigation";
 import Newproducts from "./components/Newproducts";
 import Productrow from "./components/Productrow";
 import Producdetails from "./components/Producdetails";
+import Shop from "./components/Shop";
+import Shoppingcart from "./components/Shoppingcart";
 
 function Routes() {
   return (
@@ -25,6 +27,8 @@ function Routes() {
           <Footer />
         </Route>
         <Route path="/productDetails/:id" exact component={Producdetails} />
+        <Route path="/shop/:subCategory" exact component={Shop} />
+        <Route path="/cart" exact component={Shoppingcart} />
       </Switch>
     </Router>
   );

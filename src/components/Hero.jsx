@@ -43,7 +43,7 @@ function Hero() {
                         <div className="slt4_space kalles-cosmetics__main-slide-01__br-02"></div>
                         <a
                           className="slt4_btn button pe_auto round_false btn_icon_false kalles-cosmetics__main-slide-01__btn"
-                          href={`/productDetails/${item._id}`}
+                          href={`/featured_productDetails/${item._id}`}
                         >
                           SHOP NOW
                         </a>
