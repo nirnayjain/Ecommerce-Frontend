@@ -5,6 +5,10 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+import { Provider } from "react-redux";
+import { applyMiddleware, createStore } from "redux";
+import cartReducer from "./Reducer/cartReducer";
+import thunk from "redux-thunk";
 
 // optional configuration
 const options = {
@@ -16,10 +20,14 @@ const options = {
   transition: transitions.SCALE,
 };
 
+const store = createStore(cartReducer, applyMiddleware(thunk));
+
 ReactDOM.render(
   <React.StrictMode>
     <AlertProvider template={AlertTemplate} {...options}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </AlertProvider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -11,6 +11,7 @@ import Productrow from "./components/Productrow";
 import Producdetails from "./components/Producdetails";
 import Shop from "./components/Shop";
 import Shoppingcart from "./components/Shoppingcart";
+import Checkout from "./components/Checkout";
 
 function Routes() {
   return (
@@ -29,6 +30,7 @@ function Routes() {
         <Route path="/productDetails/:id" exact component={Producdetails} />
         <Route path="/shop/:subCategory" exact component={Shop} />
         <Route path="/cart" exact component={Shoppingcart} />
+        <Route path="/checkout" exact component={Checkout} />
       </Switch>
     </Router>
   );

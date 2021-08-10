@@ -1,10 +1,13 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Actions/cartAction";
 import { API } from "../API";
 
 function Newproducts() {
   let [newArrival, setnewArrival] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
     async function getnewArrival() {
       let product = await axios.get(`${API}/api/product/new`);
@@ -12,6 +15,10 @@ function Newproducts() {
     }
     getnewArrival();
   }, []);
+
+  function addCart(id) {
+    dispatch(addToCart(id));
+  }
 
   return (
     <div className="container">
@@ -29,9 +36,12 @@ function Newproducts() {
             <span className="section-subtitle db tc"></span>
           </div>
           <div className="products nt_products_holder row fl_center row_pr_1 cdt_des_5 round_cd_true nt_cover ratio_nt position_8 space_30">
-            {newArrival?.map((product) => {
+            {newArrival?.map((product, index) => {
               return (
-                <div className="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
+                <div
+                  key={index}
+                  className="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1"
+                >
                   <div className="product-inner pr">
                     <div className="product-image pr oh lazyload">
                       {/* <span className="tc nt_labels pa pe_none cw">
@@ -57,6 +67,7 @@ function Newproducts() {
                       </div>
                       <div className="hover_button op__0 tc pa flex column ts__03">
                         <a
+                          onClick={() => addCart(product._id)}
                           href="#"
                           className="pr pr_atc cd br__40 bgw tc dib js_addtc cb chp ttip_nt tooltip_top_left"
                         >

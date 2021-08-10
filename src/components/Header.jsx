@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { API } from "../API";
+import Cartpopup from "./Cartpopup";
 import Popform from "./Popform";
 import Toplabel from "./Toplabel";
 
@@ -168,6 +169,7 @@ function Header() {
         </div>
       </div>
       <Popform />
+      <Cartpopup />
     </>
   );
 }

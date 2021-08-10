@@ -5,6 +5,7 @@ import { useState } from "react";
 
 function Navigation() {
   let [category, setCategory] = useState([]);
+
   useEffect(() => {
     async function getCategory() {
       let categories = await axios.get(`${API}/api/category`);
@@ -14,8 +15,6 @@ function Navigation() {
 
     getCategory();
   }, []);
-
-  console.log(category);
 
   return (
     <div id="ntheader" className="ntheader header_4 h_icon_iccl">
