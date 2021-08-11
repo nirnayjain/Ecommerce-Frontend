@@ -20,6 +20,7 @@ export const viewCart = () => {
         },
       })
       .then((response) => {
+        console.log(response.data);
         const cartItems = response.data;
         dispatch(viewCartSuccess(cartItems));
       });
@@ -50,7 +51,7 @@ export const addToCart = (id) => {
         }
       )
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         dispatch(addToCartSuccess(response.data.message));
       });
   };

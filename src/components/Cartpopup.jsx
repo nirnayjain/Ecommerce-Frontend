@@ -11,15 +11,14 @@ import {
 
 function Cartpopup() {
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState("");
+  const [quantity, setQuantity] = useState([]);
   const items = useSelector((state) => state.cartItems);
   let cartItem = [];
   useEffect(() => {
     dispatch(viewCart());
-  }, [cartItem]);
-  cartItem = items?.cartItems;
+  }, []);
 
-  
+  cartItem = items?.cartItems;
 
   function handleDelete(id) {
     dispatch(removeFromCart(id));

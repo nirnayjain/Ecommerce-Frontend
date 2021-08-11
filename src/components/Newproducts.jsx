@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../Actions/cartAction";
+import { addToCart, viewCart } from "../Actions/cartAction";
 import { API } from "../API";
 
 function Newproducts() {
@@ -18,6 +18,7 @@ function Newproducts() {
 
   function addCart(id) {
     dispatch(addToCart(id));
+    
   }
 
   return (
