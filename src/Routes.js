@@ -12,6 +12,8 @@ import Producdetails from "./components/Producdetails";
 import Shop from "./components/Shop";
 import Shoppingcart from "./components/Shoppingcart";
 import Checkout from "./components/Checkout";
+import Paymentpage from "./components/Paymentpage";
+import Paymentsuccess from "./components/Paymentsuccess";
 
 function Routes() {
   return (
@@ -31,6 +33,8 @@ function Routes() {
         <Route path="/shop/:subCategory" exact component={Shop} />
         <Route path="/cart" exact component={Shoppingcart} />
         <Route path="/checkout" exact component={Checkout} />
+        <Route path="/payment/:id" exact component={Paymentpage} />
+        <Route path="/payment-success" exact component={Paymentsuccess} />
       </Switch>
     </Router>
   );

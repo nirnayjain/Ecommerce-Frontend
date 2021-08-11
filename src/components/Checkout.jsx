@@ -1,7 +1,9 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { API } from "../API";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -20,11 +22,14 @@ function Checkout() {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [orderNote, setOrderNote] = useState("");
+  const [total, setTotal] = useState("");
 
   let cartItem = [];
   let totalPrice = 0;
   let product = [];
   const token = localStorage.getItem("token");
+  const history = useHistory();
+  const alert = useAlert();
   cartItem = items?.cartItems;
 
   cartItem?.map((item) => {
@@ -50,15 +55,33 @@ function Checkout() {
         city,
         orderNote,
         product,
+        Amount: totalPrice,
       },
     ],
   };
+
   async function handleOrder() {
-    await axios.post(`${API}/api/order/add_order`, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !address ||
+      !phone ||
+      !city ||
+      !state ||
+      !pinCode ||
+      !country
+    ) {
+      alert.show("please fill all the fields", { type: "error" });
+    } else {
+      const order = await axios.post(`${API}/api/order/add_order`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const orderID = order.data.orderId;
+      history.push(`/payment/${orderID}`);
+    }
   }
   return (
     <div>
@@ -252,6 +275,7 @@ function Checkout() {
                         {cartItem?.map((item, index) => {
                           totalPrice +=
                             item.quantity * 1 * item.product.sale_price * 1;
+
                           return (
                             <tr key={index} className="cart_item">
                               <td className="product-name">
@@ -282,6 +306,7 @@ function Checkout() {
                             <span className="cart_price">Rs. 0.00</span>
                           </td>
                         </tr>
+                        {(data["Amount"] = totalPrice)}
                         <tr className="order-total cart_item">
                           <th>Total</th>
                           <td>
