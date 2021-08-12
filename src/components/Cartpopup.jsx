@@ -13,10 +13,11 @@ function Cartpopup() {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState([]);
   const items = useSelector((state) => state.cartItems);
+  const totalPrice = useSelector((state) => state.totalPrice);
   let cartItem = [];
   useEffect(() => {
     dispatch(viewCart());
-  }, []);
+  }, [totalPrice]);
 
   cartItem = items?.cartItems;
 
@@ -214,7 +215,9 @@ function Cartpopup() {
                   <strong>Subtotal:</strong>
                 </div>
                 <div class="col-auto tr js_cat_ttprice">
-                  <div class="cart_tot_price">Rs. 91.00</div>
+                  <div class="cart_tot_price">
+                    Rs. {totalPrice ? totalPrice : ""}
+                  </div>
                 </div>
               </div>
               <p class="txt_tax_ship mb__5 fs__12">

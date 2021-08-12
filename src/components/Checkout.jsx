@@ -26,6 +26,7 @@ function Checkout() {
 
   let cartItem = [];
   let totalPrice = 0;
+  let totalQuantity = 0;
   let product = [];
   const token = localStorage.getItem("token");
   const history = useHistory();
@@ -33,13 +34,18 @@ function Checkout() {
   cartItem = items?.cartItems;
 
   cartItem?.map((item) => {
+    totalPrice += item.quantity * 1 * item.product.sale_price * 1;
+    totalQuantity += item.quantity * 1;
+
     product.push({
       title: item.product.title,
       quantity: item.quantity,
       price: item.product.sale_price,
+      image: item.product.image,
+      totalPrice: item.quantity * 1 * item.product.sale_price * 1,
     });
   });
-
+  console.log(totalPrice);
   let data = {
     order: [
       {
@@ -56,6 +62,7 @@ function Checkout() {
         orderNote,
         product,
         Amount: totalPrice,
+        totalQuantity:totalQuantity
       },
     ],
   };
@@ -273,9 +280,6 @@ function Checkout() {
                       </thead>
                       <tbody>
                         {cartItem?.map((item, index) => {
-                          totalPrice +=
-                            item.quantity * 1 * item.product.sale_price * 1;
-
                           return (
                             <tr key={index} className="cart_item">
                               <td className="product-name">
@@ -297,7 +301,7 @@ function Checkout() {
                         <tr className="cart-subtotal cart_item">
                           <th>Subtotal</th>
                           <td>
-                            <span className="cart_price">Rs. 85.00</span>
+                            <span className="cart_price">Rs. {totalPrice}</span>
                           </td>
                         </tr>
                         <tr className="cart_item">
@@ -306,7 +310,7 @@ function Checkout() {
                             <span className="cart_price">Rs. 0.00</span>
                           </td>
                         </tr>
-                        {(data["Amount"] = totalPrice)}
+
                         <tr className="order-total cart_item">
                           <th>Total</th>
                           <td>

@@ -10,6 +10,8 @@ const initialState = {
   cartItems: [],
   error: "",
   message: "",
+  totalPrice: 0,
+  totalQuantity: 0,
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -19,6 +21,8 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         loading: true,
         cartItems: action.payload,
+        totalPrice: action.totalPrice,
+        totalQuantity: action.totalQuantity,
       };
 
     case ADD_TO_CART:
@@ -26,6 +30,8 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         loading: true,
         cartItems: action.payload,
+        totalPrice: action.totalPrice,
+        totalQuantity: action.totalQuantity,
       };
 
     case REMOVE_FROM_CART:
@@ -33,12 +39,16 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         loading: true,
         message: action.payload,
+        totalPrice: action.totalPrice,
+        totalQuantity: action.totalQuantity,
       };
     case INCREASE_QUANTITY:
       return {
         ...state,
         loading: true,
         message: action.payload,
+        totalPrice: action.totalPrice,
+        totalQuantity: action.totalQuantity,
       };
 
     default:

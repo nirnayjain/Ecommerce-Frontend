@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { API } from "../API";
 import Cartpopup from "./Cartpopup";
 import Popform from "./Popform";
@@ -16,6 +17,8 @@ function Header() {
   let [instagramUrl, setinstagramUrl] = useState("");
   let [twiiterUrl, settwiiterUrl] = useState("");
   let [linkedinUrl, setlinkedinUrl] = useState("");
+
+  const totalQuantity = useSelector((state) => state.totalQuantity);
 
   useEffect(() => {
     async function getFeatured() {
@@ -158,7 +161,7 @@ function Header() {
                   >
                     <i className="iccl iccl-cart pr">
                       <span className="op__0 ts_op pa tcount bgb br__50 cw tc">
-                        3
+                        {totalQuantity}
                       </span>
                     </i>
                   </a>
