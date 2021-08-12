@@ -18,8 +18,9 @@ function Newproducts() {
 
   function addCart(id) {
     dispatch(addToCart(id));
-    
   }
+
+  console.log(newArrival);
 
   return (
     <div className="container">

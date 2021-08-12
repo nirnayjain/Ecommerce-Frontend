@@ -2,7 +2,9 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { addToCart, decreaseQuant, increseQuant } from "../Actions/cartAction";
 import { API } from "../API";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -13,6 +15,7 @@ function Producdetails() {
   const { id } = useParams();
   const [productDetailes, setproductDetailes] = useState({});
   const [modalShow, setModalShow] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
     async function getProduct() {
       const product = await axios.get(`${API}/api/product/${id}`);
@@ -21,6 +24,16 @@ function Producdetails() {
     }
     getProduct();
   }, []);
+
+  function addCart(id) {
+    dispatch(addToCart(id));
+  }
+  function increaseQuntity(id) {
+    dispatch(increseQuant(id));
+  }
+  function decreaseQuntity(id) {
+    dispatch(decreaseQuant(id));
+  }
 
   console.log(productDetailes);
   return (
@@ -136,12 +149,18 @@ function Producdetails() {
                                     />
                                     <div class="qty tc fs__14">
                                       <button
+                                        onClick={() =>
+                                          increaseQuntity(productDetailes._id)
+                                        }
                                         type="button"
                                         class="plus db cb pa pd__0 pr__15 tr r__0"
                                       >
                                         <i class="facl facl-plus"></i>
                                       </button>
                                       <button
+                                        onClick={() =>
+                                          decreaseQuntity(productDetailes._id)
+                                        }
                                         type="button"
                                         class="minus db cb pa pd__0 pl__15 tl l__0"
                                       >
@@ -166,7 +185,14 @@ function Producdetails() {
                                     data-ani="shake"
                                     class="single_add_to_cart_button button truncate w__100 mt__20 order-4 d-inline-block animated"
                                   >
-                                    <span class="txt_add ">Add to cart</span>
+                                    <span
+                                      class="txt_add "
+                                      onClick={() =>
+                                        addCart(productDetailes._id)
+                                      }
+                                    >
+                                      Add to cart
+                                    </span>
                                   </button>
                                 </div>
                               </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
 import {
   decreaseQuant,
   increseQuant,
@@ -241,18 +242,66 @@ function Cartpopup() {
                   <path d="M9 20l-7-7 3-3 4 4L19 4l3 3z"></path>
                 </svg>
               </p>
-              <a
-                href="/cart"
-                class="button btn-cart mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center cd-imp"
-              >
-                View cart
-              </a>
-              <a
-                href="/checkout"
-                class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white"
-              >
-                Check Out
-              </a>
+              {cartItem?.length === 0 ? (
+                <a
+                  href=""
+                  class="button btn-cart mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center cd-imp"
+                >
+                  <Button
+                    style={{
+                      backgroundColor: "transparent",
+                      border: "none",
+                      color: "black",
+                    }}
+                    disabled
+                  >
+                    View cart
+                  </Button>
+                </a>
+              ) : (
+                <a
+                  href="/cart"
+                  class="button btn-cart mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center cd-imp"
+                >
+                  <Button
+                    style={{
+                      backgroundColor: "transparent",
+                      border: "none",
+                      color: "black",
+                    }}
+                  >
+                    View cart
+                  </Button>
+                </a>
+              )}
+
+              {cartItem?.length === 0 ? (
+                <a
+                  href=""
+                  class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white"
+                >
+                  <Button
+                    style={{ backgroundColor: "transparent", border: "none" }}
+                    class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white"
+                    disabled
+                  >
+                    Check Out
+                  </Button>
+                </a>
+              ) : (
+                <a
+                  href="/checkout"
+                  class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white"
+                >
+                  <Button
+                    style={{ backgroundColor: "transparent", border: "none" }}
+                    class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white"
+                  >
+                    Check Out
+                  </Button>
+                </a>
+              )}
+
               <div class="cat_img_trust mt__10 lazyload">
                 <img
                   class="w__100 lz_op_ef"

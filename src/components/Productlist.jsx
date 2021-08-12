@@ -16,10 +16,10 @@ function Productlist() {
         return prod.subCategory === subCategory && prod.status;
       });
       setProducts(list);
-      console.log(productList);
     }
     getProduct();
   }, []);
+  console.log(products);
   return (
     <div class="col-lg-9 col-12">
       <div class="kalles-section tp_se_cdt">
@@ -69,7 +69,7 @@ function Productlist() {
                       <span class="tc nt_labels pa pe_none cw">
                         <span class="nt_label new">New</span>
                       </span>
-                      <a class="d-block" href="product-detail-layout-01.html">
+                      <a class="d-block" href={`/productDetails/${item._id}`}>
                         <div
                           class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571"
                           data-bgset={item.featuredImage}
@@ -108,11 +108,10 @@ function Productlist() {
                           <span>Quick Shop</span>
                         </a>
                       </div>
-                      
                     </div>
                     <div class="product-info mt__15">
                       <h3 class="product-title pr fs__14 mg__0 fwm">
-                        <a class="cd chp" href="product-detail-layout-01.html">
+                        <a class="cd chp" href={`/productDetails/${item._id}`}>
                           {item.title}
                         </a>
                       </h3>

@@ -1,5 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToCart,
+  decreaseQuant,
+  removeFromCart,
+} from "../Actions/cartAction";
 import Footer from "./Footer";
 import Header from "./Header";
 import Navigation from "./Navigation";
@@ -7,8 +12,20 @@ import Shopbanner from "./Shopbanner";
 
 function Shoppingcart() {
   const items = useSelector((state) => state.cartItems);
+  const dispatch = useDispatch();
   let cartItem = [];
   cartItem = items?.cartItems;
+
+  function increaseQuntity(id) {
+    dispatch(addToCart(id));
+  }
+
+  function decreaseQuntity(id) {
+    dispatch(decreaseQuant(id));
+  }
+  function handleDelete(id) {
+    dispatch(removeFromCart(id));
+  }
 
   return (
     <div>
@@ -56,7 +73,7 @@ function Shoppingcart() {
                             </div>
                             <div class="mini_cart_tool mt__10">
                               <a
-                                href="#"
+                                onClick={() => handleDelete(item.product?._id)}
                                 class="cart_ac_remove js_cart_rem ttip_nt tooltip_top_right"
                               >
                                 <span class="tt_txt">Remove this item</span>
@@ -95,12 +112,14 @@ function Shoppingcart() {
                           />
                           <div class="qty tc fs__14">
                             <button
+                              onClick={() => increaseQuntity(item.product._id)}
                               type="button"
                               class="plus db cb pa pd__0 pr__15 tr r__0"
                             >
                               <i class="facl facl-plus"></i>
                             </button>
                             <button
+                              onClick={() => decreaseQuntity(item.product._id)}
                               type="button"
                               class="minus db cb pa pd__0 pl__15 tl l__0 qty_1"
                             >
@@ -111,7 +130,7 @@ function Shoppingcart() {
                       </div>
                       <div class="col-12 col-md-4 col-lg-2 tc__ tr_lg">
                         <span class="cart-item-price fwm cd js_tt_price_it">
-                          $35.00
+                          Rs. {item.product.sale_price * 1 * item.quantity * 1}
                         </span>
                       </div>
                     </div>
