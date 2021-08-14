@@ -9,12 +9,19 @@ import {
   removeFromCart,
   viewCart,
 } from "../Actions/cartAction";
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
 
 function Cartpopup() {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState([]);
+  const [link, setLink] = useState("");
+  const [checked, setChecked] = useState(false);
   const items = useSelector((state) => state.cartItems);
   const totalPrice = useSelector((state) => state.totalPrice);
+  const totalQunatity = useSelector((state) => state.totalQunatity);
+  const alert = useAlert();
+  const history = useHistory();
   let cartItem = [];
   useEffect(() => {
     dispatch(viewCart());
@@ -32,6 +39,15 @@ function Cartpopup() {
     dispatch(decreaseQuant(id));
   }
 
+  function moveTocheckout() {
+    if (!checked) {
+      alert.show("Please Accept Terms and Conditions To Procees", {
+        type: "error",
+      });
+    } else {
+      setLink("/checkout");
+    }
+  }
   return (
     <div>
       <div id="nt_cart_canvas" class="nt_fk_canvas dn">
@@ -103,9 +119,9 @@ function Cartpopup() {
                                 type="number"
                                 class="input-text qty text tc qty_cart_js"
                                 step="1"
-                                min="0"
+                                min="1"
                                 max="9999"
-                                value={item?.quantity}
+                                value={item.quantity}
                               />
                               <div class="qty tc fs__14">
                                 <button
@@ -119,7 +135,9 @@ function Cartpopup() {
                                 </button>
                                 <button
                                   onClick={() =>
-                                    decreseQunatity(item.product._id)
+                                    item?.quantity === 1
+                                      ? handleDelete(item.product?._id)
+                                      : decreseQunatity(item.product._id)
                                   }
                                   type="button"
                                   class="minus db cb pa pd__0 pl__15 tl l__0 qty_1"
@@ -230,6 +248,7 @@ function Cartpopup() {
                   id="cart_agree"
                   class="js_agree_ck mr__5"
                   name="ck_lumise"
+                  onChange={(e) => setChecked(e.target.checked)}
                 />
                 <label for="cart_agree">
                   I agree with the terms and conditions.
@@ -276,10 +295,7 @@ function Cartpopup() {
               )}
 
               {cartItem?.length === 0 ? (
-                <a
-                  href=""
-                  class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white"
-                >
+                <a class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white">
                   <Button
                     style={{ backgroundColor: "transparent", border: "none" }}
                     class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white"
@@ -290,10 +306,11 @@ function Cartpopup() {
                 </a>
               ) : (
                 <a
-                  href="/checkout"
+                  href={link === "" ? "#" : link}
                   class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white"
                 >
                   <Button
+                    onClick={moveTocheckout}
                     style={{ backgroundColor: "transparent", border: "none" }}
                     class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white"
                   >

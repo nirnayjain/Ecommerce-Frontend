@@ -5,11 +5,14 @@ import { Button } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import { API } from "../API";
+import { useDispatch } from "react-redux";
+import { delteUserCart } from "../Actions/cartAction";
 
 function Paymentpage() {
   const history = useHistory();
   const { id } = useParams();
   const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
 
   async function handlePayment() {
     const payment = await axios.patch(`${API}/api/order/update_order/${id}`, {
@@ -17,8 +20,9 @@ function Paymentpage() {
         Authorization: `Bearer ${token}`,
       },
     });
-    if(payment){
-      history.push("/payment-success")
+    if (payment) {
+      dispatch(delteUserCart());
+      history.push("/payment-success");
     }
   }
   return (

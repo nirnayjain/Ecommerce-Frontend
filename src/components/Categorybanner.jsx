@@ -25,7 +25,7 @@ function Categorybanner() {
   }, []);
 
   return (
-    <div classNameName="container">
+    <div classNameName="container" style={{ marginTop: "5rem" }}>
       <div className="kalles-section nt_section type_collection_list">
         <div className="kalles-cosmetics__category-banner container">
           <div className="wrap_title des_title_7">

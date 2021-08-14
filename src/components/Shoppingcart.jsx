@@ -1,5 +1,8 @@
 import React from "react";
+import { useState } from "react";
+import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   addToCart,
   decreaseQuant,
@@ -11,8 +14,12 @@ import Navigation from "./Navigation";
 import Shopbanner from "./Shopbanner";
 
 function Shoppingcart() {
+  const [checked, setChecked] = useState(false);
   const items = useSelector((state) => state.cartItems);
   const dispatch = useDispatch();
+  const alert = useAlert();
+  const history = useHistory();
+  const totalPrice = useSelector((state) => state.totalPrice);
   let cartItem = [];
   cartItem = items?.cartItems;
 
@@ -27,6 +34,13 @@ function Shoppingcart() {
     dispatch(removeFromCart(id));
   }
 
+  function handleCheckout() {
+    if (!checked) {
+      alert.show("Please Accept Terms & Conditions", { type: "error" });
+    } else {
+      history.push("/checkout");
+    }
+  }
   return (
     <div>
       <Header />
@@ -176,7 +190,7 @@ function Shoppingcart() {
                       <strong>Subtotal:</strong>
                     </div>
                     <div class="col-auto tr js_cat_ttprice fs__20 fwm">
-                      <div class="cart_tot_price">$85.00</div>
+                      <div class="cart_tot_price">Rs. {totalPrice}</div>
                     </div>
                   </div>
                   <div class="clearfix"></div>
@@ -189,6 +203,7 @@ function Shoppingcart() {
                       id="cart_agree_2"
                       class="js_agree_ck mr__5"
                       name="ck_lumise"
+                      onChange={(e) => setChecked(e.target.checked)}
                     />
                     <label for="cart_agree_2">
                       I agree with the terms and conditions.
@@ -200,17 +215,20 @@ function Shoppingcart() {
                   <div class="clearfix"></div>
 
                   <button
-                    type="submit"
-                    data-confirm="ck_lumise"
-                    name="checkout"
-                    class="btn_checkout button button_primary tu mt__10 mb__10 js_add_ld w-50"
+                    onClick={handleCheckout}
                     style={{
                       backgroundColor: "#56cfe1",
                       border: "1px solid #56cfe1",
+                      width: "50%",
+                      marginTop: "2rem",
+                      color: "white",
                     }}
+                    type="button"
+                    // className="button button_primary btn checkout-payment__btn-place-order"
                   >
                     Check Out
                   </button>
+
                   <div class="clearfix"></div>
                   <div class="cat_img_trust mt__10">
                     <img

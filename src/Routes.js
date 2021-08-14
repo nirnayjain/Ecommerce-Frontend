@@ -23,7 +23,7 @@ function Routes() {
           <Header />
           <Navigation />
           <Hero />
-          <Productrow />
+          {/* <Productrow /> */}
           <Categorybanner />
           <Newproducts />
           <Bottombanner />

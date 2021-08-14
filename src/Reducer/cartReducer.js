@@ -1,5 +1,6 @@
 import {
   ADD_TO_CART,
+  DELETE_USER_CART,
   INCREASE_QUANTITY,
   REMOVE_FROM_CART,
   VIEW_CART,
@@ -49,6 +50,13 @@ const cartReducer = (state = initialState, action) => {
         message: action.payload,
         totalPrice: action.totalPrice,
         totalQuantity: action.totalQuantity,
+      };
+
+    case DELETE_USER_CART:
+      return {
+        ...state,
+        loading: true,
+        cartItems: action.payload,
       };
 
     default:

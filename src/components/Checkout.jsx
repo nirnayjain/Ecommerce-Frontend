@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
@@ -20,9 +21,11 @@ function Checkout() {
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
+  const [appartment, setAppartment] = useState("");
   const [city, setCity] = useState("");
   const [orderNote, setOrderNote] = useState("");
   const [total, setTotal] = useState("");
+  const [checked, setChecked] = useState(false);
 
   let cartItem = [];
   let totalPrice = 0;
@@ -45,7 +48,7 @@ function Checkout() {
       totalPrice: item.quantity * 1 * item.product.sale_price * 1,
     });
   });
-  console.log(totalPrice);
+
   let data = {
     order: [
       {
@@ -58,11 +61,12 @@ function Checkout() {
         state,
         country,
         address,
+        appartment,
         city,
         orderNote,
         product,
         Amount: totalPrice,
-        totalQuantity:totalQuantity
+        totalQuantity: totalQuantity,
       },
     ],
   };
@@ -81,13 +85,17 @@ function Checkout() {
     ) {
       alert.show("please fill all the fields", { type: "error" });
     } else {
-      const order = await axios.post(`${API}/api/order/add_order`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const orderID = order.data.orderId;
-      history.push(`/payment/${orderID}`);
+      if (!checked) {
+        alert.show("Please Accept Terms & Conditions", { type: "error" });
+      } else {
+        const order = await axios.post(`${API}/api/order/add_order`, data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const orderID = order.data.orderId;
+        history.push(`/payment/${orderID}`);
+      }
     }
   }
   return (
@@ -183,9 +191,10 @@ function Checkout() {
                         placeholder="House number and street name"
                       />
                       <input
+                        value={appartment}
+                        onChange={(e) => setAppartment(e.target.value)}
                         type="text"
                         id="address_02"
-                        value=""
                         placeholder="Apartment, suite, unit, etc. (optional)"
                       />
                     </p>
@@ -331,7 +340,12 @@ function Checkout() {
                         <a href="#">privacy policy</a>.
                       </p>
                       <label className="checkout-payment__confirm-terms-and-conditions">
-                        <input type="checkbox" name="terms" id="terms" />
+                        <input
+                          type="checkbox"
+                          name="terms"
+                          id="terms"
+                          onChange={(e) => setChecked(e.target.checked)}
+                        />
                         <span>
                           I have read and agree to the website{" "}
                           <a href="#" className="terms-and-conditions-link">
@@ -340,6 +354,7 @@ function Checkout() {
                         </span>
                         &nbsp;<span className="required">*</span>
                       </label>
+
                       <button
                         onClick={handleOrder}
                         type="button"

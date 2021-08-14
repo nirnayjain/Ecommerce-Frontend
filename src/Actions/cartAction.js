@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   ADD_TO_CART,
   DECREASE_QUANTITY,
+  DELETE_USER_CART,
   INCREASE_QUANTITY,
   REMOVE_FROM_CART,
   VIEW_CART,
@@ -22,6 +23,7 @@ export const viewCart = () => {
         },
       })
       .then((response) => {
+        console.log(response);
         response.data.cartItems.map((item) => {
           totalPrice += item.product.sale_price * 1 * item.quantity * 1;
           totalQuantity += item.quantity * 1;
@@ -59,7 +61,7 @@ export const addToCart = (id) => {
         }
       )
       .then((response) => {
-        response.data.cart.cartItems.map((item) => {
+        response.data.data.cartItems.map((item) => {
           totalPrice += item.product.sale_price * 1 * item.quantity * 1;
           totalQuantity += item.quantity * 1;
         });
@@ -133,6 +135,7 @@ export const increseQuant = (id) => {
       )
       .then((response) => {
         response.data.cart.cartItems.map((item) => {
+          console.log(item);
           totalPrice += item.product.sale_price * 1 * item.quantity * 1;
           totalQuantity += item.quantity * 1;
         });
@@ -177,5 +180,12 @@ export const decreaseQuantSuccess = (message) => {
   return {
     type: DECREASE_QUANTITY,
     payload: message,
+  };
+};
+
+export const delteUserCart = () => {
+  return {
+    type: DELETE_USER_CART,
+    payload: "",
   };
 };

@@ -2,9 +2,14 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addToCart, decreaseQuant, increseQuant } from "../Actions/cartAction";
+import {
+  addToCart,
+  decreaseQuant,
+  increseQuant,
+  viewCart,
+} from "../Actions/cartAction";
 import { API } from "../API";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -15,16 +20,17 @@ function Producdetails() {
   const { id } = useParams();
   const [productDetailes, setproductDetailes] = useState({});
   const [modalShow, setModalShow] = useState(false);
+  const items = useSelector((state) => state.cartItems);
+  const [quantity, setQuantity] = useState(0);
   const dispatch = useDispatch();
   useEffect(() => {
     async function getProduct() {
       const product = await axios.get(`${API}/api/product/${id}`);
-      console.log(product);
       setproductDetailes(product.data.product);
     }
     getProduct();
   }, []);
-
+  console.log(items.cartItems);
   function addCart(id) {
     dispatch(addToCart(id));
   }
@@ -125,8 +131,8 @@ function Producdetails() {
                         </h1>
                         <div class="flex wrap fl_between al_center price-review">
                           <p class="price_range" id="price_ppr">
-                            <del>Rs. {productDetailes?.sale_price}</del>
-                            <ins>Rs. {productDetailes?.price}</ins>
+                            <del>Rs. {productDetailes?.price}</del>
+                            <ins>Rs. {productDetailes?.sale_price}</ins>
                           </p>
                         </div>
                         <div class="pr_short_des">
@@ -142,10 +148,10 @@ function Producdetails() {
                                     id="sp_qty_ppr"
                                   >
                                     <input
+                                      value={1}
                                       type="number"
                                       class="input-text qty text tc qty_pr_js qty_cart_js"
                                       name="quantity"
-                                      value="1"
                                     />
                                     <div class="qty tc fs__14">
                                       <button
