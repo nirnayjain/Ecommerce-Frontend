@@ -44,7 +44,7 @@ function Footer() {
                             <img
                               className="w__100 mb__15 lz_op_ef lazyload max-width__95px"
                               src={configuration[0]?.logo[0].Footerlogo}
-                              data-src="assets/images/svg/pop.svg"
+                              data-src={configuration[0]?.logo[0].Footerlogo}
                             />
                           </a>
                         </p>

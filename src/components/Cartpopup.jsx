@@ -193,7 +193,7 @@ function Cartpopup() {
                     );
                   })}
                 </div>
-                <div class="mini_cart_tool js_cart_tool tc ">
+                {/* <div class="mini_cart_tool js_cart_tool tc ">
                   <div
                     data-id="note"
                     class="mini_cart_tool_note js_cart_tls ttip_nt tooltip_top"
@@ -228,7 +228,7 @@ function Cartpopup() {
                     <i class="las la-tag"></i>
                     <span class="tt_txt">Add A Coupon</span>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div class="mini_cart_footer js_cart_footer">
