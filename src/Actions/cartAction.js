@@ -11,10 +11,22 @@ import {
 import { API } from "../API";
 
 const token = localStorage.getItem("token");
+const cartProduct = [];
 
 export const viewCart = () => {
   let totalPrice = 0;
   let totalQuantity = 0;
+  if (!token) {
+    return function (dispatch) {
+      const cartItems = JSON.parse(localStorage.getItem("cartData"));
+      console.log(cartItems);
+      cartItems?.map((item) => {
+        totalPrice += item.sale_price * 1 * item.quantity * 1;
+        totalQuantity += item.quantity * 1;
+      });
+      dispatch(viewCartSuccess(cartItems, totalPrice, totalQuantity));
+    };
+  }
   return function (dispatch) {
     axios
       .get(`${API}/api/cart/view_cart`, {
@@ -35,6 +47,7 @@ export const viewCart = () => {
 };
 
 export const viewCartSuccess = (dataItems, totalPrice, totalQuantity) => {
+  console.log(dataItems);
   return {
     type: VIEW_CART,
     payload: dataItems,
@@ -47,29 +60,41 @@ export const addToCart = (id) => {
   let totalPrice = 0;
   let totalQuantity = 0;
 
-  return function (dispatch) {
-    axios
-      .post(
-        `${API}/api/cart/add_product`,
-        {
-          cartItems: [{ product: id }],
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+  if (!token) {
+    return function () {
+      axios.get(`${API}/api/product/${id}`).then((product) => {
+        cartProduct.push(product.data.product);
+        if (cartProduct.includes(product.data.product)) {
+          console.log("yes");
         }
-      )
-      .then((response) => {
-        response.data.data.cartItems.map((item) => {
-          totalPrice += item.product.sale_price * 1 * item.quantity * 1;
-          totalQuantity += item.quantity * 1;
-        });
-        dispatch(
-          addToCartSuccess(response.data.message, totalPrice, totalQuantity)
-        );
+        localStorage.setItem("cartData", JSON.stringify(cartProduct));
       });
-  };
+    };
+  } else {
+    return function (dispatch) {
+      axios
+        .post(
+          `${API}/api/cart/add_product`,
+          {
+            cartItems: [{ product: id }],
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          response.data.data.cartItems.map((item) => {
+            totalPrice += item.product.sale_price * 1 * item.quantity * 1;
+            totalQuantity += item.quantity * 1;
+          });
+          dispatch(
+            addToCartSuccess(response.data.message, totalPrice, totalQuantity)
+          );
+        });
+    };
+  }
 };
 
 export const addToCartSuccess = (message, totalPrice, totalQuantity) => {

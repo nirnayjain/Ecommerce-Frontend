@@ -26,11 +26,13 @@ function Producdetails() {
   useEffect(() => {
     async function getProduct() {
       const product = await axios.get(`${API}/api/product/${id}`);
+      console.log(product, "PRODUCT");
       setproductDetailes(product.data.product);
     }
     getProduct();
   }, []);
-  console.log(items.cartItems);
+  console.log(productDetailes, "PRODUCT DETAILS");
+
   function addCart(id) {
     dispatch(addToCart(id));
   }
@@ -53,10 +55,11 @@ function Producdetails() {
               <div class="row al_center">
                 <div class="col">
                   <nav class="sp-breadcrumb">
-                    <a href="index.html">Home</a>
+                    <a href="/">Home</a>
                     <i class="facl facl-angle-right"></i>
-                    <a href="shop-filter-options.html">Makeup</a>
-                    <i class="facl facl-angle-right"></i>Face Primer
+                    <a href="#">{productDetailes?.category}</a>
+                    <i class="facl facl-angle-right"></i>
+                    {productDetailes?.subCategory}
                   </nav>
                 </div>
               </div>
@@ -88,11 +91,11 @@ function Producdetails() {
                             data-cap="Short Sleeved Hoodie"
                           ></div>
                         </div>
-                        <span class="tc nt_labels pa pe_none cw">
+                        {/* <span class="tc nt_labels pa pe_none cw">
                           <span class="onsale nt_label">
                             <span>-34%</span>
                           </span>
-                        </span>
+                        </span> */}
                         {/* <div class="p_group_btns pa flex">
                           <button class="br__40 tc flex al_center fl_center bghp show_btn_pr_gallery ttip_nt tooltip_top_left">
                             <i class="las la-expand-arrows-alt"></i>
@@ -174,7 +177,7 @@ function Producdetails() {
                                       </button>
                                     </div>
                                   </div>
-                                  <div class="nt_add_w ts__03 pa order-3">
+                                  {/* <div class="nt_add_w ts__03 pa order-3">
                                     <a
                                       href="#"
                                       class="wishlistadd cb chp ttip_nt tooltip_top_left"
@@ -184,7 +187,7 @@ function Producdetails() {
                                       </span>
                                       <i class="facl facl-heart-o"></i>
                                     </a>
-                                  </div>
+                                  </div> */}
                                   <button
                                     type="submit"
                                     data-time="6000"
@@ -397,7 +400,7 @@ function Producdetails() {
 
           <div class="clearfix"></div>
 
-          <div class="kalles-section tp_se_cdt">
+          {/* <div class="kalles-section tp_se_cdt">
             <div class="related product-extra mt__60 lazyload">
               <div class="container">
                 <div class="wrap_title des_title_1">
@@ -640,7 +643,7 @@ function Producdetails() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <Footer />

@@ -22,11 +22,11 @@ function Header() {
 
   useEffect(() => {
     async function getFeatured() {
-      const featuredProduct = await axios.get(`${API}/api/featured`);
-      localStorage.setItem(
-        "Featured",
-        JSON.stringify(featuredProduct?.data.featured)
-      );
+      const Product = await axios.get(`${API}/api/product`);
+      const featuredProduct = Product.data.data.filter((item) => {
+        return item.featured.status;
+      });
+      localStorage.setItem("Featured", JSON.stringify(featuredProduct));
     }
     async function getConfig() {
       const config = await axios.get(`${API}/api/config`);
@@ -46,7 +46,7 @@ function Header() {
 
   return (
     <>
-      <Toplabel />
+      {/* <Toplabel /> */}
       <div className="header__mid">
         <div className="container">
           <div className="row al_center css_h_se">
@@ -127,13 +127,13 @@ function Header() {
             </div>
             <div className="col-lg-3 col-md-3 col-3 tr">
               <div className="nt_action in_flex al_center cart_des_1">
-                <a
+                {/* <a
                   className="icon_search push_side cb chp"
                   data-id="#nt_search_canvas"
                   href="#"
                 >
                   <i className="iccl iccl-search"></i>
-                </a>
+                </a> */}
                 <div className="my-account ts__05 pr dn db_md">
                   <a
                     className="cb chp db push_side"
@@ -143,7 +143,7 @@ function Header() {
                     <i className="iccl iccl-user"></i>
                   </a>
                 </div>
-                <a
+                {/* <a
                   className="icon_like cb chp pr dn db_md js_link_wis"
                   href="#"
                 >
@@ -152,7 +152,7 @@ function Header() {
                       5
                     </span>
                   </i>
-                </a>
+                </a> */}
                 <div className="icon_cart pr">
                   <a
                     className="push_side pr cb chp db"

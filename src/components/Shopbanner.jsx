@@ -1,6 +1,23 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { API } from "../API";
 
 function Shopbanner() {
+  const { subCategory } = useParams();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function getProduct() {
+      const productList = await axios.get(`${API}/api/product/all`);
+      const list = productList.data.product.filter((prod) => {
+        return prod.subCategory === subCategory && prod.status;
+      });
+      setProducts(list);
+    }
+    getProduct();
+  }, []);
+
   return (
     <div id="nt_content">
       <div class="kalles-section page_section_heading">
@@ -10,7 +27,7 @@ function Shopbanner() {
             data-bgset="assets/images/shop/shop-banner.jpg"
           ></div>
           <div class="container pr z_100">
-            <h1 class="mb__5 cw">Makeup</h1>
+            <h1 class="mb__5 cw">{products[0]?.category}</h1>
             <p class="mg__0">
               Shop through our latest selection of color cosmetics
             </p>

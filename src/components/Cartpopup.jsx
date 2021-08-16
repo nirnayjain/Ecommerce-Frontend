@@ -26,8 +26,12 @@ function Cartpopup() {
   useEffect(() => {
     dispatch(viewCart());
   }, [totalPrice]);
-
-  cartItem = items?.cartItems;
+  console.log(items);
+  if (Array.isArray(items)) {
+    cartItem = items;
+  } else {
+    cartItem = items?.cartItems;
+  }
 
   function handleDelete(id) {
     dispatch(removeFromCart(id));
@@ -56,13 +60,13 @@ function Cartpopup() {
             <div class="h3 fwm tu fs__16 mg__0">Shopping cart</div>
             <i class="close_pp pegk pe-7s-close ts__03 cd"></i>
           </div>
-          <div class="cart_threshold cart_thres_js">
+          {/* <div class="cart_threshold cart_thres_js">
             <div class="cart_thres_2">
               Almost there, add
               <span class="cr fwm mn_thres_js">Rs. 9.00</span> more to get{" "}
               <span class="cr fwm">FREE SHIPPING!</span>
             </div>
-          </div>
+          </div> */}
           <div class="mini_cart_wrap">
             <div class="mini_cart_content fixcl-scroll">
               <div class="fixcl-scroll-content">
@@ -102,7 +106,7 @@ function Cartpopup() {
                             href="product-detail.html"
                             class="mini_cart_title truncate"
                           >
-                            {item.product?.title}
+                            {item.product ? item.product.titel : item.title}
                           </a>
                           <div class="mini_cart_meta">
                             <p class="cart_selling_plan"></p>
