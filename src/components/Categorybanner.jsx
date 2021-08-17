@@ -51,7 +51,7 @@ function Categorybanner() {
                     >
                       <div className="cat_grid_item__content pr oh">
                         <a
-                          href="shop-left-sidebar.html"
+                          href={`/allProducts/${item.category}`}
                           className="db cat_grid_item__link"
                         >
                           <div

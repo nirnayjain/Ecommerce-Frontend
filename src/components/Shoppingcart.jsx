@@ -21,7 +21,11 @@ function Shoppingcart() {
   const history = useHistory();
   const totalPrice = useSelector((state) => state.totalPrice);
   let cartItem = [];
-  cartItem = items?.cartItems;
+  if (Array.isArray(items)) {
+    cartItem = items;
+  } else {
+    cartItem = items?.cartItems;
+  }
 
   function increaseQuntity(id) {
     dispatch(addToCart(id));
@@ -72,14 +76,20 @@ function Shoppingcart() {
                           <a href="product-detail-layout-01.html">
                             <img
                               class="lazyload w__100 lz_op_ef"
-                              src={item.product.image}
-                              data-src={item.product.image}
+                              src={
+                                item.product ? item.product?.image : item.image
+                              }
+                              data-src={
+                                item.product ? item.product?.image : item.image
+                              }
                             />
                           </a>
                           <div class="mini_cart_body ml__15">
                             <h5 class="mini_cart_title mg__0 mb__5">
                               <a href="product-detail-layout-01.html">
-                                {item.product.title}
+                                {item.product
+                                  ? item.product?.title
+                                  : item.title}
                               </a>
                             </h5>
                             <div class="mini_cart_meta">
@@ -112,7 +122,10 @@ function Shoppingcart() {
                       <div class="col-12 col-md-4 col-lg-3 tc__ tc_lg">
                         <div class="cart_meta_prices price">
                           <div class="cart_price">
-                            RS. {item.product.sale_price}
+                            RS.{" "}
+                            {item.product
+                              ? item.product?.sale_price
+                              : item.sale_price}
                           </div>
                         </div>
                       </div>
@@ -126,14 +139,22 @@ function Shoppingcart() {
                           />
                           <div class="qty tc fs__14">
                             <button
-                              onClick={() => increaseQuntity(item.product._id)}
+                              onClick={() =>
+                                increaseQuntity(
+                                  item.product ? item.product?._id : item._id
+                                )
+                              }
                               type="button"
                               class="plus db cb pa pd__0 pr__15 tr r__0"
                             >
                               <i class="facl facl-plus"></i>
                             </button>
                             <button
-                              onClick={() => decreaseQuntity(item.product._id)}
+                              onClick={() =>
+                                decreaseQuntity(
+                                  item.product ? item.product?._id : item._id
+                                )
+                              }
                               type="button"
                               class="minus db cb pa pd__0 pl__15 tl l__0 qty_1"
                             >
@@ -144,7 +165,10 @@ function Shoppingcart() {
                       </div>
                       <div class="col-12 col-md-4 col-lg-2 tc__ tr_lg">
                         <span class="cart-item-price fwm cd js_tt_price_it">
-                          Rs. {item.product.sale_price * 1 * item.quantity * 1}
+                          Rs.{" "}
+                          {item.product
+                            ? item.product?.sale_price
+                            : item.sale_price * 1 * item.quantity * 1}
                         </span>
                       </div>
                     </div>

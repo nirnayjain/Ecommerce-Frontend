@@ -1,5 +1,6 @@
 import {
   ADD_TO_CART,
+  DECREASE_QUANTITY,
   DELETE_USER_CART,
   INCREASE_QUANTITY,
   REMOVE_FROM_CART,
@@ -44,6 +45,15 @@ const cartReducer = (state = initialState, action) => {
         totalQuantity: action.totalQuantity,
       };
     case INCREASE_QUANTITY:
+      return {
+        ...state,
+        loading: true,
+        message: action.payload,
+        totalPrice: action.totalPrice,
+        totalQuantity: action.totalQuantity,
+      };
+
+    case DECREASE_QUANTITY:
       return {
         ...state,
         loading: true,

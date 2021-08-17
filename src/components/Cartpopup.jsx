@@ -26,15 +26,17 @@ function Cartpopup() {
   useEffect(() => {
     dispatch(viewCart());
   }, [totalPrice]);
-  console.log(items);
+  console.log(totalPrice);
   if (Array.isArray(items)) {
     cartItem = items;
+    console.log(items);
   } else {
     cartItem = items?.cartItems;
   }
 
   function handleDelete(id) {
     dispatch(removeFromCart(id));
+    console.log(id);
   }
   function increaseQuntity(id) {
     dispatch(increseQuant(id));
@@ -94,11 +96,15 @@ function Cartpopup() {
                         <a href="product-detail.html" class="mini_cart_img">
                           <img
                             class="w__100 lazyload"
-                            data-src={item?.product?.image}
+                            data-src={
+                              item?.product ? item?.product?.image : item?.image
+                            }
                             width="120"
                             height="153"
                             alt=""
-                            src={item?.product?.image}
+                            src={
+                              item?.product ? item?.product?.image : item?.image
+                            }
                           />
                         </a>
                         <div class="mini_cart_info">
@@ -106,14 +112,24 @@ function Cartpopup() {
                             href="product-detail.html"
                             class="mini_cart_title truncate"
                           >
-                            {item.product ? item.product.titel : item.title}
+                            {item.product ? item.product.titel : item?.title}
                           </a>
                           <div class="mini_cart_meta">
                             <p class="cart_selling_plan"></p>
                             <div class="cart_meta_price price">
                               <div class="cart_price">
-                                <del>Rs. {item.product?.price}</del>
-                                <ins>Rs. {item.product?.sale_price}</ins>
+                                <del>
+                                  Rs.{" "}
+                                  {item.product
+                                    ? item.product?.price
+                                    : item?.price}
+                                </del>
+                                <ins>
+                                  Rs.{" "}
+                                  {item.product
+                                    ? item.product?.sale_price
+                                    : item?.sale_price}
+                                </ins>
                               </div>
                             </div>
                           </div>
@@ -130,7 +146,9 @@ function Cartpopup() {
                               <div class="qty tc fs__14">
                                 <button
                                   onClick={() =>
-                                    increaseQuntity(item.product._id)
+                                    increaseQuntity(
+                                      item.product ? item.product._id : item._id
+                                    )
                                   }
                                   type="button"
                                   class="plus db cb pa pd__0 pr__15 tr r__0"
@@ -140,8 +158,16 @@ function Cartpopup() {
                                 <button
                                   onClick={() =>
                                     item?.quantity === 1
-                                      ? handleDelete(item.product?._id)
-                                      : decreseQunatity(item.product._id)
+                                      ? handleDelete(
+                                          item.product
+                                            ? item.product?._id
+                                            : item._id
+                                        )
+                                      : decreseQunatity(
+                                          item.product
+                                            ? item.product?._id
+                                            : item._id
+                                        )
                                   }
                                   type="button"
                                   class="minus db cb pa pd__0 pl__15 tl l__0 qty_1"
@@ -168,7 +194,11 @@ function Cartpopup() {
                               </svg>
                             </a>
                             <a
-                              onClick={() => handleDelete(item.product?._id)}
+                              onClick={() =>
+                                handleDelete(
+                                  item.product ? item.product?._id : item._id
+                                )
+                              }
                               href="#"
                               class="cart_ac_remove js_cart_rem ttip_nt tooltip_top_right"
                             >

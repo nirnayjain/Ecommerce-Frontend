@@ -11,11 +11,11 @@ import {
 import { API } from "../API";
 
 const token = localStorage.getItem("token");
-const cartProduct = [];
 
 export const viewCart = () => {
   let totalPrice = 0;
   let totalQuantity = 0;
+
   if (!token) {
     return function (dispatch) {
       const cartItems = JSON.parse(localStorage.getItem("cartData"));
@@ -59,15 +59,58 @@ export const viewCartSuccess = (dataItems, totalPrice, totalQuantity) => {
 export const addToCart = (id) => {
   let totalPrice = 0;
   let totalQuantity = 0;
+  let cartProduct;
+  const cartData = JSON.parse(localStorage.getItem("cartData"));
+  if (cartData) {
+    cartProduct = cartData;
+  } else {
+    cartProduct = [];
+  }
 
   if (!token) {
-    return function () {
+    return function (dispatch) {
       axios.get(`${API}/api/product/${id}`).then((product) => {
-        cartProduct.push(product.data.product);
-        if (cartProduct.includes(product.data.product)) {
-          console.log("yes");
+        let cartItemDetail = {
+          _id: product.data.product._id,
+          title: product.data.product.title,
+          price: product.data.product.price,
+          sale_price: product.data.product.sale_price,
+          image: product.data.product.image,
+          quantity: 1,
+        };
+
+        if (cartProduct.length > 0) {
+          let cartItem = cartProduct.filter((item) => {
+            return item._id === cartItemDetail._id;
+          });
+
+          if (cartItem.length > 0) {
+            let updatecartItemDetail = {
+              _id: cartItem[0]._id,
+              title: cartItem[0].title,
+              price: cartItem[0].price,
+              sale_price: cartItem[0].sale_price,
+              image: cartItem[0].image,
+              quantity: cartItem[0].quantity + 1,
+            };
+            let index = cartProduct.findIndex((item) => {
+              return item._id == cartItem[0]._id;
+            });
+            cartProduct.splice(index, 1, updatecartItemDetail);
+          } else {
+            cartProduct.push(cartItemDetail);
+          }
+        } else {
+          cartProduct.push(cartItemDetail);
         }
+        cartProduct.map((item) => {
+          totalPrice += item.sale_price * 1 * item.quantity * 1;
+          totalQuantity += item.quantity * 1;
+        });
+
         localStorage.setItem("cartData", JSON.stringify(cartProduct));
+        let cart = localStorage.getItem("cartData");
+        dispatch(addToCartSuccess(cart, totalPrice, totalQuantity));
       });
     };
   } else {
@@ -109,6 +152,28 @@ export const addToCartSuccess = (message, totalPrice, totalQuantity) => {
 export const removeFromCart = (id) => {
   let totalPrice = 0;
   let totalQuantity = 0;
+
+  if (!token) {
+    return function (dispatch) {
+      const cartItems = JSON.parse(localStorage.getItem("cartData"));
+      const product = cartItems.filter((item) => {
+        return item._id === id;
+      });
+
+      let index = cartItems.findIndex((item) => {
+        return item._id == product[0]._id;
+      });
+      cartItems.splice(index, 1);
+      localStorage.setItem("cartData", JSON.stringify(cartItems));
+      dispatch(
+        removeFromCartSuccess(
+          "ITEM REMOVED FROM CART",
+          totalPrice,
+          totalQuantity
+        )
+      );
+    };
+  }
   return function (dispatch) {
     axios
       .delete(`${API}/api/cart/remove_product/${id}`, {
@@ -144,31 +209,62 @@ export const removeFromCartSuccess = (message, totalPrice, totalQuantity) => {
 export const increseQuant = (id) => {
   let totalPrice = 0;
   let totalQuantity = 0;
-  return function (dispatch) {
-    axios
-      .post(
-        `${API}/api/cart/update_product`,
-        {
-          update: "add",
-          product: id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        response.data.cart.cartItems.map((item) => {
-          console.log(item);
-          totalPrice += item.product.sale_price * 1 * item.quantity * 1;
-          totalQuantity += item.quantity * 1;
-        });
-        dispatch(
-          increseQuantSuccess(response.data.message, totalPrice, totalQuantity)
-        );
+
+  if (!token) {
+    return function (dispatch) {
+      let cart = JSON.parse(localStorage.getItem("cartData"));
+      let product = cart.filter((item) => {
+        return item._id === id;
       });
-  };
+      let cartItemDetail = {
+        _id: product[0]._id,
+        title: product[0].title,
+        price: product[0].price,
+        sale_price: product[0].sale_price,
+        image: product[0].image,
+        quantity: product[0].quantity + 1,
+      };
+      let index = cart.findIndex((item) => {
+        return item._id == product[0]._id;
+      });
+      cart.splice(index, 1, cartItemDetail);
+
+      localStorage.setItem("cartData", JSON.stringify(cart));
+      dispatch(
+        increseQuantSuccess("INCREASED QUANTITY", totalPrice, totalQuantity)
+      );
+    };
+  } else {
+    return function (dispatch) {
+      axios
+        .post(
+          `${API}/api/cart/update_product`,
+          {
+            update: "add",
+            product: id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          response.data.cart.cartItems.map((item) => {
+            console.log(item);
+            totalPrice += item.product.sale_price * 1 * item.quantity * 1;
+            totalQuantity += item.quantity * 1;
+          });
+          dispatch(
+            increseQuantSuccess(
+              response.data.message,
+              totalPrice,
+              totalQuantity
+            )
+          );
+        });
+    };
+  }
 };
 
 export const increseQuantSuccess = (message, totalPrice, totalQuantity) => {
@@ -181,30 +277,67 @@ export const increseQuantSuccess = (message, totalPrice, totalQuantity) => {
 };
 
 export const decreaseQuant = (id) => {
-  return function (dispatch) {
-    axios
-      .post(
-        `${API}/api/cart/update_product`,
-        {
-          update: "delete",
-          product: id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        dispatch(increseQuantSuccess(response.data.message));
+  let totalPrice = 0;
+  let totalQuantity = 0;
+
+  if (!token) {
+    return function (dispatch) {
+      let cart = JSON.parse(localStorage.getItem("cartData"));
+      let product = cart.filter((item) => {
+        return item._id === id;
       });
-  };
+      let cartItemDetail = {
+        _id: product[0]._id,
+        title: product[0].title,
+        price: product[0].price,
+        sale_price: product[0].sale_price,
+        image: product[0].image,
+        quantity: product[0].quantity - 1,
+      };
+      let index = cart.findIndex((item) => {
+        return item._id == product[0]._id;
+      });
+      cart.splice(index, 1, cartItemDetail);
+
+      localStorage.setItem("cartData", JSON.stringify(cart));
+      dispatch(
+        decreaseQuantSuccess("Decreased Quantity", totalPrice, totalQuantity)
+      );
+    };
+  } else {
+    return function (dispatch) {
+      axios
+        .post(
+          `${API}/api/cart/update_product`,
+          {
+            update: "delete",
+            product: id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          dispatch(
+            decreaseQuantSuccess(
+              response.data.message,
+              totalPrice,
+              totalQuantity
+            )
+          );
+        });
+    };
+  }
 };
 
-export const decreaseQuantSuccess = (message) => {
+export const decreaseQuantSuccess = (message, totalPrice, totalQuantity) => {
   return {
     type: DECREASE_QUANTITY,
     payload: message,
+    totalPrice,
+    totalQuantity,
   };
 };
 

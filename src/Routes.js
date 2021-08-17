@@ -14,6 +14,7 @@ import Shoppingcart from "./components/Shoppingcart";
 import Checkout from "./components/Checkout";
 import Paymentpage from "./components/Paymentpage";
 import Paymentsuccess from "./components/Paymentsuccess";
+import Allproductlist from "./components/Allproductlist";
 
 function Routes() {
   return (
@@ -30,6 +31,7 @@ function Routes() {
           <Footer />
         </Route>
         <Route path="/productDetails/:id" exact component={Producdetails} />
+        <Route path="/allProducts/:category" exact component={Allproductlist} />
         <Route path="/shop/:subCategory" exact component={Shop} />
         <Route path="/cart" exact component={Shoppingcart} />
         <Route path="/checkout" exact component={Checkout} />
