@@ -353,7 +353,7 @@ function Cartpopup() {
                 </a>
               )}
 
-              <div class="cat_img_trust mt__10 lazyload">
+              {/* <div class="cat_img_trust mt__10 lazyload">
                 <img
                   class="w__100 lz_op_ef"
                   src="assets/images/trust_img2.png"
@@ -361,7 +361,7 @@ function Cartpopup() {
                   height="46"
                   alt=""
                 />
-              </div>
+              </div> */}
             </div>
           </div>
 
