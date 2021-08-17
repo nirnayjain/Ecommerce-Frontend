@@ -31,7 +31,6 @@ function Checkout() {
   const [total, setTotal] = useState("");
   const [checked, setChecked] = useState(false);
   const [country, setCountry] = useState("");
-  const [region, setRegion] = useState("");
 
   let cartItem = [];
   let totalPrice = 0;
@@ -125,12 +124,7 @@ function Checkout() {
       }
     }
   }
-  function selectCountry(val) {
-    setCountry(val);
-  }
-  function selectRegion(val) {
-    setRegion(val);
-  }
+
   return (
     <div>
       <Header />
@@ -188,7 +182,7 @@ function Checkout() {
                       </label>
                       <CountryDropdown
                         value={country}
-                        onChange={(val) => selectCountry(val)}
+                        onChange={(val) => setCountry(val)}
                       />
                     </p>
                     <p className="checkout-section__field col-12">
@@ -227,8 +221,8 @@ function Checkout() {
                       </label>
                       <RegionDropdown
                         country={country}
-                        value={region}
-                        onChange={(val) => selectRegion(val)}
+                        value={state}
+                        onChange={(val) => setState(val)}
                       />
                     </p>
                     <p className="checkout-section__field col-12">
