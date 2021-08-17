@@ -230,18 +230,18 @@ function Shoppingcart() {
                   </button>
 
                   <div class="clearfix"></div>
-                  <div class="cat_img_trust mt__10">
+                  {/* <div class="cat_img_trust mt__10">
                     <img
                       class="lz_op_ef lazyload w-50"
                       src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20476%2052%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E"
                       data-src="assets/images/shopping-cart/cart_image.png"
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
           </form>
-          <div
+          {/* <div
             class="shipping_calculator shipping_calc_page row al_center fl_center mt__60 mt-md-0"
             style={{
               position: "relative",
@@ -249,18 +249,7 @@ function Shoppingcart() {
               padding: "50px 10px",
             }}
           >
-            {/* position: absolute;
-    top: 0;
-    left: 50%;
-    margin: 0;
-    padding: 0 14px 0 18px;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    background: #fff;
-    white-space: nowrap;
-    display: inline-block;
-    font-size: 24px;
-    font-weight: 600; */}
+
             <h2
               class="mg__0 tc mt__20 mb__20 col-auto truncate"
               style={{
@@ -401,7 +390,7 @@ function Shoppingcart() {
                 }}
               />
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
       <Footer />

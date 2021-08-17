@@ -11,7 +11,7 @@ function Hero() {
           className="fade_flick_1 slideshow row no-gutters equal_nt nt_slider js_carousel prev_next_0 btn_owl_1 dot_owl_2 dot_color_3 btn_vi_2"
           data-flickity='{ "fade":0,"cellAlign": "center","imagesLoaded": 0,"lazyLoad": 0,"freeScroll": 0,"wrapAround": true,"autoPlay" : 0,"pauseAutoPlayOnHover" : true, "rightToLeft": false, "prevNextButtons": false,"pageDots": true, "contain" : 1,"adaptiveHeight" : 1,"dragThreshold" : 5,"percentPosition": 1 }'
         >
-          {featured?.map((item, index) => {
+          {/* {featured?.map((item, index) => {
             return (
               <div
                 key={index}
@@ -57,7 +57,7 @@ function Hero() {
                 </div>
               </div>
             );
-          })}
+          })} */}
         </div>
       </div>
     </div>

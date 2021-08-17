@@ -72,6 +72,10 @@ function Checkout() {
   };
 
   async function handleOrder() {
+     if(phone.length<10||phone.length>10)
+    return  alert.show("Please Fill Valid Mobile No", { type: "error" });
+     if(!(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email)))
+ return alert.show("Please Fill Valid Email Address", { type: "error" });
     if (
       !firstName ||
       !lastName ||
@@ -84,7 +88,9 @@ function Checkout() {
       !country
     ) {
       alert.show("please fill all the fields", { type: "error" });
-    } else {
+    }
+
+    else {
       if (!checked) {
         alert.show("Please Accept Terms & Conditions", { type: "error" });
       } else {

@@ -150,7 +150,7 @@ function Cartpopup() {
                                 </button>
                               </div>
                             </div>
-                            <a
+                            {/* <a
                               href="#"
                               class="cart_ac_edit js__qs ttip_nt tooltip_top_right"
                             >
@@ -166,7 +166,7 @@ function Cartpopup() {
                                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                               </svg>
-                            </a>
+                            </a> */}
                             <a
                               onClick={() => handleDelete(item.product?._id)}
                               href="#"
