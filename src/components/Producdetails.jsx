@@ -47,7 +47,7 @@ function Producdetails() {
   return (
     <div>
       <Header />
-      <Navigation />
+      <Navigation active={productDetailes?.category} />
       <div id="nt_content">
         <div class="sp-single sp-single-5 des_pr_layout_1 mb__60">
           <div class="bgbl pt__20 pb__20 lh__1">
