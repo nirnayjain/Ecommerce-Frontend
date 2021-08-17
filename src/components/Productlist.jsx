@@ -86,7 +86,7 @@ function Productlist() {
                           href="#"
                           class="wishlistadd cb chp ttip_nt tooltip_right"
                         >
-                          <span class="tt_txt">Add to Wishlist</span>
+                          <span class="tt_txt">Add to wishlist</span>
                           <i class="facl facl-heart-o"></i>
                         </a>
                       </div>
