@@ -135,7 +135,7 @@ function Footer() {
                           <a href="#">Contact us</a>
                         </li>
                         <li className="menu-item">
-                          <a href="#">Privacy Policy</a>
+                          <a href="/privacyPolicy">Privacy Policy</a>
                         </li>
                         <li className="menu-item">
                           <a href="#">Shipping & Delivery</a>

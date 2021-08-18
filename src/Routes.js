@@ -14,6 +14,7 @@ import Shoppingcart from "./components/Shoppingcart";
 import Checkout from "./components/Checkout";
 import Paymentpage from "./components/Paymentpage";
 import Paymentsuccess from "./components/Paymentsuccess";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 function Routes() {
   return (
@@ -35,6 +36,7 @@ function Routes() {
         <Route path="/checkout" exact component={Checkout} />
         <Route path="/payment/:id" exact component={Paymentpage} />
         <Route path="/payment-success" exact component={Paymentsuccess} />
+        <Route path="/privacyPolicy" exact component={PrivacyPolicy} />
       </Switch>
     </Router>
   );
