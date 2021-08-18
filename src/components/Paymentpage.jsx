@@ -15,15 +15,23 @@ function Paymentpage() {
   const dispatch = useDispatch();
 
   async function handlePayment() {
-    const payment = await axios.patch(`${API}/api/order/update_order/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+    let res = await axios.post(`${API}/payment_gateway/payumoney`, {
+      txnid: "84713847091",
+      amount: 1,
+      productinfo: "Nail Police",
+      firstname: "Nirnay",
+      email: "nirnay@gmail.com",
     });
-    if (payment) {
-      dispatch(delteUserCart());
-      history.push("/payment-success");
-    }
+    console.log(res);
+    // const payment = await axios.patch(`${API}/api/order/update_order/${id}`, {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // });
+    // if (payment) {
+    //   dispatch(delteUserCart());
+    //   history.push("/payment-success");
+    // }
   }
   return (
     <div>

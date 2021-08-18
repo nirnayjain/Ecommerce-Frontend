@@ -11,7 +11,7 @@ function Hero() {
           className="fade_flick_1 slideshow row no-gutters equal_nt nt_slider js_carousel prev_next_0 btn_owl_1 dot_owl_2 dot_color_3 btn_vi_2"
           data-flickity='{ "fade":0,"cellAlign": "center","imagesLoaded": 0,"lazyLoad": 0,"freeScroll": 0,"wrapAround": true,"autoPlay" : 0,"pauseAutoPlayOnHover" : true, "rightToLeft": false, "prevNextButtons": false,"pageDots": true, "contain" : 1,"adaptiveHeight" : 1,"dragThreshold" : 5,"percentPosition": 1 }'
         >
-          {/* {featured?.map((item, index) => {
+          {featured?.map((item, index) => {
             return (
               <div
                 key={index}
@@ -21,13 +21,13 @@ function Hero() {
                   <div className="js_full_ht4 img_slider_block dek_img_slide">
                     <div
                       className="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_tran_ef pa l__0 t__0 r__0 b__0"
-                      data-bgset={item.featured.image}
+                      data-bgset={item?.featured?.image}
                     ></div>
                   </div>
                   <div className="js_full_ht4 img_slider_block mb_img_slide">
                     <div
                       className="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_tran_ef pa l__0 t__0 r__0 b__0"
-                      data-bgset={item.featured.image}
+                      data-bgset={item?.featured?.image}
                     ></div>
                   </div>
                   <div className="caption-wrap caption-w-1 pe_none z_100 tl_md tc">
@@ -38,12 +38,12 @@ function Hero() {
                         </h4>
                         <div className="slt4_space kalles-cosmetics__main-slide-01__br-02"></div>
                         <h3 className="slt4_h3 lh__1 mg__0 kalles-cosmetics__main-slide-01__title">
-                          {item.featured.name}
+                          {item?.featured?.name}
                         </h3>
                         <div className="slt4_space kalles-cosmetics__main-slide-01__br-02"></div>
                         <a
                           className="slt4_btn button pe_auto round_false btn_icon_false kalles-cosmetics__main-slide-01__btn"
-                          href={`/productDetails/${item._id}`}
+                          href={`/productDetails/${item?._id}`}
                         >
                           SHOP NOW
                         </a>
@@ -57,7 +57,7 @@ function Hero() {
                 </div>
               </div>
             );
-          })} */}
+          })}
         </div>
       </div>
     </div>

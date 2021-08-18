@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { API } from "../API";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
-function Navigation() {
+function Navigation({ active }) {
   let [category, setCategory] = useState([]);
 
   useEffect(() => {
@@ -34,7 +35,11 @@ function Navigation() {
                           href="#"
                           style={{ color: "black", whiteSpace: "nowrap" }}
                         >
-                          {cate.category}
+                          {cate.category === active ? (
+                            <strong>{cate.category}</strong>
+                          ) : (
+                            cate.category
+                          )}
                         </a>
 
                         <div class="dropdown-content">

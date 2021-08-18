@@ -1,5 +1,10 @@
 import axios from "axios";
 import React from "react";
+import {
+  CountryDropdown,
+  RegionDropdown,
+  CountryRegionData,
+} from "react-country-region-selector";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useAlert } from "react-alert";
@@ -19,13 +24,15 @@ function Checkout() {
   const [pinCode, setPinCode] = useState("");
   const [company, setCompany] = useState("");
   const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
   const [appartment, setAppartment] = useState("");
   const [city, setCity] = useState("");
   const [orderNote, setOrderNote] = useState("");
   const [total, setTotal] = useState("");
   const [checked, setChecked] = useState(false);
+  const [country, setCountry] = useState("");
+
+  
 
   let cartItem = [];
   let totalPrice = 0;
@@ -34,18 +41,28 @@ function Checkout() {
   const token = localStorage.getItem("token");
   const history = useHistory();
   const alert = useAlert();
-  cartItem = items?.cartItems;
+  if (Array.isArray(items)) {
+    cartItem = items;
+  } else {
+    cartItem = items?.cartItems;
+  }
 
   cartItem?.map((item) => {
-    totalPrice += item.quantity * 1 * item.product.sale_price * 1;
+    item.product
+      ? (totalPrice += item.quantity * 1 * item.product.sale_price)
+      : (totalPrice += item.quantity * 1 * item.sale_price);
+
     totalQuantity += item.quantity * 1;
 
     product.push({
-      title: item.product.title,
+      title: item.product ? item.product?.title : item.title,
       quantity: item.quantity,
-      price: item.product.sale_price,
-      image: item.product.image,
-      totalPrice: item.quantity * 1 * item.product.sale_price * 1,
+      price: item.product ? item.product?.sale_price : item.sale_price,
+      image: item.product ? item.product?.image : item.image,
+      totalPrice:
+        item.quantity * 1 * item.product
+          ? item.product?.sale_price
+          : item.sale_price * 1,
     });
   });
 
@@ -72,13 +89,16 @@ function Checkout() {
   };
 
   async function handleOrder() {
-     if(phone.length<10||phone.length>10)
-    return  alert.show("Please Fill Valid Mobile No", { type: "error" });
-     if(!(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email)))
- return alert.show("Please Fill Valid Email Address", { type: "error" });
+    if (phone.length < 10 || phone.length > 10)
+      return alert.show("Please Fill Valid Mobile No", { type: "error" });
+    if (
+      !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+        email
+      )
+    )
+      return alert.show("Please Fill Valid Email Address", { type: "error" });
     if (
       !firstName ||
-      !lastName ||
       !email ||
       !address ||
       !phone ||
@@ -88,22 +108,28 @@ function Checkout() {
       !country
     ) {
       alert.show("please fill all the fields", { type: "error" });
-    }
-
-    else {
+    } else {
       if (!checked) {
         alert.show("Please Accept Terms & Conditions", { type: "error" });
       } else {
-        const order = await axios.post(`${API}/api/order/add_order`, data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const orderID = order.data.orderId;
-        history.push(`/payment/${orderID}`);
+        if (!token) {
+          alert.show("Please Login To Proceed", { type: "error" });
+          setTimeout(() => {
+            history.push("/login");
+          }, 2000);
+        } else {
+          const order = await axios.post(`${API}/api/order/add_order`, data, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const orderID = order.data.orderId;
+          history.push(`/payment/${orderID}`);
+        }
       }
     }
   }
+
   return (
     <div>
       <Header />
@@ -159,32 +185,10 @@ function Checkout() {
                       <label for="address_country_ship_2">
                         Country / Region *
                       </label>
-                      <select
-                        id="address_country_ship_2"
+                      <CountryDropdown
                         value={country}
-                        onChange={(e) => setCountry(e.target.value)}
-                      >
-                        <option value="">---</option>
-                        <option value="India" selected="">
-                          India
-                        </option>
-                        <option value="United Kingdom">United Kingdom</option>
-                        <option value="Italy">Italy</option>
-                        <option value="Germany">Germany</option>
-                        <option value="France">France</option>
-                        <option value="Spain">Spain</option>
-                        <option value="Australia">Australia</option>
-                        <option value="Finland">Finland</option>
-                        <option value="Austria">Austria</option>
-                        <option value="Belgium">Belgium</option>
-                        <option value="Brazil">Brazil</option>
-                        <option value="Canada">Canada</option>
-                        <option value="Chile">Chile</option>
-                        <option value="Cuba">Cuba</option>
-                        <option value="United States">United States</option>
-                        <option value="Indonesia">Indonesia</option>
-                        <option value="Japan">Japan</option>
-                      </select>
+                        onChange={(val) => setCountry(val)}
+                      />
                     </p>
                     <p className="checkout-section__field col-12">
                       <label for="address_01">Street address *</label>
@@ -220,18 +224,11 @@ function Checkout() {
                       >
                         State *
                       </label>
-                      <select
-                        id="address_province_ship"
+                      <RegionDropdown
+                        country={country}
                         value={state}
-                        onChange={(e) => setState(e.target.value)}
-                      >
-                        <option value="Andhra Pradesh">Andhra Pradesh</option>
-                        <option value="Assam">Assam</option>
-                        <option value="Arunachal Pradesh">
-                          Arunachal Pradesh
-                        </option>
-                        <option value="Telangana">Telangana</option>
-                      </select>
+                        onChange={(val) => setState(val)}
+                      />
                     </p>
                     <p className="checkout-section__field col-12">
                       <label for="address_zip_ship_2">Postal/Zip Code</label>
@@ -298,14 +295,19 @@ function Checkout() {
                           return (
                             <tr key={index} className="cart_item">
                               <td className="product-name">
-                                {item.product.title}
+                                {item.product
+                                  ? item.product?.title
+                                  : item.title}
                                 <strong className="product-quantity">
                                   × {item.quantity}
                                 </strong>
                               </td>
                               <td className="product-total">
                                 <span className="cart_price">
-                                  Rs. {item.product.sale_price}
+                                  Rs.{" "}
+                                  {item.product
+                                    ? item.product?.sale_price
+                                    : item.sale_price}
                                 </span>
                               </td>
                             </tr>
