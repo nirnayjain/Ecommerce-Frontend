@@ -32,6 +32,8 @@ function Checkout() {
   const [checked, setChecked] = useState(false);
   const [country, setCountry] = useState("");
 
+  
+
   let cartItem = [];
   let totalPrice = 0;
   let totalQuantity = 0;
@@ -112,6 +114,9 @@ function Checkout() {
       } else {
         if (!token) {
           alert.show("Please Login To Proceed", { type: "error" });
+          setTimeout(() => {
+            history.push("/login");
+          }, 2000);
         } else {
           const order = await axios.post(`${API}/api/order/add_order`, data, {
             headers: {

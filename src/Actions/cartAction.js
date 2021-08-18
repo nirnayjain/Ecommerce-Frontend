@@ -15,6 +15,7 @@ const token = localStorage.getItem("token");
 export const viewCart = () => {
   let totalPrice = 0;
   let totalQuantity = 0;
+  const token = localStorage.getItem("token");
 
   if (!token) {
     return function (dispatch) {
@@ -61,13 +62,15 @@ export const addToCart = (id) => {
   let totalQuantity = 0;
   let cartProduct;
   const cartData = JSON.parse(localStorage.getItem("cartData"));
+  const token = localStorage.getItem("token");
   if (cartData) {
     cartProduct = cartData;
   } else {
     cartProduct = [];
   }
-
+  console.log(token);
   if (!token) {
+    console.log("NO TOKEN");
     return function (dispatch) {
       axios.get(`${API}/api/product/${id}`).then((product) => {
         let cartItemDetail = {
@@ -114,6 +117,7 @@ export const addToCart = (id) => {
       });
     };
   } else {
+    console.log("TOKEN");
     return function (dispatch) {
       axios
         .post(
@@ -152,6 +156,7 @@ export const addToCartSuccess = (message, totalPrice, totalQuantity) => {
 export const removeFromCart = (id) => {
   let totalPrice = 0;
   let totalQuantity = 0;
+  const token = localStorage.getItem("token");
 
   if (!token) {
     return function (dispatch) {
@@ -209,6 +214,7 @@ export const removeFromCartSuccess = (message, totalPrice, totalQuantity) => {
 export const increseQuant = (id) => {
   let totalPrice = 0;
   let totalQuantity = 0;
+  const token = localStorage.getItem("token");
 
   if (!token) {
     return function (dispatch) {
@@ -279,6 +285,7 @@ export const increseQuantSuccess = (message, totalPrice, totalQuantity) => {
 export const decreaseQuant = (id) => {
   let totalPrice = 0;
   let totalQuantity = 0;
+  const token = localStorage.getItem("token");
 
   if (!token) {
     return function (dispatch) {

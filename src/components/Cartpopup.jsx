@@ -112,7 +112,7 @@ function Cartpopup() {
                             href="product-detail.html"
                             class="mini_cart_title truncate"
                           >
-                            {item.product ? item.product.titel : item?.title}
+                            {item.product ? item.product.title : item?.title}
                           </a>
                           <div class="mini_cart_meta">
                             <p class="cart_selling_plan"></p>
