@@ -72,13 +72,13 @@ function Paymentpage() {
             <input
               type="hidden"
               id="surl"
-              value="http://localhost:5000/payment-success"
+              value="https://popstoreeee.herokuapp.com/payment-success"
               name="surl"
             />
             <input
               type="hidden"
               id="furl"
-              value="http://localhost:5000/payment-failure"
+              value="https://popstoreeee.herokuapp.com/payment-failure"
               name="furl"
             />
             <input class="amount" type="hidden" name="amount" value={amount} />
