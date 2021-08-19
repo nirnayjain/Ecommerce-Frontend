@@ -86,11 +86,11 @@ handlePayment()
             Pay
           </Button>
 
-          {/* <a href="/">
+          <a href="/">
             <Button variant="warning" size="lg">
               Cancel
             </Button>
-          </a> */}
+          </a>
         </div>
 </form>
 }
