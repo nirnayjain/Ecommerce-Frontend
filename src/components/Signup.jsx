@@ -25,26 +25,30 @@ function Signup(props) {
       setLoading(false);
     }
 
-    const response = await axios.post(`${API}/signup`, {
-      firstName,
-      lastName,
-      email,
-      password,
-    });
+    try {
+      const response = await axios.post(`${API}/signup`, {
+        firstName,
+        lastName,
+        email,
+        password,
+      });
 
-    console.log(response);
+      console.log(response);
 
-    if (response.data) {
-      setLoading(false);
-      localStorage.setItem("token", response.data.token);
-      alert.show("Registered Successfully", { type: "success" });
+      if (response.data) {
+        setLoading(false);
+        localStorage.setItem("token", response.data.token);
+        alert.show("Registered Successfully", { type: "success" });
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
-      setTimeout(() => {
-        window.stop();
-      }, 4000);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+        setTimeout(() => {
+          window.stop();
+        }, 4000);
+      }
+    } catch (error) {
+      alert.show(error.response.data.message, { type: "error" });
     }
   }
 
