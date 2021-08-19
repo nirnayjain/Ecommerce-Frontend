@@ -329,7 +329,7 @@ function Cartpopup() {
               )}
 
               {cartItem?.length === 0 ? (
-                <a class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white">
+                <a class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white" href="/checkout">
                   <Button
                     style={{ backgroundColor: "transparent", border: "none" }}
                     class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white"
