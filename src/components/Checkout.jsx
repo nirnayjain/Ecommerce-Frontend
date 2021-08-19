@@ -32,7 +32,7 @@ function Checkout() {
   const [checked, setChecked] = useState(false);
   const [country, setCountry] = useState("");
 
-  
+
 
   let cartItem = [];
   let totalPrice = 0;
@@ -124,7 +124,7 @@ function Checkout() {
             },
           });
           const orderID = order.data.orderId;
-          history.push(`/payment/${orderID}`);
+          history.push(`/payment/${orderID}?amount=${totalPrice}`);
         }
       }
     }

@@ -1,8 +1,8 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import { Button } from "react-bootstrap";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams,useLocation } from "react-router-dom";
 import axios from "axios";
 import { API } from "../API";
 import { useDispatch } from "react-redux";
@@ -10,19 +10,32 @@ import { delteUserCart } from "../Actions/cartAction";
 
 function Paymentpage() {
   const history = useHistory();
+    const search = useLocation().search;
+  const amount = new URLSearchParams(search).get('amount');
   const { id } = useParams();
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
+const[data,setData]=useState("")
+useEffect(()=>
+handlePayment()
+,[])
+// const[amount,setAmount]=useState("")
 
   async function handlePayment() {
-    let res = await axios.post(`${API}/payment_gateway/payumoney`, {
-      txnid: "84713847091",
-      amount: 1,
-      productinfo: "Nail Police",
-      firstname: "Nirnay",
-      email: "nirnay@gmail.com",
-    });
-    console.log(res);
+    // const response=await axios.get(`${API}/api/order/${id}`)
+    // console.log(response.data)
+    // setAmount(response.data.order.orders[0].Amount)
+    const res = await axios.post(`${API}/api/user/payment_gateway/payumoney`, {
+      txnid:id,
+      amount:amount,
+      productinfo:"Shopping",
+      // firstname: "Nirnay",
+      // email: "nirnayrockjain@gmail.com",
+    },{headers: {
+          Authorization: `Bearer ${token}`,
+        }});
+
+    setData(res.data)
     // const payment = await axios.patch(`${API}/api/order/update_order/${id}`, {
     //   headers: {
     //     Authorization: `Bearer ${token}`,
@@ -45,22 +58,43 @@ function Paymentpage() {
           marginTop: "10%",
         }}
       >
-        <div className="row">
+        {data===null&&amount===null?
+        "":
+        <form action=" https://test.payu.in/_payment" method="POST">
+<input class="key" type="hidden" name="key" value={data.key}/>
+<input class="txnid" type="hidden" name="txnid" value={id}/>
+<input class="hash" type="hidden" name="hash" value={data.hash}/>
+<input type="hidden" id="surl" value="http://localhost:5000/payment-success"name="surl" />
+<input type="hidden" id="furl" value="http://localhost:5000//payment-failure" name="furl" />
+<input class="amount" type="hidden" name="amount" value={amount}/>
+<input class="con" type="hidden" name="phone" value="9572635588" />
+<input type="hidden" name="service_provider" value="payu_paisa"/>
+<input type="hidden" class="product" name="productinfo"value="Shopping"/>
+<input class="firstname" type="hidden" name="firstname" value={data.firstName}/>
+<input class="email" type="hidden" name="email" value={data.email}/>
+
+
+
+ <div className="row">
           <Button
+          type="submit"
             variant="primary"
             size="lg"
             className="mr-2"
-            onClick={handlePayment}
+
           >
             Pay
           </Button>
 
-          <a href="/">
+          {/* <a href="/">
             <Button variant="warning" size="lg">
               Cancel
             </Button>
-          </a>
+          </a> */}
         </div>
+</form>
+}
+
       </div>
       <Footer />
     </div>
