@@ -31,6 +31,7 @@ function Cartpopup() {
     cartItem = items;
     console.log(items);
   } else {
+    console.log(items);
     cartItem = items?.cartItems;
   }
 

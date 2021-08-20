@@ -117,13 +117,13 @@ export const addToCart = (id) => {
       });
     };
   } else {
-    console.log("TOKEN");
+    console.log(id);
     return function (dispatch) {
       axios
         .post(
           `${API}/api/cart/add_product`,
           {
-           product: id ,
+            product: id,
           },
           {
             headers: {
