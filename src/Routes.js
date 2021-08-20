@@ -24,7 +24,9 @@ function Routes() {
     <Router>
       <Switch>
         <Route path="/" exact>
-          {/* <Comingsoon /> */}
+          <Comingsoon />
+        </Route>
+        <Route path="/view" exact>
           <Header />
           <Navigation />
           <Hero />
