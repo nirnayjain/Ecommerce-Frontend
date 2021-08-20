@@ -73,13 +73,13 @@ function Paymentpage() {
             <input
               type="hidden"
               id="surl"
-              value="API/payment-success"
+              value="http://localhost:5000/payment-success"
               name="surl"
             />
             <input
               type="hidden"
               id="furl"
-              value="API/payment-failure"
+              value="http://localhost:5000/payment-failure"
               name="furl"
             />
             <input class="amount" type="hidden" name="amount" value={amount} />

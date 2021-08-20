@@ -40,7 +40,7 @@ function Routes() {
         <Route path="/cart" exact component={Shoppingcart} />
         <Route path="/checkout" exact component={Checkout} />
         <Route path="/payment/:id" exact component={Paymentpage} />
-        <Route path="/payment-success" exact component={Paymentsuccess} />
+        <Route path="/payment-success/:id" exact component={Paymentsuccess} />
         <Route path="/privacyPolicy" exact component={PrivacyPolicy} />
         <Route path="/login" exact component={Checkoutlogin} />
       </Switch>
