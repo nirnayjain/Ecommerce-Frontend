@@ -123,7 +123,7 @@ export const addToCart = (id) => {
         .post(
           `${API}/api/cart/add_product`,
           {
-            cartItems: [{ product: id }],
+           product: id ,
           },
           {
             headers: {

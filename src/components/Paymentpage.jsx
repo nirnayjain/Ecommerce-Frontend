@@ -16,13 +16,14 @@ function Paymentpage() {
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const [data, setData] = useState("");
+   const[orderData,setOrderData]=useState("")
   useEffect(() => handlePayment(), []);
-  // const[amount,setAmount]=useState("")
+
 
   async function handlePayment() {
-    // const response=await axios.get(`${API}/api/order/${id}`)
-    // console.log(response.data)
-    // setAmount(response.data.order.orders[0].Amount)
+    const response=await axios.get(`${API}/api/order/${id}`)
+    console.log(response.data)
+    setOrderData(response.data.order.orders[0])
     const res = await axios.post(
       `${API}/api/user/payment_gateway/payumoney`,
       {
@@ -72,17 +73,17 @@ function Paymentpage() {
             <input
               type="hidden"
               id="surl"
-              value="https://popstoreeee.herokuapp.com/payment-success"
+              value="API/payment-success"
               name="surl"
             />
             <input
               type="hidden"
               id="furl"
-              value="https://popstoreeee.herokuapp.com/payment-failure"
+              value="API/payment-failure"
               name="furl"
             />
             <input class="amount" type="hidden" name="amount" value={amount} />
-            <input class="con" type="hidden" name="phone" value="9572635588" />
+            <input class="con" type="hidden" name="phone" value={orderData.phone} />
             <input type="hidden" name="service_provider" value="payu_paisa" />
             <input
               type="hidden"
