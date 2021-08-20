@@ -91,6 +91,12 @@ function Paymentpage() {
               name="productinfo"
               value="Shopping"
             />
+             <input
+              type="hidden"
+              class="udf1"
+              name="udf1"
+              value={data.userId}
+            />
             <input
               class="firstname"
               type="hidden"
