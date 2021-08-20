@@ -17,22 +17,24 @@ import Paymentsuccess from "./components/Paymentsuccess";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Allproductlist from "./components/Allproductlist";
 import Checkoutlogin from "./components/Checkoutlogin";
+import Comingsoon from "./components/Comingsoon";
 
 function Routes() {
   return (
     <Router>
       <Switch>
         <Route path="/" exact>
-          <Header />
+          <Comingsoon />
+          {/* <Header />
           <Navigation />
           <Hero />
           {/* <Productrow /> */}
-          <Categorybanner />
+          {/* <Categorybanner />
           <Newproducts />
           <Bottombanner />
-          <Footer />
+          <Footer /> */}
         </Route>
-        <Route path="/productDetails/:id" exact component={Producdetails} />
+        {/* <Route path="/productDetails/:id" exact component={Producdetails} />
         <Route path="/allProducts/:category" exact component={Allproductlist} />
         <Route path="/shop/:subCategory" exact component={Shop} />
         <Route path="/cart" exact component={Shoppingcart} />
@@ -40,7 +42,7 @@ function Routes() {
         <Route path="/payment/:id" exact component={Paymentpage} />
         <Route path="/payment-success" exact component={Paymentsuccess} />
         <Route path="/privacyPolicy" exact component={PrivacyPolicy} />
-        <Route path="/login" exact component={Checkoutlogin} />
+        <Route path="/login" exact component={Checkoutlogin} /> */}
       </Switch>
     </Router>
   );
