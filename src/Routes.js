@@ -14,7 +14,7 @@ import Shoppingcart from "./components/Shoppingcart";
 import Checkout from "./components/Checkout";
 import Paymentpage from "./components/Paymentpage";
 import Paymentsuccess from "./components/Paymentsuccess";
-import PrivacyPolicy from "./components/PrivacyPolicy";
+import WebsitePolicyPage from "./components/websitePolicyPage";
 import Allproductlist from "./components/Allproductlist";
 import Checkoutlogin from "./components/Checkoutlogin";
 import Comingsoon from "./components/Comingsoon";
@@ -43,7 +43,7 @@ function Routes() {
         <Route path="/checkout" exact component={Checkout} />
         <Route path="/payment/:id" exact component={Paymentpage} />
         <Route path="/payment-success/:id" exact component={Paymentsuccess} />
-        <Route path="/privacyPolicy" exact component={PrivacyPolicy} />
+        <Route path="/:id" exact component={WebsitePolicyPage} />
         <Route path="/login" exact component={Checkoutlogin} />
       </Switch>
     </Router>

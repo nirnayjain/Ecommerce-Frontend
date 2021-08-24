@@ -41,7 +41,8 @@ function Paymentsuccess() {
           <div
             style={{ display: "grid", placeItems: "center", marginTop: "5%" }}
           >
-            <h1>Payment Successfull</h1>
+            <h2>Payment Successfull</h2>
+             <h3 style={{marginTop:20,marginBottom:20}}>Your Order Id :{id}</h3>
             <div className="col-12 col-md-6 col-lg-5 mt__50 mb__80 mt-md-0 mb-md-0">
               <div className="order-review__wrapper">
                 <h3 className="order-review__title">Your order</h3>

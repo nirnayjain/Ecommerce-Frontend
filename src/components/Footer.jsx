@@ -7,6 +7,7 @@ import { API } from "../API";
 function Footer() {
   const [configuration, setConfiguration] = useState("");
   const [category, setCategory] = useState([]);
+  const[page,setPage]=useState(null)
 
   useEffect(() => {
     async function getCategory() {
@@ -19,7 +20,13 @@ function Footer() {
     }
     getConfiguration();
     getCategory();
+    getPages();
   }, []);
+  const getPages=async()=>{
+    const res=await axios.get(`${API}/api/page/view_page`)
+    console.log(res)
+    setPage(res.data.Page)
+  }
   console.log(configuration);
   return (
     <div id="nt_wrapper">
@@ -129,25 +136,22 @@ function Footer() {
                       <span className="txt_title">Infomation</span>
                       <span className="nav_link_icon ml__5"></span>
                     </h3>
+                    {page===null?
+                    <>
+                    </>
+                    :
+                    <>
+                    {page.map(i=>
                     <div className="menu_footer widget_footer">
                       <ul className="menu">
                         <li className="menu-item">
-                          <a href="#">Contact us</a>
-                        </li>
-                        <li className="menu-item">
-                          <a href="/privacyPolicy">Privacy Policy</a>
-                        </li>
-                        <li className="menu-item">
-                          <a href="#">Shipping & Delivery</a>
-                        </li>
-                        <li className="menu-item">
-                          <a href="#">Terms & Conditions</a>
-                        </li>
-                        <li className="menu-item">
-                          <a href="#">Returns & Exchanges</a>
+                          <a href={i.url}>{i.title}</a>
                         </li>
                       </ul>
                     </div>
+                    )}
+                    </>
+                    }
                   </div>
                 </div>
                 <div className="col-lg-2 col-md-6 col-12 mb__50 order-lg-4 order-1">
