@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+
 import { API } from "../API";
 import Cartpopup from "./Cartpopup";
 import Popform from "./Popform";
@@ -45,6 +46,12 @@ function Header() {
     getFeatured();
   }, []);
 
+  function handleLogout() {
+    localStorage.removeItem("token");
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
+  }
   return (
     <>
       {/* <Toplabel /> */}
@@ -174,7 +181,10 @@ function Header() {
                         </li>
                         <li style={{ marginTop: "1.5rem" }}>
                           {" "}
-                          <a href="#"> Logout</a>
+                          <a href="" onClick={handleLogout}>
+                            {" "}
+                            Logout
+                          </a>
                         </li>
                       </ul>
                     </div>

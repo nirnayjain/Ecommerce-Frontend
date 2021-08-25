@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API } from "../API";
 
-function Shopbanner() {
+function Shopbanner(props) {
   const { subCategory } = useParams();
   const [products, setProducts] = useState([]);
 
@@ -28,9 +28,13 @@ function Shopbanner() {
           ></div>
           <div class="container pr z_100">
             <h1 class="mb__5 cw">{products[0]?.category}</h1>
-            <p class="mg__0">
-              Shop through our latest selection of color cosmetics
-            </p>
+            {props.heading ? (
+              <h3 style={{ color: "white" }}>{props.heading}</h3>
+            ) : (
+              <p class="mg__0">
+                "Shop through our latest selection of color cosmetics"
+              </p>
+            )}
           </div>
         </div>
       </div>

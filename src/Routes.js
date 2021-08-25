@@ -21,6 +21,7 @@ import Comingsoon from "./components/Comingsoon";
 import Myorders from "./components/Myorders";
 import Mywishlist from "./components/Mywishlist";
 import Changepassword from "./components/Changepassword";
+import Orderdetails from "./components/Orderdetails";
 
 function Routes() {
   return (
@@ -41,6 +42,7 @@ function Routes() {
         </Route>
         <Route path="/my-orders" exact component={Myorders}></Route>
         <Route path="/my-wishlist" exact component={Mywishlist}></Route>
+        <Route path="/order-details/:id" exact component={Orderdetails}></Route>
         <Route path="/change-password" exact component={Changepassword}></Route>
         <Route path="/productDetails/:id" exact component={Producdetails} />
         <Route path="/allProducts/:category" exact component={Allproductlist} />
