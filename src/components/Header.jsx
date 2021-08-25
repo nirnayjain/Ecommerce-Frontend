@@ -19,6 +19,7 @@ function Header() {
   let [linkedinUrl, setlinkedinUrl] = useState("");
 
   const totalQuantity = useSelector((state) => state.totalQuantity);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     async function getFeatured() {
@@ -134,7 +135,7 @@ function Header() {
                 >
                   <i className="iccl iccl-search"></i>
                 </a> */}
-                <div className="my-account ts__05 pr dn db_md">
+                <div className="my-account ts__05 pr dn db_md ">
                   <a
                     className="cb chp db push_side"
                     href="#"
@@ -142,6 +143,42 @@ function Header() {
                   >
                     <i className="iccl iccl-user"></i>
                   </a>
+                  {token ? (
+                    <div
+                      style={{
+                        position: "absolute",
+                        left: "-8rem",
+                        top: "-2rem",
+                        zIndex: "10000",
+                      }}
+                    >
+                      <ul
+                        style={{
+                          backgroundColor: "#eee",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                        }}
+                      >
+                        <li style={{ marginTop: "1.5rem" }}>
+                          <a href="/my-orders"> My Orders</a>
+                        </li>
+                        <li style={{ marginTop: "1.5rem" }}>
+                          {" "}
+                          <a href="/my-wishlist"> My Wishlist</a>
+                        </li>
+
+                        <li style={{ marginTop: "1.5rem" }}>
+                          {" "}
+                          <a href="/change-password">Change Password</a>
+                        </li>
+                        <li style={{ marginTop: "1.5rem" }}>
+                          {" "}
+                          <a href="#"> Logout</a>
+                        </li>
+                      </ul>
+                    </div>
+                  ) : null}
                 </div>
                 {/* <a
                   className="icon_like cb chp pr dn db_md js_link_wis"

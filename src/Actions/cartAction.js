@@ -38,7 +38,7 @@ export const viewCart = () => {
       .then((response) => {
         console.log(response);
         response.data?.cartItems.map((item) => {
-          totalPrice += item.product.sale_price * 1 * item.quantity * 1;
+          totalPrice += item.product?.sale_price * 1 * item.quantity * 1;
           totalQuantity += item.quantity * 1;
         });
         const cartItems = response.data;

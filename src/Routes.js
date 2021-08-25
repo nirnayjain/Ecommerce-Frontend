@@ -18,6 +18,9 @@ import WebsitePolicyPage from "./components/websitePolicyPage";
 import Allproductlist from "./components/Allproductlist";
 import Checkoutlogin from "./components/Checkoutlogin";
 import Comingsoon from "./components/Comingsoon";
+import Myorders from "./components/Myorders";
+import Mywishlist from "./components/Mywishlist";
+import Changepassword from "./components/Changepassword";
 
 function Routes() {
   return (
@@ -36,6 +39,9 @@ function Routes() {
           <Bottombanner />
           <Footer />
         </Route>
+        <Route path="/my-orders" exact component={Myorders}></Route>
+        <Route path="/my-wishlist" exact component={Mywishlist}></Route>
+        <Route path="/change-password" exact component={Changepassword}></Route>
         <Route path="/productDetails/:id" exact component={Producdetails} />
         <Route path="/allProducts/:category" exact component={Allproductlist} />
         <Route path="/shop/:subCategory" exact component={Shop} />
