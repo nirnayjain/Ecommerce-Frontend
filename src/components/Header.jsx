@@ -174,6 +174,10 @@ function Header() {
                           {" "}
                           <a href="/my-wishlist"> My Wishlist</a>
                         </li>
+                        <li style={{ marginTop: "1.5rem" }}>
+                          {" "}
+                          <a href="/my-address">Address</a>
+                        </li>
 
                         <li style={{ marginTop: "1.5rem" }}>
                           {" "}
