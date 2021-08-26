@@ -20,7 +20,7 @@ function Producdetails() {
   const { id } = useParams();
   const [productDetailes, setproductDetailes] = useState({});
   const [modalShow, setModalShow] = useState(false);
-  const items = useSelector((state) => state.cartItems);
+  const items = useSelector((state) => state.cart.cartItems);
   const [quantity, setQuantity] = useState(0);
   const dispatch = useDispatch();
   useEffect(() => {

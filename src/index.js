@@ -6,9 +6,10 @@ import reportWebVitals from "./reportWebVitals";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import { Provider } from "react-redux";
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, createStore, combineReducers } from "redux";
 import cartReducer from "./Reducer/cartReducer";
 import thunk from "redux-thunk";
+import wishlistReducer from "./Reducer/wishlistReducer";
 
 // optional configuration
 const options = {
@@ -20,7 +21,11 @@ const options = {
   transition: transitions.SCALE,
 };
 
-const store = createStore(cartReducer, applyMiddleware(thunk));
+const rootReducer = combineReducers({
+  cart: cartReducer,
+  wishlist: wishlistReducer,
+});
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <React.StrictMode>

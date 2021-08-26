@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart, viewCart } from "../Actions/cartAction";
 import { API } from "../API";
+import { addToWishlist } from "../Actions/wishlishAction";
 
 function Newproducts() {
   let [newArrival, setnewArrival] = useState([]);
@@ -19,6 +20,10 @@ function Newproducts() {
 
   function addCart(id) {
     dispatch(addToCart(id));
+  }
+  function Wishlist(id) {
+    dispatch(addToWishlist(id));
+    window.location.href = "/my-wishlist";
   }
 
   console.log(newArrival);
@@ -61,7 +66,7 @@ function Newproducts() {
 
                       <div className="nt_add_w ts__03 pa">
                         <a
-                          href="#"
+                          onClick={() => Wishlist(product._id)}
                           className="wishlistadd cb chp ttip_nt tooltip_right"
                         >
                           <span className="tt_txt">Add to Wishlist</span>

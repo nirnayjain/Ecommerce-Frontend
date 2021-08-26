@@ -15,11 +15,11 @@ import Shopbanner from "./Shopbanner";
 
 function Shoppingcart() {
   const [checked, setChecked] = useState(false);
-  const items = useSelector((state) => state.cartItems);
+  const items = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
   const alert = useAlert();
   const history = useHistory();
-  const totalPrice = useSelector((state) => state.totalPrice);
+  const totalPrice = useSelector((state) => state.cart.totalPrice);
   let cartItem = [];
   if (Array.isArray(items)) {
     cartItem = items;

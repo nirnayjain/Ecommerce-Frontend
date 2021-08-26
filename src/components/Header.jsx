@@ -19,7 +19,7 @@ function Header() {
   let [twiiterUrl, settwiiterUrl] = useState("");
   let [linkedinUrl, setlinkedinUrl] = useState("");
 
-  const totalQuantity = useSelector((state) => state.totalQuantity);
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
