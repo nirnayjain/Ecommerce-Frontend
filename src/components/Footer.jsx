@@ -7,7 +7,7 @@ import { API } from "../API";
 function Footer() {
   const [configuration, setConfiguration] = useState("");
   const [category, setCategory] = useState([]);
-  const[page,setPage]=useState(null)
+  const [page, setPage] = useState(null);
 
   useEffect(() => {
     async function getCategory() {
@@ -22,11 +22,11 @@ function Footer() {
     getCategory();
     getPages();
   }, []);
-  const getPages=async()=>{
-    const res=await axios.get(`${API}/api/page/view_page`)
-    console.log(res)
-    setPage(res.data.Page)
-  }
+  const getPages = async () => {
+    const res = await axios.get(`${API}/api/page/view_page`);
+    console.log(res);
+    setPage(res.data.Page);
+  };
   console.log(configuration);
   return (
     <div id="nt_wrapper">
@@ -136,22 +136,21 @@ function Footer() {
                       <span className="txt_title">Infomation</span>
                       <span className="nav_link_icon ml__5"></span>
                     </h3>
-                    {page===null?
-                    <>
-                    </>
-                    :
-                    <>
-                    {page.map(i=>
-                    <div className="menu_footer widget_footer">
-                      <ul className="menu">
-                        <li className="menu-item">
-                          <a href={i.url}>{i.title}</a>
-                        </li>
-                      </ul>
-                    </div>
+                    {page === null ? (
+                      <></>
+                    ) : (
+                      <>
+                        {page.map((i) => (
+                          <div className="menu_footer widget_footer">
+                            <ul className="menu">
+                              <li className="menu-item">
+                                <a href={i.url}>{i.title}</a>
+                              </li>
+                            </ul>
+                          </div>
+                        ))}
+                      </>
                     )}
-                    </>
-                    }
                   </div>
                 </div>
                 <div className="col-lg-2 col-md-6 col-12 mb__50 order-lg-4 order-1">
@@ -245,7 +244,7 @@ function Footer() {
                       <a href="about-us.html">About Us</a>
                     </li>
                     <li className="menu-item">
-                      <a href="#">Contact Us</a>
+                      <a href="/contact-us">Contact Us</a>
                     </li>
                     <li className="menu-item">
                       <a href="blog-grid.html">Blog</a>

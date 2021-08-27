@@ -23,6 +23,7 @@ import Mywishlist from "./components/Mywishlist";
 import Changepassword from "./components/Changepassword";
 import Orderdetails from "./components/Orderdetails";
 import Address from "./components/Address";
+import Contact from "./components/Contact";
 
 function Routes() {
   return (
@@ -41,6 +42,7 @@ function Routes() {
           <Bottombanner />
           <Footer />
         </Route>
+        <Route path="/contact-us" exact component={Contact} />
         <Route path="/my-orders" exact component={Myorders}></Route>
         <Route path="/my-wishlist" exact component={Mywishlist}></Route>
         <Route path="/my-address" exact component={Address}></Route>
