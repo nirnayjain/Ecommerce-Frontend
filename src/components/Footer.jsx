@@ -3,12 +3,16 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { API } from "../API";
+import { useAlert } from "react-alert";
+import validator from "email-validator";
 
 function Footer() {
   const [configuration, setConfiguration] = useState("");
   const [category, setCategory] = useState([]);
   const [page, setPage] = useState(null);
-
+  const [email, setEmail] = useState("");
+  const alert = useAlert();
+  const token = localStorage.getItem("token");
   useEffect(() => {
     async function getCategory() {
       let categories = await axios.get(`${API}/api/category`);
@@ -27,7 +31,34 @@ function Footer() {
     console.log(res);
     setPage(res.data.Page);
   };
-  console.log(configuration);
+
+  async function subscribe(e) {
+    e.preventDefault();
+
+    if (!validator.validate(email)) {
+      alert.show("Please Enter Valid Email Address", { type: "error" });
+    } else {
+      let subscribeNews = await axios.post(
+        `${API}/api/user/subscribeNewsLetter`,
+        {
+          email,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (subscribeNews.data.message === "success") {
+        alert.show("Thanks For Subscribing To Our NewsLetter", {
+          type: "success",
+        });
+        setEmail("");
+      }
+    }
+  }
+
   return (
     <div id="nt_wrapper">
       <footer id="nt_footer" className="bgbl footer-1">
@@ -197,16 +228,18 @@ function Footer() {
                           <div className="signup-newsletter-form row no-gutters pr oh">
                             <div className="col col_email">
                               <input
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 type="email"
                                 name="email"
                                 placeholder="Your email address"
-                                value=""
                                 className="tc tl_md input-text"
                                 required="required"
                               />
                             </div>
                             <div className="col-auto">
                               <button
+                                onClick={(e) => subscribe(e)}
                                 type="submit"
                                 className="btn_new_icon_false w__100 submit-btn truncate"
                               >
