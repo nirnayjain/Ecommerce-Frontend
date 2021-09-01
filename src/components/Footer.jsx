@@ -3,11 +3,16 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { API } from "../API";
+import { useAlert } from "react-alert";
+import validator from "email-validator";
 
 function Footer() {
   const [configuration, setConfiguration] = useState("");
   const [category, setCategory] = useState([]);
-
+  const [page, setPage] = useState(null);
+  const [email, setEmail] = useState("");
+  const alert = useAlert();
+  const token = localStorage.getItem("token");
   useEffect(() => {
     async function getCategory() {
       let categories = await axios.get(`${API}/api/category`);
@@ -19,8 +24,41 @@ function Footer() {
     }
     getConfiguration();
     getCategory();
+    getPages();
   }, []);
-  console.log(configuration);
+  const getPages = async () => {
+    const res = await axios.get(`${API}/api/page/view_page`);
+    console.log(res);
+    setPage(res.data.Page);
+  };
+
+  async function subscribe(e) {
+    e.preventDefault();
+
+    if (!validator.validate(email)) {
+      alert.show("Please Enter Valid Email Address", { type: "error" });
+    } else {
+      let subscribeNews = await axios.post(
+        `${API}/api/user/subscribeNewsLetter`,
+        {
+          email,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (subscribeNews.data.message === "success") {
+        alert.show("Thanks For Subscribing To Our NewsLetter", {
+          type: "success",
+        });
+        setEmail("");
+      }
+    }
+  }
+
   return (
     <div id="nt_wrapper">
       <footer id="nt_footer" className="bgbl footer-1">
@@ -129,25 +167,21 @@ function Footer() {
                       <span className="txt_title">Infomation</span>
                       <span className="nav_link_icon ml__5"></span>
                     </h3>
-                    <div className="menu_footer widget_footer">
-                      <ul className="menu">
-                        <li className="menu-item">
-                          <a href="#">Contact us</a>
-                        </li>
-                        <li className="menu-item">
-                          <a href="/privacyPolicy">Privacy Policy</a>
-                        </li>
-                        <li className="menu-item">
-                          <a href="#">Shipping & Delivery</a>
-                        </li>
-                        <li className="menu-item">
-                          <a href="#">Terms & Conditions</a>
-                        </li>
-                        <li className="menu-item">
-                          <a href="#">Returns & Exchanges</a>
-                        </li>
-                      </ul>
-                    </div>
+                    {page === null ? (
+                      <></>
+                    ) : (
+                      <>
+                        {page.map((i) => (
+                          <div className="menu_footer widget_footer">
+                            <ul className="menu">
+                              <li className="menu-item">
+                                <a href={i.url}>{i.title}</a>
+                              </li>
+                            </ul>
+                          </div>
+                        ))}
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="col-lg-2 col-md-6 col-12 mb__50 order-lg-4 order-1">
@@ -194,16 +228,18 @@ function Footer() {
                           <div className="signup-newsletter-form row no-gutters pr oh">
                             <div className="col col_email">
                               <input
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 type="email"
                                 name="email"
                                 placeholder="Your email address"
-                                value=""
                                 className="tc tl_md input-text"
                                 required="required"
                               />
                             </div>
                             <div className="col-auto">
                               <button
+                                onClick={(e) => subscribe(e)}
                                 type="submit"
                                 className="btn_new_icon_false w__100 submit-btn truncate"
                               >
@@ -241,7 +277,7 @@ function Footer() {
                       <a href="about-us.html">About Us</a>
                     </li>
                     <li className="menu-item">
-                      <a href="#">Contact Us</a>
+                      <a href="/contact-us">Contact Us</a>
                     </li>
                     <li className="menu-item">
                       <a href="blog-grid.html">Blog</a>

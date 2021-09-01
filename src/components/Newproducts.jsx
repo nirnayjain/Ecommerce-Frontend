@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect } from "react";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart, viewCart } from "../Actions/cartAction";
 import { API } from "../API";
+import { addToWishlist } from "../Actions/wishlishAction";
 
 function Newproducts() {
   let [newArrival, setnewArrival] = useState([]);
@@ -18,6 +20,10 @@ function Newproducts() {
 
   function addCart(id) {
     dispatch(addToCart(id));
+  }
+  function Wishlist(id) {
+    dispatch(addToWishlist(id));
+    window.location.href = "/my-wishlist";
   }
 
   console.log(newArrival);
@@ -60,11 +66,11 @@ function Newproducts() {
 
                       <div className="nt_add_w ts__03 pa">
                         <a
-                          href="#"
+                          onClick={() => Wishlist(product._id)}
                           className="wishlistadd cb chp ttip_nt tooltip_right"
                         >
                           <span className="tt_txt">Add to Wishlist</span>
-                          <i className="facl facl-heart-o"></i>
+                          <FavoriteBorderIcon style={{ color: "gray" }} />
                         </a>
                       </div>
                       <div className="hover_button op__0 tc pa flex column ts__03">

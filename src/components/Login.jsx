@@ -29,7 +29,7 @@ function Login() {
       email,
       password,
     });
-
+    console.log(response.data);
     if (response.data) {
       setLoading(false);
       localStorage.setItem("token", response.data.token);

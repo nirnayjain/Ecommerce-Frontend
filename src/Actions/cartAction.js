@@ -37,8 +37,8 @@ export const viewCart = () => {
       })
       .then((response) => {
         console.log(response);
-        response.data.cartItems.map((item) => {
-          totalPrice += item.product.sale_price * 1 * item.quantity * 1;
+        response.data?.cartItems.map((item) => {
+          totalPrice += item.product?.sale_price * 1 * item.quantity * 1;
           totalQuantity += item.quantity * 1;
         });
         const cartItems = response.data;
@@ -117,13 +117,13 @@ export const addToCart = (id) => {
       });
     };
   } else {
-    console.log("TOKEN");
+    console.log(id);
     return function (dispatch) {
       axios
         .post(
           `${API}/api/cart/add_product`,
           {
-            cartItems: [{ product: id }],
+            product: id,
           },
           {
             headers: {

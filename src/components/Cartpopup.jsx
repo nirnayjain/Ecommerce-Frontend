@@ -17,9 +17,9 @@ function Cartpopup() {
   const [quantity, setQuantity] = useState([]);
   const [link, setLink] = useState("");
   const [checked, setChecked] = useState(false);
-  const items = useSelector((state) => state.cartItems);
-  const totalPrice = useSelector((state) => state.totalPrice);
-  const totalQunatity = useSelector((state) => state.totalQunatity);
+  const items = useSelector((state) => state.cart.cartItems);
+  const totalPrice = useSelector((state) => state.cart.totalPrice);
+  const totalQunatity = useSelector((state) => state.cart.totalQunatity);
   const alert = useAlert();
   const history = useHistory();
   let cartItem = [];
@@ -31,6 +31,7 @@ function Cartpopup() {
     cartItem = items;
     console.log(items);
   } else {
+    console.log(items);
     cartItem = items?.cartItems;
   }
 

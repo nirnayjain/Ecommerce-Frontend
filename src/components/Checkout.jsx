@@ -16,7 +16,7 @@ import Header from "./Header";
 import Navigation from "./Navigation";
 
 function Checkout() {
-  const items = useSelector((state) => state.cartItems);
+  const items = useSelector((state) => state.cart.cartItems);
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
   const [email, setEmail] = useState("");
