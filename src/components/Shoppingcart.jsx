@@ -193,7 +193,7 @@ function Shoppingcart() {
                     class="cart-note__input"
                     placeholder="How can we help you?"
                   ></textarea>
-                  <label
+                  {/* <label
                     for="couponcode"
                     class="cart-couponcode__label db cd mt__20 mb__10"
                   >
@@ -206,7 +206,7 @@ function Shoppingcart() {
                     id="couponcode"
                     placeholder="Coupon Code"
                     class="w-50"
-                  />
+                  /> */}
                 </div>
                 <div class="col-12 tr_md tc order-md-4 order-4 col-md-6">
                   <div class="total row in_flex fl_between al_center cd fs__18 tu">

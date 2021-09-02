@@ -83,7 +83,7 @@ function Checkout() {
         product,
         Amount: totalPrice,
         totalQuantity: totalQuantity,
-     
+
   };
 
   async function handleOrder() {
@@ -259,7 +259,7 @@ function Checkout() {
                 </div>
                 <div className="checkout-section">
                   <h3 className="checkout-section__title">Shipping Details</h3>
-                  <div className="row">
+                  {/* <div className="row">
                     <p className="checkout-section__field col-12">
                       <label for="order_comments" className="">
                         Order notes (optional)
@@ -274,7 +274,7 @@ function Checkout() {
                         onChange={(e) => setOrderNote(e.target.value)}
                       ></textarea>
                     </p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="col-12 col-md-6 col-lg-5 mt__50 mb__80 mt-md-0 mb-md-0">
