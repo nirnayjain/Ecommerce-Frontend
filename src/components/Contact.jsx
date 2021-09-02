@@ -13,6 +13,16 @@ function Contact() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (
+      !name ||
+      !email ||
+      !phoneNo||
+      !message
+    ) {
+      alert.show("please fill all the fields", { type: "error" });
+    }
+    else
+    {
     let response = await axios.post(
       `${API}/api/contact/add_Contact`,
       {
@@ -28,12 +38,13 @@ function Contact() {
       }
     );
     if (response.data.message) {
-      alert.show("Thanks for messaging us !", { type: "success" });
+      alert.show("Thanks for reaching us.We will get back to you at the earliest.", { type: "success" });
       setName("");
       setEmail("");
       setphoneNo("");
       setMessage("");
     }
+  }
   }
   return (
     <div>

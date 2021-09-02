@@ -22,7 +22,7 @@ function Paymentpage() {
   async function handlePayment() {
     const response = await axios.get(`${API}/api/order/${id}`);
     console.log(response.data);
-    setOrderData(response.data.order.orders[0]);
+    setOrderData(response.data.order);
     const res = await axios.post(
       `${API}/api/user/payment_gateway/payumoney`,
       {

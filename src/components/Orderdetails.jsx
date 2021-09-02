@@ -57,8 +57,8 @@ function Orderdetails() {
     async function getOrderDetails() {
       const details = await axios.get(`${API}/api/order/${id}`);
       console.log(details);
-      setOrderDetails(details.data.order.orders);
-      setProduct(details.data.order.orders[0].product);
+      setOrderDetails(details.data.order);
+      setProduct(details.data.order.product);
     }
     getOrderDetails();
   }, []);
@@ -215,7 +215,7 @@ function Orderdetails() {
                     </div>
                   </td>
                   {/* <td>
-                    
+
                   </td> */}
                 </tr>
               );

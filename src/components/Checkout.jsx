@@ -67,8 +67,7 @@ function Checkout() {
   });
 
   let data = {
-    order: [
-      {
+
         firstName,
         lastName,
         email,
@@ -84,8 +83,7 @@ function Checkout() {
         product,
         Amount: totalPrice,
         totalQuantity: totalQuantity,
-      },
-    ],
+     
   };
 
   async function handleOrder() {

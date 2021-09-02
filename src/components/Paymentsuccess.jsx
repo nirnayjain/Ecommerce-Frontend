@@ -23,7 +23,7 @@ function Paymentsuccess() {
       }
     );
     if (res.data.order === null) history.push("/");
-    else setOrderDetails(res.data.order.orders[0].product);
+    else setOrderDetails(res.data.order.product);
     console.log(res.data.order);
   };
 
