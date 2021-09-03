@@ -36,7 +36,7 @@ export const viewCart = () => {
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log("carts",response.data);
         response.data?.cartItems.map((item) => {
           totalPrice += item.product?.sale_price * 1 * item.quantity * 1;
           totalQuantity += item.quantity * 1;
@@ -79,6 +79,7 @@ export const addToCart = (id) => {
           price: product.data.product.price,
           sale_price: product.data.product.sale_price,
           image: product.data.product.image,
+          tax:product.data.product.tax,
           quantity: 1,
         };
 

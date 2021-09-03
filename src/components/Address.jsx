@@ -22,7 +22,7 @@ function Address() {
         },
       });
       console.log(Addresses.data.Address);
-      setAddress(Addresses.data.Address);
+      setAddress(Addresses.data.Address.addresses);
     }
     async function getuserOrders() {
       const order = await axios.get(`${API}/api/order/user_order`, {
@@ -39,6 +39,19 @@ function Address() {
   async function removeAddress(id) {
     let delResponse = await axios.delete(
       `${API}/api/address/delete_Address/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (delResponse.data.message) {
+      window.location.reload();
+    }
+  }
+  async function setDefault(id) {
+    let delResponse = await axios.put(
+      `${API}/api/address/update_default_Address/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -88,16 +101,17 @@ function Address() {
                   <button
                     className="border-0 p-4"
                     style={{ backgroundColor: "transparent", color: "black" }}
+                    onClick={() => setDefault(el._id)}
                   >
                     Set Default
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => handleEdit(el._id)}
                     className="border-0 p-4"
                     style={{ backgroundColor: "transparent", color: "black" }}
                   >
                     Edit
-                  </button>
+                  </button> */}
                   <button
                     className="border-0 p-4 "
                     onClick={() => removeAddress(el._id)}
@@ -129,7 +143,7 @@ function Address() {
               <h6>Name</h6>
               <p>Address</p>
               <p>Phone</p>
-              
+
             </div>
             <div className="col-3 w-25 bg-light border p-2">
               <h6>Name</h6>

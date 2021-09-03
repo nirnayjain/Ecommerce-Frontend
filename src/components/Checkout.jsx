@@ -5,7 +5,7 @@ import {
   RegionDropdown,
   CountryRegionData,
 } from "react-country-region-selector";
-import { useEffect } from "react";
+import {useEffect} from "react";
 import { useState } from "react";
 import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
@@ -23,16 +23,28 @@ function Checkout() {
   const [phone, setPhone] = useState("");
   const [pinCode, setPinCode] = useState("");
   const [company, setCompany] = useState("");
-  const [state, setState] = useState("");
+  const [state, setState] = useState("All States");
   const [address, setAddress] = useState("");
   const [appartment, setAppartment] = useState("");
   const [city, setCity] = useState("");
   const [orderNote, setOrderNote] = useState("");
   const [total, setTotal] = useState("");
   const [checked, setChecked] = useState(false);
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState("India");
 
+  useEffect(()=>
+  getShipping()
+  ,[])
+  const[shipping,setShipping]=useState("")
+  const getShipping=async()=>{
+     const res = await axios.get(`${API}/api/shipping/view_shipping`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setShipping(res.data)
 
+  }
 
   let cartItem = [];
   let totalPrice = 0;
@@ -46,11 +58,11 @@ function Checkout() {
   } else {
     cartItem = items?.cartItems;
   }
-
+   console.log("cartItem",cartItem)
   cartItem?.map((item) => {
     item.product
-      ? (totalPrice += item.quantity * 1 * item.product.sale_price)
-      : (totalPrice += item.quantity * 1 * item.sale_price);
+      ? (totalPrice += item.quantity * 1 * item.product.sale_price+((item.product.sale_price)*(item.product.tax.tax)/100))
+      : (totalPrice += item.quantity * 1 * item.sale_price+((item.sale_price)*(item.tax.tax)/100));
 
     totalQuantity += item.quantity * 1;
 
@@ -63,6 +75,7 @@ function Checkout() {
         item.quantity * 1 * item.product
           ? item.product?.sale_price
           : item.sale_price * 1,
+      tax:item.product?item.product?.tax:item.tax
     });
   });
 
@@ -257,9 +270,9 @@ function Checkout() {
                     </p>
                   </div>
                 </div>
-                <div className="checkout-section">
+                {/* <div className="checkout-section">
                   <h3 className="checkout-section__title">Shipping Details</h3>
-                  {/* <div className="row">
+                  <div className="row">
                     <p className="checkout-section__field col-12">
                       <label for="order_comments" className="">
                         Order notes (optional)
@@ -274,8 +287,8 @@ function Checkout() {
                         onChange={(e) => setOrderNote(e.target.value)}
                       ></textarea>
                     </p>
-                  </div> */}
-                </div>
+                  </div>
+                </div> */}
               </div>
               <div className="col-12 col-md-6 col-lg-5 mt__50 mb__80 mt-md-0 mb-md-0">
                 <div className="order-review__wrapper">
