@@ -9,7 +9,7 @@ import Shopbanner from "./Shopbanner";
 function Myorders() {
   const token = localStorage.getItem("token");
   const [userOrder, setUserorder] = useState([]);
-  
+
 
   let status = [];
   let orderIds = [];
@@ -30,7 +30,7 @@ function Myorders() {
   console.log(userOrder);
 
   userOrder?.map((item, index) => {
-    product.push(item.orders[0].product);
+    product.push(item.product);
     status.push(item.status);
     orderIds.push(item._id);
   });
