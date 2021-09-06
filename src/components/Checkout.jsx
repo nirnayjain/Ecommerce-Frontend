@@ -5,7 +5,7 @@ import {
   RegionDropdown,
   CountryRegionData,
 } from "react-country-region-selector";
-import {useEffect} from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
@@ -31,18 +31,44 @@ function Checkout() {
   const [total, setTotal] = useState("");
   const [checked, setChecked] = useState(false);
   const [country, setCountry] = useState("India");
+  const[discount,setDiscount]=useState(null)
+  const[couponCode,setCoupon]=useState("")
+  const[off,setOff]=useState(0)
+  let couponData={
+    couponCode
+  }
+  const applyCoupon=async()=>{
+    const res=await axios.post(`${API}/api/coupon/applyCoupon`, couponData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(res)
+    if(res.data.status=="success")
+    {
+     alert.show("Coupon Code applied Successfully", { type: "success" });
+    setCoupon("")
+    setDiscount(res.data.data)
+    setOff((res.data.data.offPercent*totalPrice)/100)
+    }
+    else
+    {
+    alert.show("Coupon Code not found", { type: "error" });
+    setCoupon("")
+    }
+  }
 
-  useEffect(()=>
-  getShipping()
-  ,[])
-  const[shipping,setShipping]=useState("")
-  const getShipping=async()=>{
-     const res = await axios.get(`${API}/api/shipping/view_shipping`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setShipping(res.data)
+  useEffect(() =>
+    getShipping()
+    , [])
+  const [shipping, setShipping] = useState("")
+  const getShipping = async () => {
+    const res = await axios.get(`${API}/api/shipping/view_shipping`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setShipping(res.data)
 
   }
 
@@ -58,11 +84,11 @@ function Checkout() {
   } else {
     cartItem = items?.cartItems;
   }
-   console.log("cartItem",cartItem)
+  console.log("cartItem", cartItem)
   cartItem?.map((item) => {
     item.product
-      ? (totalPrice += item.quantity * 1 * item.product.sale_price+((item.product.sale_price)*(item.product.tax.tax)/100))
-      : (totalPrice += item.quantity * 1 * item.sale_price+((item.sale_price)*(item.tax.tax)/100));
+      ? (totalPrice += item.quantity * 1 * item.product.sale_price + ((item.product.sale_price) * (item.product.tax.tax) / 100))
+      : (totalPrice += item.quantity * 1 * item.sale_price + ((item.sale_price) * (item.tax.tax) / 100));
 
     totalQuantity += item.quantity * 1;
 
@@ -75,29 +101,30 @@ function Checkout() {
         item.quantity * 1 * item.product
           ? item.product?.sale_price
           : item.sale_price * 1,
-      tax:item.product?item.product?.tax:item.tax
+      tax: item.product ? item.product?.tax : item.tax
     });
   });
 
   let data = {
 
-        firstName,
-        lastName,
-        email,
-        phone,
-        pinCode,
-        company,
-        state,
-        country,
-        address,
-        appartment,
-        city,
-        orderNote,
-        product,
-        Amount: totalPrice,
-        totalQuantity: totalQuantity,
+    firstName,
+    lastName,
+    email,
+    phone,
+    pinCode,
+    company,
+    state,
+    country,
+    address,
+    appartment,
+    city,
+    orderNote,
+    product,
+    Amount: totalPrice,
+    totalQuantity: totalQuantity,
 
   };
+
 
   async function handleOrder() {
     if (phone.length < 10 || phone.length > 10)
@@ -326,12 +353,45 @@ function Checkout() {
                         })}
                       </tbody>
                       <tfoot>
+                        <label
+                          for="couponcode"
+                          class="cart-couponcode__label db cd mt__20 mb__10"
+                        >
+                          Coupon:
+                        </label>
+                        <div style={{width:50}}>
+                          <input
+                            type="text"
+                            name="discount"
+                            id="couponcode"
+                            value={couponCode}
+                            placeholder="Coupon Code"
+                            class="w-50"
+                            onChange={(e)=>setCoupon(e.target.value)}
+                          />
+                          </div>
+                          <button
+                            style={{marginTop:10}}
+                            onClick={applyCoupon}
+                            type="button"
+
+                          >
+                            Apply
+                          </button>
+
                         <tr className="cart-subtotal cart_item">
                           <th>Subtotal</th>
                           <td>
-                            <span className="cart_price">Rs. {totalPrice}</span>
+                            <span className="cart_price">Rs. {totalPrice.toFixed(2)}</span>
                           </td>
                         </tr>
+                        {discount!=null?
+                        <tr className="cart-subtotal cart_item">
+                          <th>Discount</th>
+                          <td>
+                            <span className="cart_price">Rs. {off.toFixed(2)}</span>
+                          </td>
+                        </tr>:""}
                         <tr className="cart_item">
                           <th>Shipping</th>
                           <td>
@@ -344,7 +404,7 @@ function Checkout() {
                           <td>
                             <strong>
                               <span className="cart_price amount">
-                                Rs. {totalPrice}
+                                Rs. {(totalPrice-off).toFixed(2)}
                               </span>
                             </strong>
                           </td>
