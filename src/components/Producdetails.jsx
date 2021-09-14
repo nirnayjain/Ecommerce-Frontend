@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import parse from 'html-react-parser'
 import {
   addToCart,
   decreaseQuant,
@@ -41,6 +42,9 @@ function Producdetails() {
   }
   function decreaseQuntity(id) {
     dispatch(decreaseQuant(id));
+  }
+  function createMarkup() {
+    return {__html:productDetailes.description };
   }
 
   console.log(productDetailes);
@@ -138,8 +142,10 @@ function Producdetails() {
                             <ins>Rs. {productDetailes?.sale_price}</ins>
                           </p>
                         </div>
-                        <div class="pr_short_des">
-                          <p class="mg__0">{productDetailes?.description}</p>
+                        <div >
+                          {productDetailes != null &&
+                            <div dangerouslySetInnerHTML={createMarkup()}></div>
+                          }
                         </div>
                         <div class="btn-atc atc-slide btn_des_1 btn_txt_3">
                           <div id="callBackVariant_ppr">
@@ -256,10 +262,10 @@ function Producdetails() {
                             </a>
                             ,{" "}
                             <a href="shop-filter-options.html" class="cg">
-                              Bottom
+                              {productDetailes?.category}
                             </a>
-                            ,{" "}
-                            <a href="shop-filter-options.html" class="cg">
+
+                            {/* <a href="shop-filter-options.html" class="cg">
                               Dress
                             </a>
                             ,{" "}
@@ -269,7 +275,7 @@ function Producdetails() {
                             ,{" "}
                             <a href="shop-filter-options.html" class="cg">
                               Women
-                            </a>
+                            </a> */}
                           </span>
                           <span class="tagged_as">
                             <span class="cb">Tags:</span>{" "}

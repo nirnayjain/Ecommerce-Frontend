@@ -20,9 +20,11 @@ function Signup(props) {
   async function handleSubmit(e) {
     setLoading(true);
     e.preventDefault();
-    if (!email || !password) {
-      alert.show("Email and Password are required.", { type: "error" });
+    if (!email || !password||!firstName||!lastName) {
+      alert.show("Required Fields Missing", { type: "error" });
       setLoading(false);
+      return
+
     }
 
     try {
@@ -48,7 +50,8 @@ function Signup(props) {
         }, 4000);
       }
     } catch (error) {
-      alert.show(error.response.data.message, { type: "error" });
+      alert.show("Error Communicating with server", { type: "error" });
+      setLoading(false);
     }
   }
 
@@ -68,19 +71,21 @@ function Signup(props) {
           <div class="mini_cart_content fixcl-scroll">
             <div class="fixcl-scroll-content">
               <p class="form-row">
-                <label for="-FirstName">First Name</label>
+                <label for="-FirstName">First Name <span class="required">*</span></label>
                 <input
                   type="text"
                   name="f-name"
                   value={firstName}
                   id="-FirstName"
+                  aria-required="true"
                   autocomplete="given-name"
                   onChange={(e) => setfirstName(e.target.value)}
                 />
               </p>
               <p class="form-row">
-                <label for="-LastName">Last Name</label>
+                <label for="-LastName">Last Name <span class="required">*</span></label>
                 <input
+                aria-required="true"
                   type="text"
                   name="last_name"
                   value={lastName}
