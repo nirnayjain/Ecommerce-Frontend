@@ -81,14 +81,11 @@ function Productlist() {
                           data-bgset={item.featuredImage}
                         ></div>
                       </div>
-                      <div class="nt_add_w ts__03 pa ">
-                        <a
-                          href="#"
-                          class="wishlistadd cb chp ttip_nt tooltip_right"
-                        >
-                          <span class="tt_txt">Add to wishlist</span>
+                      <div class="nt_add_w ts__03 pa " style={{cursor:'pointer'}}>
+
+                          <span class="tt_txt wishlistadd cb chp ttip_nt tooltip_right" >Add to wishlist</span>
                           <i class="facl facl-heart-o"></i>
-                        </a>
+
                       </div>
                       <div class="hover_button op__0 tc pa flex column ts__03">
                         {/* <a
