@@ -37,7 +37,7 @@ function Signup(props) {
 
       console.log(response);
 
-      if (response.data) {
+      if (response.data.status==="ok") {
         setLoading(false);
         localStorage.setItem("token", response.data.token);
         alert.show("Registered Successfully", { type: "success" });
@@ -49,8 +49,11 @@ function Signup(props) {
           window.stop();
         }, 4000);
       }
+      else
+      alert.show(response.data.message, { type: "error" });
+
     } catch (error) {
-      alert.show("Error Communicating with server", { type: "error" });
+      alert.show(error.message, { type: "error" });
       setLoading(false);
     }
   }
