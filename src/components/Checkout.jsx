@@ -23,7 +23,7 @@ function Checkout() {
   const [phone, setPhone] = useState("");
   const [pinCode, setPinCode] = useState("");
   const [company, setCompany] = useState("");
-  const [state, setState] = useState("All States");
+  const [state, setState] = useState("");
   const [address, setAddress] = useState("");
   const [appartment, setAppartment] = useState("");
   const [city, setCity] = useState("");
@@ -32,46 +32,33 @@ function Checkout() {
   const [checked, setChecked] = useState(false);
   const [country, setCountry] = useState("India");
   const[discount,setDiscount]=useState(null)
-  const[couponCode,setCoupon]=useState("")
-  const[off,setOff]=useState(0)
-  let couponData={
-    couponCode
-  }
-  const applyCoupon=async()=>{
-    const res=await axios.post(`${API}/api/coupon/applyCoupon`, couponData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(res)
-    if(res.data.status=="success")
+  const[code,setCoupon]=useState("")
+  const[amountOff,setAmountOff]=useState(0)
+
+
+
+
+  const [shipping, setShipping] = useState(0)
+
+ useEffect(()=>{
+   if(country.length>0&&state.length>0)
+   getShipmentPrice()
+ },[country,state])
+ const getShipmentPrice=async()=>{
+  const res = await axios.post(`${API}/api/shipment/get_shipping_price`,
     {
-     alert.show("Coupon Code applied Successfully", { type: "success" });
-    setCoupon("")
-    setDiscount(res.data.data)
-    setOff((res.data.data.offPercent*totalPrice)/100)
-    }
-    else
+      country,
+      state
+    },
     {
-    alert.show("Coupon Code not found", { type: "error" });
-    setCoupon("")
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
     }
-  }
+  )
+  setShipping(res.data.data)
 
-  useEffect(() =>
-    getShipping()
-    , [])
-  const [shipping, setShipping] = useState("")
-  const getShipping = async () => {
-    const res = await axios.get(`${API}/api/shipping/view_shipping`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    setShipping(res.data)
-
-  }
-
+ }
   let cartItem = [];
   let totalPrice = 0;
   let totalQuantity = 0;
@@ -101,9 +88,35 @@ function Checkout() {
         item.quantity * 1 * item.product
           ? item.product?.sale_price
           : item.sale_price * 1,
-      tax: item.product ? item.product?.tax : item.tax
+      tax: item.product ? item.product?.tax : item.tax,
+      id:item.product?item.product?._id:item._id,
+      category:item.product?item.product?.category:item.category
     });
   });
+  const applyCoupon=async()=>{
+    const res=await axios.post(`${API}/api/coupons/applyCoupon`,
+      {
+        totalPrice,product,code
+      },
+      {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(res)
+    if(res.data.status=="success")
+    {
+     alert.show("Coupon Code applied Successfully", { type: "success" });
+    setCoupon("")
+    setDiscount(res.data.data)
+    setAmountOff(res.data.data)
+    }
+    else
+    {
+    alert.show(res.data.message, { type: "error" });
+    setCoupon("")
+    }
+  }
 
   let data = {
 
@@ -120,7 +133,9 @@ function Checkout() {
     city,
     orderNote,
     product,
-    Amount: totalPrice,
+    shipping,
+    amountOff,
+    Amount: totalPrice+shipping-amountOff,
     totalQuantity: totalQuantity,
 
   };
@@ -162,7 +177,7 @@ function Checkout() {
             },
           });
           const orderID = order.data.orderId;
-          history.push(`/payment/${orderID}?amount=${totalPrice}`);
+          history.push(`/payment/${orderID}?amount=${totalPrice-amountOff+shipping}`);
         }
       }
     }
@@ -364,7 +379,7 @@ function Checkout() {
                             type="text"
                             name="discount"
                             id="couponcode"
-                            value={couponCode}
+                            value={code}
                             placeholder="Coupon Code"
                             class="w-50"
                             onChange={(e)=>setCoupon(e.target.value)}
@@ -382,20 +397,20 @@ function Checkout() {
                         <tr className="cart-subtotal cart_item">
                           <th>Subtotal</th>
                           <td>
-                            <span className="cart_price">Rs. {totalPrice.toFixed(2)}</span>
+                            <span className="cart_price">Rs. {totalPrice.toFixed(1)}</span>
                           </td>
                         </tr>
                         {discount!=null?
                         <tr className="cart-subtotal cart_item">
                           <th>Discount</th>
                           <td>
-                            <span className="cart_price">Rs. {off.toFixed(2)}</span>
+                            <span className="cart_price">Rs. {amountOff.toFixed(1)}</span>
                           </td>
                         </tr>:""}
                         <tr className="cart_item">
                           <th>Shipping</th>
                           <td>
-                            <span className="cart_price">Rs. 0.00</span>
+                            <span className="cart_price">Rs. {shipping}.00</span>
                           </td>
                         </tr>
 
@@ -404,7 +419,7 @@ function Checkout() {
                           <td>
                             <strong>
                               <span className="cart_price amount">
-                                Rs. {(totalPrice-off).toFixed(2)}
+                                Rs. {(totalPrice-amountOff+shipping).toFixed(1)}
                               </span>
                             </strong>
                           </td>

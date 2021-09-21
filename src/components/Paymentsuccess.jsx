@@ -8,6 +8,8 @@ function Paymentsuccess() {
   const history = useHistory();
   const token = localStorage.getItem("token");
   const [orderDetails, setOrderDetails] = React.useState(null);
+  const[order,setOrder]=React.useState(null)
+  const[shipping,setShipping]=React.useState(0)
   let totalPrice = 0;
   React.useEffect(() => {
     getOrder();
@@ -23,7 +25,10 @@ function Paymentsuccess() {
       }
     );
     if (res.data.order === null) history.push("/");
-    else setOrderDetails(res.data.order.product);
+    else{
+       setOrderDetails(res.data.order.product);
+       setOrder(res.data.order)
+    }
     console.log(res.data.order);
   };
 
@@ -75,24 +80,33 @@ function Paymentsuccess() {
                     </tbody>
                     <tfoot>
                       <tr className="cart-subtotal cart_item">
-                        <th>Subtotal</th>
+                        <th>Total</th>
                         <td>
-                          <span className="cart_price">Rs.{totalPrice}</span>
+                          <span className="cart_price">Rs.{order&&order.Amount}</span>
                         </td>
                       </tr>
                       <tr className="cart_item">
                         <th>Shipping</th>
                         <td>
-                          <span className="cart_price">Rs. 0.00</span>
+                          <span className="cart_price">Rs. {order.shipping}.00</span>
                         </td>
                       </tr>
+                      {order.amountOff &&
+                      <tr className="cart_item">
+                        <th>Discount</th>
+                        <td>
+                          <span className="cart_price">Rs. {order.amountOff}.00</span>
+                        </td>
+                      </tr>
+}
+
 
                       <tr className="order-total cart_item">
-                        <th>Total</th>
+                        <th>SubTotal</th>
                         <td>
                           <strong>
                             <span className="cart_price amount">
-                              Rs.{totalPrice}
+                              Rs.{order&&order.Amount+order.shipping-order.amountOff}
                             </span>
                           </strong>
                         </td>
