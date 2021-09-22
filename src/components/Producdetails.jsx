@@ -23,7 +23,12 @@ function Producdetails() {
   const [modalShow, setModalShow] = useState(false);
   const items = useSelector((state) => state.cart.cartItems);
   const [quantity, setQuantity] = useState(0);
+  const [type,setType]=useState("")
   const dispatch = useDispatch();
+  const handlePopUp=(type)=>{
+    setModalShow(true)
+    setType(type)
+  }
   useEffect(() => {
     async function getProduct() {
       const product = await axios.get(`${API}/api/product/${id}`);
@@ -227,7 +232,7 @@ function Producdetails() {
                             class="ajax_pp_js cd chp mr__20"
                             href="#"
                             data-id="#popup-delivery-and-return"
-                            onClick={() => setModalShow(true)}
+                            onClick={() =>handlePopUp("address")}
                           >
                             Delivery &amp; Return
                           </a>
@@ -235,13 +240,15 @@ function Producdetails() {
                             class="ajax_pp_js cd chp"
                             href="#"
                             data-id="#popup-ask-a-question"
-                            onClick={() => setModalShow(true)}
+                            onClick={()=>handlePopUp("question")}
                           >
                             Ask a Question
                           </a>
                           <Popup
-                           modelfor="address"
+                           modelfor={type}
                            delievery={productDetailes.delievery}
+                           productName={productDetailes.title}
+                           id={productDetailes._id}
                             show={modalShow}
                             onHide={() => setModalShow(false)}
                           />
