@@ -96,13 +96,16 @@ function Popup(props) {
       >
         <Modal.Header>
           <Modal.Title id="contained-modal-title-vcenter">
-            ADD ADDRESS FOR DELIVERY
+             DELIVERY & RETURN
           </Modal.Title>
         </Modal.Header>
         {props.modelfor === "address" ? (
           <>
             <Modal.Body>
-              <input
+              <p>
+                {props.delievery}
+                </p>
+              {/* <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="mt-3"
@@ -150,12 +153,10 @@ function Popup(props) {
                 className="mt-3"
                 type="text"
                 placeholder="Enter Phone Number"
-              />
+              /> */}
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={saveAddress}>
-                {loading ? "Loading..." : "Save"}
-              </Button>
+              
               <Button onClick={props.onHide}>Close</Button>
             </Modal.Footer>
           </>
@@ -163,11 +164,26 @@ function Popup(props) {
           <>
             <Modal.Body>
               <h4>Centered Modal</h4>
-              <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo
-                odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                risus, porta ac consectetur ac, vestibulum at eros.
-              </p>
+              <div className="row">
+                <div className="col-6">
+                  <input
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    className="mt-3"
+                    type="text"
+                    placeholder="Enter Your Address"
+                  />
+                </div>
+                <div className="col-6">
+                  <input
+                    value={pin}
+                    onChange={(e) => setPin(e.target.value)}
+                    className="mt-3"
+                    type="text"
+                    placeholder="Enter Pin Code"
+                  />
+                </div>
+              </div>
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={props.onHide}>Close</Button>

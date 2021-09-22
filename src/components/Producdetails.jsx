@@ -44,7 +44,7 @@ function Producdetails() {
     dispatch(decreaseQuant(id));
   }
   function createMarkup() {
-    return {__html:productDetailes.description };
+    return { __html: productDetailes.description };
   }
 
   console.log(productDetailes);
@@ -240,6 +240,8 @@ function Producdetails() {
                             Ask a Question
                           </a>
                           <Popup
+                           modelfor="address"
+                           delievery={productDetailes.delievery}
                             show={modalShow}
                             onHide={() => setModalShow(false)}
                           />
@@ -279,33 +281,17 @@ function Producdetails() {
                           </span>
                           <span class="tagged_as">
                             <span class="cb">Tags:</span>{" "}
-                            <a href="shop-filter-options.html" class="cg">
-                              Color Black
-                            </a>
-                            ,{" "}
-                            <a href="shop-filter-options.html" class="cg">
-                              Color Grey
-                            </a>
-                            ,{" "}
-                            <a href="shop-filter-options.html" class="cg">
-                              Color Pink
-                            </a>
-                            ,{" "}
-                            <a href="shop-filter-options.html" class="cg">
-                              Price Rs. 7-Rs. 50
-                            </a>
-                            ,{" "}
-                            <a href="shop-filter-options.html" class="cg">
-                              Size L
-                            </a>
-                            ,{" "}
-                            <a href="shop-filter-options.html" class="cg">
-                              Size M
-                            </a>
-                            ,{" "}
-                            <a href="shop-filter-options.html" class="cg">
-                              Size S
-                            </a>
+                            {productDetailes.tags != undefined &&
+                              <>
+                                {productDetailes.tags.map((i) =>
+                                  <a href="shop-filter-options.html" class="cg">
+                                    {i}
+                                  </a>
+                            ,
+                                )}
+                              </>
+                            }
+
                           </span>
                         </div>
                         <div class="social-share tc">
