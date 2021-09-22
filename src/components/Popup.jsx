@@ -1,90 +1,60 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, {  useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { API } from "../API";
-import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+
 function Popup(props) {
-  const [phoneNo, setPhoneNo] = useState("");
-  const [address, setAddress] = useState("");
-  const [name, setName] = useState("");
-  const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
-  const [pin, setPin] = useState("");
-  const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
+  const [characters, setCharacters] = useState(300)
+  const[userquestion, setUserQuestion]=useState({
+    name:"",
+    contact:"",
+    question:""
+  })
 
-  useEffect(() => {
-    async function getAddress() {
-      const response = await axios.get(
-        `${API}/api/address/view_Address/${props.edit}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setName(response.data.Address.name);
-      setAddress(response.data.Address.address);
-      setPin(response.data.Address.pin);
-      setCountry(response.data.Address.country);
-      setPhoneNo(response.data.Address.phoneNo);
-      setState(response.data.Address.state);
+const {name, contact, question} = userquestion
+
+const getUserQuestion = (event) => {
+  const { name, value } = event.target;
+
+  setUserQuestion((preval) => {
+    return { ...preval, [name]: value };
+  });
+};
+
+async function handleSubmit(event){
+  event.preventDefault();
+  if(!(
+    name||
+    contact||
+    question
+  )){
+    alert("please fill all the fields")
+    return
+  }else{
+    let response = await axios.post(`${API}/api/question/add_Question`,{
+      name, contact, question
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     }
-    getAddress();
-  }, []);
-
-  async function saveAddress() {
-    setLoading(true);
-
-    if (props.edit) {
-      const response = await axios.patch(
-        `${API}/api/address/update_Address/${props.edit}`,
-        {
-          phoneNo,
-          name,
-          address,
-          state,
-          country,
-          pin,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(response);
-      if (response.data.data) {
-        setLoading(false);
-        window.location.reload();
-      } else {
-        setLoading(false);
-      }
-    } else {
-      const response = await axios.post(
-        `${API}/api/address/add_Address`,
-        {
-          phoneNo,
-          name,
-          address,
-          state,
-          country,
-          pin,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (response.data.data) {
-        setLoading(false);
-        window.location.reload();
-      } else {
-        setLoading(false);
-      }
+    )
+    if (response) {
+      window.location = "/productDetails";
     }
   }
+}
+
+
+useEffect(()=>
+ titleCharacter()
+ ,[question])
+
+ const titleCharacter=()=>{
+     setCharacters(300-question.length)
+ }
 
   return (
     <div>
@@ -94,13 +64,14 @@ function Popup(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
+      {props.modelfor === "address" ? (
+          <>
         <Modal.Header>
           <Modal.Title id="contained-modal-title-vcenter">
              DELIVERY & RETURN
           </Modal.Title>
         </Modal.Header>
-        {props.modelfor === "address" ? (
-          <>
+        
             <Modal.Body>
               <p>
                 {props.delievery}
@@ -162,9 +133,18 @@ function Popup(props) {
           </>
         ) : (
           <>
+
+          <Modal.Header>
+          <Modal.Title id="contained-modal-title-vcenter">
+             Ask a Question
+          </Modal.Title>
+        </Modal.Header>
+        <div className="mx-3">
+        <h4>  Product Id:{props.id}</h4>
+        </div>
+           
             <Modal.Body>
-              <h4>Centered Modal</h4>
-              <div className="row">
+              {/* <div className="row">
                 <div className="col-6">
                   <input
                     value={address}
@@ -183,10 +163,47 @@ function Popup(props) {
                     placeholder="Enter Pin Code"
                   />
                 </div>
-              </div>
+              </div> */}
+
+
+
+              <div className="row clearfix">
+                    <div className="col-lg-6 col-md-6 col-sm-12 form-group">
+                      <input
+                        type="text"
+                        name="name"
+                        value={name}
+                        onChange={getUserQuestion}
+                        placeholder="Your Name"
+                        required=""
+                      />
+                    </div>
+                    <div className="col-lg-6 col-md-6 col-sm-12 form-group">
+                      <input
+                        type="text"
+                        name="contact"
+                        value={contact}
+                        onChange={getUserQuestion}
+                        placeholder="Email or Phone"
+                        required=""
+                      />
+                    </div>
+                    
+                    <div className="col-lg-12 col-md-12 col-sm-12 form-group">
+                      <textarea
+                        name="question"
+                        value={question}
+                        onChange={getUserQuestion}
+                        placeholder="Write Message"
+                      ></textarea>
+                      <sapn>Remaining Characters {characters}</sapn>
+                    </div>
+                    </div>
+
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={props.onHide}>Close</Button>
+              <Button type="submit" onClick={(e)=>handleSubmit(e)} >Ask Questions</Button>
             </Modal.Footer>
           </>
         )}
