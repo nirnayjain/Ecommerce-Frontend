@@ -10,9 +10,10 @@ function Popup(props) {
     name:"",
     contact:"",
     question:""
+
   })
 
-const {name, contact, question} = userquestion
+const {name, contact, question,product} = userquestion
 
 const getUserQuestion = (event) => {
   const { name, value } = event.target;
@@ -32,18 +33,22 @@ async function handleSubmit(event){
     alert("please fill all the fields")
     return
   }else{
-    let response = await axios.post(`${API}/api/question/add_Question`,{
-      name, contact, question
-    },
+    let response = await axios.post(`${API}/api/question/add_Question`,
+    { name,
+     contact,
+     question,
+      product:props.id
+     }
+    ,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
     )
-    if (response) {
-      window.location = "/productDetails";
-    }
+    // if (response) {
+    //   window.location = `/productDetails/${props.id}`;
+    // }
   }
 }
 
@@ -71,7 +76,7 @@ useEffect(()=>
              DELIVERY & RETURN
           </Modal.Title>
         </Modal.Header>
-        
+
             <Modal.Body>
               <p>
                 {props.delievery}
@@ -127,7 +132,7 @@ useEffect(()=>
               /> */}
             </Modal.Body>
             <Modal.Footer>
-              
+
               <Button onClick={props.onHide}>Close</Button>
             </Modal.Footer>
           </>
@@ -140,9 +145,9 @@ useEffect(()=>
           </Modal.Title>
         </Modal.Header>
         <div className="mx-3">
-        <h4>  Product Id:{props.id}</h4>
+        <h4>  Product Name:{props.productName}</h4>
         </div>
-           
+
             <Modal.Body>
               {/* <div className="row">
                 <div className="col-6">
@@ -188,13 +193,13 @@ useEffect(()=>
                         required=""
                       />
                     </div>
-                    
+
                     <div className="col-lg-12 col-md-12 col-sm-12 form-group">
                       <textarea
                         name="question"
                         value={question}
                         onChange={getUserQuestion}
-                        placeholder="Write Message"
+                        placeholder="Write Your Question"
                       ></textarea>
                       <sapn>Remaining Characters {characters}</sapn>
                     </div>

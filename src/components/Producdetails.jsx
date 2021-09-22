@@ -23,9 +23,9 @@ function Producdetails() {
   const [modalShow, setModalShow] = useState(false);
   const items = useSelector((state) => state.cart.cartItems);
   const [quantity, setQuantity] = useState(0);
-  const [type,setType]=useState("")
+  const [type, setType] = useState("")
   const dispatch = useDispatch();
-  const handlePopUp=(type)=>{
+  const handlePopUp = (type) => {
     setModalShow(true)
     setType(type)
   }
@@ -228,27 +228,29 @@ function Producdetails() {
                           />
                         </div>
                         <div class="extra-link mt__35 fwsb">
-                          <a
-                            class="ajax_pp_js cd chp mr__20"
-                            href="#"
-                            data-id="#popup-delivery-and-return"
-                            onClick={() =>handlePopUp("address")}
-                          >
-                            Delivery &amp; Return
-                          </a>
+                          {productDetailes.delievery !=undefined &&
+                            <a
+                              class="ajax_pp_js cd chp mr__20"
+                              href="#"
+                              data-id="#popup-delivery-and-return"
+                              onClick={() => handlePopUp("address")}
+                            >
+                              Delivery &amp; Return
+                            </a>
+                          }
                           <a
                             class="ajax_pp_js cd chp"
                             href="#"
                             data-id="#popup-ask-a-question"
-                            onClick={()=>handlePopUp("question")}
+                            onClick={() => handlePopUp("question")}
                           >
                             Ask a Question
                           </a>
                           <Popup
-                           modelfor={type}
-                           delievery={productDetailes.delievery}
-                           productName={productDetailes.title}
-                           id={productDetailes._id}
+                            modelfor={type}
+                            delievery={productDetailes.delievery}
+                            productName={productDetailes.title}
+                            id={productDetailes._id}
                             show={modalShow}
                             onHide={() => setModalShow(false)}
                           />
