@@ -92,9 +92,9 @@ function Producdetails() {
                             class="img_ptw p_ptw js-sl-item p-item sp-pr-gallery__img w__100 nt_bg_lz lazyload media_id_001 padding-top__127_571"
                             data-mdid="001"
                             data-mdtype="image"
-                            data-bgset={productDetailes?.image}
+                            data-bgset={productDetailes?.featuredImage}
                             data-ratio="0.7838776928422516"
-                            data-src={productDetailes?.image}
+                            data-src={productDetailes?.featuredImage}
                             data-width="1128"
                             data-height="1439"
                             data-cap="Short Sleeved Hoodie"

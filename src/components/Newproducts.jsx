@@ -60,7 +60,7 @@ function Newproducts() {
                       <a className="db" href={`/productDetails/${product._id}`}>
                         <div
                           className="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__100"
-                          data-bgset={product.image}
+                          data-bgset={product.featuredImage}
                         ></div>
                       </a>
 
@@ -73,7 +73,7 @@ function Newproducts() {
                           <FavoriteBorderIcon style={{ color: "gray" }} />
                         </a>
                       </div>
-                      <div className="hover_button op__0 tc pa flex column ts__03">
+                      {/* <div className="hover_button op__0 tc pa flex column ts__03">
                         <a
                           onClick={() => addCart(product._id)}
                           href="#"
@@ -83,7 +83,7 @@ function Newproducts() {
                           <i className="iccl iccl-cart"></i>
                           <span>Add to cart</span>
                         </a>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="product-info mt__15">
                       <h3 className="product-title pr fs__14 mg__0 fwm">
