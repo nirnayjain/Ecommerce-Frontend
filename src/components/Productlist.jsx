@@ -7,7 +7,7 @@ import { API } from "../API";
 
 function Productlist() {
   const { subCategory } = useParams();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
 
   useEffect(() => {
     async function getProduct() {
@@ -57,6 +57,10 @@ function Productlist() {
 
         {/* <!--products list--> */}
         <div class="on_list_view_false products nt_products_holder row fl_center row_pr_1 cdt_des_1 round_cd_false nt_cover ratio_nt position_8 space_30 nt_default">
+          {products===null?
+           <h3 style={{ marginTop: "5rem" }}>Loading...</h3>
+          :
+          <>
           {products.length > 0 ? (
             products.map((item, index) => {
               return (
@@ -118,9 +122,12 @@ function Productlist() {
                 </div>
               );
             })
-          ) : (
+          )
+           : (
             <h1 style={{ marginTop: "5rem" }}>No Product Found</h1>
           )}
+          </>
+          }
         </div>
       </div>
       <div class="products-footer tc mt__40">

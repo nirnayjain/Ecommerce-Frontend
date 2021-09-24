@@ -60,7 +60,7 @@ function Newproducts() {
                       <a className="db" href={`/productDetails/${product._id}`}>
                         <div
                           className="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__100"
-                          data-bgset={product.image}
+                          data-bgset={product.featuredImage}
                         ></div>
                       </a>
 
