@@ -24,6 +24,8 @@ import Changepassword from "./components/Changepassword";
 import Orderdetails from "./components/Orderdetails";
 import Address from "./components/Address";
 import Contact from "./components/Contact";
+import Blogs from "./components/Blogs"
+import BlogPost from "./components/BlogPost";
 
 function Routes() {
   return (
@@ -57,6 +59,8 @@ function Routes() {
         <Route path="/payment-success/:id" exact component={Paymentsuccess} />
         <Route path="/:id" exact component={WebsitePolicyPage} />
         <Route path="/login" exact component={Checkoutlogin} />
+        <Route path="/blogs" exact component={Blogs} />
+        <Route path="/blogpost" exact component={BlogPost} />
       </Switch>
     </Router>
   );

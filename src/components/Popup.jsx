@@ -34,7 +34,7 @@ async function handleSubmit(event){
     question
   )){
     // alert("please fill all the fields")
-    swal("Oops!", "please fill all the fields", "error");
+    swal("Oops!", "Please fill all the required fields", "error");
     return
   }else{
     let response = await axios.post(`${API}/api/question/add_Question`,
