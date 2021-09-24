@@ -87,7 +87,7 @@ function Productlist() {
                           <i class="facl facl-heart-o"></i>
 
                       </div>
-                      <div class="hover_button op__0 tc pa flex column ts__03">
+                      {/* <div class="hover_button op__0 tc pa flex column ts__03"> */}
                         {/* <a
                           class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left"
                           href="#"
@@ -96,7 +96,7 @@ function Productlist() {
                           <i class="iccl iccl-eye"></i>
                           <span>Quick view</span>
                         </a> */}
-                        <a
+                        {/* <a
                           href="#"
                           class="pr pr_atc cd br__40 bgw tc dib js__qs cb chp ttip_nt tooltip_top_left"
                         >
@@ -104,7 +104,7 @@ function Productlist() {
                           <i class="iccl iccl-cart"></i>
                           <span>Quick Shop</span>
                         </a>
-                      </div>
+                      </div> */}
                     </div>
                     <div class="product-info mt__15">
                       <h3 class="product-title pr fs__14 mg__0 fwm">
