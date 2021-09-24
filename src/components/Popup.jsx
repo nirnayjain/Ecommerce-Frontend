@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, {  useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import { API } from "../API";
+import swal from "sweetalert";
 
 function Popup(props) {
   const token = localStorage.getItem("token");
   const [characters, setCharacters] = useState(300)
+  const history = useHistory();
   const[userquestion, setUserQuestion]=useState({
     name:"",
     contact:"",
@@ -30,7 +33,8 @@ async function handleSubmit(event){
     contact||
     question
   )){
-    alert("please fill all the fields")
+    // alert("please fill all the fields")
+    swal("Oops!", "please fill all the fields", "error");
     return
   }else{
     let response = await axios.post(`${API}/api/question/add_Question`,
@@ -46,9 +50,20 @@ async function handleSubmit(event){
       },
     }
     )
-    // if (response) {
-    //   window.location = `/productDetails/${props.id}`;
-    // }
+    if (response.data.message= "success") {
+      swal({
+        title: "Send Successsfully!",
+        text: "Thanks for Asking a question",
+        icon: "success",
+        button: "Done",
+        type: "success",
+      }).then(() => {
+        window.location = `/productDetails/${props.id}`;
+      });
+    }else{
+      swal("Oops!", "Something went wrong!", "error");
+    }
+
   }
 }
 
@@ -145,7 +160,7 @@ useEffect(()=>
           </Modal.Title>
         </Modal.Header>
         <div className="mx-3">
-        <h4>  Product Name:{props.productName}</h4>
+        <h4>  Product: {props.productName}</h4>
         </div>
 
             <Modal.Body>
@@ -207,8 +222,8 @@ useEffect(()=>
 
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={props.onHide}>Close</Button>
-              <Button type="submit" onClick={(e)=>handleSubmit(e)} >Ask Questions</Button>
+              <Button style={{color:"white" ,backgroundColor:"#81BF33", outline:"none", border:"none"}} onClick={props.onHide}>Close</Button>
+              <Button style={{color:"white" ,backgroundColor:"#81BF33", outline:"none", border:"none"}} type="submit" onClick={(e)=>handleSubmit(e)} >Send Question</Button>
             </Modal.Footer>
           </>
         )}
