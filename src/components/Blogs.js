@@ -3,6 +3,8 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Navigation from "./Navigation";
 
+// import ScrollTop from "./ScrollTop"
+
 const Blogs = () => {
     return (
         <div >
@@ -165,7 +167,7 @@ const Blogs = () => {
                 </div>
                 {/*end articles*/}
                 {/*navigation*/}
-                <div className="products-footer tc">
+                <div className="products-footer tc" style={{position:"relative"}}>
                   <nav className="nt-pagination w__100 tc paginate_ajax">
                     <ul className="pagination-page page-numbers">
                       <li><span className="page-numbers current">1</span></li>
@@ -174,15 +176,28 @@ const Blogs = () => {
                       <li><a href="#" className="next page-numbers">Next</a></li>
                     </ul>
                   </nav>
+                  <div style={{position:"absolute" ,bottom:"10px" , right:"10px"}}>
+        <a id="nt_backtop" style={{backgroundColor:"red"}} class="pf br__50 z__100 des_bt1" href="#"><span style={{backgroundColor:"red"}} class="tc br__50 db cw"><i class="pr pegk pe-7s-angle-up"></i></span></a>
+        <h1>hello</h1>
+        </div>
                 </div>
                 {/*end navigation*/}
+                
               </div>
             </div>
           </div>
         </div>
         {/*end main content*/}
+        {/* <div>
+        <a id="nt_backtop" style={{backgroundColor:"red"}} class="pf br__50 z__100 des_bt1" href="#"><span style={{backgroundColor:"red"}} class="tc br__50 db cw"></span></a>
+        </div> */}
+        
       </div>
+      
       <Footer />
+
+      
+      {/* <ScrollTop/> */}
         </div>
     )
 }
