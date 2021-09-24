@@ -44,6 +44,7 @@ function Routes() {
           <Bottombanner />
           <Footer />
         </Route>
+        <Route path="/blogs" exact component={Blogs} />
         <Route path="/contact-us" exact component={Contact} />
         <Route path="/my-orders" exact component={Myorders}></Route>
         <Route path="/my-wishlist" exact component={Mywishlist}></Route>
@@ -59,7 +60,6 @@ function Routes() {
         <Route path="/payment-success/:id" exact component={Paymentsuccess} />
         <Route path="/:id" exact component={WebsitePolicyPage} />
         <Route path="/login" exact component={Checkoutlogin} />
-        <Route path="/blogs" exact component={Blogs} />
         <Route path="/blogpost" exact component={BlogPost} />
       </Switch>
     </Router>

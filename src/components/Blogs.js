@@ -5,10 +5,10 @@ import Navigation from "./Navigation";
 
 const Blogs = () => {
     return (
-        <div>
+        <div >
         <Header />
         <Navigation />
-        <div id="nt_content">
+        <div id="nt_content" >
         {/*main content*/}
         <div className="container container_cat cat_default mt__60 mb__20">
           <div className="row nt_single_blog">
