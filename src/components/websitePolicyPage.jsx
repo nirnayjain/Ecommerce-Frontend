@@ -6,6 +6,7 @@ import {useParams} from 'react-router-dom'
 import { useState } from "react";
 import { useEffect } from "react";
 import { API } from "../API";
+ import parse from 'html-react-parser'
 import axios from 'axios'
 const Page = ()=> {
 const[data,setData]=useState(null)
@@ -44,7 +45,7 @@ const getPageByUrl=async()=>{
 
             <div class="container mt__40 mb__40 cb">
                 <div class="kalles-term-exp mb__30">
-                   {data.content}
+                   {parse(data.content)}
                 </div>
             </div>
 
