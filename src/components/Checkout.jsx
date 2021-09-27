@@ -135,7 +135,7 @@ function Checkout() {
     product,
     shipping,
     amountOff,
-    Amount: totalPrice+shipping-amountOff,
+    Amount: totalPrice,
     totalQuantity: totalQuantity,
 
   };
@@ -177,7 +177,7 @@ function Checkout() {
             },
           });
           const orderID = order.data.orderId;
-          history.push(`/payment/${orderID}?amount=${totalPrice-amountOff+shipping}`);
+          history.push(`/payment/${orderID}?amount=${(totalPrice-amountOff+shipping).toFixed(1)}`);
         }
       }
     }

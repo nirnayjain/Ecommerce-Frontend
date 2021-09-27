@@ -82,35 +82,36 @@ function Paymentsuccess() {
                       <tr className="cart-subtotal cart_item">
                         <th>Total</th>
                         <td>
-                          <span className="cart_price">Rs.{order&&order.Amount}</span>
+                          <span className="cart_price">Rs.{order&&order.Amount.toFixed(1)}</span>
                         </td>
                       </tr>
                       <tr className="cart_item">
                         <th>Shipping</th>
                         <td>
-                          <span className="cart_price">Rs. {order.shipping}.00</span>
+                          <span className="cart_price">Rs. {order&&order.shipping}.00</span>
                         </td>
                       </tr>
-                      {order.amountOff &&
+
                       <tr className="cart_item">
                         <th>Discount</th>
                         <td>
-                          <span className="cart_price">Rs. {order.amountOff}.00</span>
+                          <span className="cart_price">Rs. {order&&order.amountOff}.00</span>
                         </td>
                       </tr>
-}
 
+                {order &&
 
                       <tr className="order-total cart_item">
                         <th>SubTotal</th>
                         <td>
                           <strong>
                             <span className="cart_price amount">
-                              Rs.{order&&order.Amount+order.shipping-order.amountOff}
+                              Rs.{(order.Amount+order.shipping-order.amountOff).toFixed(1)}
                             </span>
                           </strong>
                         </td>
                       </tr>
+                      }
                     </tfoot>
                   </table>
                   <div className="checkout-payment">
