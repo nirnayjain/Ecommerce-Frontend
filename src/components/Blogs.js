@@ -3,12 +3,14 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Navigation from "./Navigation";
 
+
+
 const Blogs = () => {
     return (
-        <div>
+        <div >
         <Header />
         <Navigation />
-        <div id="nt_content">
+        <div id="nt_content" >
         {/*main content*/}
         <div className="container container_cat cat_default mt__60 mb__20">
           <div className="row nt_single_blog">
@@ -165,7 +167,7 @@ const Blogs = () => {
                 </div>
                 {/*end articles*/}
                 {/*navigation*/}
-                <div className="products-footer tc">
+                <div className="products-footer tc" style={{position:"relative"}}>
                   <nav className="nt-pagination w__100 tc paginate_ajax">
                     <ul className="pagination-page page-numbers">
                       <li><span className="page-numbers current">1</span></li>
@@ -174,15 +176,23 @@ const Blogs = () => {
                       <li><a href="#" className="next page-numbers">Next</a></li>
                     </ul>
                   </nav>
+                  
                 </div>
                 {/*end navigation*/}
+                
               </div>
             </div>
           </div>
         </div>
         {/*end main content*/}
+        
+        
       </div>
+      
       <Footer />
+
+      
+      {/* <ScrollTop/> */}
         </div>
     )
 }
