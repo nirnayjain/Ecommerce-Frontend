@@ -22,7 +22,7 @@ function Address() {
         },
       });
       console.log(Addresses.data.Address);
-      setAddress(Addresses.data.Address.addresses);
+      setAddress(Addresses.data.Address);
     }
     async function getuserOrders() {
       const order = await axios.get(`${API}/api/order/user_order`, {
@@ -87,7 +87,9 @@ function Address() {
             modelfor="address"
             edit={edit}
           />
+          {address!=null?
           <div className="row mr-3 ml-3">
+
             {address.map((el) => {
               return (
                 <div className="col-4 w-25 bg-light border p-2">
@@ -154,7 +156,14 @@ function Address() {
               <button className="border-0">Set Default</button>
             </div> */}
           </div>
+           :
+           <h3 style={{display:'flex',justifyContent:'center'}}>
+           No address added
+           </h3>
+           }
         </div>
+
+
       </div>
       <Footer />
     </div>

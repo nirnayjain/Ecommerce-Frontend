@@ -32,7 +32,7 @@ function Navigation({ active }) {
                     >
                       <div class="dropdown type_mn_link menu-item sub-column-item col-3">
                         <a
-                          href="#"
+                          href={`/allProducts/${cate.category}`}
                           style={{ color: "black", whiteSpace: "nowrap" }}
                         >
                           {cate.category === active ? (
@@ -46,7 +46,7 @@ function Navigation({ active }) {
                           {cate.subCategory.map((subcate) => {
                             return (
                               <a
-                                href={`/shop/${subcate.category}`}
+                                href={`/shop/${cate.category}/${subcate.category}`}
                                 className="lh__1 flex al_center pr kalles-lbl__nav-sale"
                               >
                                 {subcate.category}

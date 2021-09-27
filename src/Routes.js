@@ -38,13 +38,13 @@ function Routes() {
           <Header />
           <Navigation />
           <Hero />
-         <Productrow /> 
+         <Productrow />
           <Categorybanner />
           <Newproducts />
           <Bottombanner />
           <Footer />
         </Route>
-        
+
         <Route path="/blogs" exact component={Blogs} />
         <Route path="/blogpost" exact component={BlogPost} />
         <Route path="/contact-us" exact component={Contact} />
@@ -55,14 +55,14 @@ function Routes() {
         <Route path="/change-password" exact component={Changepassword}></Route>
         <Route path="/productDetails/:id" exact component={Producdetails} />
         <Route path="/allProducts/:category" exact component={Allproductlist} />
-        <Route path="/shop/:subCategory" exact component={Shop} />
+        <Route path="/shop/:category/:subCategory" exact component={Shop} />
         <Route path="/cart" exact component={Shoppingcart} />
         <Route path="/checkout" exact component={Checkout} />
         <Route path="/payment/:id" exact component={Paymentpage} />
         <Route path="/payment-success/:id" exact component={Paymentsuccess} />
         <Route path="/:id" exact component={WebsitePolicyPage} />
         <Route path="/login" exact component={Checkoutlogin} />
-        
+
       </Switch>
     </Router>
   );

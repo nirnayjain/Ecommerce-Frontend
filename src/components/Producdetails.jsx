@@ -22,7 +22,7 @@ function Producdetails() {
   const [productDetailes, setproductDetailes] = useState({});
   const [modalShow, setModalShow] = useState(false);
   const items = useSelector((state) => state.cart.cartItems);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [type, setType] = useState("")
   const dispatch = useDispatch();
   const handlePopUp = (type) => {
@@ -39,8 +39,8 @@ function Producdetails() {
   }, []);
   console.log(productDetailes, "PRODUCT DETAILS");
 
-  function addCart(id) {
-    dispatch(addToCart(id));
+  function addCart(id,quantity) {
+    dispatch(addToCart(id,quantity));
   }
   function increaseQuntity(id) {
     dispatch(increseQuant(id));
@@ -162,15 +162,19 @@ function Producdetails() {
                                     id="sp_qty_ppr"
                                   >
                                     <input
-                                      value={1}
+                                      value={ quantity}
                                       type="number"
-                                      class="input-text qty text tc qty_pr_js qty_cart_js"
+                                      class="input-text qty text tc "
                                       name="quantity"
                                     />
                                     <div class="qty tc fs__14">
                                       <button
                                         onClick={() =>
-                                          increaseQuntity(productDetailes._id)
+                                          {
+
+                                          quantity>=0 &&
+                                          setQuantity(quantity+1)
+                                          }
                                         }
                                         type="button"
                                         class="plus db cb pa pd__0 pr__15 tr r__0"
@@ -179,7 +183,10 @@ function Producdetails() {
                                       </button>
                                       <button
                                         onClick={() =>
-                                          decreaseQuntity(productDetailes._id)
+                                          {
+                                            quantity>1 &&
+                                          setQuantity(quantity-1)
+                                          }
                                         }
                                         type="button"
                                         class="minus db cb pa pd__0 pl__15 tl l__0"
@@ -200,6 +207,10 @@ function Producdetails() {
                                     </a>
                                   </div> */}
                                   <button
+                                   onClick={() =>
+                                    addCart(productDetailes._id,quantity)
+                                  }
+                                  disabled={quantity===0}
                                     type="submit"
                                     data-time="6000"
                                     data-ani="shake"
@@ -207,9 +218,7 @@ function Producdetails() {
                                   >
                                     <span
                                       class="txt_add "
-                                      onClick={() =>
-                                        addCart(productDetailes._id)
-                                      }
+
                                     >
                                       Add to cart
                                     </span>

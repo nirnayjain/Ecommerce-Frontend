@@ -13,6 +13,7 @@ function Header() {
   let [configuration, setConfiguration] = useState([]);
   let [address, setAddress] = useState([]);
   let [featuredProd, setFeaturedProd] = useState([]);
+  const[account,setAccount]=useState(false)
   let [logo, setLogo] = useState("");
   let [facebookUrl, setfacebookUrl] = useState("");
   let [instagramUrl, setinstagramUrl] = useState("");
@@ -148,9 +149,9 @@ function Header() {
                     href="#"
                     data-id="#nt_login_canvas"
                   >
-                    <i className="iccl iccl-user"></i>
+                    <i className="iccl iccl-user" ></i>
                   </a>
-                  {token ? (
+                  {token  ? (
                     <div
                       style={{
                         position: "absolute",

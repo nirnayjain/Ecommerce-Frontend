@@ -9,7 +9,7 @@ import Navigation from "./Navigation";
 
 function Allproductlist() {
   const { category } = useParams();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null)
   let subCategory = [];
 
   useEffect(() => {
@@ -36,6 +36,8 @@ function Allproductlist() {
             <div class="kalles-section tp_se_cdt">
               {/* <!--products list--> */}
               <div class="on_list_view_false products nt_products_holder row fl_center row_pr_1 cdt_des_1 round_cd_false nt_cover ratio_nt position_8 space_30 nt_default">
+{products!=null?
+<>
                 {products.length > 0 ? (
                   products.map((item, index) => {
                     return (
@@ -72,7 +74,7 @@ function Allproductlist() {
                                 <i class="facl facl-heart-o"></i>
                               </a>
                             </div>
-                            <div class="hover_button op__0 tc pa flex column ts__03">
+                            {/* <div class="hover_button op__0 tc pa flex column ts__03"> */}
                               {/* <a
                                 class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left"
                                 href="#"
@@ -81,7 +83,7 @@ function Allproductlist() {
                                 <i class="iccl iccl-eye"></i>
                                 <span>Quick view</span>
                               </a> */}
-                              <a
+                              {/* <a
                                 href="#"
                                 class="pr pr_atc cd br__40 bgw tc dib js__qs cb chp ttip_nt tooltip_top_left"
                               >
@@ -89,7 +91,7 @@ function Allproductlist() {
                                 <i class="iccl iccl-cart"></i>
                                 <span>Quick Shop</span>
                               </a>
-                            </div>
+                            </div> */}
                           </div>
                           <div class="product-info mt__15">
                             <h3 class="product-title pr fs__14 mg__0 fwm">
@@ -111,6 +113,10 @@ function Allproductlist() {
                 ) : (
                   <h1 style={{ marginTop: "5rem" }}>No Product Found</h1>
                 )}
+                </>
+                :
+                <h3 style={{ marginTop: "5rem" }}>Loading...</h3>
+}
               </div>
             </div>
             <div class="products-footer tc mt__40">

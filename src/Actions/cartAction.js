@@ -57,7 +57,7 @@ export const viewCartSuccess = (dataItems, totalPrice, totalQuantity) => {
   };
 };
 
-export const addToCart = (id) => {
+export const addToCart = (id,productQuantity) => {
   let totalPrice = 0;
   let totalQuantity = 0;
   let cartProduct;
@@ -70,7 +70,7 @@ export const addToCart = (id) => {
   }
   console.log(token);
   if (!token) {
-    console.log("NO TOKEN");
+
     return function (dispatch) {
       axios.get(`${API}/api/product/${id}`).then((product) => {
         let cartItemDetail = {
@@ -80,7 +80,7 @@ export const addToCart = (id) => {
           sale_price: product.data.product.sale_price,
           image: product.data.product.image,
           tax:product.data.product.tax,
-          quantity: 1,
+          quantity: productQuantity,
         };
 
         if (cartProduct.length > 0) {
@@ -95,7 +95,7 @@ export const addToCart = (id) => {
               price: cartItem[0].price,
               sale_price: cartItem[0].sale_price,
               image: cartItem[0].image,
-              quantity: cartItem[0].quantity + 1,
+              quantity: cartItem[0].quantity + productQuantity,
             };
             let index = cartProduct.findIndex((item) => {
               return item._id == cartItem[0]._id;
@@ -125,6 +125,7 @@ export const addToCart = (id) => {
           `${API}/api/cart/add_product`,
           {
             product: id,
+            quantity:productQuantity
           },
           {
             headers: {

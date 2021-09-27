@@ -6,15 +6,13 @@ import { useParams } from "react-router-dom";
 import { API } from "../API";
 
 function Productlist() {
-  const { subCategory } = useParams();
+  const { subCategory,category } = useParams();
   const [products, setProducts] = useState(null);
 
   useEffect(() => {
     async function getProduct() {
-      const productList = await axios.get(`${API}/api/product/all`);
-      const list = productList.data.product.filter((prod) => {
-        return prod.subCategory === subCategory && prod.status;
-      });
+      const productList = await axios.get(`${API}/api/product/subcategory/${category}/${subCategory}`);
+      const list = productList.data.product
       setProducts(list);
     }
     getProduct();
