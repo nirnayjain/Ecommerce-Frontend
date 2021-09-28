@@ -20,6 +20,7 @@ import Popup from "./Popup";
 function Producdetails() {
   const { id } = useParams();
   const [productDetailes, setproductDetailes] = useState({});
+  const[image,setImage]=useState(null)
   const [modalShow, setModalShow] = useState(false);
   const items = useSelector((state) => state.cart.cartItems);
   const [quantity, setQuantity] = useState(1);
@@ -34,6 +35,7 @@ function Producdetails() {
       const product = await axios.get(`${API}/api/product/${id}`);
       console.log(product, "PRODUCT");
       setproductDetailes(product.data.product);
+      setImage(product.data.product.image)
     }
     getProduct();
   }, []);
@@ -86,51 +88,57 @@ function Producdetails() {
                           class="p-thumb p-thumb_ppr images sp-pr-gallery equal_nt nt_contain ratio_imgtrue position_8 nt_slider pr_carousel"
                           data-flickity='{"initialIndex": ".media_id_001","fade":true,"draggable":">1","cellSelector": ".p-item:not(.is_varhide)","cellAlign": "center","wrapAround": true,"autoPlay": false,"prevNextButtons":true,"adaptiveHeight": true,"imagesLoaded": false, "lazyLoad": 0,"dragThreshold" : 6,"pageDots": false,"rightToLeft": false }'
                         >
+                          {image!=null &&
+                          <>
+                          {image.map(item=>
                           <div
                             data-grname="not4"
                             data-grpvl="ntt4"
                             class="img_ptw p_ptw js-sl-item p-item sp-pr-gallery__img w__100 nt_bg_lz lazyload media_id_001 padding-top__127_571"
                             data-mdid="001"
                             data-mdtype="image"
-                            data-bgset={productDetailes?.featuredImage}
+                            data-bgset={item}
                             data-ratio="0.7838776928422516"
-                            data-src={productDetailes?.featuredImage}
+                            data-src={item}
                             data-width="1128"
                             data-height="1439"
                             data-cap="Short Sleeved Hoodie"
                           ></div>
+                          )}
+                          </>
+}
                         </div>
                         {/* <span class="tc nt_labels pa pe_none cw">
                           <span class="onsale nt_label">
                             <span>-34%</span>
                           </span>
                         </span> */}
-                        {/* <div class="p_group_btns pa flex">
+                        <div class="p_group_btns pa flex">
                           <button class="br__40 tc flex al_center fl_center bghp show_btn_pr_gallery ttip_nt tooltip_top_left">
                             <i class="las la-expand-arrows-alt"></i>
                             <span class="tt_txt">Click to enlarge</span>
                           </button>
-                        </div> */}
+                        </div>
                       </div>
                       <div class="col-12 col-lg-auto col_nav nav_medium t4_show">
-                        {/* <div
+                        <div
                           class="p-nav ratio_imgtrue row equal_nt nt_cover ratio_imgtrue position_8 nt_slider pr_carousel"
                           data-flickityjs='{"initialIndex": ".media_id_001","cellSelector": ".n-item:not(.is_varhide)","cellAlign": "left","asNavFor": ".p-thumb","wrapAround": true,"draggable": ">1","autoPlay": 0,"prevNextButtons": 0,"percentPosition": 1,"imagesLoaded": 0,"pageDots": 0,"groupCells": true,"rightToLeft": false,"contain":  1,"freeScroll": 0}'
-                        ></div> */}
-                        {/* <button
+                        ></div>
+                        <button
                           type="button"
                           aria-label="Previous"
                           class="btn_pnav_prev pe_none"
                         >
                           <i class="las la-angle-up"></i>
-                        </button> */}
-                        {/* <button
+                        </button>
+                        <button
                           type="button"
                           aria-label="Next"
                           class="btn_pnav_next pe_none"
                         >
                           <i class="las la-angle-down"></i>
-                        </button> */}
+                        </button>
                       </div>
                       <div class="dt_img_zoom pa t__0 r__0 dib"></div>
                     </div>
