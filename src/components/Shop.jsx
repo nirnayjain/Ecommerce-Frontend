@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Categoryfilter from "./Categoryfilter";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -7,6 +7,7 @@ import Productlist from "./Productlist";
 import Shopbanner from "./Shopbanner";
 
 function Shop() {
+  const [products, setProducts] = useState(null);
   return (
     <div>
       <Header />
@@ -14,8 +15,8 @@ function Shop() {
       <Shopbanner />
       <div className="container">
         <div className="row">
-          <Categoryfilter />
-          <Productlist />
+          <Categoryfilter setProducts={setProducts} products={products}/>
+          <Productlist setProducts={setProducts} products={products}/>
         </div>
       </div>
       <Footer />

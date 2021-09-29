@@ -34,6 +34,7 @@ function Checkout() {
   const[discount,setDiscount]=useState(null)
   const[code,setCoupon]=useState("")
   const[amountOff,setAmountOff]=useState(0)
+  const[freeShipping,setFreeShipping]=useState(false)
 
 
 
@@ -56,6 +57,7 @@ function Checkout() {
     },
     }
   )
+!freeShipping &&
   setShipping(res.data.data)
 
  }
@@ -106,15 +108,28 @@ function Checkout() {
     console.log(res)
     if(res.data.status=="success")
     {
-     alert.show("Coupon Code applied Successfully", { type: "success" });
-    setCoupon("")
+     alert.show(res.data.message, { type: "success" });
+
+    if(res.data.message!="Free shipping applied")
+    {
     setDiscount(res.data.data)
     setAmountOff(res.data.data)
     }
     else
     {
+    setFreeShipping(true)
+    setDiscount(null)
+    setAmountOff(0)
+    setShipping(0)
+    }
+
+    }
+    else
+    {
     alert.show(res.data.message, { type: "error" });
     setCoupon("")
+    setDiscount(null)
+    setAmountOff(0)
     }
   }
 
@@ -135,6 +150,7 @@ function Checkout() {
     product,
     shipping,
     amountOff,
+    couponCode:code,
     Amount: totalPrice,
     totalQuantity: totalQuantity,
 
@@ -370,7 +386,7 @@ function Checkout() {
                       <tfoot>
                         <label
                           for="couponcode"
-                          class="cart-couponcode__label db cd mt__20 mb__10"
+                          className="cart-couponcode__label db cd mt__20 mb__10"
                         >
                           Coupon:
                         </label>
@@ -400,6 +416,13 @@ function Checkout() {
                             <span className="cart_price">Rs. {totalPrice.toFixed(1)}</span>
                           </td>
                         </tr>
+                        {/* {discount!=null || freeShipping ?
+                        <tr className="cart-subtotal cart_item">
+                          <th>Coupon Code</th>
+                          <td>
+                            <span className="cart_price">{code}</span>
+                          </td>
+                        </tr>:""} */}
                         {discount!=null?
                         <tr className="cart-subtotal cart_item">
                           <th>Discount</th>
@@ -407,12 +430,14 @@ function Checkout() {
                             <span className="cart_price">Rs. {amountOff.toFixed(1)}</span>
                           </td>
                         </tr>:""}
+
                         <tr className="cart_item">
                           <th>Shipping</th>
                           <td>
                             <span className="cart_price">Rs. {shipping}.00</span>
                           </td>
                         </tr>
+
 
                         <tr className="order-total cart_item">
                           <th>Total</th>

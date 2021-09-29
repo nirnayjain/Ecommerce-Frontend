@@ -10,6 +10,7 @@ function Productlist() {
   const [products, setProducts] = useState(null);
 
   useEffect(() => {
+   
     async function getProduct() {
       const productList = await axios.get(`${API}/api/product/subcategory/${category}/${subCategory}`);
       const list = productList.data.product
