@@ -60,16 +60,16 @@ function Producdetails() {
       <Header />
       <Navigation active={productDetailes?.category} />
       <div id="nt_content">
-        <div class="sp-single sp-single-5 des_pr_layout_1 mb__60">
-          <div class="bgbl pt__20 pb__20 lh__1">
-            <div class="container">
-              <div class="row al_center">
-                <div class="col">
-                  <nav class="sp-breadcrumb">
+        <div className="sp-single sp-single-5 des_pr_layout_1 mb__60">
+          <div className="bgbl pt__20 pb__20 lh__1">
+            <div className="container">
+              <div className="row al_center">
+                <div className="col">
+                  <nav className="sp-breadcrumb">
                     <a href="/">Home</a>
-                    <i class="facl facl-angle-right"></i>
-                    <a href="#">{productDetailes?.category}</a>
-                    <i class="facl facl-angle-right"></i>
+                    <i className="facl facl-angle-right"></i>
+                    <a href={`/allProducts/${productDetailes?.category}`}>{productDetailes?.category}</a>
+                    <i className="facl facl-angle-right"></i>
                     {productDetailes?.subCategory}
                   </nav>
                 </div>
@@ -77,26 +77,26 @@ function Producdetails() {
             </div>
           </div>
 
-          <div class="container container_cat cat_default">
-            <div class="row product mt__40">
-              <div class="col-md-12 col-12 thumb_right">
-                <div class="row mb__50 pr_sticky_content">
-                  <div class="col-md-6 col-12 pr product-images img_action_zoom pr_sticky_img kalles_product_thumnb_slide">
-                    <div class="row theiaStickySidebar">
-                      <div class="col-12 col-lg col_thumb">
+          <div className="container container_cat cat_default">
+            <div className="row product mt__40">
+              <div className="col-md-12 col-12 thumb_right">
+                <div className="row mb__50 pr_sticky_content">
+                  <div className="col-md-6 col-12 pr product-images img_action_zoom pr_sticky_img kalles_product_thumnb_slide">
+                    <div className="row theiaStickySidebar">
+                      <div className="col-12 col-lg col_thumb">
                       {image!=null &&
                         <div
-                        
-                          class="p-thumb p-thumb_ppr images sp-pr-gallery equal_nt nt_contain ratio_imgtrue position_8 nt_slider pr_carousel"
+
+                          className="p-thumb p-thumb_ppr images sp-pr-gallery equal_nt nt_contain ratio_imgtrue position_8 nt_slider pr_carousel"
                           data-flickity='{"initialIndex": ".media_id_001","fade":true,"draggable":">1","cellSelector": ".p-item:not(.is_varhide)","cellAlign": "center","wrapAround": true,"autoPlay": false,"prevNextButtons":true,"adaptiveHeight": true,"imagesLoaded": false, "lazyLoad": 0,"dragThreshold" : 6,"pageDots": false,"rightToLeft": false }'
                         >
-                          
-                        
+
+
                           {image.map(item=>
                           <div
                             data-grname="not4"
                             data-grpvl="ntt4"
-                            class="img_ptw p_ptw js-sl-item p-item sp-pr-gallery__img w__100 nt_bg_lz lazyload media_id_001 padding-top__127_571"
+                            className="img_ptw p_ptw js-sl-item p-item sp-pr-gallery__img w__100 nt_bg_lz lazyload media_id_001 padding-top__127_571"
                             data-mdid="001"
                             data-mdtype="image"
                             data-bgset={item}
@@ -107,53 +107,53 @@ function Producdetails() {
                             data-cap="Short Sleeved Hoodie"
                           ></div>
                           )}
-                        
+
 
                         </div>
                     }
-                        {/* <span class="tc nt_labels pa pe_none cw">
-                          <span class="onsale nt_label">
+                        {/* <span className="tc nt_labels pa pe_none cw">
+                          <span className="onsale nt_label">
                             <span>-34%</span>
                           </span>
                         </span> */}
-                        <div class="p_group_btns pa flex">
-                          <button class="br__40 tc flex al_center fl_center bghp show_btn_pr_gallery ttip_nt tooltip_top_left">
-                            <i class="las la-expand-arrows-alt"></i>
-                            <span class="tt_txt">Click to enlarge</span>
+                        <div className="p_group_btns pa flex">
+                          <button className="br__40 tc flex al_center fl_center bghp show_btn_pr_gallery ttip_nt tooltip_top_left">
+                            <i className="las la-expand-arrows-alt"></i>
+                            <span className="tt_txt">Click to enlarge</span>
                           </button>
                         </div>
                       </div>
-                      <div class="col-12 col-lg-auto col_nav nav_medium t4_show">
+                      <div className="col-12 col-lg-auto col_nav nav_medium t4_show">
                         <div
-                          class="p-nav ratio_imgtrue row equal_nt nt_cover ratio_imgtrue position_8 nt_slider pr_carousel"
+                          className="p-nav ratio_imgtrue row equal_nt nt_cover ratio_imgtrue position_8 nt_slider pr_carousel"
                           data-flickityjs='{"initialIndex": ".media_id_001","cellSelector": ".n-item:not(.is_varhide)","cellAlign": "left","asNavFor": ".p-thumb","wrapAround": true,"draggable": ">1","autoPlay": 0,"prevNextButtons": 0,"percentPosition": 1,"imagesLoaded": 0,"pageDots": 0,"groupCells": true,"rightToLeft": false,"contain":  1,"freeScroll": 0}'
                         ></div>
                         <button
                           type="button"
                           aria-label="Previous"
-                          class="btn_pnav_prev pe_none"
+                          className="btn_pnav_prev pe_none"
                         >
-                          <i class="las la-angle-up"></i>
+                          <i className="las la-angle-up"></i>
                         </button>
                         <button
                           type="button"
                           aria-label="Next"
-                          class="btn_pnav_next pe_none"
+                          className="btn_pnav_next pe_none"
                         >
-                          <i class="las la-angle-down"></i>
+                          <i className="las la-angle-down"></i>
                         </button>
                       </div>
-                      <div class="dt_img_zoom pa t__0 r__0 dib"></div>
+                      <div className="dt_img_zoom pa t__0 r__0 dib"></div>
                     </div>
                   </div>
-                  <div class="col-md-6 col-12 product-infors pr_sticky_su">
-                    <div class="theiaStickySidebar">
-                      <div class="kalles-section-pr_summary kalles-section summary entry-summary mt__30">
-                        <h1 class="product_title entry-title fs__16">
+                  <div className="col-md-6 col-12 product-infors pr_sticky_su">
+                    <div className="theiaStickySidebar">
+                      <div className="kalles-section-pr_summary kalles-section summary entry-summary mt__30">
+                        <h1 className="product_title entry-title fs__16">
                           {productDetailes?.title}
                         </h1>
-                        <div class="flex wrap fl_between al_center price-review">
-                          <p class="price_range" id="price_ppr">
+                        <div className="flex wrap fl_between al_center price-review">
+                          <p className="price_range" id="price_ppr">
                             <del>Rs. {productDetailes?.price}</del>
                             <ins>Rs. {productDetailes?.sale_price}</ins>
                           </p>
@@ -163,22 +163,22 @@ function Producdetails() {
                             <div dangerouslySetInnerHTML={createMarkup()}></div>
                           }
                         </div>
-                        <div class="btn-atc atc-slide btn_des_1 btn_txt_3">
+                        <div className="btn-atc atc-slide btn_des_1 btn_txt_3">
                           <div id="callBackVariant_ppr">
-                            <div class="nt_cart_form variations_form variations_form_ppr">
-                              <div class="variations_button in_flex column w__100 buy_qv_false">
-                                <div class="flex wrap">
+                            <div className="nt_cart_form variations_form variations_form_ppr">
+                              <div className="variations_button in_flex column w__100 buy_qv_false">
+                                <div className="flex wrap">
                                   <div
-                                    class="quantity pr mr__10 order-1 qty__true d-inline-block"
+                                    className="quantity pr mr__10 order-1 qty__true d-inline-block"
                                     id="sp_qty_ppr"
                                   >
                                     <input
                                       value={ quantity}
                                       type="number"
-                                      class="input-text qty text tc "
+                                      className="input-text qty text tc "
                                       name="quantity"
                                     />
-                                    <div class="qty tc fs__14">
+                                    <div className="qty tc fs__14">
                                       <button
                                         onClick={() =>
                                           {
@@ -188,9 +188,9 @@ function Producdetails() {
                                           }
                                         }
                                         type="button"
-                                        class="plus db cb pa pd__0 pr__15 tr r__0"
+                                        className="plus db cb pa pd__0 pr__15 tr r__0"
                                       >
-                                        <i class="facl facl-plus"></i>
+                                        <i className="facl facl-plus"></i>
                                       </button>
                                       <button
                                         onClick={() =>
@@ -200,21 +200,21 @@ function Producdetails() {
                                           }
                                         }
                                         type="button"
-                                        class="minus db cb pa pd__0 pl__15 tl l__0"
+                                        className="minus db cb pa pd__0 pl__15 tl l__0"
                                       >
-                                        <i class="facl facl-minus"></i>
+                                        <i className="facl facl-minus"></i>
                                       </button>
                                     </div>
                                   </div>
-                                  {/* <div class="nt_add_w ts__03 pa order-3">
+                                  {/* <div className="nt_add_w ts__03 pa order-3">
                                     <a
                                       href="#"
-                                      class="wishlistadd cb chp ttip_nt tooltip_top_left"
+                                      className="wishlistadd cb chp ttip_nt tooltip_top_left"
                                     >
-                                      <span class="tt_txt">
+                                      <span className="tt_txt">
                                         Add to Wishlist
                                       </span>
-                                      <i class="facl facl-heart-o"></i>
+                                      <i className="facl facl-heart-o"></i>
                                     </a>
                                   </div> */}
                                   <button
@@ -225,10 +225,10 @@ function Producdetails() {
                                     type="submit"
                                     data-time="6000"
                                     data-ani="shake"
-                                    class="single_add_to_cart_button button truncate w__100 mt__20 order-4 d-inline-block animated"
+                                    className="single_add_to_cart_button button truncate w__100 mt__20 order-4 d-inline-block animated"
                                   >
                                     <span
-                                      class="txt_add "
+                                      className="txt_add "
 
                                     >
                                       Add to cart
@@ -239,18 +239,18 @@ function Producdetails() {
                             </div>
                           </div>
                         </div>
-                        <div id="trust_seal_ppr" class="pr_trust_seal tl_md tc">
+                        <div id="trust_seal_ppr" className="pr_trust_seal tl_md tc">
                           <img
-                            class="img_tr_s1 lazyload w__100 max-width__330px"
+                            className="img_tr_s1 lazyload w__100 max-width__330px"
                             src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%202244%20285%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E"
                             alt=""
                             data-srcset="assets/images/single-product/trust_img2.png"
                           />
                         </div>
-                        <div class="extra-link mt__35 fwsb">
+                        <div className="extra-link mt__35 fwsb">
                           {productDetailes.delievery !=undefined &&
                             <a
-                              class="ajax_pp_js cd chp mr__20"
+                              className="ajax_pp_js cd chp mr__20"
                               href="#"
                               data-id="#popup-delivery-and-return"
                               onClick={() => handlePopUp("address")}
@@ -259,7 +259,7 @@ function Producdetails() {
                             </a>
                           }
                           <a
-                            class="ajax_pp_js cd chp"
+                            className="ajax_pp_js cd chp"
                             href="#"
                             data-id="#popup-ask-a-question"
                             onClick={() => handlePopUp("question")}
@@ -275,45 +275,45 @@ function Producdetails() {
                             onHide={() => setModalShow(false)}
                           />
                         </div>
-                        <div class="product_meta">
-                          <span class="sku_wrapper">
-                            <span class="cb">SKU:</span>{" "}
-                            <span class="sku value cg d-inline-block">
+                        <div className="product_meta">
+                          <span className="sku_wrapper">
+                            <span className="cb">SKU:</span>{" "}
+                            <span className="sku value cg d-inline-block">
                               {productDetailes?.sku}
                             </span>
                           </span>
-                          <span class="posted_in">
-                            <span class="cb">Categories:</span>{" "}
-                            <a href="shop-filter-options.html" class="cg">
+                          <span className="posted_in">
+                            <span className="cb">Categories:</span>{" "}
+                            <a href="shop-filter-options.html" className="cg">
                               All
                             </a>
                             ,{" "}
-                            <a href="shop-filter-options.html" class="cg">
+                            <a href="shop-filter-options.html" className="cg">
                               Best seller
                             </a>
                             ,{" "}
-                            <a href="shop-filter-options.html" class="cg">
+                            <a href="shop-filter-options.html" className="cg">
                               {productDetailes?.category}
                             </a>
 
-                            {/* <a href="shop-filter-options.html" class="cg">
+                            {/* <a href="shop-filter-options.html" className="cg">
                               Dress
                             </a>
                             ,{" "}
-                            <a href="shop-filter-options.html" class="cg">
+                            <a href="shop-filter-options.html" className="cg">
                               New Arrival
                             </a>
                             ,{" "}
-                            <a href="shop-filter-options.html" class="cg">
+                            <a href="shop-filter-options.html" className="cg">
                               Women
                             </a> */}
                           </span>
-                          <span class="tagged_as">
-                            <span class="cb">Tags:</span>{" "}
+                          <span className="tagged_as">
+                            <span className="cb">Tags:</span>{" "}
                             {productDetailes.tags != undefined &&
                               <>
                                 {productDetailes.tags.map((i) =>
-                                  <a href="shop-filter-options.html" class="cg">
+                                  <a href="shop-filter-options.html" className="cg">
                                     {i}
                                   </a>
                             ,
@@ -323,16 +323,16 @@ function Producdetails() {
 
                           </span>
                         </div>
-                        <div class="social-share tc">
-                          <div class="at-share-btn-elements kalles-social-media d-block text-left fs__0 lh__1">
+                        <div className="social-share tc">
+                          <div className="at-share-btn-elements kalles-social-media d-block text-left fs__0 lh__1">
                             <a
                               href="https://www.facebook.com/"
-                              class="at-icon-wrapper at-share-btn at-svc-facebook bg-white kalles-social-media__btn"
+                              className="at-icon-wrapper at-share-btn at-svc-facebook bg-white kalles-social-media__btn"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 32 32"
-                                class="at-icon at-icon-facebook"
+                                className="at-icon at-icon-facebook"
                               >
                                 <g>
                                   <path
@@ -344,12 +344,12 @@ function Producdetails() {
                             </a>
                             <a
                               href="https://twitter.com/"
-                              class="at-icon-wrapper at-share-btn at-svc-twitter bg-white kalles-social-media__btn"
+                              className="at-icon-wrapper at-share-btn at-svc-twitter bg-white kalles-social-media__btn"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 32 32"
-                                class="at-icon at-icon-twitter"
+                                className="at-icon at-icon-twitter"
                               >
                                 <g>
                                   <path
@@ -361,12 +361,12 @@ function Producdetails() {
                             </a>
                             <a
                               href="https://www.google.com/gmail/about"
-                              class="at-icon-wrapper at-share-btn at-svc-email bg-white"
+                              className="at-icon-wrapper at-share-btn at-svc-email bg-white"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 32 32"
-                                class="at-icon at-icon-email kalles-social-media__btn"
+                                className="at-icon at-icon-email kalles-social-media__btn"
                               >
                                 <g>
                                   <g fill-rule="evenodd"></g>
@@ -377,12 +377,12 @@ function Producdetails() {
                             </a>
                             <a
                               href="https://www.pinterest.com/"
-                              class="at-icon-wrapper at-share-btn at-svc-pinterest_share bg-white kalles-social-media__btn"
+                              className="at-icon-wrapper at-share-btn at-svc-pinterest_share bg-white kalles-social-media__btn"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 32 32"
-                                class="at-icon at-icon-pinterest_share"
+                                className="at-icon at-icon-pinterest_share"
                               >
                                 <g>
                                   <path
@@ -394,12 +394,12 @@ function Producdetails() {
                             </a>
                             <a
                               href="https://www.messenger.com/"
-                              class="at-icon-wrapper at-share-btn at-svc-messenger bg-white kalles-social-media__btn"
+                              className="at-icon-wrapper at-share-btn at-svc-messenger bg-white kalles-social-media__btn"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 32 32"
-                                class="at-icon at-icon-messenger"
+                                className="at-icon at-icon-messenger"
                               >
                                 <g>
                                   <path
@@ -419,245 +419,245 @@ function Producdetails() {
             </div>
           </div>
 
-          <div class="clearfix"></div>
+          <div className="clearfix"></div>
 
-          {/* <div class="kalles-section tp_se_cdt">
-            <div class="related product-extra mt__60 lazyload">
-              <div class="container">
-                <div class="wrap_title des_title_1">
-                  <h3 class="section-title tc pr flex fl_center al_center fs__24 title_1">
-                    <span class="mr__10 ml__10">Recently viewed products</span>
+          {/* <div className="kalles-section tp_se_cdt">
+            <div className="related product-extra mt__60 lazyload">
+              <div className="container">
+                <div className="wrap_title des_title_1">
+                  <h3 className="section-title tc pr flex fl_center al_center fs__24 title_1">
+                    <span className="mr__10 ml__10">Recently viewed products</span>
                   </h3>
-                  <span class="dn tt_divider">
+                  <span className="dn tt_divider">
                     <span></span>
-                    <i class="dn clprfalse title_1 la-gem"></i>
+                    <i className="dn clprfalse title_1 la-gem"></i>
                     <span></span>
                   </span>
-                  <span class="section-subtitle db tc sub-title"></span>
+                  <span className="section-subtitle db tc sub-title"></span>
                 </div>
                 <div
-                  class="sortby_3 products nt_products_holder nt_slider row row_pr_1 cdt_des_1 round_cd_false nt_cover ratio_nt position_8 space_30 prev_next_0 btn_owl_1 dot_owl_1 dot_color_1 btn_vi_1 is-draggable"
+                  className="sortby_3 products nt_products_holder nt_slider row row_pr_1 cdt_des_1 round_cd_false nt_cover ratio_nt position_8 space_30 prev_next_0 btn_owl_1 dot_owl_1 dot_color_1 btn_vi_1 is-draggable"
                   data-flickity='{"imagesLoaded": 0,"adaptiveHeight": 0, "contain": 1, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": true,"prevNextButtons": false,"percentPosition": 1,"pageDots": false, "autoPlay" : 0, "pauseAutoPlayOnHover" : true, "rightToLeft": false }'
                 >
-                  <div class="col-lg-3 pr_animated col-md-3 col-6 mt__30 pr_grid_item product nt_pr desgin__1 done">
-                    <div class="product-inner pr">
-                      <div class="product-image pr oh lazyload">
-                        <span class="tc nt_labels pa pe_none cw">
-                          <span class="onsale nt_label">
+                  <div className="col-lg-3 pr_animated col-md-3 col-6 mt__30 pr_grid_item product nt_pr desgin__1 done">
+                    <div className="product-inner pr">
+                      <div className="product-image pr oh lazyload">
+                        <span className="tc nt_labels pa pe_none cw">
+                          <span className="onsale nt_label">
                             <span>-34%</span>
                           </span>
                         </span>
-                        <a class="d-block" href="product-detail-layout-01.html">
+                        <a className="d-block" href="product-detail-layout-01.html">
                           <div
-                            class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571"
+                            className="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571"
                             data-bgset="assets/images/home-cosmetics/recent-01.png"
                           ></div>
                         </a>
-                        <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
+                        <div className="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
                           <div
-                            class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571"
+                            className="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571"
                             data-bgset="assets/images/home-cosmetics/recent-01.png"
                           ></div>
                         </div>
-                        <div class="nt_add_w ts__03 pa ">
+                        <div className="nt_add_w ts__03 pa ">
                           <a
                             href="#"
-                            class="wishlistadd cb chp ttip_nt tooltip_right"
+                            className="wishlistadd cb chp ttip_nt tooltip_right"
                           >
-                            <span class="tt_txt">Add to Wishlist</span>
-                            <i class="facl facl-heart-o"></i>
+                            <span className="tt_txt">Add to Wishlist</span>
+                            <i className="facl facl-heart-o"></i>
                           </a>
                         </div>
-                        <div class="hover_button op__0 tc pa flex column ts__03">
+                        <div className="hover_button op__0 tc pa flex column ts__03">
                           <a
                             href="#"
-                            class="pr pr_atc cd br__40 bgw tc dib js__qs cb chp ttip_nt tooltip_top_left"
+                            className="pr pr_atc cd br__40 bgw tc dib js__qs cb chp ttip_nt tooltip_top_left"
                           >
-                            <span class="tt_txt">Add to cart</span>
-                            <i class="iccl iccl-cart"></i>
+                            <span className="tt_txt">Add to cart</span>
+                            <i className="iccl iccl-cart"></i>
                             <span>Add to cart</span>
                           </a>
                         </div>
                       </div>
-                      <div class="product-info mt__15">
-                        <h3 class="product-title pr fs__14 mg__0 fwm">
+                      <div className="product-info mt__15">
+                        <h3 className="product-title pr fs__14 mg__0 fwm">
                           <a
-                            class="cd chp"
+                            className="cd chp"
                             href="product-detail-layout-01.html"
                           >
                             La Bohème Rose Gold
                           </a>
                         </h3>
-                        <span class="price dib mb__5">
+                        <span className="price dib mb__5">
                           <del>Rs. 60.00</del>
                           <ins>Rs. 40.00</ins>
                         </span>
-                        <div class="swatch__list_js swatch__list lh__1 nt_swatches_on_grid">
+                        <div className="swatch__list_js swatch__list lh__1 nt_swatches_on_grid">
                           <span
                             data-bgset="assets/images/products/pr-27.jpg"
-                            class="nt_swatch_on_bg swatch__list--item pr ttip_nt tooltip_top_right"
+                            className="nt_swatch_on_bg swatch__list--item pr ttip_nt tooltip_top_right"
                           >
-                            <span class="tt_txt">Pink</span>
-                            <span class="swatch__value bg_color_pink"></span>
+                            <span className="tt_txt">Pink</span>
+                            <span className="swatch__value bg_color_pink"></span>
                           </span>
                           <span
                             data-bgset="assets/images/products/pr-35.jpg"
-                            class="nt_swatch_on_bg swatch__list--item pr ttip_nt tooltip_top_right"
+                            className="nt_swatch_on_bg swatch__list--item pr ttip_nt tooltip_top_right"
                           >
-                            <span class="tt_txt">Black</span>
-                            <span class="swatch__value bg_color_black"></span>
+                            <span className="tt_txt">Black</span>
+                            <span className="swatch__value bg_color_black"></span>
                           </span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 pr_animated col-md-3 col-6 mt__30 pr_grid_item product nt_pr desgin__1 done">
-                    <div class="product-inner pr">
-                      <div class="product-image pr oh lazyload">
-                        <a class="d-block" href="product-detail-layout-01.html">
+                  <div className="col-lg-3 pr_animated col-md-3 col-6 mt__30 pr_grid_item product nt_pr desgin__1 done">
+                    <div className="product-inner pr">
+                      <div className="product-image pr oh lazyload">
+                        <a className="d-block" href="product-detail-layout-01.html">
                           <div
-                            class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571"
+                            className="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571"
                             data-bgset="assets/images/home-cosmetics/recent-02.png"
                           ></div>
                         </a>
-                        <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
+                        <div className="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
                           <div
-                            class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571"
+                            className="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571"
                             data-bgset="assets/images/home-cosmetics/recent-02.png"
                           ></div>
                         </div>
-                        <div class="nt_add_w ts__03 pa ">
+                        <div className="nt_add_w ts__03 pa ">
                           <a
                             href="#"
-                            class="wishlistadd cb chp ttip_nt tooltip_right"
+                            className="wishlistadd cb chp ttip_nt tooltip_right"
                           >
-                            <span class="tt_txt">Add to Wishlist</span>
-                            <i class="facl facl-heart-o"></i>
+                            <span className="tt_txt">Add to Wishlist</span>
+                            <i className="facl facl-heart-o"></i>
                           </a>
                         </div>
-                        <div class="hover_button op__0 tc pa flex column ts__03">
+                        <div className="hover_button op__0 tc pa flex column ts__03">
                           <a
                             href="#"
-                            class="pr pr_atc cd br__40 bgw tc dib js_addtc cb chp ttip_nt tooltip_top_left"
+                            className="pr pr_atc cd br__40 bgw tc dib js_addtc cb chp ttip_nt tooltip_top_left"
                           >
-                            <span class="tt_txt">Add to cart</span>
-                            <i class="iccl iccl-cart"></i>
+                            <span className="tt_txt">Add to cart</span>
+                            <i className="iccl iccl-cart"></i>
                             <span>Add to cart</span>
                           </a>
                         </div>
                       </div>
-                      <div class="product-info mt__15">
-                        <h3 class="product-title pr fs__14 mg__0 fwm">
+                      <div className="product-info mt__15">
+                        <h3 className="product-title pr fs__14 mg__0 fwm">
                           <a
-                            class="cd chp"
+                            className="cd chp"
                             href="product-detail-layout-01.html"
                           >
                             Simple Skin Cream
                           </a>
                         </h3>
-                        <span class="price dib mb__5">Rs. 56.00</span>
+                        <span className="price dib mb__5">Rs. 56.00</span>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 pr_animated col-md-3 col-6 mt__30 pr_grid_item product nt_pr desgin__1 done">
-                    <div class="product-inner pr">
-                      <div class="product-image pr oh lazyload">
-                        <span class="tc nt_labels pa pe_none cw">
-                          <span class="nt_label new">New</span>
+                  <div className="col-lg-3 pr_animated col-md-3 col-6 mt__30 pr_grid_item product nt_pr desgin__1 done">
+                    <div className="product-inner pr">
+                      <div className="product-image pr oh lazyload">
+                        <span className="tc nt_labels pa pe_none cw">
+                          <span className="nt_label new">New</span>
                         </span>
-                        <a class="d-block" href="product-detail-layout-01.html">
+                        <a className="d-block" href="product-detail-layout-01.html">
                           <div
-                            class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571"
+                            className="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571"
                             data-bgset="assets/images/home-cosmetics/recent-03.png"
                           ></div>
                         </a>
-                        <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
+                        <div className="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
                           <div
-                            class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571"
+                            className="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571"
                             data-bgset="assets/images/home-cosmetics/recent-03.png"
                           ></div>
                         </div>
-                        <div class="nt_add_w ts__03 pa ">
+                        <div className="nt_add_w ts__03 pa ">
                           <a
                             href="#"
-                            class="wishlistadd cb chp ttip_nt tooltip_right"
+                            className="wishlistadd cb chp ttip_nt tooltip_right"
                           >
-                            <span class="tt_txt">Add to Wishlist</span>
-                            <i class="facl facl-heart-o"></i>
+                            <span className="tt_txt">Add to Wishlist</span>
+                            <i className="facl facl-heart-o"></i>
                           </a>
                         </div>
-                        <div class="hover_button op__0 tc pa flex column ts__03">
+                        <div className="hover_button op__0 tc pa flex column ts__03">
                           <a
                             href="#"
-                            class="pr pr_atc cd br__40 bgw tc dib js__qs cb chp ttip_nt tooltip_top_left"
+                            className="pr pr_atc cd br__40 bgw tc dib js__qs cb chp ttip_nt tooltip_top_left"
                           >
-                            <span class="tt_txt">Add to cart</span>
-                            <i class="iccl iccl-cart"></i>
+                            <span className="tt_txt">Add to cart</span>
+                            <i className="iccl iccl-cart"></i>
                             <span>Add to cart</span>
                           </a>
                         </div>
-                        <div class="product-attr pa ts__03 cw op__0 tc">
-                          <p class="truncate mg__0 w__100">XS, S, M, L, XL</p>
+                        <div className="product-attr pa ts__03 cw op__0 tc">
+                          <p className="truncate mg__0 w__100">XS, S, M, L, XL</p>
                         </div>
                       </div>
-                      <div class="product-info mt__15">
-                        <h3 class="product-title pr fs__14 mg__0 fwm">
+                      <div className="product-info mt__15">
+                        <h3 className="product-title pr fs__14 mg__0 fwm">
                           <a
-                            class="cd chp"
+                            className="cd chp"
                             href="product-detail-layout-01.html"
                           >
                             Analogue{" "}
                           </a>
                         </h3>
-                        <span class="price dib mb__5">Rs. 30.00</span>
+                        <span className="price dib mb__5">Rs. 30.00</span>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 pr_animated col-md-3 col-6 mt__30 pr_grid_item product nt_pr desgin__1 done">
-                    <div class="product-inner pr">
-                      <div class="product-image pr oh lazyload">
-                        <a class="d-block" href="product-detail-layout-01.html">
+                  <div className="col-lg-3 pr_animated col-md-3 col-6 mt__30 pr_grid_item product nt_pr desgin__1 done">
+                    <div className="product-inner pr">
+                      <div className="product-image pr oh lazyload">
+                        <a className="d-block" href="product-detail-layout-01.html">
                           <div
-                            class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571"
+                            className="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571"
                             data-bgset="assets/images/home-cosmetics/recent-04.png"
                           ></div>
                         </a>
-                        <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
+                        <div className="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
                           <div
-                            class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571"
+                            className="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571"
                             data-bgset="assets/images/home-cosmetics/recent-04.png"
                           ></div>
                         </div>
-                        <div class="nt_add_w ts__03 pa">
+                        <div className="nt_add_w ts__03 pa">
                           <a
                             href="#"
-                            class="wishlistadd cb chp ttip_nt tooltip_right"
+                            className="wishlistadd cb chp ttip_nt tooltip_right"
                           >
-                            <span class="tt_txt">Add to Wishlist</span>
-                            <i class="facl facl-heart-o"></i>
+                            <span className="tt_txt">Add to Wishlist</span>
+                            <i className="facl facl-heart-o"></i>
                           </a>
                         </div>
-                        <div class="hover_button op__0 tc pa flex column ts__03">
+                        <div className="hover_button op__0 tc pa flex column ts__03">
                           <a
                             href="#"
-                            class="pr pr_atc cd br__40 bgw tc dib js_addtc cb chp ttip_nt tooltip_top_left"
+                            className="pr pr_atc cd br__40 bgw tc dib js_addtc cb chp ttip_nt tooltip_top_left"
                           >
-                            <span class="tt_txt">Add to cart</span>
-                            <i class="iccl iccl-cart"></i>
+                            <span className="tt_txt">Add to cart</span>
+                            <i className="iccl iccl-cart"></i>
                             <span>Add to cart</span>
                           </a>
                         </div>
                       </div>
-                      <div class="product-info mt__15">
-                        <h3 class="product-title pr fs__14 mg__0 fwm">
+                      <div className="product-info mt__15">
+                        <h3 className="product-title pr fs__14 mg__0 fwm">
                           <a
-                            class="cd chp"
+                            className="cd chp"
                             href="product-detail-layout-01.html"
                           >
                             Fresh Cream
                           </a>
                         </h3>
-                        <span class="price dib mb__5">Rs. 15.00 </span>
+                        <span className="price dib mb__5">Rs. 15.00 </span>
                       </div>
                     </div>
                   </div>

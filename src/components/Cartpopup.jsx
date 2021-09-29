@@ -98,13 +98,13 @@ function Cartpopup() {
                           <img
                             class="w__100 lazyload"
                             data-src={
-                              item?.product ? item?.product?.image : item?.image
+                              item?.product ? item?.product?.featuredImage : item?.featuredImage
                             }
                             width="120"
                             height="153"
                             alt=""
                             src={
-                              item?.product ? item?.product?.image : item?.image
+                              item?.product ? item?.product?.featuredImage : item?.featuredImage
                             }
                           />
                         </a>

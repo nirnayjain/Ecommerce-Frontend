@@ -195,6 +195,9 @@ function Footer() {
                         <li className="menu-item">
                           <a href="#">Store Location</a>
                         </li>
+                        {/* <li className="menu-item">
+                          <a href="/blogs">Blog</a>
+                        </li> */}
                         <li className="menu-item">
                           <a href="#">Latest Posts</a>
                         </li>
@@ -280,7 +283,7 @@ function Footer() {
                       <a href="/contact-us">Contact Us</a>
                     </li>
                     <li className="menu-item">
-                      <a href="blog-grid.html">Blog</a>
+                      <a href="/blogs">Blog</a>
                     </li>
                   </ul>
                 </div>

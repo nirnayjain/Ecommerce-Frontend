@@ -12,7 +12,8 @@ import {Link} from "react-router-dom"
 const Blogs = () => {
   const[currentPage, setCurrentPage]=useState(1)
  const[postperpage, setPostPerPage]= useState(10)
- const[blogdetails, setBlogDetails]= useState([])
+ const[blogdetails, setBlogDetails]= useState(null)
+ const[recentBlog, setRecentBlog]= useState(null)
  const[blogcategories, setBlogCategories]= useState([])
   useEffect( ()=>{
     getBlogDetails()
@@ -22,6 +23,7 @@ const Blogs = () => {
 async function getBlogDetails(){
 let res= await axios.get(`${API}/api/blog/view_Blog?page=${currentPage}&limit=${postperpage}`)
 setBlogDetails(res.data.Blog)
+setRecentBlog(res.data.Blog)
 }
 
 async function getBlogCategory(){
@@ -29,10 +31,15 @@ async function getBlogCategory(){
 
  setBlogCategories(res.data.BlogCategory)
 }
+async function handleCategory(id){
+  let res= await axios.post(`${API}/api/blog/view_BlogByCategory?page=${currentPage}&limit=${postperpage}`,{category:id})
+setBlogDetails(res.data.Blog)
+
+}
     return (
         <div >
         <Header />
-        <Navigation />
+        {/* <Navigation /> */}
         <div id="nt_content" >
         {/*main content*/}
         <div className="container container_cat cat_default mt__60 mb__20">
@@ -49,7 +56,7 @@ async function getBlogCategory(){
 
                           {blogcategories.length > 0? blogcategories.map(item=>
                             <li className="cat-item">
-                              <a href="#">{item.name}</a>
+                              <h6 style={{cursor:'pointer'}} onClick={()=>handleCategory(item._id)}>{item.name}</h6>
                             </li> ): null}
 
                             {/* <li className="cat-item current-cat">
@@ -58,22 +65,27 @@ async function getBlogCategory(){
                             <li className="cat-item">
                               <a href="#">Skin</a>
                             </li> */}
-                            
+
                           </ul>
                         </div>
                         <div className="col-12 col-md-12 widget widget_post_list">
                           <h5 className="widget-title">Recent Post</h5>
+                          {recentBlog!=null &&
                           <div className="post_list_widget">
+                            {recentBlog.slice(0,3).map(i=>
+                             <Link className="mb__20 db pr oh" to={`/blogpost/${i._id}`}>
                             <div className="row mb__10 pb__10">
                               <div className="col-auto widget_img_ar">
-                                <a className="db pr oh" href="product-detail-layout-01.html"><img src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%201920%201281%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" className="w__100 lz_op_ef lazyload" alt="Spring – Summer Trending 2020" data-srcset="assets/images/blog-page/blog-thumbnail-01.jpg" /></a>
+                                <a className="db pr oh" href="product-detail-layout-01.html"><img src={i.image} className="w__100 lz_op_ef lazyload" alt={i.title} data-srcset={i.image} /></a>
                               </div>
                               <div className="col widget_if_ar">
-                                <a className="article-title db" href="blog-post-with-instagram-shop.html">Spring – Summer Trending 2020</a>
-                                <time dateTime="2020-04-06T02:22:00Z">August 6, 2021</time>
+                                <a className="article-title db" href="blog-post-with-instagram-shop.html">{i.title}</a>
+                                <time dateTime="2020-04-06T02:22:00Z">{converttimestamp(i.updatedAt)}</time>
                               </div>
                             </div>
-                            <div className="row mb__10 pb__10">
+                            </Link>
+                            )}
+                            {/* <div className="row mb__10 pb__10">
                               <div className="col-auto widget_img_ar">
                                 <a className="db pr oh" href="product-detail-layout-01.html"><img src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%201920%201281%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" className="w__100 lz_op_ef lazyload" alt="The Easiest Way to Break Out on Top" data-srcset="assets/images/blog-page/blog-thumbnail-02.jpg" /></a>
                               </div>
@@ -90,8 +102,9 @@ async function getBlogCategory(){
                                 <a className="article-title db" href="blog-post-with-instagram-shop.html">Style for couple in Weeding season</a>
                                 <time dateTime="2020-04-06T02:17:00Z">April 6, 2021</time>
                               </div>
-                            </div>
+                            </div> */}
                           </div>
+}
                         </div>
                       </div>
                     </div>
@@ -101,6 +114,7 @@ async function getBlogCategory(){
             </div>
             <div className="col-lg-9 order-1 col-xs-12">
               <div className="kalles-section nt_section type_isotope">
+              {blogdetails!=null ?
               <div className="articles products art_des2 nt_products_holder row des_cnt_1 nt_cover ratio4_3 position_8 equal_nt">
 
               {blogdetails.length > 0 ? blogdetails.map(item =>
@@ -109,7 +123,7 @@ async function getBlogCategory(){
                       <div className="lazyload nt_bg_lz pr_lazy_img" data-bgset={item.image} />
                     </Link>
                     <div className="post-info mb__5">
-                      <span className="post-author mr__5">By <span className="cd">admin</span></span><span className="post-time">on <span className="cd"><time dateTime="2020-04-06T02:22:00Z">{converttimestamp(item.updatedAt)}</time></span></span>
+                      <span className="post-author mr__5">By <span className="cd">Admin</span></span><span className="post-time">on <span className="cd"><time dateTime="2020-04-06T02:22:00Z">{converttimestamp(item.createdAt)}</time></span></span>
                       <h4 className="mg__0 fs__16 mt__15 ls__0">
                         <Link className="cd chp open" to={`/blogpost/${item._id}`}>{item.title}</Link>
                       </h4>
@@ -117,8 +131,8 @@ async function getBlogCategory(){
                   </article>
               ) :null}
                 {/*articles*/}
-                
-                  
+
+
                   {/* <article className="post_nt_loop post_1 col-lg-6 col-md-6 col-12 mb__40">
                     <a className="mb__20 db pr oh" href="blog-post.html">
                       <div className="lazyload nt_bg_lz pr_lazy_img" data-bgset="assets/images/blog-page/blog-slide-02.jpg" />
@@ -129,7 +143,7 @@ async function getBlogCategory(){
                         <a className="cd chp open" href="blog-post.html">The Easiest Way to Break Out on Top</a>
                       </h4>
                     </div>
-                  </article> 
+                  </article>
                   <article className="post_nt_loop post_1 col-lg-6 col-md-6 col-12 mb__40">
                     <a className="mb__20 db pr oh" href="blog-post.html">
                       <div className="lazyload nt_bg_lz pr_lazy_img" data-bgset="assets/images/blog-page/blog-slide-03.jpg" />
@@ -197,6 +211,8 @@ async function getBlogCategory(){
                     </div>
                   </article>*/}
                 </div>
+                :""
+}
                 {/*end articles*/}
                 {/*navigation*/}
                 <div className="products-footer tc" style={{position:"relative"}}>
@@ -208,22 +224,22 @@ async function getBlogCategory(){
                       <li><a href="#" className="next page-numbers">Next</a></li>
                     </ul>
                   </nav>
-                  
+
                 </div>
                 {/*end navigation*/}
-                
+
               </div>
             </div>
           </div>
         </div>
         {/*end main content*/}
-        
-        
+
+
       </div>
-      
+
       <Footer />
 
-      
+
       {/* <ScrollTop/> */}
         </div>
     )

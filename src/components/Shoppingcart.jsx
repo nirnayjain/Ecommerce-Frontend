@@ -77,10 +77,10 @@ function Shoppingcart() {
                             <img
                               class="lazyload w__100 lz_op_ef"
                               src={
-                                item.product ? item.product?.image : item.image
+                                item.product ? item.product?.featuredImage : item.featuredImage
                               }
                               data-src={
-                                item.product ? item.product?.image : item.image
+                                item.product ? item.product?.featuredImage : item.featuredImage
                               }
                             />
                           </a>

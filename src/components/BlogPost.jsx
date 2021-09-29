@@ -37,13 +37,15 @@ setBlogDetails(res.data.Blog)
         <div className="container mt__40 mb__40 cb">
           <div className="kalles-term-exp mb__30">
             <h2 className="fs__22 mt-0">{blogdetails.title}</h2>
+            {blogdetails!="" &&
             <p className="mb-2 text-justify">
-            {/* {parse(blogdetails.content)} */}
+            {parse(blogdetails.content)}
             </p>
+            }
           </div>
         </div>
         {/*end page content*/}
-      </div>  
+      </div>
 
       <Footer />
         </>
