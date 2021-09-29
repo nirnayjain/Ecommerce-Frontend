@@ -46,7 +46,7 @@ function Routes() {
         </Route>
 
         <Route path="/blogs" exact component={Blogs} />
-        <Route path="/blogpost" exact component={BlogPost} />
+        <Route path="/blogpost/:id" exact component={BlogPost} />
         <Route path="/contact-us" exact component={Contact} />
         <Route path="/my-orders" exact component={Myorders}></Route>
         <Route path="/my-wishlist" exact component={Mywishlist}></Route>

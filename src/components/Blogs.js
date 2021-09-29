@@ -1,11 +1,34 @@
-import React from 'react'
+import axios from 'axios';
+import React,{useState, useEffect} from 'react'
 import Footer from "./Footer";
 import Header from "./Header";
 import Navigation from "./Navigation";
+import {API} from "../API"
+import {converttimestamp} from "../Utils"
+import {Link} from "react-router-dom"
 
 
 
 const Blogs = () => {
+  const[currentPage, setCurrentPage]=useState(1)
+ const[postperpage, setPostPerPage]= useState(10)
+ const[blogdetails, setBlogDetails]= useState([])
+ const[blogcategories, setBlogCategories]= useState([])
+  useEffect( ()=>{
+    getBlogDetails()
+    getBlogCategory()
+  },[])
+
+async function getBlogDetails(){
+let res= await axios.get(`${API}/api/blog/view_Blog?page=${currentPage}&limit=${postperpage}`)
+setBlogDetails(res.data.Blog)
+}
+
+async function getBlogCategory(){
+  let res= await axios.get(`${API}/api/blog/view_BlogCategory?page=${currentPage}&limit=${postperpage}`)
+
+ setBlogCategories(res.data.BlogCategory)
+}
     return (
         <div >
         <Header />
@@ -23,15 +46,19 @@ const Blogs = () => {
                         <div className="col-12 col-md-12 widget widget_product_categories cat_count_true nt_filter_block">
                           <h5 className="widget-title">Blog Categories</h5>
                           <ul className="product-categories">
-                            <li className="cat-item current-cat">
+
+                          {blogcategories.length > 0? blogcategories.map(item=>
+                            <li className="cat-item">
+                              <a href="#">{item.name}</a>
+                            </li> ): null}
+
+                            {/* <li className="cat-item current-cat">
                               <a href="#">Life Style</a>
                             </li>
                             <li className="cat-item">
                               <a href="#">Skin</a>
-                            </li>
-                            <li className="cat-item">
-                              <a href="#">Hair</a>
-                            </li>
+                            </li> */}
+                            
                           </ul>
                         </div>
                         <div className="col-12 col-md-12 widget widget_post_list">
@@ -74,20 +101,25 @@ const Blogs = () => {
             </div>
             <div className="col-lg-9 order-1 col-xs-12">
               <div className="kalles-section nt_section type_isotope">
-                {/*articles*/}
-                <div className="articles products art_des2 nt_products_holder row des_cnt_1 nt_cover ratio4_3 position_8 equal_nt">
-                  <article className="post_nt_loop post_1 col-lg-6 col-md-6 col-12 mb__40">
-                    <a className="mb__20 db pr oh" href="blog-post.html">
-                      <div className="lazyload nt_bg_lz pr_lazy_img" data-bgset="assets/images/blog-page/blog-slide-01.jpg" />
-                    </a>
+              <div className="articles products art_des2 nt_products_holder row des_cnt_1 nt_cover ratio4_3 position_8 equal_nt">
+
+              {blogdetails.length > 0 ? blogdetails.map(item =>
+                <article className="post_nt_loop post_1 col-lg-6 col-md-6 col-12 mb__40">
+                    <Link className="mb__20 db pr oh" to={`/blogpost/${item._id}`}>
+                      <div className="lazyload nt_bg_lz pr_lazy_img" data-bgset={item.image} />
+                    </Link>
                     <div className="post-info mb__5">
-                      <span className="post-author mr__5">By <span className="cd">admin</span></span><span className="post-time">on <span className="cd"><time dateTime="2020-04-06T02:22:00Z">April 6, 2020</time></span></span>
+                      <span className="post-author mr__5">By <span className="cd">admin</span></span><span className="post-time">on <span className="cd"><time dateTime="2020-04-06T02:22:00Z">{converttimestamp(item.updatedAt)}</time></span></span>
                       <h4 className="mg__0 fs__16 mt__15 ls__0">
-                        <a className="cd chp open" href="blog-post.html">Spring – Summer Trending 2020</a>
+                        <Link className="cd chp open" to={`/blogpost/${item._id}`}>{item.title}</Link>
                       </h4>
                     </div>
                   </article>
-                  <article className="post_nt_loop post_1 col-lg-6 col-md-6 col-12 mb__40">
+              ) :null}
+                {/*articles*/}
+                
+                  
+                  {/* <article className="post_nt_loop post_1 col-lg-6 col-md-6 col-12 mb__40">
                     <a className="mb__20 db pr oh" href="blog-post.html">
                       <div className="lazyload nt_bg_lz pr_lazy_img" data-bgset="assets/images/blog-page/blog-slide-02.jpg" />
                     </a>
@@ -97,7 +129,7 @@ const Blogs = () => {
                         <a className="cd chp open" href="blog-post.html">The Easiest Way to Break Out on Top</a>
                       </h4>
                     </div>
-                  </article>
+                  </article> 
                   <article className="post_nt_loop post_1 col-lg-6 col-md-6 col-12 mb__40">
                     <a className="mb__20 db pr oh" href="blog-post.html">
                       <div className="lazyload nt_bg_lz pr_lazy_img" data-bgset="assets/images/blog-page/blog-slide-03.jpg" />
@@ -163,7 +195,7 @@ const Blogs = () => {
                         <a className="cd chp open" href="blog-post.html">The Easiest Way to Break Out on Top</a>
                       </h4>
                     </div>
-                  </article>
+                  </article>*/}
                 </div>
                 {/*end articles*/}
                 {/*navigation*/}
