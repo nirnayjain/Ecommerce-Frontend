@@ -28,10 +28,10 @@ function Allproductlist() {
   return (
     <div>
       <Header />
-      <Navigation />
+      <Navigation active={category}/>
       <div className="container">
         <div className="row">
-          <Categoryfilter />
+          <Categoryfilter setProducts={setProducts} />
           <div class="col-lg-9 col-12">
             <div class="kalles-section tp_se_cdt">
               {/* <!--products list--> */}
