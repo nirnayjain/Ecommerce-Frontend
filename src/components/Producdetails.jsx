@@ -84,12 +84,14 @@ function Producdetails() {
                   <div class="col-md-6 col-12 pr product-images img_action_zoom pr_sticky_img kalles_product_thumnb_slide">
                     <div class="row theiaStickySidebar">
                       <div class="col-12 col-lg col_thumb">
+                      {image!=null &&
                         <div
+                        
                           class="p-thumb p-thumb_ppr images sp-pr-gallery equal_nt nt_contain ratio_imgtrue position_8 nt_slider pr_carousel"
                           data-flickity='{"initialIndex": ".media_id_001","fade":true,"draggable":">1","cellSelector": ".p-item:not(.is_varhide)","cellAlign": "center","wrapAround": true,"autoPlay": false,"prevNextButtons":true,"adaptiveHeight": true,"imagesLoaded": false, "lazyLoad": 0,"dragThreshold" : 6,"pageDots": false,"rightToLeft": false }'
                         >
-                          {image!=null &&
-                          <>
+                          
+                        
                           {image.map(item=>
                           <div
                             data-grname="not4"
@@ -105,9 +107,10 @@ function Producdetails() {
                             data-cap="Short Sleeved Hoodie"
                           ></div>
                           )}
-                          </>
-}
+                        
+
                         </div>
+                    }
                         {/* <span class="tc nt_labels pa pe_none cw">
                           <span class="onsale nt_label">
                             <span>-34%</span>
