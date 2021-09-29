@@ -5,9 +5,9 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { API } from "../API";
 
-function Productlist() {
+function Productlist({products, setProducts}) {
   const { subCategory,category } = useParams();
-  const [products, setProducts] = useState(null);
+  
 
   useEffect(() => {
    

@@ -1,6 +1,18 @@
 import React from "react";
+import Pdata from "./Pdata"
+import { useParams } from "react-router-dom";
+import { API } from "../API";
+import axios from "axios";
 
-function Categoryfilter() {
+function Categoryfilter({setProducts}) {
+  const { subCategory,category } = useParams();
+
+  const handleCheckBox =  async (min, max)=>{
+     
+      const res = await axios.post(`${API}/api/product/applyFilter/${category}/${subCategory}`,{lowValue:min, highValue:max});
+     setProducts(res.data.product)
+    
+  }
   return (
     <div class="js_sidebar sidebar sidebar_nt col-lg-3 col-12 space_30 hidden_false lazyload">
       <div
@@ -19,54 +31,15 @@ function Categoryfilter() {
                     <h5 class="widget-title">Filter by price</h5>
                     <div class="loke_scroll">
                       <ul class="nt_filter_block nt_filter_styleck css_ntbar">
-                        <li>
-                          <a
-                            href="#"
-                            aria-label="Narrow selection to products matching tag price Rs. 50-Rs. 100"
-                          >
-                            Rs. 50-Rs. 100
-                          </a>
+                      {Pdata.map((item)=>
+                        <li style={{display:"flex", alignItems:"center", textAlign:"left"}}>
+                          <input type="radio" id={item._id} name="50-100" value={item._id}
+                            aria-label="Narrow selection to products matching tag price Rs. 50-Rs. 100" onChange={e => handleCheckBox(item.min, item.max)} style={{border:"none", textDecoration:"none"}}
+                          />
+                          <label for={item._id} style={{paddingLeft:"13px" , color:"black" , "hover":{color: "#efefef"}}}>  Rs. {item.min}-Rs. {item.max}</label>
                         </li>
-                        <li>
-                          <a
-                            href="#"
-                            aria-label="Narrow selection to products matching tag price Rs. 100-Rs. 150"
-                          >
-                            Rs. 100-Rs. 150
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            aria-label="Narrow selection to products matching tag price Rs. 150-Rs. 200"
-                          >
-                            Rs. 150-Rs. 200
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            aria-label="Narrow selection to products matching tag price Rs. 250-Rs. 300"
-                          >
-                            Rs. 250-Rs. 300
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            aria-label="Narrow selection to products matching tag price Rs. 350-Rs. 400"
-                          >
-                            Rs. 350-Rs. 400
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            aria-label="Narrow selection to products matching tag price Rs. 450-Rs. 500"
-                          >
-                            Rs. 450-Rs. 500
-                          </a>
-                        </li>
+                      )}
+                        
                       </ul>
                     </div>
                   </div>
