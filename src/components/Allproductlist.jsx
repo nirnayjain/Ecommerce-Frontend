@@ -31,7 +31,7 @@ function Allproductlist() {
       <Navigation active={category}/>
       <div className="container">
         <div className="row">
-          <Categoryfilter setProducts={setProducts} />
+          <Categoryfilter setProducts={setProducts} isCategory={true} />
           <div class="col-lg-9 col-12">
             <div class="kalles-section tp_se_cdt">
               {/* <!--products list--> */}

@@ -17,7 +17,7 @@ function Shop() {
       <Shopbanner />
       <div className="container">
         <div className="row">
-          <Categoryfilter setProducts={setProducts} products={products}/>
+          <Categoryfilter setProducts={setProducts}  isCatgeory={false}/>
           <Productlist setProducts={setProducts} products={products}/>
         </div>
       </div>

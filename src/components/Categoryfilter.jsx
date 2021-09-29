@@ -4,14 +4,21 @@ import { useParams } from "react-router-dom";
 import { API } from "../API";
 import axios from "axios";
 
-function Categoryfilter({setProducts}) {
+function Categoryfilter({setProducts,isCategory}) {
   const { subCategory,category } = useParams();
 
   const handleCheckBox =  async (min, max)=>{
-     
+    if(!isCategory)
+   {
       const res = await axios.post(`${API}/api/product/applyFilter/${category}/${subCategory}`,{lowValue:min, highValue:max});
      setProducts(res.data.product)
-    
+     }
+     else
+     {
+      const res = await axios.post(`${API}/api/product/applyFilter/${category}`,{lowValue:min, highValue:max});
+      setProducts(res.data.product)
+     }
+
   }
   return (
     <div class="js_sidebar sidebar sidebar_nt col-lg-3 col-12 space_30 hidden_false lazyload">
@@ -39,7 +46,7 @@ function Categoryfilter({setProducts}) {
                           <label for={item._id} style={{paddingLeft:"13px" , color:"black" , "hover":{color: "#efefef"}}}>  Rs. {item.min}-Rs. {item.max}</label>
                         </li>
                       )}
-                        
+
                       </ul>
                     </div>
                   </div>
