@@ -21,7 +21,7 @@ setBlogDetails(res.data.Blog)
     return (
         <>
         <Header />
-        <Navigation />
+        {/* <Navigation /> */}
            <div id="nt_content">
         {/*hero banner*/}
         <div className="kalles-section page_section_heading">
