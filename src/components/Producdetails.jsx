@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import parse from 'html-react-parser'
 import {
   addToCart,
@@ -19,6 +19,7 @@ import Popup from "./Popup";
 
 function Producdetails() {
   const { id } = useParams();
+  const history= useHistory()
   const [productDetailes, setproductDetailes] = useState({});
   const[image,setImage]=useState(null)
   const [modalShow, setModalShow] = useState(false);
@@ -43,6 +44,10 @@ function Producdetails() {
 
   function addCart(id,quantity) {
     dispatch(addToCart(id,quantity));
+    setTimeout(() => {
+      history.push("/cart")
+    }, 1000);
+    
   }
   function increaseQuntity(id) {
     dispatch(increseQuant(id));

@@ -298,22 +298,35 @@ export const decreaseQuant = (id) => {
       let cart = JSON.parse(localStorage.getItem("cartData"));
       let product = cart.filter((item) => {
         return item._id === id;
-      });
-      let cartItemDetail = {
-        _id: product[0]._id,
-        title: product[0].title,
-        price: product[0].price,
-        sale_price: product[0].sale_price,
-        image: product[0].image,
-        featuredImage:product[0].featuredImage,
-        quantity: product[0].quantity - 1,
-      };
-      let index = cart.findIndex((item) => {
-        return item._id == product[0]._id;
-      });
-      cart.splice(index, 1, cartItemDetail);
 
-      localStorage.setItem("cartData", JSON.stringify(cart));
+      });
+      if(product[0].quantity===1){
+        let index = cart.findIndex((item) => {
+          return item._id == product[0]._id;
+        });
+      
+        cart.splice(index, 1);
+        localStorage.setItem("cartData", JSON.stringify(cart));
+
+      }
+else{
+  let cartItemDetail = {
+    _id: product[0]._id,
+    title: product[0].title,
+    price: product[0].price,
+    sale_price: product[0].sale_price,
+    image: product[0].image,
+    featuredImage:product[0].featuredImage,
+    quantity: product[0].quantity - 1,
+  };
+  let index = cart.findIndex((item) => {
+    return item._id == product[0]._id;
+  });
+  cart.splice(index, 1, cartItemDetail);
+
+  localStorage.setItem("cartData", JSON.stringify(cart));
+}
+      
       dispatch(
         decreaseQuantSuccess("Decreased Quantity", totalPrice, totalQuantity)
       );
