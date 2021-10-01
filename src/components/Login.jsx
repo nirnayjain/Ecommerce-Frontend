@@ -37,25 +37,25 @@ function Login() {
       localStorage.setItem("token", response.data.token);
       alert.show("Logged In Successfully", { type: "success" });
       const cart = JSON.parse(localStorage.getItem("cartData"));
-
+     if(cart!=null)
+     {
       cart.map((item) => {
-        prodIds.push(...prodIds, item._id);
-      });
-      localStorage.removeItem("cartData");
-      console.log(prodIds);
-      prodIds.map((id) => {
         const token = localStorage.getItem("token");
         if (token) {
-          return dispatch(addToCart(id));
+          return dispatch(addToCart(item._id,item.quantity));
         }
       });
+      localStorage.removeItem("cartData");
+
+
+    }
 
       setTimeout(() => {
         window.location.reload();
       }, 2000);
-      setTimeout(() => {
-        window.stop();
-      }, 2000);
+      // setTimeout(() => {
+      //   window.stop();
+      // }, 2000);
     }
   }
 
