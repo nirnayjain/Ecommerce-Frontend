@@ -2,8 +2,8 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import {  viewWishlist } from "../Actions/wishlishAction";
 import { API } from "../API";
 import Cartpopup from "./Cartpopup";
 import Popform from "./Popform";
@@ -19,9 +19,25 @@ function Header() {
   let [instagramUrl, setinstagramUrl] = useState("");
   let [twiiterUrl, settwiiterUrl] = useState("");
   let [linkedinUrl, setlinkedinUrl] = useState("");
+  let [category, setCategory] = useState([]);
+  const[sub,setSub]=useState(false)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(viewWishlist());
+  }, []);
+  useEffect(() => {
+    async function getCategory() {
+      let categories = await axios.get(`${API}/api/category`);
+      setCategory(categories?.data);
+    }
 
+    getCategory();
+  }, []);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const totalWishListQuantity=useSelector((state) => state.wishlist.totalQuantity);
   const token = localStorage.getItem("token");
+
+
 
   useEffect(() => {
     async function getFeatured() {
@@ -222,9 +238,113 @@ function Header() {
             </div>
           </div>
         </div>
+
       </div>
       <Popform />
       <Cartpopup />
+      <div id="nt_menu_canvas" class="nt_fk_canvas nt_sleft dn lazyload">
+    <i class="close_pp pegk pe-7s-close ts__03 cd"></i>
+    {/* <div class="mb_nav_tabs flex al_center mb_cat_true"> */}
+        <div class="mb_nav_title pr mb_nav_ul flex al_center fl_center active" data-id="#kalles-section-mb_nav_js">
+            <span class="db truncate">Menu</span>
+        </div>
+        {/* <div class="mb_nav_title pr flex al_center fl_center" data-id="#kalles-section-mb_cat_js">
+            <span class="db truncate">Categories</span>
+        </div> */}
+    {/* </div> */}
+    <div id="kalles-section-mb_nav_js" class="mb_nav_tab active">
+        <div id="kalles-section-mb_nav" class="kalles-section">
+            <ul id="menu_mb_ul" class="nt_mb_menu">
+              {category.map((i,index)=>
+      <li class="menu-item menu-item-has-children only_icon_false" key={i._id}>
+
+                    <a ><a href="shop-filter-sidebar.html"><span class="nav_link_txt flex al_center">{i.category}</span></a><span class="nav_link_icon ml__5" onClick={()=>setSub(!sub)}></span></a>
+
+                    <ul class="sub-menu" style={{display:'block'}}>
+                    {sub &&
+                    <>
+                      {i.subCategory.map(j=>
+
+                        <li class="menu-item">
+                        <a href={`/shop/${i.category}/${j.category}`}>{j.category}</a>
+                        </li>
+                      )}
+                      </>
+
+}
+                    </ul>
+                </li>
+              )}
+
+                <li class="menu-item menu-item-btns menu-item-wishlist">
+                    <a class="js_link_wis" href="/my-wishlist"><span class="iconbtns">Wishlist</span></a></li>
+                {/* <li class="menu-item menu-item-btns menu-item-sea push_side" data-id="#nt_search_canvas">
+                    <a href="#"><span class="iconbtns">Search</span></a></li> */}
+              {!token ?
+                <li class="menu-item menu-item-btns menu-item-acount">
+                    <a href="#" class="push_side" data-id="#nt_login_canvas"><span class="iconbtns">Login / Register</span></a>
+                </li>
+                :
+                <li class="menu-item menu-item-btns menu-item-acount">
+                    <a href=""  onClick={handleLogout}><span class="iconbtns">Logout</span></a>
+                </li>
+}
+
+                <li class="menu-item menu-item-infos">
+                    <p class="menu_infos_title">Need help?</p>
+                    <div class="menu_infos_text">
+                        <i class="pegk pe-7s-call fwb mr__10" ></i>+91 123 456 7890<br /><i class="pegk pe-7s-mail fwb mr__10"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="kalles-section-toolbar_mobile" class="kalles-section">
+    <div class="kalles_toolbar kalles_toolbar_label_true ntpf r__0 l__0 b__0 flex fl_between al_center">
+        <div class="type_toolbar_shop kalles_toolbar_item">
+            <a href="/">
+                <span class="toolbar_icon"></span>
+                <span class="kalles_toolbar_label">Shop</span>
+            </a>
+        </div>
+        {/* <div class="type_toolbar_filter kalles_toolbar_item dn">
+            <a class="dt_trigger_cl" href="#" data-trigger=".btn_filter">
+                <span class="toolbar_icon"></span>
+                <span class="kalles_toolbar_label">Filter</span>
+            </a>
+        </div> */}
+        <div class="type_toolbar_wish kalles_toolbar_item">
+            <a class="js_link_wis" href="/my-wishlist">
+				<span class="toolbar_icon">
+					{/* <span class="jswcount toolbar_count">{totalWishListQuantity}</span> */}
+				</span>
+                <span class="kalles_toolbar_label">Wishlist</span>
+            </a>
+        </div>
+        <div class="type_toolbar_cart kalles_toolbar_item">
+            <a href="#" class="push_side" data-id="#nt_cart_canvas">
+				<span class="toolbar_icon">
+					<span class="jsccount toolbar_count">{totalQuantity}</span>
+				</span>
+                <span class="kalles_toolbar_label">Cart</span>
+            </a>
+        </div>
+        <div class="type_toolbar_account kalles_toolbar_item">
+            <a href="#" class="push_side" data-id="#nt_login_canvas">
+                <span class="toolbar_icon"></span>
+                <span class="kalles_toolbar_label">Account</span>
+            </a>
+        </div>
+        {/* <div class="type_toolbar_search kalles_toolbar_item">
+            <a href="#" class="push_side" data-id="#nt_search_canvas">
+                <span class="toolbar_icon"></span>
+                <span class="kalles_toolbar_label">Search</span>
+            </a>
+        </div> */}
+    </div>
+</div>
+
     </>
   );
 }

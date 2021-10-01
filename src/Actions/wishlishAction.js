@@ -7,6 +7,8 @@ import {
 import { API } from "../API";
 
 export const viewWishlist = () => {
+  let totalPrice = 0;
+  let totalQuantity = 0;
   const token = localStorage.getItem("token");
   return function (dispatch) {
     axios
@@ -16,8 +18,11 @@ export const viewWishlist = () => {
         },
       })
       .then((response) => {
-        console.log(response.data.WishListItems);
-        dispatch(viewWishlistSuccess(response.data.WishListItems));
+        response.data?.WishListItems.map((item) => {
+          totalPrice += item.product?.sale_price * 1 * item.quantity * 1;
+          totalQuantity += item.quantity * 1;
+        });
+        dispatch(viewWishlistSuccess(response.data.WishListItems,totalQuantity));
       });
   };
 };
@@ -48,6 +53,7 @@ export const addToWishlist = (id) => {
       )
       .then((response) => {
         dispatch(addToWishlistSuccess(response.data.data.WishListItems));
+        window.location.href = "/my-wishlist";
         console.log(response);
       });
   };

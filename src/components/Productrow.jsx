@@ -32,11 +32,11 @@ function Productrow() {
             </span>
             <span class="section-subtitle db tc"></span>
           </div>
-          {/* <div
+          <div
             class="products nt_products_holder row row_pr_1 cdt_des_1 round_cd_false js_carousel nt_slider nt_cover ratio_nt position_8 space_30 prev_next_3 btn_owl_1 dot_owl_1 dot_color_1 btn_vi_2"
             data-flickity='{"imagesLoaded": 0,"adaptiveHeight": 0, "contain": 1, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": true,"prevNextButtons": true,"percentPosition": 1,"pageDots": false, "autoPlay" : 0, "pauseAutoPlayOnHover" : true, "rightToLeft": false }'
-          > */}
-          <div style={{display:'flex',justifyContent:'space-between'}}>
+          >
+          {/* <div style={{display:'flex',justifyContent:'space-between'}}> */}
           {products?.slice(0,4).map(i=>
 
             <div class="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1" >

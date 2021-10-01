@@ -23,7 +23,7 @@ function Newproducts() {
   }
   function Wishlist(id) {
     dispatch(addToWishlist(id));
-    window.location.href = "/my-wishlist";
+    
   }
 
   console.log(newArrival);
@@ -64,13 +64,9 @@ function Newproducts() {
                         ></div>
                       </a>
 
-                      <div className="nt_add_w ts__03 pa">
-                        <a
-                          onClick={() => Wishlist(product._id)}
-                          className="wishlistadd cb chp ttip_nt tooltip_right"
-                        >
-                          <span className="tt_txt">Add to Wishlist</span>
-                          <FavoriteBorderIcon style={{ color: "gray" }} />
+                      <div class="nt_add_w ts__03 pa">
+                        <a href="#" class="wishlistadd cb chp ttip_nt tooltip_right"   onClick={() => Wishlist(product._id)}>
+                          <span class="tt_txt">Add to Wishlist</span><i class="facl facl-heart-o"></i>
                         </a>
                       </div>
                       {/* <div className="hover_button op__0 tc pa flex column ts__03">

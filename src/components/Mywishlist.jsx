@@ -41,21 +41,21 @@ function Mywishlist() {
                       display: "flex",
                       alignItems: "center",
                     }}
-                  >
-                    <a href="/order-details/2">
+                  >  <a href={`/productDetails/${el.product._id}`}>
+
                       <img
                         style={{ width: "100px" }}
                         src={el.product.image[0]}
                         alt="product"
                       />
-                    </a>
+</a>
                     <div style={{ marginLeft: "2rem" }}>
-                      <a href="#">
+                      <a href={`/productDetails/${el.product._id}`}>
                         <p>{el.product.title}</p>
                       </a>
-                      <a href="#">
+
                         <p>Rs .{el.product.sale_price}</p>
-                      </a>
+
                     </div>
                   </div>
                 </td>

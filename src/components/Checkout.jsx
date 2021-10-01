@@ -368,15 +368,15 @@ function Checkout() {
                                   ? item.product?.title
                                   : item.title}
                                 <strong className="product-quantity">
-                                  × {item.quantity}
+                               ({item.product?.sale_price} × {item.quantity})
                                 </strong>
                               </td>
                               <td className="product-total">
                                 <span className="cart_price">
                                   Rs.{" "}
                                   {item.product
-                                    ? item.product?.sale_price
-                                    : item.sale_price}
+                                    ? item.product?.sale_price*item.quantity
+                                    : item.sale_price*item.quantity}
                                 </span>
                               </td>
                             </tr>
@@ -411,7 +411,7 @@ function Checkout() {
                           </button>
 
                         <tr className="cart-subtotal cart_item">
-                          <th>Subtotal</th>
+                          <th>Subtotal <strong>(Inclusive of Taxes)</strong></th>
                           <td>
                             <span className="cart_price">Rs. {totalPrice.toFixed(1)}</span>
                           </td>

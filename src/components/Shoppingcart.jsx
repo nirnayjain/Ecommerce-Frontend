@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import {
   addToCart,
   decreaseQuant,
+  increseQuant,
   removeFromCart,
 } from "../Actions/cartAction";
 import Footer from "./Footer";
@@ -28,7 +29,7 @@ function Shoppingcart() {
   }
 
   function increaseQuntity(id) {
-    dispatch(addToCart(id));
+    dispatch(increseQuant(id));
   }
 
   function decreaseQuntity(id) {
@@ -140,6 +141,7 @@ function Shoppingcart() {
                           <div class="qty tc fs__14">
                             <button
                               onClick={() =>
+                               
                                 increaseQuntity(
                                   item.product ? item.product?._id : item._id
                                 )
@@ -167,7 +169,7 @@ function Shoppingcart() {
                         <span class="cart-item-price fwm cd js_tt_price_it">
                           Rs.{" "}
                           {item.product
-                            ? item.product?.sale_price
+                            ? item.product?.sale_price * item.quantity
                             : item.sale_price * 1 * item.quantity * 1}
                         </span>
                       </div>

@@ -15,6 +15,7 @@ const wishlistReducer = (state = initialState, action) => {
       return {
         ...state,
         wishlistItems: action.payload,
+        totalQuantity: action.totalQuantity
       };
     case ADD_TO_WISHLIST:
       return {
