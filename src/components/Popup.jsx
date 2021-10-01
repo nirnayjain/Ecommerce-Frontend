@@ -215,6 +215,7 @@ useEffect(()=>
                         value={question}
                         onChange={getUserQuestion}
                         placeholder="Write Your Question"
+                        maxlength="300"
                       ></textarea>
                       <sapn>Remaining Characters {characters}</sapn>
                     </div>
