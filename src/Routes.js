@@ -16,7 +16,7 @@ import Paymentpage from "./components/Paymentpage";
 import Paymentsuccess from "./components/Paymentsuccess";
 import WebsitePolicyPage from "./components/websitePolicyPage";
 import Allproductlist from "./components/Allproductlist";
-import Checkoutlogin from "./components/Checkoutlogin";
+import SignIn from "./components/SignIn";
 import Comingsoon from "./components/Comingsoon";
 import Myorders from "./components/Myorders";
 import Mywishlist from "./components/Mywishlist";
@@ -26,6 +26,8 @@ import Address from "./components/Address";
 import Contact from "./components/Contact";
 import Blogs from "./components/Blogs"
 import BlogPost from "./components/BlogPost";
+import CreateAccount from "./components/createAccount";
+
 
 function Routes() {
   return (
@@ -44,7 +46,8 @@ function Routes() {
           <Bottombanner />
           <Footer />
         </Route>
-
+        <Route path="/createAccount" exact component={CreateAccount} />
+        <Route path="/login" exact component={SignIn} />
         <Route path="/blogs" exact component={Blogs} />
         <Route path="/blogpost/:id" exact component={BlogPost} />
         <Route path="/contact-us" exact component={Contact} />
@@ -61,7 +64,7 @@ function Routes() {
         <Route path="/payment/:id" exact component={Paymentpage} />
         <Route path="/payment-success/:id" exact component={Paymentsuccess} />
         <Route path="/:id" exact component={WebsitePolicyPage} />
-        <Route path="/login" exact component={Checkoutlogin} />
+
 
       </Switch>
     </Router>

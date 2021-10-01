@@ -4,7 +4,8 @@ import axios from "axios";
 import Recoverpassword from "./Recoverpassword";
 import Signup from "./Signup";
 import { API } from "../API";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Actions/cartAction";
 function Login() {
   const [loginSelect, setloginSelect] = useState(true);
   const [signupSelect, setsignupSelect] = useState(false);
@@ -12,7 +13,8 @@ function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const alert = useAlert();
-
+  let prodIds = [];
+  const dispatch = useDispatch();
   function showRegistration() {
     setloginSelect(false);
     setsignupSelect(true);
@@ -34,13 +36,26 @@ function Login() {
       setLoading(false);
       localStorage.setItem("token", response.data.token);
       alert.show("Logged In Successfully", { type: "success" });
+      const cart = JSON.parse(localStorage.getItem("cartData"));
+
+      cart.map((item) => {
+        prodIds.push(...prodIds, item._id);
+      });
+      localStorage.removeItem("cartData");
+      console.log(prodIds);
+      prodIds.map((id) => {
+        const token = localStorage.getItem("token");
+        if (token) {
+          return dispatch(addToCart(id));
+        }
+      });
 
       setTimeout(() => {
         window.location.reload();
-      }, 3000);
+      }, 2000);
       setTimeout(() => {
         window.stop();
-      }, 4000);
+      }, 2000);
     }
   }
 

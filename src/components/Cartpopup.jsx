@@ -12,7 +12,9 @@ import {
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 
+
 function Cartpopup() {
+  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState([]);
   const [link, setLink] = useState("");
@@ -51,7 +53,10 @@ function Cartpopup() {
       alert.show("Please Accept Terms and Conditions To Procees", {
         type: "error",
       });
-    } else {
+    }
+    // elseif(!token)
+    // history.push("/")
+     else {
       setLink("/checkout");
     }
   }

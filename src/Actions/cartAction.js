@@ -68,7 +68,7 @@ export const addToCart = (id,productQuantity) => {
   } else {
     cartProduct = [];
   }
-  console.log(token);
+
   if (!token) {
 
     return function (dispatch) {
@@ -79,6 +79,7 @@ export const addToCart = (id,productQuantity) => {
           price: product.data.product.price,
           sale_price: product.data.product.sale_price,
           image: product.data.product.image,
+          featuredImage:product.data.product.featuredImage,
           tax:product.data.product.tax,
           quantity: productQuantity,
         };
@@ -95,6 +96,7 @@ export const addToCart = (id,productQuantity) => {
               price: cartItem[0].price,
               sale_price: cartItem[0].sale_price,
               image: cartItem[0].image,
+              featuredImage:cartItem[0].featuredImage,
               quantity: cartItem[0].quantity + productQuantity,
             };
             let index = cartProduct.findIndex((item) => {
@@ -224,12 +226,14 @@ export const increseQuant = (id) => {
       let product = cart.filter((item) => {
         return item._id === id;
       });
+      console.log(product)
       let cartItemDetail = {
         _id: product[0]._id,
         title: product[0].title,
         price: product[0].price,
         sale_price: product[0].sale_price,
         image: product[0].image,
+        featuredImage:product[0].featuredImage,
         quantity: product[0].quantity + 1,
       };
       let index = cart.findIndex((item) => {
@@ -301,6 +305,7 @@ export const decreaseQuant = (id) => {
         price: product[0].price,
         sale_price: product[0].sale_price,
         image: product[0].image,
+        featuredImage:product[0].featuredImage,
         quantity: product[0].quantity - 1,
       };
       let index = cart.findIndex((item) => {

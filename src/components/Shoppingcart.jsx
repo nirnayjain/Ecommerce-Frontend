@@ -20,6 +20,7 @@ function Shoppingcart() {
   const dispatch = useDispatch();
   const alert = useAlert();
   const history = useHistory();
+  const token = localStorage.getItem("token");
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   let cartItem = [];
   if (Array.isArray(items)) {
@@ -42,7 +43,16 @@ function Shoppingcart() {
   function handleCheckout() {
     if (!checked) {
       alert.show("Please Accept Terms & Conditions", { type: "error" });
-    } else {
+    }
+    else if(!token){
+
+        alert.show("Please Login To Proceed", { type: "error" });
+        setTimeout(() => {
+          history.push("/login");
+        }, 2000);
+      }
+
+    else {
       history.push("/checkout");
     }
   }
@@ -98,7 +108,8 @@ function Shoppingcart() {
                             </div>
                             <div class="mini_cart_tool mt__10">
                               <a
-                                onClick={() => handleDelete(item.product?._id)}
+                              style={{cursor:'pointer'}}
+                                onClick={() => handleDelete( item.product ? item.product?._id : item._id)}
                                 class="cart_ac_remove js_cart_rem ttip_nt tooltip_top_right"
                               >
                                 <span class="tt_txt">Remove this item</span>
@@ -141,7 +152,7 @@ function Shoppingcart() {
                           <div class="qty tc fs__14">
                             <button
                               onClick={() =>
-                               
+
                                 increaseQuntity(
                                   item.product ? item.product?._id : item._id
                                 )

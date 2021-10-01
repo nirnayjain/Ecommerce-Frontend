@@ -39,15 +39,15 @@ function Signup(props) {
 
       if (response.data.status==="ok") {
         setLoading(false);
-        localStorage.setItem("token", response.data.token);
+
         alert.show("Registered Successfully", { type: "success" });
 
         setTimeout(() => {
           window.location.reload();
-        }, 3000);
+        }, 2000);
         setTimeout(() => {
           window.stop();
-        }, 4000);
+        }, 2000);
       }
       else
       alert.show(response.data.message, { type: "error" });

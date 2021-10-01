@@ -18,12 +18,16 @@ export const viewWishlist = () => {
         },
       })
       .then((response) => {
-        response.data?.WishListItems.map((item) => {
+        if(response.data !=null)
+        {
+        response.data.WishListItems.map((item) => {
           totalPrice += item.product?.sale_price * 1 * item.quantity * 1;
           totalQuantity += item.quantity * 1;
         });
         dispatch(viewWishlistSuccess(response.data.WishListItems,totalQuantity));
+      }
       });
+
   };
 };
 

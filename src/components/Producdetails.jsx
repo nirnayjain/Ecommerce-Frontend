@@ -223,9 +223,9 @@ function Producdetails() {
                                   }
                                   disabled={quantity===0}
                                     type="submit"
-                                    data-time="6000"
-                                    data-ani="shake"
-                                    className="single_add_to_cart_button button truncate w__100 mt__20 order-4 d-inline-block animated"
+                                     data-time="6000"
+                                     data-ani="shake"
+                                     className="single_add_to_cart_button button truncate w__100 mt__20  d-inline-block animated"
                                   >
                                     <span
                                       className="txt_add "

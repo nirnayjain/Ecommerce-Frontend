@@ -7,6 +7,7 @@ import {  viewWishlist } from "../Actions/wishlishAction";
 import { API } from "../API";
 import Cartpopup from "./Cartpopup";
 import Popform from "./Popform";
+import {Link} from 'react-router-dom'
 import Toplabel from "./Toplabel";
 
 function Header() {
@@ -222,17 +223,13 @@ function Header() {
                   </i>
                 </a> */}
                 <div className="icon_cart pr">
-                  <a
-                    className="push_side pr cb chp db"
-                    href="#"
-                    data-id="#nt_cart_canvas"
-                  >
+                <Link to="/cart">
                     <i className="iccl iccl-cart pr">
                       <span className="op__0 ts_op pa tcount bgb br__50 cw tc">
                         {totalQuantity}
                       </span>
                     </i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -323,12 +320,12 @@ function Header() {
             </a>
         </div>
         <div class="type_toolbar_cart kalles_toolbar_item">
-            <a href="#" class="push_side" data-id="#nt_cart_canvas">
+            <Link to="/cart">
 				<span class="toolbar_icon">
 					<span class="jsccount toolbar_count">{totalQuantity}</span>
 				</span>
                 <span class="kalles_toolbar_label">Cart</span>
-            </a>
+                </Link>
         </div>
         <div class="type_toolbar_account kalles_toolbar_item">
             <a href="#" class="push_side" data-id="#nt_login_canvas">

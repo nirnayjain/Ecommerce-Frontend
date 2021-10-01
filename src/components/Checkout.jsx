@@ -158,14 +158,8 @@ function Checkout() {
 
 
   async function handleOrder() {
-    if (phone.length < 10 || phone.length > 10)
-      return alert.show("Please Fill Valid Mobile No", { type: "error" });
-    if (
-      !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
-        email
-      )
-    )
-      return alert.show("Please Fill Valid Email Address", { type: "error" });
+
+
     if (
       !firstName ||
       !email ||
@@ -176,8 +170,17 @@ function Checkout() {
       !pinCode ||
       !country
     ) {
-      alert.show("please fill all the fields", { type: "error" });
-    } else {
+      return alert.show("please fill all the fields", { type: "error" });
+    }
+    if (phone.length < 10 || phone.length > 10)
+    return alert.show("Please Fill Valid Mobile No", { type: "error" });
+    if (
+      !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+        email
+      )
+    )
+      return alert.show("Please Fill Valid Email Address", { type: "error" });
+    else {
       if (!checked) {
         alert.show("Please Accept Terms & Conditions", { type: "error" });
       } else {
@@ -368,7 +371,8 @@ function Checkout() {
                                   ? item.product?.title
                                   : item.title}
                                 <strong className="product-quantity">
-                               ({item.product?.sale_price} × {item.quantity})
+                               ({item.product? item.product?.sale_price
+                                  : item.sale_price} × {item.quantity})
                                 </strong>
                               </td>
                               <td className="product-total">

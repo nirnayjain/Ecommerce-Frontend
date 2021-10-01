@@ -15,7 +15,7 @@ import wishlistReducer from "./Reducer/wishlistReducer";
 const options = {
   // you can also just use 'bottom center'
   position: positions.TOP_CENTER,
-  timeout: 5000,
+  timeout: 2000,
   offset: "25px",
   // you can also just use 'scale'
   transition: transitions.SCALE,
