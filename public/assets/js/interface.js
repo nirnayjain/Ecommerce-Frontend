@@ -167,8 +167,8 @@
 
         $.fn.closeMenu = function () {
             $( '.push_side.act_current' ).removeClass( 'act_current' );
-            html.removeClass( 'hside_opened' );
-            body.removeClass( 'pside_opened' );
+            // html.removeClass( 'hside_opened' );
+            // body.removeClass( 'pside_opened' );
             $( '.nt_fk_canvas.act_opened,.nt_fk_full.act_opened' ).removeClass( 'act_opened' );
             mask.removeClass( 'mask_opened' );
         }
@@ -1866,7 +1866,7 @@
                             el.flickity( JSON.parse( option ) );
                             body.addClass( 'open_ntqv' );
                             $( '.kalles_swatch_js' ).kallesSwatches();
-                            $( '#callBackVariant_qv .single_add_to_cart_button' ).kallesAnimation();
+                            $( '#callBackVariant_qv ' ).kallesAnimation();
                             $( '#nt_countdow_qv' ).initCountdown_pr();
                             $btn.removeClass( 'loading' );
                             $( '.dropdown_picker_js' ).kallesDropdownPicker();
@@ -2095,7 +2095,7 @@
         /**********************************************
          * Add to cart button
          * ********************************************/
-        body.on( 'click', '.js_addtc , .single_add_to_cart_button', function ( e ) {
+        body.on( 'click', '.js_addtc', function ( e ) {
             e.preventDefault();
             e.stopPropagation();
             let mini_cart_block$ = $( '#nt_cart_canvas' ),
