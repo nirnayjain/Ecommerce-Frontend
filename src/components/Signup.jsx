@@ -3,9 +3,9 @@ import { useAlert } from "react-alert";
 import axios from "axios";
 import { API } from "../API";
 
-function Signup(props) {
-  const [loginSelect, setloginSelect] = useState(false);
-  const [signupSelect, setsignupSelect] = useState(false);
+function Signup({signupSelect,setloginSelect,setsignupSelect}) {
+  // const [loginSelect, setloginSelect] = useState(false);
+  // const [signupSelect, setsignupSelect] = useState(false);
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
   const [email, setEmail] = useState("");
@@ -63,7 +63,7 @@ function Signup(props) {
       <form
         id="RegisterForm"
         class={`nt_mini_cart flex column h__100 ${
-          props.show ? "is_selected" : ""
+          signupSelect ? "is_selected" : ""
         } `}
       >
         <div class="mini_cart_header flex fl_between al_center">

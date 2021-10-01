@@ -130,8 +130,9 @@ function Login() {
           </div>
         </div>
       </form>
+     
       <Recoverpassword />
-      <Signup show={signupSelect} />
+      <Signup signupSelect={signupSelect} setsignupSelect={setsignupSelect} setloginSelect={setloginSelect}/>
     </div>
   );
 }
