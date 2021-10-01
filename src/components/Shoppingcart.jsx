@@ -145,7 +145,7 @@ function Shoppingcart() {
                         <div class="quantity pr mr__10 qty__true">
                           <input
                             type="number"
-                            class="input-text qty text tc qty_cart_js"
+                            class="input-text qty text tc"
                             name="updates[]"
                             value={item.quantity}
                           />
@@ -227,7 +227,7 @@ function Shoppingcart() {
                       <strong>Subtotal:</strong>
                     </div>
                     <div class="col-auto tr js_cat_ttprice fs__20 fwm">
-                      <div class="cart_tot_price">Rs. {totalPrice}</div>
+                      <div class="cart_tot_price">Rs. {totalPrice ?totalPrice :""}</div>
                     </div>
                   </div>
                   <div class="clearfix"></div>
