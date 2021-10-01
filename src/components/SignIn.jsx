@@ -27,7 +27,7 @@ function SignIn() {
   }
   async function handleLogin(e) {
     e.preventDefault();
-    let prodIds = [];
+    
     if (!email || !password) {
       alert.show("Email and Password are required.", { type: "error" });
     }
@@ -42,17 +42,21 @@ function SignIn() {
 
       const cart = JSON.parse(localStorage.getItem("cartData"));
 
-      cart.map((item) => {
-        prodIds.push(...prodIds, item._id);
-      });
+      if(cart!=null)
+      {
+       cart.map((item) => {
+         const token = localStorage.getItem("token");
+         if (token) {
+           return dispatch(addToCart(item._id,item.quantity));
+         }
+       });
+       localStorage.removeItem("cartData");
+
+
+     }
+
       localStorage.removeItem("cartData");
-      console.log(prodIds);
-      prodIds.map((id) => {
-        const token = localStorage.getItem("token");
-        if (token) {
-          return dispatch(addToCart(id));
-        }
-      });
+
       setTimeout(() => {
         window.location.href = "/checkout";
       }, 2000);

@@ -27,6 +27,7 @@ function Login() {
     if (!email || !password) {
       alert.show("Email and Password are required.", { type: "error" });
     }
+    try{
     const response = await axios.post(`${API}/signin`, {
       email,
       password,
@@ -46,9 +47,11 @@ function Login() {
         }
       });
       localStorage.removeItem("cartData");
-
-
     }
+
+
+
+
 
       setTimeout(() => {
         window.location.reload();
@@ -56,6 +59,10 @@ function Login() {
       // setTimeout(() => {
       //   window.stop();
       // }, 2000);
+    }
+  }
+    catch(error){
+      alert.show(error.message, { type: "error" });
     }
   }
 
@@ -130,7 +137,7 @@ function Login() {
           </div>
         </div>
       </form>
-     
+
       <Recoverpassword />
       <Signup signupSelect={signupSelect} setsignupSelect={setsignupSelect} setloginSelect={setloginSelect}/>
     </div>
