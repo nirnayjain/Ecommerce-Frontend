@@ -27,7 +27,7 @@ function SignIn() {
   }
   async function handleLogin(e) {
     e.preventDefault();
-    
+
     if (!email || !password) {
       alert.show("Email and Password are required.", { type: "error" });
     }
@@ -36,7 +36,7 @@ function SignIn() {
       password,
     });
 
-    if (response.data) {
+    if (response.data.status==="ok") {
       localStorage.setItem("token", response.data.token);
       alert.show("Logged In Successfully", { type: "success" });
 
@@ -55,11 +55,16 @@ function SignIn() {
 
      }
 
-      localStorage.removeItem("cartData");
+
 
       setTimeout(() => {
         window.location.href = "/checkout";
       }, 2000);
+    }
+    else
+    {
+      alert.show(response.data.message, { type: "error" });
+
     }
   }
 

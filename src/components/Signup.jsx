@@ -50,7 +50,10 @@ function Signup({signupSelect,setloginSelect,setsignupSelect}) {
         }, 2000);
       }
       else
+      {
       alert.show(response.data.message, { type: "error" });
+      setLoading(false);
+      }
 
     } catch (error) {
       alert.show(error.message, { type: "error" });

@@ -33,7 +33,7 @@ function Login() {
       password,
     });
     console.log(response.data);
-    if (response.data) {
+    if (response.data.status==="ok") {
       setLoading(false);
       localStorage.setItem("token", response.data.token);
       alert.show("Logged In Successfully", { type: "success" });
@@ -60,9 +60,14 @@ function Login() {
       //   window.stop();
       // }, 2000);
     }
+    else{
+      alert.show(response.data.message, { type: "error" });
+      setLoading(false);
+    }
   }
     catch(error){
       alert.show(error.message, { type: "error" });
+      setLoading(false)
     }
   }
 
