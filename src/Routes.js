@@ -27,9 +27,10 @@ import Contact from "./components/Contact";
 import Blogs from "./components/Blogs"
 import BlogPost from "./components/BlogPost";
 import CreateAccount from "./components/createAccount";
-
+import {Redirect} from 'react-router-dom'
 
 function Routes() {
+  const token = localStorage.getItem("token");
   return (
     <Router>
       <Switch>
@@ -46,8 +47,20 @@ function Routes() {
           <Bottombanner />
           <Footer />
         </Route>
-        <Route path="/createAccount" exact component={CreateAccount} />
-        <Route path="/login" exact component={SignIn} />
+        <Route path="/createAccount" exact render={(props) =>
+                !token ? (
+                  <CreateAccount/>
+                ) : (
+                  <Redirect to="/view" />
+                )
+              } />
+        <Route path="/login" exact render={(props) =>
+                !token ? (
+                  <SignIn />
+                ) : (
+                  <Redirect to="/view" />
+                )
+              } />
         <Route path="/blogs" exact component={Blogs} />
         <Route path="/blogpost/:id" exact component={BlogPost} />
         <Route path="/contact-us" exact component={Contact} />
