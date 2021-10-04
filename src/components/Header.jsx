@@ -203,7 +203,7 @@ const classes= useStyles()
                 </div>
               </div>
             </div>
-            <div className="col-lg-2 col-md-6 col-6 tc">
+            <div className="col-lg-6 col-md-6 col-6 tc">
               <div className="branding ts__05 lh__1">
                 <a className="dib" href="/">
                   <img
@@ -221,7 +221,7 @@ const classes= useStyles()
                 </a>
               </div>
             </div>
-            <div className="col-lg-8 col-md-3 col-3 tr">
+            <div className="col-lg-4 col-md-3 col-3 tr">
               <div className="nt_action in_flex al_center cart_des_1">
                 {show === true ? (
                   <div class="frm_search_input pr oh col" className={classes.search}> 
