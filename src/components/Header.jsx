@@ -153,13 +153,13 @@ function Header() {
             </div>
             <div className="col-lg-3 col-md-3 col-3 tr">
               <div className="nt_action in_flex al_center cart_des_1">
-                {/* <a
+                <a
                   className="icon_search push_side cb chp"
                   data-id="#nt_search_canvas"
                   href="#"
                 >
                   <i className="iccl iccl-search"></i>
-                </a> */}
+                </a>
                 <div className="my-account ts__05 pr dn db_md ">
                   <a
                     className="cb chp db push_side"
@@ -340,6 +340,23 @@ function Header() {
             </a>
         </div> */}
     </div>
+    <div id="nt_search_canvas" class="nt_fk_full dn tl tc_lg">
+    <div class="nt_mini_cart flex column h__100">
+        <div class="mini_cart_wrap">
+            <form method="get" class="search_header mini_search_frm js_frm_search pr" role="search">
+                <div class="row">
+                    <div class="frm_search_input pr oh col">
+                        <input class="search_header__input js_iput_search" autocomplete="off" type="text" name="q" placeholder="Search for products" />
+                        <button class="search_header__submit js_btn_search use_jsfull hide_  pe_none" type="submit">
+                            <i class="iccl iccl-search"></i></button>
+                    </div>
+                </div>
+                <i class="close_pp pegk pe-7s-close ts__03 cd pa r__0"></i>
+                <div class="ld_bar_search"></div>
+            </form>
+        </div>
+    </div>
+</div>
 </div>
 
     </>

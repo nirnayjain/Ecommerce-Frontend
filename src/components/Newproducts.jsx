@@ -23,10 +23,10 @@ function Newproducts() {
   }
   function Wishlist(id) {
     dispatch(addToWishlist(id));
-    
+
   }
 
-  console.log(newArrival);
+
 
   return (
     <div className="container">
