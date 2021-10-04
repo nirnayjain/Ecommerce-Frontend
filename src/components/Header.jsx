@@ -3,28 +3,82 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  viewWishlist } from "../Actions/wishlishAction";
+import { viewWishlist } from "../Actions/wishlishAction";
 import { API } from "../API";
 import Cartpopup from "./Cartpopup";
 import Popform from "./Popform";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import Toplabel from "./Toplabel";
-import Popup from 'reactjs-popup';
-import '../../node_modules/reactjs-popup/dist/index.css';
+import Popup from "reactjs-popup";
+import "../../node_modules/reactjs-popup/dist/index.css";
+import {
+  Container,
+  Grid,
+  makeStyles,
+  CircularProgress,
+  Card,
+  Typography,
+  Paper,
+  IconButton,
+  InputBase,
+  Avatar,
+} from "@material-ui/core";
+const useStyles = makeStyles(() => ({
+  
+  
+  search: {
+      padding: '2px 4px',
+      display: 'flex',
+      alignItems: 'center',
+      borderRadius: '10px',
+      position: 'relative',
+      width: "100%",
+      height: "max-content"
+
+  },
+  
+  input: {
+      marginLeft: 2,
+      flex: 1,
+  },
+  
+  listbox: {
+      width: "100%",
+      margin: 0,
+      padding: 0,
+      zIndex: 100000,
+      position: 'absolute',
+      top: '50px',
+      left: 0,
+      listStyle: 'none',
+      backgroundColor:" #fff",
+      overflow: 'auto',
+      maxHeight: 300,
+
+      border: '1px solid rgba(0,0,0,.125)',
+      boxShadow: '0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%)'
+  },
+
+}))
 
 function Header() {
+const classes= useStyles()
   let [configuration, setConfiguration] = useState([]);
   let [address, setAddress] = useState([]);
   let [featuredProd, setFeaturedProd] = useState([]);
-  const[account,setAccount]=useState(false)
+  const [account, setAccount] = useState(false);
   let [logo, setLogo] = useState("");
   let [facebookUrl, setfacebookUrl] = useState("");
   let [instagramUrl, setinstagramUrl] = useState("");
   let [twiiterUrl, settwiiterUrl] = useState("");
   let [linkedinUrl, setlinkedinUrl] = useState("");
   let [category, setCategory] = useState([]);
-  const[sub,setSub]=useState(false)
+  const [sub, setSub] = useState(false);
+  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
+  const [keyword, setKeyword] = useState("");
+  const [searchlist, setSearchList] = useState([]);
+  
   useEffect(() => {
     dispatch(viewWishlist());
   }, []);
@@ -37,10 +91,10 @@ function Header() {
     getCategory();
   }, []);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
-  const totalWishListQuantity=useSelector((state) => state.wishlist.totalQuantity);
+  const totalWishListQuantity = useSelector(
+    (state) => state.wishlist.totalQuantity
+  );
   const token = localStorage.getItem("token");
-
-
 
   useEffect(() => {
     async function getFeatured() {
@@ -72,13 +126,27 @@ function Header() {
       window.location.reload();
     }, 3000);
   }
+
+  useEffect(() => {
+    getSearchResult();
+  }, [keyword]);
+   
+  async function getSearchResult(){
+    if(keyword.length>0 ){
+      let res = await axios.get(`${API}/api/product/search?keyword=${keyword}`)
+      setSearchList(res.data.searchResult)
+    }
+    
+    
+  }
+
   return (
     <>
       {/* <Toplabel /> */}
       <div className="header__mid">
         <div className="container">
           <div className="row al_center css_h_se">
-            <div className="col-lg-3 col-md-3 col-3">
+            <div className="col-lg-2 col-md-3 col-3">
               <a
                 href="#"
                 data-id="#nt_menu_canvas"
@@ -135,7 +203,7 @@ function Header() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 col-md-6 col-6 tc">
+            <div className="col-lg-2 col-md-6 col-6 tc">
               <div className="branding ts__05 lh__1">
                 <a className="dib" href="/">
                   <img
@@ -153,77 +221,145 @@ function Header() {
                 </a>
               </div>
             </div>
-            <div className="col-lg-3 col-md-3 col-3 tr">
+            <div className="col-lg-8 col-md-3 col-3 tr">
               <div className="nt_action in_flex al_center cart_des_1">
-                <a
-                  className="icon_search push_side cb chp"
-                  data-id="#nt_search_canvas"
-                  href="#"
-                >
-                  <i className="iccl iccl-search"></i>
-                </a> 
-
-{token?<>
-  <Popup trigger={<a
-                    href="#"
-                    data-id="#nt_login_canvas"
-                  >
-                    <i className="iccl iccl-user" ></i>
-                  </a>}
-                  position="bottom center">
-                 <div
+                {show === true ? (
+                  <div class="frm_search_input pr oh col" className={classes.search}> 
+                    <input
+                      class="search_header__input js_iput_search"
+                      autocomplete="off"
+                      type="text"
+                      name="q"
+                      value={keyword}
+                      placeholder="Search for products"
+                      onChange={(e)=>setKeyword(e.target.value)}
+                      className={classes.input}
+                    />
+                    <button
+                      class="search_header__submit js_btn_search use_jsfull hide_  pe_none"
+                      type="submit"
                     >
-                      <ul
-                        style={{
-                          listStyle:"none",
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                        }}
-                      >
-                        <li style={{ marginTop: "1.5rem" }}>
-                          <a href="/my-orders"> My Orders</a>
-                        </li>
-                        <li style={{ marginTop: "1.5rem" }}>
-                          {" "}
-                          <a href="/my-wishlist"> My Wishlist</a>
-                        </li>
-                        <li style={{ marginTop: "1.5rem" }}>
-                          {" "}
-                          <a href="/my-address">Address</a>
-                        </li>
+                      <i class="iccl iccl-search"></i>
+                    </button>
 
-                        <li style={{ marginTop: "1.5rem" }}>
-                          {" "}
-                          <a href="/change-password">Change Password</a>
-                        </li>
-                        <li style={{ marginTop: "1.5rem" }}>
-                          {" "}
-                          <a href="" onClick={handleLogout}>
-                            {" "}
-                            Logout
-                          </a>
-                        </li>
+                    {searchlist.length > 0 ? (
+                      <ul className={classes.listbox}>
+                        {searchlist.map((option, index) => (
+                          <>
+                            <li>
+                              <Container>
+                                <Grid container spacing={1}>
+                                  <Grid
+                                    item
+                                    xs={3}
+                                    sm={3}
+                                    md={3}
+                                    lg={3}
+                                    xl={3}
+                                  >
+                                    
+                                        <Avatar
+                                          src={option.featuredImage}
+                                          width={150}
+                                          height={150}
+              
+                                        />
+
+                                        
+                        
+                                  </Grid>
+                                  <Grid
+                                    item
+                                    xs={9}
+                                    sm={9}
+                                    md={9}
+                                    lg={9}
+                                    xl={9}
+                                  >
+                                  <Typography>
+                                    {option.title}
+                                  </Typography>
+                                  </Grid>
+
+                                  <Grid item xs={12}>
+                                    <hr />
+                                  </Grid>
+                                </Grid>
+                              </Container>
+                            </li>
+                          </>
+                        ))}
                       </ul>
-                    </div>
-  </Popup>
-
-
-
-
-
-                    </>
-                   :
-                  <div className="my-account ts__05 pr dn db_md ">
+                    ) : null}
+                  </div>
+                ) : (
                   <a
-                    className="cb chp db push_side"
+                    // className="icon_search push_side cb chp"
+                    onClick={() => setShow(true)}
+                    data-id="#nt_search_canvas"
                     href="#"
-                    data-id="#nt_login_canvas"
                   >
-                    <i className="iccl iccl-user" ></i>
+                    <i className="iccl iccl-search"></i>
                   </a>
-                  </div>}
+                )}
 
+                {token ? (
+                  <>
+                    <Popup
+                      trigger={
+                        <a href="#" data-id="#nt_login_canvas">
+                          <i className="iccl iccl-user"></i>
+                        </a>
+                      }
+                      position="bottom center"
+                    >
+                      <div>
+                        <ul
+                          style={{
+                            listStyle: "none",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                          }}
+                        >
+                          <li style={{ marginTop: "1.5rem" }}>
+                            <a href="/my-orders"> My Orders</a>
+                          </li>
+                          <li style={{ marginTop: "1.5rem" }}>
+                            {" "}
+                            <a href="/my-wishlist"> My Wishlist</a>
+                          </li>
+                          <li style={{ marginTop: "1.5rem" }}>
+                            {" "}
+                            <a href="/my-address">Address</a>
+                          </li>
+
+                          <li style={{ marginTop: "1.5rem" }}>
+                            {" "}
+                            <a href="/change-password">Change Password</a>
+                          </li>
+                          <li style={{ marginTop: "1.5rem" }}>
+                            {" "}
+                            <a href="" onClick={handleLogout}>
+                              {" "}
+                              Logout
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </Popup>
+                  </>
+                ) : (
+                  <div className="my-account ts__05 pr dn db_md ">
+                    <a
+                      className="cb chp db push_side"
+                      href="#"
+                      data-id="#nt_login_canvas"
+                    >
+                      <i className="iccl iccl-user"></i>
+                    </a>
+                  </div>
+                )}
 
                 {/* <div className="my-account ts__05 pr dn db_md ">
                   <a
@@ -233,48 +369,8 @@ function Header() {
                   >
                     <i className="iccl iccl-user" ></i>
                   </a> */}
-                  {/* {token  ? (
-                    <div
-                      style={{
-                        position: "absolute",
-                        // left: "-8rem",
-                        // top: "-2rem",
-                         zIndex: "100",
-                      }}
-                    >
-                      <ul
-                        style={{
-                          backgroundColor: "#eee",
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                        }}
-                      >
-                        <li style={{ marginTop: "1.5rem" }}>
-                          <a href="/my-orders"> My Orders</a>
-                        </li>
-                        <li style={{ marginTop: "1.5rem" }}>
-                          {" "}
-                          <a href="/my-wishlist"> My Wishlist</a>
-                        </li>
-                        <li style={{ marginTop: "1.5rem" }}>
-                          {" "}
-                          <a href="/my-address">Address</a>
-                        </li>
-
-                        <li style={{ marginTop: "1.5rem" }}>
-                          {" "}
-                          <a href="/change-password">Change Password</a>
-                        </li>
-                        <li style={{ marginTop: "1.5rem" }}>
-                          {" "}
-                          <a href="" onClick={handleLogout}>
-                            {" "}
-                            Logout
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
+                {/* {token  ? (
+                   
                   ) : null} */}
                 {/* </div> */}
                 {/* <a
@@ -288,7 +384,7 @@ function Header() {
                   </i>
                 </a> */}
                 <div className="icon_cart pr">
-                <Link to="/cart">
+                  <Link to="/cart">
                     <i className="iccl iccl-cart pr">
                       <span className="op__0 ts_op pa tcount bgb br__50 cw tc">
                         {totalQuantity}
@@ -300,112 +396,135 @@ function Header() {
             </div>
           </div>
         </div>
-
       </div>
       <Popform />
       <Cartpopup />
       <div id="nt_menu_canvas" class="nt_fk_canvas nt_sleft dn lazyload">
-    <i class="close_pp pegk pe-7s-close ts__03 cd"></i>
-    {/* <div class="mb_nav_tabs flex al_center mb_cat_true"> */}
-        <div class="mb_nav_title pr mb_nav_ul flex al_center fl_center active" data-id="#kalles-section-mb_nav_js">
-            <span class="db truncate">Menu</span>
+        <i class="close_pp pegk pe-7s-close ts__03 cd"></i>
+        {/* <div class="mb_nav_tabs flex al_center mb_cat_true"> */}
+        <div
+          class="mb_nav_title pr mb_nav_ul flex al_center fl_center active"
+          data-id="#kalles-section-mb_nav_js"
+        >
+          <span class="db truncate">Menu</span>
         </div>
         {/* <div class="mb_nav_title pr flex al_center fl_center" data-id="#kalles-section-mb_cat_js">
             <span class="db truncate">Categories</span>
         </div> */}
-    {/* </div> */}
-    <div id="kalles-section-mb_nav_js" class="mb_nav_tab active">
-        <div id="kalles-section-mb_nav" class="kalles-section">
+        {/* </div> */}
+        <div id="kalles-section-mb_nav_js" class="mb_nav_tab active">
+          <div id="kalles-section-mb_nav" class="kalles-section">
             <ul id="menu_mb_ul" class="nt_mb_menu">
-              {category.map((i,index)=>
-      <li class="menu-item menu-item-has-children only_icon_false" key={i._id}>
+              {category.map((i, index) => (
+                <li
+                  class="menu-item menu-item-has-children only_icon_false"
+                  key={i._id}
+                >
+                  <a>
+                    <a href="shop-filter-sidebar.html">
+                      <span class="nav_link_txt flex al_center">
+                        {i.category}
+                      </span>
+                    </a>
+                    <span
+                      class="nav_link_icon ml__5"
+                      onClick={() => setSub(!sub)}
+                    ></span>
+                  </a>
 
-                    <a ><a href="shop-filter-sidebar.html"><span class="nav_link_txt flex al_center">{i.category}</span></a><span class="nav_link_icon ml__5" onClick={()=>setSub(!sub)}></span></a>
-
-                    <ul class="sub-menu" style={{display:'block'}}>
-                    {sub &&
-                    <>
-                      {i.subCategory.map(j=>
-
-                        <li class="menu-item">
-                        <a href={`/shop/${i.category}/${j.category}`}>{j.category}</a>
-                        </li>
-                      )}
+                  <ul class="sub-menu" style={{ display: "block" }}>
+                    {sub && (
+                      <>
+                        {i.subCategory.map((j) => (
+                          <li class="menu-item">
+                            <a href={`/shop/${i.category}/${j.category}`}>
+                              {j.category}
+                            </a>
+                          </li>
+                        ))}
                       </>
+                    )}
+                  </ul>
+                </li>
+              ))}
 
-}
-                    </ul>
+              <li class="menu-item menu-item-btns menu-item-wishlist">
+                <a class="js_link_wis" href="/my-wishlist">
+                  <span class="iconbtns">Wishlist</span>
+                </a>
+              </li>
+              {/* <li class="menu-item menu-item-btns menu-item-sea push_side" data-id="#nt_search_canvas">
+                    <a href="#"><span class="iconbtns">Search</span></a></li> */}
+              {!token ? (
+                <li class="menu-item menu-item-btns menu-item-acount">
+                  <a href="#" class="push_side" data-id="#nt_login_canvas">
+                    <span class="iconbtns">Login / Register</span>
+                  </a>
+                </li>
+              ) : (
+                <li class="menu-item menu-item-btns menu-item-acount">
+                  <a href="" onClick={handleLogout}>
+                    <span class="iconbtns">Logout</span>
+                  </a>
                 </li>
               )}
 
-                <li class="menu-item menu-item-btns menu-item-wishlist">
-                    <a class="js_link_wis" href="/my-wishlist"><span class="iconbtns">Wishlist</span></a></li>
-                {/* <li class="menu-item menu-item-btns menu-item-sea push_side" data-id="#nt_search_canvas">
-                    <a href="#"><span class="iconbtns">Search</span></a></li> */}
-              {!token ?
-                <li class="menu-item menu-item-btns menu-item-acount">
-                    <a href="#" class="push_side" data-id="#nt_login_canvas"><span class="iconbtns">Login / Register</span></a>
-                </li>
-                :
-                <li class="menu-item menu-item-btns menu-item-acount">
-                    <a href=""  onClick={handleLogout}><span class="iconbtns">Logout</span></a>
-                </li>
-}
-
-                <li class="menu-item menu-item-infos">
-                    <p class="menu_infos_title">Need help?</p>
-                    <div class="menu_infos_text">
-                        <i class="pegk pe-7s-call fwb mr__10" ></i>+91 123 456 7890<br /><i class="pegk pe-7s-mail fwb mr__10"></i>
-                    </div>
-                </li>
+              <li class="menu-item menu-item-infos">
+                <p class="menu_infos_title">Need help?</p>
+                <div class="menu_infos_text">
+                  <i class="pegk pe-7s-call fwb mr__10"></i>+91 123 456 7890
+                  <br />
+                  <i class="pegk pe-7s-mail fwb mr__10"></i>
+                </div>
+              </li>
             </ul>
+          </div>
         </div>
-    </div>
-</div>
-<div id="kalles-section-toolbar_mobile" class="kalles-section">
-    <div class="kalles_toolbar kalles_toolbar_label_true ntpf r__0 l__0 b__0 flex fl_between al_center">
-        <div class="type_toolbar_shop kalles_toolbar_item">
+      </div>
+      <div id="kalles-section-toolbar_mobile" class="kalles-section">
+        <div class="kalles_toolbar kalles_toolbar_label_true ntpf r__0 l__0 b__0 flex fl_between al_center">
+          <div class="type_toolbar_shop kalles_toolbar_item">
             <a href="/">
-                <span class="toolbar_icon"></span>
-                <span class="kalles_toolbar_label">Shop</span>
+              <span class="toolbar_icon"></span>
+              <span class="kalles_toolbar_label">Shop</span>
             </a>
-        </div>
-        {/* <div class="type_toolbar_filter kalles_toolbar_item dn">
+          </div>
+          {/* <div class="type_toolbar_filter kalles_toolbar_item dn">
             <a class="dt_trigger_cl" href="#" data-trigger=".btn_filter">
                 <span class="toolbar_icon"></span>
                 <span class="kalles_toolbar_label">Filter</span>
             </a>
         </div> */}
-        <div class="type_toolbar_wish kalles_toolbar_item">
+          <div class="type_toolbar_wish kalles_toolbar_item">
             <a class="js_link_wis" href="/my-wishlist">
-				<span class="toolbar_icon">
-					{/* <span class="jswcount toolbar_count">{totalWishListQuantity}</span> */}
-				</span>
-                <span class="kalles_toolbar_label">Wishlist</span>
+              <span class="toolbar_icon">
+                {/* <span class="jswcount toolbar_count">{totalWishListQuantity}</span> */}
+              </span>
+              <span class="kalles_toolbar_label">Wishlist</span>
             </a>
-        </div>
-        <div class="type_toolbar_cart kalles_toolbar_item">
+          </div>
+          <div class="type_toolbar_cart kalles_toolbar_item">
             <Link to="/cart">
-				<span class="toolbar_icon">
-					<span class="jsccount toolbar_count">{totalQuantity}</span>
-				</span>
-                <span class="kalles_toolbar_label">Cart</span>
-                </Link>
-        </div>
-        <div class="type_toolbar_account kalles_toolbar_item">
+              <span class="toolbar_icon">
+                <span class="jsccount toolbar_count">{totalQuantity}</span>
+              </span>
+              <span class="kalles_toolbar_label">Cart</span>
+            </Link>
+          </div>
+          <div class="type_toolbar_account kalles_toolbar_item">
             <a href="#" class="push_side" data-id="#nt_login_canvas">
-                <span class="toolbar_icon"></span>
-                <span class="kalles_toolbar_label">Account</span>
+              <span class="toolbar_icon"></span>
+              <span class="kalles_toolbar_label">Account</span>
             </a>
-        </div>
-        {/* <div class="type_toolbar_search kalles_toolbar_item">
+          </div>
+          {/* <div class="type_toolbar_search kalles_toolbar_item">
             <a href="#" class="push_side" data-id="#nt_search_canvas">
                 <span class="toolbar_icon"></span>
                 <span class="kalles_toolbar_label">Search</span>
             </a>
         </div> */}
-    </div>
-    <div id="nt_search_canvas" class="nt_fk_full dn tl tc_lg">
+        </div>
+        {/* <div id="nt_search_canvas" class="nt_fk_full dn tl tc_lg">
     <div class="nt_mini_cart flex column h__100">
         <div class="mini_cart_wrap">
             <form method="get" class="search_header mini_search_frm js_frm_search pr" role="search">
@@ -421,9 +540,8 @@ function Header() {
             </form>
         </div>
     </div>
-</div>
-</div>
-
+</div> */}
+      </div>
     </>
   );
 }
