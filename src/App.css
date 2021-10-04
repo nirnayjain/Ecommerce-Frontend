@@ -1,0 +1,47 @@
+@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-lists/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-react-calendars/styles/material.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+.consult{
+    width:855px;
+    height:640px;
+   overflow: scroll;
+   position: relative;
+}
+.consult input , .consult textarea, .countrystyle{
+    background-color:#F5F8FA;
+}
+.txtarea textarea{
+min-height: 100px!important;
+}
+.consultfooter{
+position: sticky;
+bottom: 0px;
+background-color: #fff!important;
+}
+
+.bookbtn  .btn-success{
+    background:#81BF33!important;
+    outline: none;
+    border: none;
+}
+
+.react-calendar{
+    background-color: #DBDBDB!important;
+    border: none!important;
+    height: 100%!important;
+    width: 350px!important;
+    font-family: 'Roboto', sans-serif;
+  line-height: 1.79em!important;
+}
+
+
+@media (min-width: 1025px) {
+    .media{
+        margin-right: 0px!important;
+        margin-left: 0px!important;
+    } 
+}

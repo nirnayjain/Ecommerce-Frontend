@@ -27,6 +27,7 @@ import Contact from "./components/Contact";
 import Blogs from "./components/Blogs"
 import BlogPost from "./components/BlogPost";
 import CreateAccount from "./components/createAccount";
+import Consultation from "./components/Consultation";
 
 
 function Routes() {
@@ -46,6 +47,7 @@ function Routes() {
           <Bottombanner />
           <Footer />
         </Route>
+        <Route path="/onlineconsultation" exact component={Consultation}/>
         <Route path="/createAccount" exact component={CreateAccount} />
         <Route path="/login" exact component={SignIn} />
         <Route path="/blogs" exact component={Blogs} />
