@@ -9,7 +9,9 @@ import Cartpopup from "./Cartpopup";
 import Popform from "./Popform";
 import {Link} from 'react-router-dom'
 import Toplabel from "./Toplabel";
-
+import Popup from 'reactjs-popup';
+import '../../node_modules/reactjs-popup/dist/index.css';
+ 
 function Header() {
   let [configuration, setConfiguration] = useState([]);
   let [address, setAddress] = useState([]);
@@ -160,21 +162,84 @@ function Header() {
                 >
                   <i className="iccl iccl-search"></i>
                 </a> */}
-                <div className="my-account ts__05 pr dn db_md ">
+
+{token?<>
+  <Popup trigger={<a
+                    href="#"
+                    data-id="#nt_login_canvas"
+                  >
+                    <i className="iccl iccl-user" ></i>
+                  </a>} 
+                  position="bottom center">
+                 <div
+                    >
+                      <ul
+                        style={{
+                          listStyle:"none",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                        }}
+                      >
+                        <li style={{ marginTop: "1.5rem" }}>
+                          <a href="/my-orders"> My Orders</a>
+                        </li>
+                        <li style={{ marginTop: "1.5rem" }}>
+                          {" "}
+                          <a href="/my-wishlist"> My Wishlist</a>
+                        </li>
+                        <li style={{ marginTop: "1.5rem" }}>
+                          {" "}
+                          <a href="/my-address">Address</a>
+                        </li>
+
+                        <li style={{ marginTop: "1.5rem" }}>
+                          {" "}
+                          <a href="/change-password">Change Password</a>
+                        </li>
+                        <li style={{ marginTop: "1.5rem" }}>
+                          {" "}
+                          <a href="" onClick={handleLogout}>
+                            {" "}
+                            Logout
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+  </Popup>
+ 
+          
+                   
+                    
+
+                    </>
+                   :
+                  <div className="my-account ts__05 pr dn db_md ">
                   <a
                     className="cb chp db push_side"
                     href="#"
                     data-id="#nt_login_canvas"
                   >
                     <i className="iccl iccl-user" ></i>
-                  </a>
-                  {token  ? (
+                  </a> 
+                  </div>}
+
+
+                {/* <div className="my-account ts__05 pr dn db_md ">
+                  <a
+                    className="cb chp db push_side"
+                    href="#"
+                    data-id="#nt_login_canvas"
+                  >
+                    <i className="iccl iccl-user" ></i>
+                  </a> */}
+                  {/* {token  ? (
                     <div
                       style={{
                         position: "absolute",
-                        left: "-8rem",
-                        top: "-2rem",
-                         zIndex: "10000",
+                        // left: "-8rem",
+                        // top: "-2rem",
+                         zIndex: "100",
                       }}
                     >
                       <ul
@@ -210,8 +275,8 @@ function Header() {
                         </li>
                       </ul>
                     </div>
-                  ) : null}
-                </div>
+                  ) : null} */}
+                {/* </div> */}
                 {/* <a
                   className="icon_like cb chp pr dn db_md js_link_wis"
                   href="#"

@@ -27,12 +27,12 @@ import Contact from "./components/Contact";
 import Blogs from "./components/Blogs"
 import BlogPost from "./components/BlogPost";
 import CreateAccount from "./components/createAccount";
-<<<<<<< HEAD
+
 import Consultation from "./components/Consultation";
 
-=======
+
 import {Redirect} from 'react-router-dom'
->>>>>>> eb8db29ed9d504acf13e264f865ee4ea104e97e9
+
 
 function Routes() {
   const token = localStorage.getItem("token");
@@ -52,11 +52,11 @@ function Routes() {
           <Bottombanner />
           <Footer />
         </Route>
-<<<<<<< HEAD
+
         <Route path="/onlineconsultation" exact component={Consultation}/>
         <Route path="/createAccount" exact component={CreateAccount} />
         <Route path="/login" exact component={SignIn} />
-=======
+
         <Route path="/createAccount" exact render={(props) =>
                 !token ? (
                   <CreateAccount/>
@@ -71,7 +71,7 @@ function Routes() {
                   <Redirect to="/view" />
                 )
               } />
->>>>>>> eb8db29ed9d504acf13e264f865ee4ea104e97e9
+
         <Route path="/blogs" exact component={Blogs} />
         <Route path="/blogpost/:id" exact component={BlogPost} />
         <Route path="/contact-us" exact component={Contact} />
