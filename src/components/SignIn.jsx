@@ -27,7 +27,7 @@ function SignIn() {
   }
   async function handleLogin(e) {
     e.preventDefault();
-    let prodIds = [];
+
     if (!email || !password) {
       alert.show("Email and Password are required.", { type: "error" });
     }
@@ -36,26 +36,35 @@ function SignIn() {
       password,
     });
 
-    if (response.data) {
+    if (response.data.status==="ok") {
       localStorage.setItem("token", response.data.token);
       alert.show("Logged In Successfully", { type: "success" });
 
       const cart = JSON.parse(localStorage.getItem("cartData"));
 
-      cart.map((item) => {
-        prodIds.push(...prodIds, item._id);
-      });
-      localStorage.removeItem("cartData");
-      console.log(prodIds);
-      prodIds.map((id) => {
-        const token = localStorage.getItem("token");
-        if (token) {
-          return dispatch(addToCart(id));
-        }
-      });
+      if(cart!=null)
+      {
+       cart.map((item) => {
+         const token = localStorage.getItem("token");
+         if (token) {
+           return dispatch(addToCart(item._id,item.quantity));
+         }
+       });
+       localStorage.removeItem("cartData");
+
+
+     }
+
+
+
       setTimeout(() => {
         window.location.href = "/checkout";
       }, 2000);
+    }
+    else
+    {
+      alert.show(response.data.message, { type: "error" });
+
     }
   }
 

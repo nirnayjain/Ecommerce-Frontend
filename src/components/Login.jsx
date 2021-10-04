@@ -27,12 +27,13 @@ function Login() {
     if (!email || !password) {
       alert.show("Email and Password are required.", { type: "error" });
     }
+    try{
     const response = await axios.post(`${API}/signin`, {
       email,
       password,
     });
     console.log(response.data);
-    if (response.data) {
+    if (response.data.status==="ok") {
       setLoading(false);
       localStorage.setItem("token", response.data.token);
       alert.show("Logged In Successfully", { type: "success" });
@@ -46,9 +47,11 @@ function Login() {
         }
       });
       localStorage.removeItem("cartData");
-
-
     }
+
+
+
+
 
       setTimeout(() => {
         window.location.reload();
@@ -56,6 +59,15 @@ function Login() {
       // setTimeout(() => {
       //   window.stop();
       // }, 2000);
+    }
+    else{
+      alert.show(response.data.message, { type: "error" });
+      setLoading(false);
+    }
+  }
+    catch(error){
+      alert.show(error.message, { type: "error" });
+      setLoading(false)
     }
   }
 
@@ -130,7 +142,7 @@ function Login() {
           </div>
         </div>
       </form>
-     
+
       <Recoverpassword />
       <Signup signupSelect={signupSelect} setsignupSelect={setsignupSelect} setloginSelect={setloginSelect}/>
     </div>
