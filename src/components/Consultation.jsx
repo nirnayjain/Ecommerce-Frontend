@@ -10,6 +10,7 @@ import axios from "axios";
 import { API } from "../API";
 import swal from "sweetalert";
 import moment from "moment";
+import Navigation from "./Navigation"
 
 
 const Consultation = () => {
@@ -135,7 +136,8 @@ const Consultation = () => {
   return (
     <>
       <Header />
-      <div className="main-content">
+      <Navigation/>
+      <div className="main-content mt-4">
         <div className="page-content">
           <div className="container">
             <h1
