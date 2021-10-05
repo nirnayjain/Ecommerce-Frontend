@@ -24,8 +24,8 @@ import {
   Avatar,
 } from "@material-ui/core";
 const useStyles = makeStyles(() => ({
-  
-  
+
+
   search: {
       padding: '2px 4px',
       display: 'flex',
@@ -36,12 +36,12 @@ const useStyles = makeStyles(() => ({
       height: "max-content"
 
   },
-  
+
   input: {
       marginLeft: 2,
       flex: 1,
   },
-  
+
   listbox: {
       width: "100%",
       margin: 0,
@@ -78,7 +78,7 @@ const classes= useStyles()
   const dispatch = useDispatch();
   const [keyword, setKeyword] = useState("");
   const [searchlist, setSearchList] = useState([]);
-  
+
   useEffect(() => {
     dispatch(viewWishlist());
   }, []);
@@ -130,14 +130,14 @@ const classes= useStyles()
   useEffect(() => {
     getSearchResult();
   }, [keyword]);
-   
+
   async function getSearchResult(){
     if(keyword.length>0 ){
       let res = await axios.get(`${API}/api/product/search?keyword=${keyword}`)
       setSearchList(res.data.searchResult)
     }
-    
-    
+
+
   }
 
   return (
@@ -224,7 +224,7 @@ const classes= useStyles()
             <div className="col-lg-4 col-md-3 col-3 tr">
               <div className="nt_action in_flex al_center cart_des_1">
                 {show === true ? (
-                  <div class="frm_search_input pr oh col" className={classes.search}> 
+                  <div class="frm_search_input pr oh col" className={classes.search}>
                     <input
                       class="search_header__input js_iput_search"
                       autocomplete="off"
@@ -233,7 +233,7 @@ const classes= useStyles()
                       value={keyword}
                       placeholder="Search for products"
                       onChange={(e)=>setKeyword(e.target.value)}
-                      className={classes.input}
+                      // className={classes.input}
                     />
                     <button
                       class="search_header__submit js_btn_search use_jsfull hide_  pe_none"
@@ -246,9 +246,9 @@ const classes= useStyles()
                       <ul className={classes.listbox}>
                         {searchlist.map((option, index) => (
                           <>
-                            <li>
-                              <Container>
-                                <Grid container spacing={1}>
+                            <li style={{height:'66px'}}>
+
+                                <Grid container spacing={1} style={{padding:5}}>
                                   <Grid
                                     item
                                     xs={3}
@@ -257,16 +257,16 @@ const classes= useStyles()
                                     lg={3}
                                     xl={3}
                                   >
-                                    
-                                        <Avatar
+
+                                        <img
                                           src={option.featuredImage}
-                                          width={150}
-                                          height={150}
-              
+                                          width={200}
+                                          height={200}
+
                                         />
 
-                                        
-                        
+
+
                                   </Grid>
                                   <Grid
                                     item
@@ -283,9 +283,10 @@ const classes= useStyles()
 
                                   <Grid item xs={12}>
                                     <hr />
-                                  </Grid>
+                                    </Grid>
+
                                 </Grid>
-                              </Container>
+
                             </li>
                           </>
                         ))}
@@ -370,7 +371,7 @@ const classes= useStyles()
                     <i className="iccl iccl-user" ></i>
                   </a> */}
                 {/* {token  ? (
-                   
+
                   ) : null} */}
                 {/* </div> */}
                 {/* <a
