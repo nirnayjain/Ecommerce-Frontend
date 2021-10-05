@@ -5,6 +5,14 @@
 @import "../node_modules/@syncfusion/ej2-react-calendars/styles/material.css";
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
+.header_right{
+    /* width:500px!important; */
+    display: flex!important;
+  
+    justify-content: flex-end!important; 
+    margin-right: 0!important;
+}
+
 .consult{
     width:855px;
     height:640px;
@@ -44,4 +52,8 @@ background-color: #fff!important;
         margin-right: 0px!important;
         margin-left: 0px!important;
     } 
+    .nt_action > a, .nt_action > div{
+        padding: 0px!important;
+        margin-right:10px ;
+    }
 }

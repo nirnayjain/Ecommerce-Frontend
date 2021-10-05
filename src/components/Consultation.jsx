@@ -273,7 +273,7 @@ const Consultation = () => {
                               <p>What time works best?</p>
                               <lable >
                               <TimePickerComponent
-                                placeholder="Select a time"
+                                placeholder="Select a time(Click on clock icon)"
                                 for="basicpill-phoneno-input"
                                 value={timevalue}
                                 min={mintime}

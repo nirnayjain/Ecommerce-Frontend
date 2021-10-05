@@ -24,45 +24,41 @@ import {
   Avatar,
 } from "@material-ui/core";
 const useStyles = makeStyles(() => ({
-  
-  
   search: {
-      padding: '2px 4px',
-      display: 'flex',
-      alignItems: 'center',
-      borderRadius: '10px',
-      position: 'relative',
-      width: "100%",
-      height: "max-content"
-
+    padding: "2px 4px",
+    display: "flex",
+    alignItems: "center",
+    borderRadius: "10px",
+    position: "relative",
+    width: "100%",
+    height: "max-content",
   },
-  
+
   input: {
-      marginLeft: 2,
-      flex: 1,
+    marginLeft: 2,
+    flex: 1,
   },
-  
+
   listbox: {
-      width: "100%",
-      margin: 0,
-      padding: 0,
-      zIndex: 100000,
-      position: 'absolute',
-      top: '50px',
-      left: 0,
-      listStyle: 'none',
-      backgroundColor:" #fff",
-      overflow: 'auto',
-      maxHeight: 300,
-
-      border: '1px solid rgba(0,0,0,.125)',
-      boxShadow: '0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%)'
+    width: "100%",
+    margin: 0,
+    padding: 0,
+    zIndex: 100000,
+    position: "absolute",
+    top: "40px",
+    left: 0,
+    listStyle: "none",
+    backgroundColor: " #fff",
+    overflow: "auto",
+    maxHeight: 300,
+    height: "auto",
+    border: "1px solid rgba(0,0,0,.125)",
+    boxShadow: "0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%)",
   },
-
-}))
+}));
 
 function Header() {
-const classes= useStyles()
+  const classes = useStyles();
   let [configuration, setConfiguration] = useState([]);
   let [address, setAddress] = useState([]);
   let [featuredProd, setFeaturedProd] = useState([]);
@@ -78,7 +74,7 @@ const classes= useStyles()
   const dispatch = useDispatch();
   const [keyword, setKeyword] = useState("");
   const [searchlist, setSearchList] = useState([]);
-  
+
   useEffect(() => {
     dispatch(viewWishlist());
   }, []);
@@ -130,14 +126,12 @@ const classes= useStyles()
   useEffect(() => {
     getSearchResult();
   }, [keyword]);
-   
-  async function getSearchResult(){
-    if(keyword.length>0 ){
-      let res = await axios.get(`${API}/api/product/search?keyword=${keyword}`)
-      setSearchList(res.data.searchResult)
-    }
-    
-    
+
+  async function getSearchResult() {
+    // if (keyword.length > 0) {
+      let res = await axios.get(`${API}/api/product/search?keyword=${keyword}`);
+      setSearchList(res.data.searchResult);
+    // }
   }
 
   return (
@@ -146,7 +140,7 @@ const classes= useStyles()
       <div className="header__mid">
         <div className="container">
           <div className="row al_center css_h_se">
-            <div className="col-lg-2 col-md-3 col-3">
+            <div className="col-lg-3 col-md-3 col-3">
               <a
                 href="#"
                 data-id="#nt_menu_canvas"
@@ -203,7 +197,9 @@ const classes= useStyles()
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 col-md-6 col-6 tc">
+            <div className="col-lg-4 col-md-4 col-4 tc"
+              style={{ textAlign: "right" }}
+            >
               <div className="branding ts__05 lh__1">
                 <a className="dib" href="/">
                   <img
@@ -212,28 +208,32 @@ const classes= useStyles()
                   />
                   <img
                     className="w__100 logo_sticky dn max-width__160px"
-                    src="assets/images/home-cosmetics/kalles-green-01.png"
+                    src={logo[0]?.Headerlogo}
                   />
                   <img
                     className="w__100 logo_mobile dn_lg max-width__105px"
-                    src="assets/images/home-cosmetics/kalles-green-02.png"
+                    src={logo[0]?.Headerlogo}
                   />
                 </a>
               </div>
             </div>
-            <div className="col-lg-4 col-md-3 col-3 tr">
-              <div className="nt_action in_flex al_center cart_des_1">
+            <div className="col-lg-5 col-md-5 col-5 tr fl_right">
+              <div className="nt_action in_flex al_center cart_des_1 header_right" style={{padding:"0px"}}>
                 {show === true ? (
-                  <div class="frm_search_input pr oh col" className={classes.search}> 
+                  <div
+                    class="frm_search_input pr oh col"
+                    className={classes.search} 
+                  >
                     <input
                       class="search_header__input js_iput_search"
+                      style={{borderRadius:"0px", paddingRight:"20px"}}
                       autocomplete="off"
                       type="text"
                       name="q"
                       value={keyword}
                       placeholder="Search for products"
-                      onChange={(e)=>setKeyword(e.target.value)}
-                      className={classes.input}
+                      onChange={(e) => setKeyword(e.target.value)}
+                      // className={classes.input}
                     />
                     <button
                       class="search_header__submit js_btn_search use_jsfull hide_  pe_none"
@@ -245,49 +245,34 @@ const classes= useStyles()
                     {searchlist.length > 0 ? (
                       <ul className={classes.listbox}>
                         {searchlist.map((option, index) => (
-                          <>
+                          <Link to={`/productdetails/${option._id}`}>
                             <li>
                               <Container>
-                                <Grid container spacing={1}>
-                                  <Grid
-                                    item
-                                    xs={3}
-                                    sm={3}
-                                    md={3}
-                                    lg={3}
-                                    xl={3}
-                                  >
-                                    
-                                        <Avatar
-                                          src={option.featuredImage}
-                                          width={150}
-                                          height={150}
-              
-                                        />
-
-                                        
-                        
+                                <Grid container spacing={2}>
+                                  <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
+                                    <img
+                                      src={option.featuredImage}
+                                      // width={200}
+                                      // height={200}
+                                    />
                                   </Grid>
-                                  <Grid
-                                    item
-                                    xs={9}
-                                    sm={9}
-                                    md={9}
-                                    lg={9}
-                                    xl={9}
-                                  >
-                                  <Typography>
-                                    {option.title}
-                                  </Typography>
+                                  <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
+                                    <Typography
+                                      style={{ fontWeight: "bolder" }}
+                                      align="center"
+                                      noWrap
+                                    >
+                                      {option.title}
+                                    </Typography>
                                   </Grid>
 
-                                  <Grid item xs={12}>
+                                  {/* <Grid item xs={12}>
                                     <hr />
-                                  </Grid>
+                                    </Grid> */}
                                 </Grid>
                               </Container>
                             </li>
-                          </>
+                          </Link>
                         ))}
                       </ul>
                     ) : null}
@@ -299,7 +284,7 @@ const classes= useStyles()
                     data-id="#nt_search_canvas"
                     href="#"
                   >
-                    <i className="iccl iccl-search"></i>
+                    <i className="iccl iccl-search" style={{paddingRight:"10px"}}></i>
                   </a>
                 )}
 
@@ -308,7 +293,7 @@ const classes= useStyles()
                     <Popup
                       trigger={
                         <a href="#" data-id="#nt_login_canvas">
-                          <i className="iccl iccl-user"></i>
+                          <i className="iccl iccl-user" style={{paddingRight:"10px"}}></i>
                         </a>
                       }
                       position="bottom center"
@@ -370,7 +355,7 @@ const classes= useStyles()
                     <i className="iccl iccl-user" ></i>
                   </a> */}
                 {/* {token  ? (
-                   
+
                   ) : null} */}
                 {/* </div> */}
                 {/* <a

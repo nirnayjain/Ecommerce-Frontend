@@ -39,10 +39,10 @@ function Routes() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact>
+        {/* <Route path="/" exact>
           <Comingsoon />
-        </Route>
-        <Route path="/view" exact>
+        </Route> */}
+        <Route path="/" exact>
           <Header />
           <Navigation />
           <Hero />

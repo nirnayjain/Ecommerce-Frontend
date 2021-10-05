@@ -192,12 +192,15 @@ function Footer() {
                     </h3>
                     <div className="menu_footer widget_footer">
                       <ul className="menu">
+                      <li className="menu-item">
+                          <a href="/onlineconsultation">Online consultation</a>
+                        </li>
+                      <li className="menu-item">
+                          <a href="/blogs">Blog</a>
+                        </li>
                         <li className="menu-item">
                           <a href="#">Store Location</a>
                         </li>
-                        {/* <li className="menu-item">
-                          <a href="/blogs">Blog</a>
-                        </li> */}
                         <li className="menu-item">
                           <a href="#">Latest Posts</a>
                         </li>
