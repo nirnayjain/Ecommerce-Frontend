@@ -13,6 +13,13 @@
     margin-right: 0!important;
 }
 
+.profilelista a{
+    color: black!important;
+}
+.profilelista a:hover{
+    color: #81BF33 !important;
+}
+
 .consult{
     width:855px;
     height:640px;

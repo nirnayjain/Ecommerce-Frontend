@@ -8,8 +8,9 @@ import { API } from "../API";
 import Cartpopup from "./Cartpopup";
 import Popform from "./Popform";
 import { Link } from "react-router-dom";
-import Toplabel from "./Toplabel";
-import Popup from "reactjs-popup";
+// import Popup from "reactjs-popup";
+import { List, Popup } from 'semantic-ui-react'
+import "../../node_modules/semantic-ui-css/semantic.min.css" 
 import "../../node_modules/reactjs-popup/dist/index.css";
 import {
   Container,
@@ -297,40 +298,44 @@ function Header() {
                         </a>
                       }
                       position="bottom center"
+                      hoverable
                     >
                       <div>
-                        <ul
+                        <List link
+                        className="profilelista"
                           style={{
                             listStyle: "none",
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
+                            
                           }}
+                         
                         >
-                          <li style={{ marginTop: "1.5rem" }}>
-                            <a href="/my-orders"> My Orders</a>
-                          </li>
-                          <li style={{ marginTop: "1.5rem" }}>
+                          <List.Item style={{ marginTop: "1.5rem"  }}>
+                            <a href="/my-orders"  > My Orders</a>
+                          </List.Item>
+                          <List.Item style={{ marginTop: "1.5rem"  }}>
                             {" "}
                             <a href="/my-wishlist"> My Wishlist</a>
-                          </li>
-                          <li style={{ marginTop: "1.5rem" }}>
+                          </List.Item>
+                          <List.Item style={{ marginTop: "1.5rem" }}>
                             {" "}
                             <a href="/my-address">Address</a>
-                          </li>
+                          </List.Item>
 
-                          <li style={{ marginTop: "1.5rem" }}>
+                          <List.Item style={{ marginTop: "1.5rem" }}>
                             {" "}
                             <a href="/change-password">Change Password</a>
-                          </li>
-                          <li style={{ marginTop: "1.5rem" }}>
+                          </List.Item>
+                          <List.Item style={{ marginTop: "1.5rem" }}>
                             {" "}
                             <a href="" onClick={handleLogout}>
                               {" "}
                               Logout
                             </a>
-                          </li>
-                        </ul>
+                          </List.Item>
+                        </List>
                       </div>
                     </Popup>
                   </>
