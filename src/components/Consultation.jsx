@@ -271,6 +271,7 @@ const Consultation = () => {
                                 30 Minutes
                               </p>
                               <p>What time works best?</p>
+                              <lable >
                               <TimePickerComponent
                                 placeholder="Select a time"
                                 for="basicpill-phoneno-input"
@@ -279,10 +280,13 @@ const Consultation = () => {
                                 max={maxtime}
                                 step={30}
                                 className="form-control timestyle"
+                                // onClick={handleInputClick}
+                                // onToggle={handleToggle}
                                 onChange={(e) =>
                                   handleTimeChange(e.target.value)
                                 }
                               />
+                              </lable>
                             </div>
                           </div>
                         </div>
