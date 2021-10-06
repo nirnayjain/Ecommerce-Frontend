@@ -13,8 +13,15 @@
     margin-right: 0!important;
 }
 
+/* .profilelista{
+    background-color: #fff!important;
+    box-shadow: 1px 3px 1px #9E9E9E !important;
+    
+} */
+
 .profilelista a{
     color: black!important;
+    
 }
 .profilelista a:hover{
     color: #81BF33 !important;
