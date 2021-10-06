@@ -23,7 +23,7 @@ export const viewCart = () => {
       console.log(cartItems);
       cartItems?.map((item) => {
         totalPrice += item.sale_price * 1 * item.quantity * 1;
-        totalQuantity += item.quantity * 1;
+        totalQuantity += 1;
       });
       dispatch(viewCartSuccess(cartItems, totalPrice, totalQuantity));
     };
@@ -39,7 +39,7 @@ export const viewCart = () => {
         console.log("carts",response.data);
         response.data?.cartItems.map((item) => {
           totalPrice += item.product?.sale_price * 1 * item.quantity * 1;
-          totalQuantity += item.quantity * 1;
+          totalQuantity += 1;
         });
         const cartItems = response.data;
         dispatch(viewCartSuccess(cartItems, totalPrice, totalQuantity));
@@ -304,7 +304,7 @@ export const decreaseQuant = (id) => {
         let index = cart.findIndex((item) => {
           return item._id == product[0]._id;
         });
-      
+
         cart.splice(index, 1);
         localStorage.setItem("cartData", JSON.stringify(cart));
 
@@ -326,7 +326,7 @@ else{
 
   localStorage.setItem("cartData", JSON.stringify(cart));
 }
-      
+
       dispatch(
         decreaseQuantSuccess("Decreased Quantity", totalPrice, totalQuantity)
       );

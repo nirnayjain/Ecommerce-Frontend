@@ -54,6 +54,12 @@ const useStyles = makeStyles(() => ({
     border: "1px solid rgba(0,0,0,.125)",
     boxShadow: "0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%)",
   },
+  list:{
+    '&:hover':{
+      backgroundColor:'#dddfe2'
+
+  },
+  }
 }));
 
 function Header() {
@@ -75,7 +81,7 @@ function Header() {
   const [searchlist, setSearchList] = useState([]);
 
   useEffect(() => {
-    dispatch(viewWishlist());
+  dispatch(viewWishlist());
   }, []);
   useEffect(() => {
     async function getCategory() {
@@ -221,7 +227,7 @@ function Header() {
                 {show === true ? (
                   <div
                     class="frm_search_input pr oh col"
-                    className={classes.search} 
+                    className={classes.search}
                   >
                     <input
                       class="search_header__input js_iput_search"
@@ -245,9 +251,9 @@ function Header() {
                       <ul className={classes.listbox}>
                         {searchlist.map((option, index) => (
                           <Link to={`/productdetails/${option._id}`}>
-                            <li>
-                              <Container>
-                                <Grid container spacing={2}>
+                            <li className={classes.list}>
+                              <Container style={{paddingTop:20}}>
+                                <Grid container spacing={3}>
                                   <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
                                     <img
                                       src={option.featuredImage}
@@ -361,16 +367,19 @@ function Header() {
 
                   ) : null} */}
                 {/* </div> */}
-                {/* <a
-                  className="icon_like cb chp pr dn db_md js_link_wis"
-                  href="#"
+
+                 <div className="icon_cart pr">
+
+                <Link to
+                ="/my-wishlist"
                 >
                   <i className="iccl iccl-heart pr">
-                    <span className="op__0 ts_op pa tcount bgb br__50 cw tc">
-                      5
-                    </span>
+
+                 <span className="op__0 ts_op pa tcount bgb br__50 cw tc">{totalWishListQuantity}</span>
+
                   </i>
-                </a> */}
+                </Link>
+                </div>
                 <div className="icon_cart pr">
                   <Link to="/cart">
                     <i className="iccl iccl-cart pr">
@@ -486,7 +495,7 @@ function Header() {
           <div class="type_toolbar_wish kalles_toolbar_item">
             <a class="js_link_wis" href="/my-wishlist">
               <span class="toolbar_icon">
-                {/* <span class="jswcount toolbar_count">{totalWishListQuantity}</span> */}
+                 <span class="jswcount toolbar_count">{totalWishListQuantity}</span>
               </span>
               <span class="kalles_toolbar_label">Wishlist</span>
             </a>

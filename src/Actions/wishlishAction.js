@@ -22,7 +22,7 @@ export const viewWishlist = () => {
         {
         response.data.WishListItems.map((item) => {
           totalPrice += item.product?.sale_price * 1 * item.quantity * 1;
-          totalQuantity += item.quantity * 1;
+          totalQuantity += 1;
         });
         dispatch(viewWishlistSuccess(response.data.WishListItems,totalQuantity));
       }
@@ -31,11 +31,12 @@ export const viewWishlist = () => {
   };
 };
 
-export const viewWishlistSuccess = (items) => {
+export const viewWishlistSuccess = (items,totalQuantity) => {
   console.log(items);
   return {
     type: VIEW_WISHLIST,
     payload: items,
+    totalQuantity
   };
 };
 

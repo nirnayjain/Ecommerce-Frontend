@@ -22,7 +22,7 @@ function Shoppingcart() {
   const history = useHistory();
   const token = localStorage.getItem("token");
   const totalPrice = useSelector((state) => state.cart.totalPrice);
-  let cartItem = [];
+  let cartItem = null;
   if (Array.isArray(items)) {
     cartItem = items;
   } else {
@@ -62,7 +62,9 @@ function Shoppingcart() {
       <Navigation />
       <Shopbanner />
       <div id="nt_content">
-      {cartItem.length>0 ? 
+        {cartItem!=null?
+        <>
+      {cartItem.length>0 ?
         <div class="kalles-section cart_page_section container mt__60">
           <form
             action="#"
@@ -77,8 +79,8 @@ function Shoppingcart() {
                 <div class="col-2 tc tr_md">Total</div>
               </div>
             </div>
-           
-            {cartItem?.map((item, index) => {
+
+            {cartItem.map((item, index) => {
               return (
                 <div key={index} class="cart_items js_cat_items">
                   <div class="cart_item js_cart_item">
@@ -191,8 +193,8 @@ function Shoppingcart() {
                 </div>
               );
             })}
-            
-            
+
+
 
             <div class="cart__footer mt__60">
               <div class="row">
@@ -437,7 +439,10 @@ function Shoppingcart() {
             <h3>No product added in cart</h3>
             </div>
             }
-           
+            </>
+            :""
+          }
+
       </div>
       <Footer />
     </div>
