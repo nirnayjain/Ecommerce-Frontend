@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useState } from "react";
+import { useState ,useRef} from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -24,6 +24,7 @@ import Popup from "./Popup";
 function Producdetails() {
   const { id } = useParams();
   const history = useHistory();
+  const myref= useRef(null)
   const [productDetailes, setproductDetailes] = useState({});
   const [index, setIndex] = useState(0);
   const [image, setImage] = useState([]);
@@ -65,6 +66,11 @@ function Producdetails() {
   function handleSmImg(index) {
     let x = index;
     setIndex(x);
+    const images=myref.current.children
+    for(let i=0; i<images.length; i++){
+      images[i].className = images[i].className.replace("active", "");
+    }
+    images[index].className = "active";
   }
 
   return (
@@ -94,7 +100,7 @@ function Producdetails() {
           <div className="container">
           
             <div className="fluid">
-              <div className="thumb">
+              <div className="thumb" ref={myref}>
                 {image.map((item, index) => (
                   <img
                     src={item}
