@@ -4,13 +4,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { API } from "../API";
+import Wishlist from "./wishlist"
 
 function Productlist({products, setProducts}) {
   const { subCategory,category } = useParams();
-  
+
 
   useEffect(() => {
-   
+
     async function getProduct() {
       const productList = await axios.get(`${API}/api/product/subcategory/${category}/${subCategory}`);
       const list = productList.data.product
@@ -84,12 +85,7 @@ function Productlist({products, setProducts}) {
                           data-bgset={item.featuredImage}
                         ></div>
                       </div>
-                      <div class="nt_add_w ts__03 pa " style={{cursor:'pointer'}}>
-
-                          <span class="tt_txt wishlistadd cb chp ttip_nt tooltip_right" >Add to wishlist</span>
-                          <i class="facl facl-heart-o"></i>
-
-                      </div>
+                      <Wishlist id={item._id} />
                       {/* <div class="hover_button op__0 tc pa flex column ts__03"> */}
                         {/* <a
                           class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left"

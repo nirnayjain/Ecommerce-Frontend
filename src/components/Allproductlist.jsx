@@ -6,6 +6,7 @@ import Categoryfilter from "./Categoryfilter";
 import Footer from "./Footer";
 import Header from "./Header";
 import Navigation from "./Navigation";
+import Wishlist from "./wishlist"
 
 function Allproductlist() {
   const { category } = useParams();
@@ -65,15 +66,7 @@ function Allproductlist() {
                                 data-bgset={item.featuredImage}
                               ></div>
                             </div>
-                            <div class="nt_add_w ts__03 pa ">
-                              <a
-                                href="#"
-                                class="wishlistadd cb chp ttip_nt tooltip_right"
-                              >
-                                <span class="tt_txt">Add to Wishlist</span>
-                                <i class="facl facl-heart-o"></i>
-                              </a>
-                            </div>
+                            <Wishlist id={item._id} />
                             {/* <div class="hover_button op__0 tc pa flex column ts__03"> */}
                               {/* <a
                                 class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left"

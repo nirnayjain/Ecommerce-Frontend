@@ -1,20 +1,11 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { useState } from "react";
-import { useAlert } from "react-alert";
 import { useDispatch,useSelector } from "react-redux";
 import { addToCart, viewCart } from "../Actions/cartAction";
 import { API } from "../API";
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import { addToWishlist, removeFromWishlist, viewWishlist} from "../Actions/wishlishAction";
-import {useHistory} from 'react-router-dom'
+import Wishlist from './wishlist'
 function Newproducts() {
-  const history=useHistory()
-  const wishlistItems = useSelector((state) => state.wishlist.wishlistItems);
-  const message = useSelector((state) => state.wishlist.message);
-  const alert = useAlert();
-  const token = localStorage.getItem("token");
   let [newArrival, setnewArrival] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -28,28 +19,7 @@ function Newproducts() {
   function addCart(id) {
     dispatch(addToCart(id));
   }
-  function Wishlist(id) {
-    if(token)
-    dispatch(addToWishlist(id));
-    else
-    {
-    alert.show("Please login to add item to Wishlist", { type: "error" });
-        setTimeout(() => {
-          history.push("/login");
-        }, 2000);
 
-    }
-
-
-  }
-  function RemoveWishlist(id){
-    dispatch(removeFromWishlist(id));
-
-
-
-  }
-  if (message === "Deleted Successfully")
-  window.location.reload();
 
 
 
@@ -89,33 +59,7 @@ function Newproducts() {
                         ></div>
                       </a>
 
-                      <div class="nt_add_w ts__03 pa">
-
-
-                          {token?
-                          <>
-                          {wishlistItems.find(item=>item.product._id===product._id) ?
-                           <a href="#" class="wishlistadd cb chp ttip_nt tooltip_right"   onClick={() => RemoveWishlist(product._id)}>
-                           <span class="tt_txt">Remove from Wishlist</span>
-                         <FavoriteIcon style={{color:"red"}}/>
-                         </a>
-                          :
-                          <a href="#" class="wishlistadd cb chp ttip_nt tooltip_right"   onClick={() => Wishlist(product._id)}>
-                           <span class="tt_txt">Add to Wishlist</span>
-                           <FavoriteBorderIcon/>
-                         </a>
-
-                          }
-                          </>:
-                          <a href="#" class="wishlistadd cb chp ttip_nt tooltip_right"   onClick={() => Wishlist(product._id)}>
-                            <span class="tt_txt">Add to Wishlist</span>
-                            <FavoriteBorderIcon/>
-                          </a>
-            }
-
-
-
-                      </div>
+                      <Wishlist id={product._id} />
                       {/* <div className="hover_button op__0 tc pa flex column ts__03">
                         <a
                           onClick={() => addCart(product._id)}

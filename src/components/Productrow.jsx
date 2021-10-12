@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { API } from "../API";
+import Wishlist from "./wishlist"
 
 function Productrow() {
     const [products, setProducts] = useState(null);
@@ -57,15 +58,7 @@ function Productrow() {
                       data-bgset={i?.featuredImage}
                     ></div>
                   </div>
-                  <div class="nt_add_w ts__03 pa">
-                    <a
-                      href="#"
-                      class="wishlistadd cb chp ttip_nt tooltip_right"
-                    >
-                      <span class="tt_txt">Add to Wishlist</span>
-                      <i class="facl facl-heart-o"></i>
-                    </a>
-                  </div>
+                <Wishlist id={i?._id}/>
                   {/* <div class="hover_button op__0 tc pa flex column ts__03">
                     {/* <a
                       href="#"
