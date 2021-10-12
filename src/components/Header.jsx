@@ -10,7 +10,7 @@ import Popform from "./Popform";
 import { Link } from "react-router-dom";
 // import Popup from "reactjs-popup";
 import { List, Popup } from 'semantic-ui-react'
-import "../../node_modules/semantic-ui-css/semantic.min.css" 
+import "../../node_modules/semantic-ui-css/semantic.min.css"
 import "../../node_modules/reactjs-popup/dist/index.css";
 import {
   Container,
@@ -94,7 +94,8 @@ function Header() {
     getCategory();
   }, []);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
-  const totalWishListQuantity = useSelector(
+  let totalWishListQuantity=0
+  totalWishListQuantity = useSelector(
     (state) => state.wishlist.totalQuantity
   );
   const token = localStorage.getItem("token");
@@ -314,9 +315,9 @@ function Header() {
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
-                            
+
                           }}
-                         
+
                         >
                           <List.Item style={{ marginTop: "1.5rem"  }}>
                             <a href="/my-orders"  > My Orders</a>
