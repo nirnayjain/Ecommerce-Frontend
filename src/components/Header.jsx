@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { viewWishlist } from "../Actions/wishlishAction";
+import {Hidden} from '@material-ui/core'
 import { API } from "../API";
 import Cartpopup from "./Cartpopup";
 import Popform from "./Popform";
@@ -146,7 +147,7 @@ function Header() {
       <div className="header__mid">
         <div className="container">
           <div className="row al_center css_h_se">
-            <div className="col-lg-3 col-md-3 col-3">
+            <div className="col-lg-3 col-md-3 col-1">
               <a
                 href="#"
                 data-id="#nt_menu_canvas"
@@ -203,7 +204,7 @@ function Header() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-4 col-4 tc"
+            <div className="col-lg-4 col-md-4 col-3 tc"
               style={{ textAlign: "right" }}
             >
               <div className="branding ts__05 lh__1">
@@ -217,13 +218,13 @@ function Header() {
                     src={logo[0]?.Headerlogo}
                   />
                   <img
-                    className="w__100 logo_mobile dn_lg max-width__105px"
+                    className="w__100 logo_mobile dn_lg max-width__50px"
                     src={logo[0]?.Headerlogo}
                   />
                 </a>
               </div>
             </div>
-            <div className="col-lg-5 col-md-5 col-5 tr fl_right">
+            <div className="col-lg-5 col-md-5 col-8 tr fl_right">
               <div className="nt_action in_flex al_center cart_des_1 header_right" style={{padding:"0px"}}>
                 {show === true ? (
                   <div
@@ -368,7 +369,7 @@ function Header() {
 
                   ) : null} */}
                 {/* </div> */}
-
+              <Hidden only={['sm','xs']}>
                  <div className="icon_cart pr">
 
                 <Link to
@@ -390,6 +391,7 @@ function Header() {
                     </i>
                   </Link>
                 </div>
+                </Hidden>
               </div>
             </div>
           </div>
@@ -509,12 +511,12 @@ function Header() {
               <span class="kalles_toolbar_label">Cart</span>
             </Link>
           </div>
-          <div class="type_toolbar_account kalles_toolbar_item">
+          {/* <div class="type_toolbar_account kalles_toolbar_item">
             <a href="#" class="push_side" data-id="#nt_login_canvas">
               <span class="toolbar_icon"></span>
               <span class="kalles_toolbar_label">Account</span>
             </a>
-          </div>
+          </div> */}
           {/* <div class="type_toolbar_search kalles_toolbar_item">
             <a href="#" class="push_side" data-id="#nt_search_canvas">
                 <span class="toolbar_icon"></span>
