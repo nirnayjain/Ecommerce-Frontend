@@ -72,7 +72,7 @@ function Producdetails() {
       <Header />
       <Navigation active={productDetailes?.category} />
       <div id="nt_content">
-        <div className="mb__60">
+        <div className="mb__100">
           <div className="pt__20 pb__20 lh__1">
             <div className="container">
               <div className="row al_center">
@@ -124,7 +124,7 @@ function Producdetails() {
                     },
                     enlargedImageContainerDimensions: {
                       width: "200%",
-                      height: "110%",
+                      height: "100%",
                       // background:"#fff"
                     },
                     enlargedImageStyle: {
@@ -133,6 +133,7 @@ function Producdetails() {
                       right: 0,
                     },
                     enlargedImagePosition: "beside",
+                    
                   }}
                 />
               </div>
