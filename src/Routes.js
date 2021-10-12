@@ -9,6 +9,7 @@ import Navigation from "./components/Navigation";
 import Newproducts from "./components/Newproducts";
 import Productrow from "./components/Productrow";
 import Producdetails from "./components/Producdetails";
+import Productdetails from "./components/Productdetails";
 import Shop from "./components/Shop";
 import Shoppingcart from "./components/Shoppingcart";
 import Checkout from "./components/Checkout";
@@ -80,7 +81,9 @@ function Routes() {
         <Route path="/my-address" exact component={Address}></Route>
         <Route path="/order-details/:id" exact component={Orderdetails}></Route>
         <Route path="/change-password" exact component={Changepassword}></Route>
-        <Route path="/productDetails/:id" exact component={Producdetails} />
+        <Route path="/Productdetails/:id" exact component={Productdetails} />
+        {/* change  for product page*/}
+
         <Route path="/allProducts/:category" exact component={Allproductlist} />
         <Route path="/shop/:category/:subCategory" exact component={Shop} />
         <Route path="/cart" exact component={Shoppingcart} />
