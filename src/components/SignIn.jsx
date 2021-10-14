@@ -5,6 +5,7 @@ import { useAlert } from "react-alert";
 import Navigation from "./Navigation";
 import { API } from "../API";
 import axios from "axios";
+import swal from "sweetalert";
 import Signup from "./Signup";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -71,6 +72,41 @@ function SignIn() {
   async function handleSignup(e) {
     e.preventDefault();
   }
+  async function handleSubmit(event){
+    event.preventDefault();
+    if(!(
+     email
+    )){
+      // alert("please fill all the fields")
+      swal("Oops!", "Please fill all the required fields", "error");
+      return
+    }else{
+      let response = await axios.put(`${API}/generatePassword`,
+      {email}
+
+
+      )
+      if (response.data.status==="success") {
+       return  swal({
+          title: "Send Successsfully!",
+          text: response.data.message,
+          icon: "success",
+          button: "Done",
+          type: "success",
+        }).then(()=>
+        window.location.href = "/login")
+      }else{
+        swal({
+          title: "Error!",
+          text: response.data.message,
+          icon: "error",
+          button: "Ok",
+          type: "error",
+        })
+      }
+
+    }
+  }
   return (
     <div>
       <Header />
@@ -120,13 +156,12 @@ function SignIn() {
                     />
                   </p>
                   <p>
-                    <a
-                      href="#RecoverPasswordForm"
-                      class="btn-change-login-form"
-                    >
-                      Forgot your password?
-                    </a>
-                  </p>
+                Lost password?
+                <a  href="#RecoverPasswordForm"
+                      class="btn-change-login-form">
+                  Recover password
+                </a>
+              </p>
 
                   <p >
                 New customer?
@@ -156,7 +191,7 @@ function SignIn() {
                 </p>
                 <form method="post" action="#">
                   <p class="form-row">
-                    <label for="rs-email">Email address</label>
+                    <label for="rs-email">Email address*</label>
                     <input
                       type="email"
                       value={email}
@@ -168,6 +203,7 @@ function SignIn() {
                   </p>
                   <input
                     type="submit"
+                    onClick={handleSubmit}
                     class="btn js_add_ld"
                     value="Reset Password"
                   />

@@ -12,6 +12,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const[recover,setRecover]=useState(false)
   const alert = useAlert();
   let prodIds = [];
   const dispatch = useDispatch();
@@ -19,7 +20,10 @@ function Login() {
     setloginSelect(false);
     setsignupSelect(true);
   }
-
+  function handleRecover(){
+    setloginSelect(false);
+    setRecover(true)
+  }
   async function handleLogin(e) {
     setLoading(true);
     e.preventDefault();
@@ -134,7 +138,7 @@ function Login() {
               </p>
               <p>
                 Lost password?
-                <a href="#" data-id="#RecoverForm" class="link_acc">
+                <a href="#" data-id="#RecoverForm" class="link_acc" onClick={handleRecover}>
                   Recover password
                 </a>
               </p>
@@ -143,7 +147,7 @@ function Login() {
         </div>
       </form>
 
-      <Recoverpassword />
+      <Recoverpassword recover={recover} setloginSelect={setloginSelect} setRecover={setRecover}/>
       <Signup signupSelect={signupSelect} setsignupSelect={setsignupSelect} setloginSelect={setloginSelect}/>
     </div>
   );

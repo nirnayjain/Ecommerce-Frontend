@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import {Helmet} from "react-helmet";
 import { useState ,useRef} from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -75,6 +76,17 @@ function Producdetails() {
 
   return (
     <div>
+      <Helmet>
+      <meta charset="UTF-8" />
+<meta name="robots" content="index, follow" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{productDetailes?.title}</title>
+
+<meta name="description" content={productDetailes?.description.slice(0,150)} />
+
+<meta name="author" content="John Doe" />
+
+            </Helmet>
       <Header />
       <Navigation active={productDetailes?.category} />
       <div id="nt_content">
@@ -98,7 +110,7 @@ function Producdetails() {
           </div>
 
           <div className="container">
-          
+
             <div className="fluid">
               <div className="thumb" ref={myref}>
                 {image.map((item, index) => (
@@ -139,7 +151,7 @@ function Producdetails() {
                       right: 0,
                     },
                     enlargedImagePosition: "beside",
-                    
+
                   }}
                 />
               </div>
@@ -200,7 +212,7 @@ function Producdetails() {
                                 <i className="facl facl-plus"></i>
                               </button>
                             </div>
-                            
+
                           </div>
                           {/* <div className="nt_add_w ts__03 pa order-3">
                                     <a

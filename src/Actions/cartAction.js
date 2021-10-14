@@ -23,8 +23,9 @@ export const viewCart = () => {
       console.log(cartItems);
       cartItems?.map((item) => {
         totalPrice += item.sale_price * 1 * item.quantity * 1;
-        totalQuantity += 1;
+
       });
+      totalQuantity =cartItems?.length;
       dispatch(viewCartSuccess(cartItems, totalPrice, totalQuantity));
     };
   }
@@ -39,8 +40,9 @@ export const viewCart = () => {
         console.log("carts",response.data);
         response.data?.cartItems.map((item) => {
           totalPrice += item.product?.sale_price * 1 * item.quantity * 1;
-          totalQuantity += 1;
+
         });
+        totalQuantity =response.data?.cartItems.length
         const cartItems = response.data;
         dispatch(viewCartSuccess(cartItems, totalPrice, totalQuantity));
       });
@@ -111,8 +113,9 @@ export const addToCart = (id,productQuantity) => {
         }
         cartProduct.map((item) => {
           totalPrice += item.sale_price * 1 * item.quantity * 1;
-          totalQuantity += item.quantity * 1;
+
         });
+        totalQuantity = cartProduct.length;
 
         localStorage.setItem("cartData", JSON.stringify(cartProduct));
         let cart = localStorage.getItem("cartData");
@@ -138,8 +141,9 @@ export const addToCart = (id,productQuantity) => {
         .then((response) => {
           response.data.data.cartItems.map((item) => {
             totalPrice += item.product.sale_price * 1 * item.quantity * 1;
-            totalQuantity += item.quantity * 1;
+
           });
+          totalQuantity = response.data.data.cartItems.length;
           dispatch(
             addToCartSuccess(response.data.message, totalPrice, totalQuantity)
           );
@@ -193,8 +197,9 @@ export const removeFromCart = (id) => {
       .then((response) => {
         response.data.cart?.cartItems.map((item) => {
           totalPrice += item.product.sale_price * 1 * item.quantity * 1;
-          totalQuantity += item.quantity * 1;
+
         });
+        totalQuantity= response.data.cart?.cartItems.length
         dispatch(
           removeFromCartSuccess(
             response.data.message,
@@ -265,8 +270,9 @@ export const increseQuant = (id) => {
           response.data.cart.cartItems.map((item) => {
             console.log(item);
             totalPrice += item.product.sale_price * 1 * item.quantity * 1;
-            totalQuantity += item.quantity * 1;
+
           });
+          totalQuantity= response.data.cart?.cartItems.length
           dispatch(
             increseQuantSuccess(
               response.data.message,

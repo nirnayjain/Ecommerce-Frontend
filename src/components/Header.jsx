@@ -377,7 +377,7 @@ function Header() {
                 >
                   <i className="iccl iccl-heart pr">
 
-                 <span className="op__0 ts_op pa tcount bgb br__50 cw tc">{totalWishListQuantity}</span>
+                 <span className="op__0 ts_op pa tcount bgb br__50 cw tc">{totalWishListQuantity!=null?totalWishListQuantity:0}</span>
 
                   </i>
                 </Link>
@@ -386,7 +386,7 @@ function Header() {
                   <Link to="/cart">
                     <i className="iccl iccl-cart pr">
                       <span className="op__0 ts_op pa tcount bgb br__50 cw tc">
-                        {totalQuantity}
+                        {totalQuantity!=null?totalQuantity:0}
                       </span>
                     </i>
                   </Link>
@@ -498,7 +498,7 @@ function Header() {
           <div class="type_toolbar_wish kalles_toolbar_item">
             <a class="js_link_wis" href="/my-wishlist">
               <span class="toolbar_icon">
-                 <span class="jswcount toolbar_count">{totalWishListQuantity}</span>
+                 <span class="jswcount toolbar_count">{totalWishListQuantity!=null?totalWishListQuantity:0}</span>
               </span>
               <span class="kalles_toolbar_label">Wishlist</span>
             </a>
@@ -506,7 +506,7 @@ function Header() {
           <div class="type_toolbar_cart kalles_toolbar_item">
             <Link to="/cart">
               <span class="toolbar_icon">
-                <span class="jsccount toolbar_count">{totalQuantity}</span>
+                <span class="jsccount toolbar_count">{totalQuantity!=null?totalQuantity:0}</span>
               </span>
               <span class="kalles_toolbar_label">Cart</span>
             </Link>

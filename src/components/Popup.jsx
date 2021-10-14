@@ -50,7 +50,7 @@ async function handleSubmit(event){
       },
     }
     )
-    if (response.data.message= "success") {
+    if (response.data.message=== "success") {
       swal({
         title: "Send Successsfully!",
         text: "Thanks for Asking a question",
