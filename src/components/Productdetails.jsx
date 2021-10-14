@@ -82,6 +82,8 @@ function Producdetails() {
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{productDetailes?.title}</title>
 <meta property="og:title" content={productDetailes?.title} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={`/productDetails/${productDetailes?._id}`}></meta>
 <meta name="description" content= {<div dangerouslySetInnerHTML={createMarkup()} /> }/>
 
 <meta name="author" content="John Doe" />
