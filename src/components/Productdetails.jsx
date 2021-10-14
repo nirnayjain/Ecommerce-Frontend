@@ -81,8 +81,8 @@ function Producdetails() {
 <meta name="robots" content="index, follow" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{productDetailes?.title}</title>
-
-<meta name="description" content={productDetailes?.description.slice(0,150)} />
+<meta property="og:title" content={productDetailes?.title} />
+<meta name="description" content= {<div dangerouslySetInnerHTML={createMarkup()} /> }/>
 
 <meta name="author" content="John Doe" />
 
