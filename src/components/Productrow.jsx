@@ -50,12 +50,14 @@ function Productrow() {
                     <div
                       class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__100"
                       data-bgset={i?.featuredImage}
+                      style={{height:336,width:265}}
                     ></div>
                   </a>
                   <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
                     <div
                       class="pr_lazy_img back-img pa nt_bg_lz lazyload"
                       data-bgset={i?.featuredImage}
+                      style={{height:336,width:265}}
                     ></div>
                   </div>
                 <Wishlist id={i?._id}/>
@@ -71,11 +73,18 @@ function Productrow() {
                   </div> */}
                 </div>
                 <div class="product-info mt__15">
+
                   <h3 class="product-title pr fs__14 mg__0 fwm">
+                  <a
+                          className="cd chp"
+                          href={`/productDetails/${i._id}`}
+                        >
 
                       {i?.title}
+                      </a>
 
                   </h3>
+
                   <span className="price dib mb__5">
                         <del>
                           <span className="money">{i?.price}</span>

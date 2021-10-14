@@ -56,6 +56,7 @@ function Newproducts() {
                         <div
                           className="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__100"
                           data-bgset={product.featuredImage}
+                          style={{height:336,width:265}}
                         ></div>
                       </a>
 

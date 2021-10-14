@@ -153,6 +153,7 @@ function Producdetails() {
                       right: 0,
                     },
                     enlargedImagePosition: "beside",
+                    shouldUsePositiveSpaceLens: true
 
                   }}
                 />
