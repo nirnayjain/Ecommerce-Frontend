@@ -40,7 +40,9 @@ function Productrow() {
           {/* <div style={{display:'flex',justifyContent:'space-between'}}> */}
           {products?.slice(0,4).map(i=>
 
-            <div class="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1" >
+            <div
+            style={{display:'flex',justifyContent:'center'}}
+            class="col-lg-3 col-md-6 col-sm-6 col-xs-12 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1" >
               <div class="product-inner pr">
                 <div class="product-image pr oh lazyload">
                   <span class="tc nt_labels pa pe_none cw">
@@ -50,14 +52,14 @@ function Productrow() {
                     <div
                       class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__100"
                       data-bgset={i?.featuredImage}
-                      style={{height:336,width:265}}
+                      style={{height:320,width:265}}
                     ></div>
                   </a>
                   <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
                     <div
                       class="pr_lazy_img back-img pa nt_bg_lz lazyload"
                       data-bgset={i?.featuredImage}
-                      style={{height:336,width:265}}
+                      style={{height:320,width:265}}
                     ></div>
                   </div>
                 <Wishlist id={i?._id}/>

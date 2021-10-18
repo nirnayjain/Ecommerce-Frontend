@@ -42,8 +42,9 @@ function Newproducts() {
             {newArrival?.map((product, index) => {
               return (
                 <div
+                style={{display:'flex',justifyContent:'center'}}
                   key={index}
-                  className="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1"
+                  className="col-lg-3 col-md-6 col-sm-6 col-xs-12 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1"
                 >
                   <div className="product-inner pr">
                     <div className="product-image pr oh lazyload">
@@ -54,9 +55,10 @@ function Newproducts() {
                       </span> */}
                       <a className="db" href={`/productDetails/${product._id}`}>
                         <div
+                        style={{width:265,height:320}}
                           className="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__100"
                           data-bgset={product.featuredImage}
-                          style={{height:336,width:265}}
+
                         ></div>
                       </a>
 
