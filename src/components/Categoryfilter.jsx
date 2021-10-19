@@ -38,12 +38,13 @@ function Categoryfilter({setProducts,isCategory}) {
                     <h5 class="widget-title">Filter by price</h5>
                     <div class="loke_scroll">
                       <ul class="nt_filter_block nt_filter_styleck css_ntbar">
+                         
                       {Pdata.map((item)=>
                         <li style={{display:"flex", alignItems:"center", textAlign:"left"}}>
                           <input type="radio" id={item._id} name="50-100" value={item._id}
                             aria-label="Narrow selection to products matching tag price Rs. 50-Rs. 100" onChange={e => handleCheckBox(item.min, item.max)} style={{border:"none", textDecoration:"none"}}
                           />
-                          <label for={item._id} style={{paddingLeft:"13px" , color:"black" , "hover":{color: "#efefef"}}}>  Rs. {item.min}-Rs. {item.max}</label>
+                          <label for={item._id} style={{paddingLeft:"13px" , color:"black" , "hover":{color: "#efefef"}}}> {item.text===undefined ?<> Rs. {item.min}- {item.max!=undefined ?<>Rs. {item.max}</>:<>above</>}</>:<>{item.text}</>}</label>
                         </li>
                       )}
 

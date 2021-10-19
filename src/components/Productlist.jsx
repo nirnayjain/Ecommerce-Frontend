@@ -12,14 +12,14 @@ function Productlist({products, setProducts}) {
 
   useEffect(() => {
 
-    async function getProduct() {
-      const productList = await axios.get(`${API}/api/product/subcategory/${category}/${subCategory}`);
-      const list = productList.data.product
-      setProducts(list);
-    }
+
     getProduct();
   }, []);
-  console.log(products);
+  async function getProduct() {
+    const productList = await axios.get(`${API}/api/product/subcategory/${category}/${subCategory}`);
+    const list = productList.data.product
+    setProducts(list);
+  }
   return (
     <div class="col-lg-9 col-12">
       <div class="kalles-section tp_se_cdt">
