@@ -47,7 +47,7 @@ function Navigation({ active }) {
                             return (
                               <a
                                 href={`/shop/${cate.category}/${subcate.category}`}
-                                className="lh__1 flex al_center pr kalles-lbl__nav-sale"
+
                               >
                                 {subcate.category}
                               </a>
@@ -58,6 +58,40 @@ function Navigation({ active }) {
                     </li>
                   );
                 })}
+                {category !=undefined &&
+                <>
+                 <li
+
+                      className="type_mega menu_wid_cus menu-item has-children menu_has_offsets menu_center pos_center"
+                    >
+                      <a
+                          href={`/onlineconsultation`}
+                          // className="lh__1 flex al_center pr kalles-lbl__nav-sale"
+
+                        >
+
+                         <strong>   Online Consultation </strong>
+
+                        </a>
+
+                    </li>
+                    <li
+
+                      className="type_mega menu_wid_cus menu-item has-children menu_has_offsets menu_center pos_center"
+                    >
+                      <a
+                          href={`/blogs`}
+                          // className="lh__1 flex al_center pr kalles-lbl__nav-sale"
+
+                        >
+
+                         <strong>Blogs</strong>
+
+                        </a>
+
+                    </li>
+                    </>
+                    }
               </ul>
             </nav>
           </div>

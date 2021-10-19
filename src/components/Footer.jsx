@@ -198,7 +198,7 @@ function Footer() {
                       <li className="menu-item">
                           <a href="/blogs">Blog</a>
                         </li>
-                        <li className="menu-item">
+                        {/* <li className="menu-item">
                           <a href="#">Store Location</a>
                         </li>
                         <li className="menu-item">
@@ -209,7 +209,7 @@ function Footer() {
                         </li>
                         <li className="menu-item">
                           <a href="#">FAQs</a>
-                        </li>
+                        </li> */}
                       </ul>
                     </div>
                   </div>
@@ -222,8 +222,7 @@ function Footer() {
                     </h3>
                     <div className="widget_footer newl_des_1">
                       <p>
-                        Subscribe to our newsletter and get 10% off your first
-                        purchase
+                        Subscribe to our newsletter and  get latest updates
                       </p>
                       <form
                         method="post"

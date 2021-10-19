@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useAlert } from "react-alert";
 import { API } from "../API";
 
@@ -8,9 +8,19 @@ function Contact() {
   const [email, setEmail] = useState("");
   const [phoneNo, setphoneNo] = useState("");
   const [message, setMessage] = useState("");
+  const[address,setAddress]=useState("")
   const alert = useAlert();
   const token = localStorage.getItem("token");
+  useEffect(()=>{
+    getAddress()
 
+  },[])
+  const getAddress=async()=>{
+    let response = await axios.get(
+      `${API}/api/config`)
+      setAddress(response.data.result[0].address[0])
+
+  }
   async function handleSubmit(e) {
     e.preventDefault();
     if (
@@ -130,22 +140,19 @@ function Contact() {
                 below.
               </p>
               <p class="mb__5 d-flex">
-                <i class="las la-home fs__20 mr__10 text-primary"></i> Flora
-                Corporation Limited, 3rd Floor, Surya Towers, Secunderabad,
-                Hyderabad
+                <i class="las la-home fs__20 mr__10 text-primary"></i> {address?.company},{address?.address},{address?.city},{address?.state}
               </p>
               <p class="mb__5 d-flex">
-                <i class="las la-phone fs__20 mr__10 text-primary"></i> +91 123
-                456 7890
+                <i class="las la-phone fs__20 mr__10 text-primary"></i>{address?.contact}
               </p>
               <p class="mb__5 d-flex">
                 <i class="las la-envelope fs__20 mr__10 text-primary"></i>{" "}
                 <a
-                  href="#"
+
                   class="__cf_email__"
                   data-cfemail="d6b5b9b8a2b7b5a296b5b9bba6b7b8aff8b5b9bb"
                 >
-                  [email&#160;protected]
+                  {address?.email}
                 </a>
               </p>
               <p class="mb__5 d-flex">
