@@ -4,13 +4,13 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { viewWishlist } from "../Actions/wishlishAction";
-import {Hidden} from '@material-ui/core'
+import { Hidden } from '@material-ui/core'
 import { API } from "../API";
 import Cartpopup from "./Cartpopup";
 import Popform from "./Popform";
 import { Link } from "react-router-dom";
 import Popup from "reactjs-popup";
- import "../../node_modules/reactjs-popup/dist/index.css";
+import "../../node_modules/reactjs-popup/dist/index.css";
 import {
   Container,
   Grid,
@@ -55,11 +55,11 @@ const useStyles = makeStyles(() => ({
     border: "1px solid rgba(0,0,0,.125)",
     boxShadow: "0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%)",
   },
-  list:{
-    '&:hover':{
-      backgroundColor:'#dddfe2'
+  list: {
+    '&:hover': {
+      backgroundColor: '#dddfe2'
 
-  },
+    },
   }
 }));
 
@@ -80,9 +80,10 @@ function Header() {
   const dispatch = useDispatch();
   const [keyword, setKeyword] = useState("");
   const [searchlist, setSearchList] = useState([]);
+  const [scrollText, setScrollText] = useState("")
 
   useEffect(() => {
-  dispatch(viewWishlist());
+    dispatch(viewWishlist());
   }, []);
   useEffect(() => {
     async function getCategory() {
@@ -93,7 +94,7 @@ function Header() {
     getCategory();
   }, []);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
-  let totalWishListQuantity=0
+  let totalWishListQuantity = 0
   totalWishListQuantity = useSelector(
     (state) => state.wishlist.totalQuantity
   );
@@ -114,10 +115,12 @@ function Header() {
         JSON.stringify(config?.data.result[0])
       );
       setLogo(config?.data.result[0].logo);
+      setScrollText(config?.data.result[0].scrollText);
       setfacebookUrl(config?.data.result[0].socialMedia[0].facebook);
       setinstagramUrl(config?.data.result[0].socialMedia[0].instagram);
       settwiiterUrl(config?.data.result[0].socialMedia[0].twitter);
       setlinkedinUrl(config?.data.result[0].socialMedia[0].linkedin);
+
     }
     getConfig();
     getFeatured();
@@ -136,15 +139,20 @@ function Header() {
 
   async function getSearchResult() {
     // if (keyword.length > 0) {
-      let res = await axios.get(`${API}/api/product/search?keyword=${keyword}`);
-      setSearchList(res.data.searchResult);
+    let res = await axios.get(`${API}/api/product/search?keyword=${keyword}`);
+    setSearchList(res.data.searchResult);
     // }
   }
 
   return (
     <>
       {/* <Toplabel /> */}
-      <div className="header__mid">
+      <div id="kalles-section-header_top" class="kalles-section">
+        <div class="h__top bgbl pt__10 pb__10 fs__12 flex fl_center al_center">
+          <marquee behavior="scroll" direction="left">{scrollText}</marquee>
+        </div>
+      </div>
+      <div className="header__mid" >
         <div className="container">
           <div className="row al_center css_h_se">
             <div className="col-lg-3 col-md-3 col-1">
@@ -225,7 +233,7 @@ function Header() {
               </div>
             </div>
             <div className="col-lg-5 col-md-5 col-8 tr fl_right">
-              <div className="nt_action in_flex al_center cart_des_1 header_right" style={{padding:"0px"}}>
+              <div className="nt_action in_flex al_center cart_des_1 header_right" style={{ padding: "0px" }}>
                 {show === true ? (
                   <div
                     class="frm_search_input pr oh col"
@@ -233,14 +241,14 @@ function Header() {
                   >
                     <input
                       class="search_header__input js_iput_search"
-                      style={{borderRadius:"0px", paddingRight:"20px"}}
+                      style={{ borderRadius: "0px", paddingRight: "20px" }}
                       autocomplete="off"
                       type="text"
                       name="q"
                       value={keyword}
                       placeholder="Search for products"
                       onChange={(e) => setKeyword(e.target.value)}
-                      // className={classes.input}
+                    // className={classes.input}
                     />
                     <button
                       class="search_header__submit js_btn_search use_jsfull hide_  pe_none"
@@ -254,13 +262,13 @@ function Header() {
                         {searchlist.map((option, index) => (
                           <Link to={`/productdetails/${option._id}`}>
                             <li className={classes.list}>
-                              <Container style={{paddingTop:20}}>
+                              <Container style={{ paddingTop: 20 }}>
                                 <Grid container spacing={3}>
                                   <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
                                     <img
                                       src={option.featuredImage}
-                                      // width={200}
-                                      // height={200}
+                                    // width={200}
+                                    // height={200}
                                     />
                                   </Grid>
                                   <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
@@ -291,7 +299,7 @@ function Header() {
                     data-id="#nt_search_canvas"
                     href="#"
                   >
-                    <i className="iccl iccl-search" style={{paddingRight:"10px"}}></i>
+                    <i className="iccl iccl-search" style={{ paddingRight: "10px" }}></i>
                   </a>
                 )}
 
@@ -300,15 +308,15 @@ function Header() {
                     <Popup
                       trigger={
                         <a href="#" data-id="#nt_login_canvas">
-                          <i className="iccl iccl-user" style={{paddingRight:"10px"}}></i>
+                          <i className="iccl iccl-user" style={{ paddingRight: "10px" }}></i>
                         </a>
                       }
                       position="bottom center"
-                     on="hover"
+                      on="hover"
                     >
                       <div>
                         <ul
-                        className="profilelista"
+                          className="profilelista"
                           style={{
                             listStyle: "none",
                             display: "flex",
@@ -318,10 +326,10 @@ function Header() {
                           }}
 
                         >
-                          <li style={{ marginTop: "1.5rem"  }}>
+                          <li style={{ marginTop: "1.5rem" }}>
                             <a href="/my-orders"  > My Orders</a>
                           </li>
-                          <li style={{ marginTop: "1.5rem"  }}>
+                          <li style={{ marginTop: "1.5rem" }}>
                             {" "}
                             <a href="/my-wishlist"> My Wishlist</a>
                           </li>
@@ -369,28 +377,28 @@ function Header() {
 
                   ) : null} */}
                 {/* </div> */}
-              <Hidden only={['sm','xs']}>
-                 <div className="icon_cart pr">
+                <Hidden only={['sm', 'xs']}>
+                  <div className="icon_cart pr">
 
-                <Link to
-                ="/my-wishlist"
-                >
-                  <i className="iccl iccl-heart pr">
+                    <Link to
+                      ="/my-wishlist"
+                    >
+                      <i className="iccl iccl-heart pr">
 
-                 <span className="op__0 ts_op pa tcount bgb br__50 cw tc">{totalWishListQuantity!=null?totalWishListQuantity:0}</span>
+                        <span className="op__0 ts_op pa tcount bgb br__50 cw tc">{totalWishListQuantity != null ? totalWishListQuantity : 0}</span>
 
-                  </i>
-                </Link>
-                </div>
-                <div className="icon_cart pr">
-                  <Link to="/cart">
-                    <i className="iccl iccl-cart pr">
-                      <span className="op__0 ts_op pa tcount bgb br__50 cw tc">
-                        {totalQuantity!=null?totalQuantity:0}
-                      </span>
-                    </i>
-                  </Link>
-                </div>
+                      </i>
+                    </Link>
+                  </div>
+                  <div className="icon_cart pr">
+                    <Link to="/cart">
+                      <i className="iccl iccl-cart pr">
+                        <span className="op__0 ts_op pa tcount bgb br__50 cw tc">
+                          {totalQuantity != null ? totalQuantity : 0}
+                        </span>
+                      </i>
+                    </Link>
+                  </div>
                 </Hidden>
               </div>
             </div>
@@ -498,7 +506,7 @@ function Header() {
           <div class="type_toolbar_wish kalles_toolbar_item">
             <a class="js_link_wis" href="/my-wishlist">
               <span class="toolbar_icon">
-                 <span class="jswcount toolbar_count">{totalWishListQuantity!=null?totalWishListQuantity:0}</span>
+                <span class="jswcount toolbar_count">{totalWishListQuantity != null ? totalWishListQuantity : 0}</span>
               </span>
               <span class="kalles_toolbar_label">Wishlist</span>
             </a>
@@ -506,7 +514,7 @@ function Header() {
           <div class="type_toolbar_cart kalles_toolbar_item">
             <Link to="/cart">
               <span class="toolbar_icon">
-                <span class="jsccount toolbar_count">{totalQuantity!=null?totalQuantity:0}</span>
+                <span class="jsccount toolbar_count">{totalQuantity != null ? totalQuantity : 0}</span>
               </span>
               <span class="kalles_toolbar_label">Cart</span>
             </Link>
