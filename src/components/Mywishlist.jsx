@@ -45,7 +45,7 @@ function Mywishlist() {
 
                       <img
                         style={{ width: "100px" }}
-                        src={el.product.image[0]}
+                        src={el.product.featuredImage}
                         alt="product"
                       />
 </a>
