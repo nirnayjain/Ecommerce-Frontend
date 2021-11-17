@@ -117,7 +117,7 @@ function Producdetails() {
               <div className="thumb" ref={myref}>
                 {image.map((item, index) => (
                   <img
-                    src={item}
+                    src={item.url}
                     alt=""
                     key={index}
                     onMouseOver={() => handleSmImg(index)}
@@ -132,13 +132,13 @@ function Producdetails() {
                     smallImage: {
                       alt: "Wristwatch by Ted Baker London",
                       isFluidWidth: true,
-                      src: image[index],
+                      src: image[index]?.url,
                       // height:250,
                       sizes:
                         "(max-width: 540px) 100vw, (max-width: 1200px) 30vw, 360px",
                     },
                     largeImage: {
-                      src: image[index],
+                      src: image[index]?.url,
                       width: 1200,
                       height: 1800,
                     },

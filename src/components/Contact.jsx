@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState,useEffect } from "react";
 import { useAlert } from "react-alert";
 import { API } from "../API";
+import Header from "./Header";
+import Navigation from "./Navigation";
 
 function Contact() {
   const [name, setName] = useState("");
@@ -58,6 +60,8 @@ function Contact() {
   }
   return (
     <div>
+       <Header />
+      <Navigation />
       <div id="nt_content">
         <div class="kalles-section page_section_heading">
           <div class="page-head tc pr oh cat_bg_img page_head_">
