@@ -51,7 +51,7 @@ function Paymentpage() {
 			currency: "INR",
 			name: "POP",
 			description: "Order",
-			image: "http://localhost:4000/public/popimage.jpeg",
+			image: "https://www.potionsofparadise.com/assets/images/k_favicon_32x.png",
 			handler: function (response) {
 				_paymentVerified(response.razorpay_payment_id);
 			},
