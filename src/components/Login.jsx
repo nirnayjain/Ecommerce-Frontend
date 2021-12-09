@@ -53,10 +53,6 @@ function Login() {
       localStorage.removeItem("cartData");
     }
 
-
-
-
-
       setTimeout(() => {
         window.location.reload();
       }, 2000);

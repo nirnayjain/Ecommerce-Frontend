@@ -45,8 +45,6 @@ function SignIn() {
       if (response.data.status==="ok") {
         setLoading(false);
 
-
-
             alert.show("Registered Successfully.Redirecting to login page.", { type: "success" });
 
             setTimeout(() => {

@@ -55,9 +55,6 @@ function SignIn() {
 
 
      }
-
-
-
       setTimeout(() => {
         window.location.href = "/checkout";
       }, 2000);
