@@ -39,7 +39,7 @@ setBlogDetails(res.data.Blog)
     return (
         <div >
         <Header />
-        {/* <Navigation /> */}
+        <Navigation />
         <div id="nt_content" >
         {/*main content*/}
         <div className="container container_cat cat_default mt__60 mb__20">

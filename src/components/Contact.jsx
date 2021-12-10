@@ -3,6 +3,7 @@ import React, { useState,useEffect } from "react";
 import { useAlert } from "react-alert";
 import { API } from "../API";
 import Header from "./Header";
+import Footer from "./Footer";
 import Navigation from "./Navigation";
 
 function Contact() {
@@ -167,6 +168,7 @@ function Contact() {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

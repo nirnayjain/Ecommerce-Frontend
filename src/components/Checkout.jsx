@@ -227,7 +227,7 @@ function Checkout() {
                   <h3 className="checkout-section__title">Billing details</h3>
                   <div className="row">
                     <p className="checkout-section__field col-lg-6 col-12">
-                      <label for="f-name">First name</label>
+                      <label for="f-name">First name*</label>
                       <input
                         type="text"
                         id="f-name"
@@ -255,7 +255,7 @@ function Checkout() {
                     </p>
                     <p className="checkout-section__field col-12">
                       <label for="address_country_ship_2">
-                        Country / Region *
+                        Country / Region*
                       </label>
                       <CountryDropdown
                         value={country}
@@ -281,7 +281,7 @@ function Checkout() {
                       />
                     </p>
                     <p className="checkout-section__field col-12">
-                      <label for="address_03">Town / City</label>
+                      <label for="address_03">Town / City*</label>
                       <input
                         type="text"
                         id="address_03"
@@ -294,7 +294,7 @@ function Checkout() {
                         for="address_province_ship"
                         id="address_province_label"
                       >
-                        State *
+                        State*
                       </label>
                       <RegionDropdown
                         country={country}
@@ -303,7 +303,7 @@ function Checkout() {
                       />
                     </p>
                     <p className="checkout-section__field col-12">
-                      <label for="address_zip_ship_2">Postal/Zip Code</label>
+                      <label for="address_zip_ship_2">Postal/Zip Code*</label>
                       <input
                         type="text"
                         id="address_zip_ship_2"
@@ -312,8 +312,9 @@ function Checkout() {
                       />
                     </p>
                     <p className="checkout-section__field col-12">
-                      <label for="address_phone">Phone</label>
+                      <label for="address_phone">Phone*</label>
                       <input
+                      placeholder="Enter Mobile Number"
                         type="text"
                         id="address_phone"
                         value={phone}
@@ -321,8 +322,9 @@ function Checkout() {
                       />
                     </p>
                     <p className="checkout-section__field col-12">
-                      <label for="address_amail">Email</label>
+                      <label for="address_amail">Email*</label>
                       <input
+                      placeholder="Enter Email"
                         type="text"
                         id="address_amail"
                         value={email}
