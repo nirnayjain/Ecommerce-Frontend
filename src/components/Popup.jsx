@@ -4,6 +4,11 @@ import { useHistory } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import { API } from "../API";
 import swal from "sweetalert";
+import {
+  CountryDropdown,
+  RegionDropdown,
+  CountryRegionData,
+} from "react-country-region-selector";
 
 function Popup(props) {
   const token = localStorage.getItem("token");
@@ -13,10 +18,36 @@ function Popup(props) {
     name:"",
     contact:"",
     question:""
-
   })
-
+  const [useraddress, setUserAdress]= useState({userName:"", address:"", state:"", Pin:"", country:"", phoneno:""})
+const {userName,phoneno,address,state,Pin,country}=useraddress
 const {name, contact, question,product} = userquestion
+
+const changeState = (newState) =>
+setUserAdress((prevState) => ({ ...prevState, ...newState }));
+
+const getUserAdress = (event) => {
+  const { name, value } = event.target;
+  changeState({ [name]: value })
+};
+
+async function handleAdressSubmit (event){
+  event.preventDefault();
+  if(
+    userName=== "" ||
+    phoneno=== "" ||
+    address=== "" ||
+    state=== "" ||
+    Pin==="" ||
+    country=== ""
+  )
+    return   swal("Oops!", "Please fill all the required fields", "error");
+  if (phoneno.length < 10 || phoneno.length > 10)
+    return swal("Oops!", "Please Fill Valid Mobile No", "error");
+  else{
+   
+  }
+}
 
 const getUserQuestion = (event) => {
   const { name, value } = event.target;
@@ -25,7 +56,6 @@ const getUserQuestion = (event) => {
     return { ...preval, [name]: value };
   });
 };
-
 async function handleSubmit(event){
   event.preventDefault();
   if(!(
@@ -88,7 +118,7 @@ useEffect(()=>
           <>
         <Modal.Header>
           <Modal.Title id="contained-modal-title-vcenter">
-             DELIVERY & RETURN
+             Add New Address
           </Modal.Title>
         </Modal.Header>
 
@@ -96,9 +126,10 @@ useEffect(()=>
               <p>
                 {props.delievery}
                 </p>
-              {/* <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+              <input
+                value={userName}
+                name="userName"
+                onChange={getUserAdress}
                 className="mt-3"
                 type="text"
                 placeholder="Enter Your Name"
@@ -107,7 +138,8 @@ useEffect(()=>
                 <div className="col-6">
                   <input
                     value={address}
-                    onChange={(e) => setAddress(e.target.value)}
+                    name="address"
+                    onChange={getUserAdress}
                     className="mt-3"
                     type="text"
                     placeholder="Enter Your Address"
@@ -115,8 +147,9 @@ useEffect(()=>
                 </div>
                 <div className="col-6">
                   <input
-                    value={pin}
-                    onChange={(e) => setPin(e.target.value)}
+                    value={Pin}
+                    name="Pin"
+                    onChange={getUserAdress}
                     className="mt-3"
                     type="text"
                     placeholder="Enter Pin Code"
@@ -126,29 +159,32 @@ useEffect(()=>
               <div className="row mt-3">
                 <div className="col-6">
                   <CountryDropdown
+                 
                     value={country}
-                    onChange={(val) => setCountry(val)}
+                    onChange={(val) => changeState({country:val})}
                   />
                 </div>
                 <div className="col-6">
                   <RegionDropdown
+                  defaultOptionLabel="Select Region"
                     country={country}
                     value={state}
-                    onChange={(val) => setState(val)}
+                    onChange={(val) => changeState({state:val})}
                   />
                 </div>
               </div>
               <input
-                value={phoneNo}
-                onChange={(e) => setPhoneNo(e.target.value)}
+                value={phoneno}
+                name="phoneno"
+                onChange={getUserAdress}
                 className="mt-3"
                 type="text"
                 placeholder="Enter Phone Number"
-              /> */}
+              />
             </Modal.Body>
             <Modal.Footer>
-
-              <Button onClick={props.onHide}>Close</Button>
+            <Button style={{color:"white" ,backgroundColor:"#81BF33", outline:"none", border:"none"}} onClick={handleAdressSubmit}>Add</Button>
+              <Button style={{color:"white" ,backgroundColor:"#81BF33", outline:"none", border:"none"}} onClick={props.onHide}>Close</Button>
             </Modal.Footer>
           </>
         ) : (
