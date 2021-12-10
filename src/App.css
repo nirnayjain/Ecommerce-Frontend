@@ -13,6 +13,17 @@
     margin-right: 0!important;
 }
 
+/* change Password */
+.pass_show{
+  position: relative;
+}
+.passwicon{
+  position: absolute;
+  right:15px;
+  bottom:10px
+}
+
+
 /* .profilelista{
     background-color: #fff!important;
     box-shadow: 1px 3px 1px #9E9E9E !important;
