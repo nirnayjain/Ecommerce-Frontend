@@ -78,7 +78,7 @@ function Footer() {
                     <div className="widget_footer">
                       <div className="footer-contact">
                         <p>
-                          <a className="db" href="index.html">
+                          <a className="db" href="/">
                             <img
                               className="w__100 mb__15 lz_op_ef lazyload max-width__95px"
                               src={configuration[0]?.logo[0].Footerlogo}
@@ -153,7 +153,7 @@ function Footer() {
                         {category.map((item, index) => {
                           return (
                             <li className="menu-item" key={index}>
-                              <a href="#">{item.category}</a>
+                              <a href={`/allProducts/${item.category}`}>{item.category}</a>
                             </li>
                           );
                         })}
@@ -276,13 +276,13 @@ function Footer() {
                 <div className="col-lg-6 col-md-12 col-12 col_2">
                   <ul id="footer-menu" className="clearfix">
                     <li className="menu-item">
-                      <a href="#">Shop</a>
+                      <a href="/">Shop</a>
                     </li>
                     <li className="menu-item">
-                      <a href="about-us.html">About Us</a>
+                      <a href="/About-Us">About Us</a>
                     </li>
                     <li className="menu-item">
-                      <a href="/contact-us">Contact Us</a>
+                      <a href="/Contact-Us">Contact Us</a>
                     </li>
                     <li className="menu-item">
                       <a href="/blogs">Blog</a>
