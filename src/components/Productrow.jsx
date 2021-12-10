@@ -34,6 +34,7 @@ function Productrow() {
             <span class="section-subtitle db tc"></span>
           </div>
           <div
+           style={{display:'flex',justifyContent:'center'}}
             class="products nt_products_holder row row_pr_1 cdt_des_1 round_cd_false js_carousel nt_slider nt_cover ratio_nt position_8 space_30 prev_next_3 btn_owl_1 dot_owl_1 dot_color_1 btn_vi_2"
             data-flickity='{"imagesLoaded": 0,"adaptiveHeight": 0, "contain": 1, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": true,"prevNextButtons": true,"percentPosition": 1,"pageDots": false, "autoPlay" : 0, "pauseAutoPlayOnHover" : true, "rightToLeft": false }'
           >

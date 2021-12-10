@@ -5,18 +5,82 @@ import { Button } from "react-bootstrap";
 import { useHistory, useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import { API } from "../API";
+import { useAlert } from "react-alert";
+import Loader from "react-loader-spinner";
 import { useDispatch } from "react-redux";
 import { delteUserCart } from "../Actions/cartAction";
 
 function Paymentpage() {
+  const alert = useAlert();
   const history = useHistory();
   const search = useLocation().search;
+  const[loading,setLoading]=useState(false)
   const amount = new URLSearchParams(search).get("amount");
   const { id } = useParams();
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const [data, setData] = useState("");
   const [orderData, setOrderData] = useState("");
+  const loadScript = (src) => {
+		return new Promise((resolve) => {
+			const script = document.createElement("script");
+			script.src = src;
+
+			script.onload = () => {
+				resolve(true);
+			};
+			script.onerror = () => {
+				resolve(false);
+			};
+			document.body.appendChild(script);
+		});
+	};
+  const makePayment = async () => {
+		const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+
+		if (!res) {
+      alert.show("Razor Pay SDK failed.", { type: "error" });
+
+
+			return;
+		}
+
+		const options = {
+			key:"rzp_test_QZl686NiTx6lhk",
+			amount:amount*100,
+			currency: "INR",
+			name: "POP",
+			description: "Order",
+			image: "https://www.potionsofparadise.com/assets/images/k_favicon_32x.png",
+			handler: function (response) {
+				_paymentVerified(response.razorpay_payment_id);
+			},
+			prefill: {
+				name: `${orderData.firstName} ${orderData.lastName}`,
+				email: orderData.email,
+				contact: orderData.phone,
+			},
+			theme: {
+				color: "#00d4c6",
+			},
+		};
+		const paymentObject = new window.Razorpay(options);
+		paymentObject.open();
+	};
+  const _paymentVerified = async(paymentRefId) => {
+    setLoading(true)
+const res=	await axios.post( `${API}/api/razorpay/confirmPayment`,{
+    orderId:id,
+    amount:amount,
+    paymentRefId:paymentRefId,
+    email:orderData.email,
+    userId:orderData.user
+  })
+  if(res.data.status=="Success")
+  history.push(`/payment-success/${id}`)
+  else
+  history.push(`/payment-failed`)
+};
   useEffect(() => handlePayment(), []);
 
   async function handlePayment() {
@@ -52,6 +116,22 @@ function Paymentpage() {
   }
   return (
     <div>
+      {loading ?
+       <Loader
+       style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "20%",
+          marginTop: "10%",
+        }}
+       type="Circles"
+       color="#0029ff"
+       height={100}
+       width={100}
+       // timeout={3000} //3 secs
+     />
+      :
+      <>
       <Header />
       <div
         className="container "
@@ -65,53 +145,54 @@ function Paymentpage() {
         {data === null && amount === null ? (
           ""
         ) : (
-          <form action=" https://test.payu.in/_payment" method="POST">
-            <input class="key" type="hidden" name="key" value={data.key} />
-            <input class="txnid" type="hidden" name="txnid" value={id} />
-            <input class="hash" type="hidden" name="hash" value={data.hash} />
-            <input
-              type="hidden"
-              id="surl"
-              value={`${API}/payment-success`}
-              name="surl"
-            />
-            <input
-              type="hidden"
-              id="furl"
-              value={`${API}/payment-failure`}
-              name="furl"
-            />
-            <input class="amount" type="hidden" name="amount" value={amount} />
-            <input
-              class="con"
-              type="hidden"
-              name="phone"
-              value={orderData.phone}
-            />
-            <input type="hidden" name="service_provider" value="payu_paisa" />
-            <input
-              type="hidden"
-              class="product"
-              name="productinfo"
-              value="Shopping"
-            />
-            <input type="hidden" class="udf1" name="udf1" value={data.userId} />
-            <input
-              class="firstname"
-              type="hidden"
-              name="firstname"
-              value={data.firstName}
-            />
-            <input
-              class="email"
-              type="hidden"
-              name="email"
-              value={data.email}
-            />
+          // <form action=" https://test.payu.in/_payment" method="POST">
+          //   <input class="key" type="hidden" name="key" value={data.key} />
+          //   <input class="txnid" type="hidden" name="txnid" value={id} />
+          //   <input class="hash" type="hidden" name="hash" value={data.hash} />
+          //   <input
+          //     type="hidden"
+          //     id="surl"
+          //     value={`${API}/payment-success`}
+          //     name="surl"
+          //   />
+          //   <input
+          //     type="hidden"
+          //     id="furl"
+          //     value={`${API}/payment-failure`}
+          //     name="furl"
+          //   />
+          //   <input class="amount" type="hidden" name="amount" value={amount} />
+          //   <input
+          //     class="con"
+          //     type="hidden"
+          //     name="phone"
+          //     value={orderData.phone}
+          //   />
+          //   <input type="hidden" name="service_provider" value="payu_paisa" />
+          //   <input
+          //     type="hidden"
+          //     class="product"
+          //     name="productinfo"
+          //     value="Shopping"
+          //   />
+          //   <input type="hidden" class="udf1" name="udf1" value={data.userId} />
+          //   <input
+          //     class="firstname"
+          //     type="hidden"
+          //     name="firstname"
+          //     value={data.firstName}
+          //   />
+          //   <input
+          //     class="email"
+          //     type="hidden"
+          //     name="email"
+          //     value={data.email}
+          //   />
 
             <div className="row">
               <Button
-                type="submit"
+                // type="submit"
+                onClick={makePayment}
                 variant="primary"
                 size="lg"
                 className="mr-2"
@@ -125,10 +206,12 @@ function Paymentpage() {
                 </Button>
               </a>
             </div>
-          </form>
+          // </form>
         )}
       </div>
       <Footer />
+      </>
+      }
     </div>
   );
 }

@@ -85,7 +85,7 @@ function Checkout() {
       title: item.product ? item.product?.title : item.title,
       quantity: item.quantity,
       price: item.product ? item.product?.sale_price : item.sale_price,
-      image: item.product ? item.product?.image : item.image,
+      image: item.product ? item.product?.featuredImage : item.featuredImage,
       totalPrice:
         item.quantity * 1 * item.product
           ? item.product?.sale_price

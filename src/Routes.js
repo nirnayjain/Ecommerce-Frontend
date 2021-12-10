@@ -12,6 +12,7 @@ import Producdetails from "./components/Producdetails";
 import Productdetails from "./components/Productdetails";
 import Shop from "./components/Shop";
 import Shoppingcart from "./components/Shoppingcart";
+import PaymentFailed from "./components/payment-failed"
 import Checkout from "./components/Checkout";
 import Paymentpage from "./components/Paymentpage";
 import Paymentsuccess from "./components/Paymentsuccess";
@@ -91,6 +92,7 @@ function Routes() {
         <Route path="/payment/:id" exact component={Paymentpage} />
         <Route path="/payment-success/:id" exact component={Paymentsuccess} />
         <Route path="/:id" exact component={WebsitePolicyPage} />
+        <Route path="/payment-failed" exact component={PaymentFailed} />
 
 
       </Switch>
