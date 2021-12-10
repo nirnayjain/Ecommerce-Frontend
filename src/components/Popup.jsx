@@ -19,8 +19,8 @@ function Popup(props) {
     contact:"",
     question:""
   })
-  const [useraddress, setUserAdress]= useState({userName:"", address:"", state:"", Pin:"", country:"", phoneno:""})
-const {userName,phoneno,address,state,Pin,country}=useraddress
+  const [useraddress, setUserAdress]= useState({userName:"", address:"", state:"", pin:"", country:"", phoneNo:"",city:""})
+const {userName,phoneNo,address,state,pin,country,city}=useraddress
 const {name, contact, question,product} = userquestion
 
 const changeState = (newState) =>
@@ -35,17 +35,48 @@ async function handleAdressSubmit (event){
   event.preventDefault();
   if(
     userName=== "" ||
-    phoneno=== "" ||
+    phoneNo=== "" ||
     address=== "" ||
     state=== "" ||
-    Pin==="" ||
+    pin==="" ||
+    city===""||
     country=== ""
   )
     return   swal("Oops!", "Please fill all the required fields", "error");
-  if (phoneno.length < 10 || phoneno.length > 10)
+  if (phoneNo.length < 10 || phoneNo.length > 10)
     return swal("Oops!", "Please Fill Valid Mobile No", "error");
   else{
-   
+    let response = await axios.post(`${API}/api/address/add_Address`,
+    { name:userName,
+      phoneNo,
+      address,
+      state,
+      pin,
+      city,
+      country
+      }
+     ,
+     {
+       headers: {
+         Authorization: `Bearer ${token}`,
+       },
+     }
+     )
+     if(response.data.message==="Success")
+     {
+      swal({
+        title: "Success!",
+        text: "Address Added Successfully",
+        icon: "success",
+        button: "Done",
+        type: "success",
+      }).then(() => {
+        window.location = `/my-address`;
+      });
+    }else{
+      swal("Oops!", "Something went wrong!", "error");
+    }
+
   }
 }
 
@@ -80,7 +111,7 @@ async function handleSubmit(event){
       },
     }
     )
-    if (response.data.message=== "success") {
+    if (response.data.message === "Success") {
       swal({
         title: "Send Successsfully!",
         text: "Thanks for Asking a question",
@@ -114,7 +145,7 @@ useEffect(()=>
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-      {props.modelfor === "address" ? (
+      {props.modelfor === "address" && (
           <>
         <Modal.Header>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -123,9 +154,7 @@ useEffect(()=>
         </Modal.Header>
 
             <Modal.Body>
-              <p>
-                {props.delievery}
-                </p>
+
               <input
                 value={userName}
                 name="userName"
@@ -147,11 +176,11 @@ useEffect(()=>
                 </div>
                 <div className="col-6">
                   <input
-                    value={Pin}
-                    name="Pin"
+                    value={pin}
+                    name="pin"
                     onChange={getUserAdress}
                     className="mt-3"
-                    type="text"
+                    type="number"
                     placeholder="Enter Pin Code"
                   />
                 </div>
@@ -159,7 +188,7 @@ useEffect(()=>
               <div className="row mt-3">
                 <div className="col-6">
                   <CountryDropdown
-                 
+
                     value={country}
                     onChange={(val) => changeState({country:val})}
                   />
@@ -173,21 +202,37 @@ useEffect(()=>
                   />
                 </div>
               </div>
-              <input
-                value={phoneno}
-                name="phoneno"
+              <div className="row mt-3">
+                 <div className="col-6">
+                 <input
+                value={city}
+                name="city"
                 onChange={getUserAdress}
                 className="mt-3"
                 type="text"
+                placeholder="City"
+              />
+                   </div>
+                   <div className="col-6">
+              <input
+                value={phoneNo}
+                name="phoneNo"
+                onChange={getUserAdress}
+                className="mt-3"
+                type="number"
                 placeholder="Enter Phone Number"
               />
+              </div>
+              </div>
             </Modal.Body>
             <Modal.Footer>
             <Button style={{color:"white" ,backgroundColor:"#81BF33", outline:"none", border:"none"}} onClick={handleAdressSubmit}>Add</Button>
               <Button style={{color:"white" ,backgroundColor:"#81BF33", outline:"none", border:"none"}} onClick={props.onHide}>Close</Button>
             </Modal.Footer>
           </>
-        ) : (
+        )
+      }
+         {props.modelfor === "question" && (
           <>
 
           <Modal.Header>
@@ -264,6 +309,22 @@ useEffect(()=>
             </Modal.Footer>
           </>
         )}
+          {props.modelfor === "delivery" && (
+            <>
+            <Modal.Header>
+            <Modal.Title id="contained-modal-title-vcenter">
+               Delivery & Return
+            </Modal.Title>
+          </Modal.Header>
+
+              <Modal.Body>
+              <p>
+                {props.delievery}
+                </p>
+               </Modal.Body>
+                </>
+          )
+}
       </Modal>
     </div>
   );

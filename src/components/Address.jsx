@@ -22,7 +22,7 @@ function Address() {
         },
       });
       console.log(Addresses.data.Address);
-      setAddress(Addresses.data.Address);
+      setAddress(Addresses.data.Address.addresses);
     }
     async function getuserOrders() {
       const order = await axios.get(`${API}/api/order/user_order`, {
@@ -90,9 +90,9 @@ function Address() {
           {address!=null?
           <div className="row mr-3 ml-3">
 
-            {address.map((el) => {
+            {address?.map((el) => {
               return (
-                <div className="col-4 w-25 bg-light border p-2">
+                <div className="col-4 w-25 bg-light border p-2" style={{margin:20}}>
                   <h6>{el.name}</h6>
                   <p>{`${el.address} ${el.state} ${el.pin} ${el.country}`}</p>
                   <p>

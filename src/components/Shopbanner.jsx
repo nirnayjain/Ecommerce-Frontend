@@ -27,12 +27,12 @@ function Shopbanner(props) {
             data-bgset="assets/images/shop/shop-banner.jpg"
           ></div>
           <div class="container pr z_100">
-            <h1 class="mb__5 cw">{products[0]?.category}</h1>
+            <h1 class="mb__5 cw">{props.category}</h1>
             {props.heading ? (
               <h3 style={{ color: "white" }}>{props.heading}</h3>
             ) : (
               <p class="mg__0">
-                "Shop through our latest selection of color cosmetics"
+                "Shop through our latest selection of Products"
               </p>
             )}
           </div>

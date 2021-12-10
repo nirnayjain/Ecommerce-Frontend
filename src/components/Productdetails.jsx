@@ -252,7 +252,7 @@ function Producdetails() {
                       className="ajax_pp_js cd chp mr__20"
                       href="#"
                       data-id="#popup-delivery-and-return"
-                      onClick={() => handlePopUp("address")}
+                      onClick={() => handlePopUp("delivery")}
                     >
                       Delivery &amp; Return
                     </a>

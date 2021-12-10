@@ -7,6 +7,8 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Navigation from "./Navigation";
 import Wishlist from "./wishlist"
+import Shopbanner from "./Shopbanner";
+
 
 function Allproductlist() {
   const { category } = useParams();
@@ -30,6 +32,7 @@ function Allproductlist() {
     <div>
       <Header />
       <Navigation active={category}/>
+      <Shopbanner category={category}/>
       <div className="container">
         <div className="row">
           <Categoryfilter setProducts={setProducts} isCategory={true} />

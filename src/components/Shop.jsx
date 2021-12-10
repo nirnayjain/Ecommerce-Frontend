@@ -14,10 +14,10 @@ function Shop() {
     <div>
       <Header />
       <Navigation active={category}/>
-      <Shopbanner />
+      <Shopbanner category={category}/>
       <div className="container">
         <div className="row">
-          <Categoryfilter setProducts={setProducts}  isCatgeory={false}/>
+          <Categoryfilter setProducts={setProducts}  isCategory={false}/>
           <Productlist setProducts={setProducts} products={products}/>
         </div>
       </div>
