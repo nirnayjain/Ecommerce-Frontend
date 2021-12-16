@@ -126,7 +126,7 @@ function Productlist({products, setProducts}) {
         </div>
       </div>
       <div class="products-footer tc mt__40">
-        <nav class="nt-pagination w__100 tc paginate_ajax">
+        {/* <nav class="nt-pagination w__100 tc paginate_ajax">
           <ul class="pagination-page page-numbers">
             <li>
               <span class="page-numbers current">1</span>
@@ -152,7 +152,7 @@ function Productlist({products, setProducts}) {
               </a>
             </li>
           </ul>
-        </nav>
+        </nav> */}
       </div>
     </div>
   );

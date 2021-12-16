@@ -11,7 +11,7 @@ import Pagination from "./Pagination";
 const Blogs = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [active, setActive] = useState(1);
-  const [postperpage, setPostPerPage] = useState(10);
+  const [postperpage, setPostPerPage] = useState(1);
   const [totalRes, setTotalRes] = useState(0);
   const [blogdetails, setBlogDetails] = useState(null);
   const [recentBlog, setRecentBlog] = useState(null);
@@ -21,12 +21,12 @@ const Blogs = () => {
     getBlogCategory();
   }, [currentPage, postperpage]);
 
-  const paginate = async (e) => {
-    setActive(Number(e.target.value));
-    setCurrentPage(e.target.value * 1);
+  const paginate = async (page) => {
+    setActive(Number(page));
+    setCurrentPage(page * 1);
   };
 
-  
+
   async function getBlogDetails() {
     let res = await axios.get(
       `${API}/api/blog/view_Blog?page=${currentPage}&limit=${postperpage}`
@@ -265,10 +265,10 @@ const Blogs = () => {
                 >
                   {/* <nav className="nt-pagination w__100 tc paginate_ajax">
                     <ul className="pagination-page page-numbers">
-                     
+
                       <li><a className="page-numbers" href="#">2</a></li>
-                    
-                      
+
+
                     </ul>
                   </nav> */}
                   <Pagination

@@ -7,10 +7,16 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Navigation from "./Navigation";
 import Wishlist from "./wishlist"
+import Pagination from "./Pagination";
+
 import Shopbanner from "./Shopbanner";
 
 
 function Allproductlist() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [active, setActive] = useState(1);
+  const [postperpage, setPostPerPage] = useState(1);
+  const [totalRes, setTotalRes] = useState(0);
   const { category } = useParams();
   const [products, setProducts] = useState(null)
   let subCategory = [];
@@ -22,11 +28,15 @@ function Allproductlist() {
       const list = productList.data.product.filter((prod) => {
         return prod.category === category && prod.status;
       });
-
+      setTotalRes(list.length);
       setProducts(list);
     }
     getProduct();
   }, []);
+  const paginate = async (page) => {
+    setActive(page*1);
+    setCurrentPage(page*1);
+  };
 
   return (
     <div>
@@ -43,7 +53,7 @@ function Allproductlist() {
 {products!=null?
 <>
                 {products.length > 0 ? (
-                  products.map((item, index) => {
+                  products.slice((currentPage-1)*postperpage,((currentPage-1)*postperpage)+postperpage).map((item, index) => {
                     return (
                       <div
                         key={index}
@@ -116,7 +126,16 @@ function Allproductlist() {
               </div>
             </div>
             <div class="products-footer tc mt__40">
-              <nav class="nt-pagination w__100 tc paginate_ajax">
+            <Pagination
+                    postsPerPage={postperpage}
+                    page={currentPage}
+                    setPage={setCurrentPage}
+                    totalPosts={totalRes}
+                    paginate={paginate}
+                    active={active}
+                    setActive={setActive}
+                  />
+              {/* <nav class="nt-pagination w__100 tc paginate_ajax">
                 <ul class="pagination-page page-numbers">
                   <li>
                     <span class="page-numbers current">1</span>
@@ -142,7 +161,7 @@ function Allproductlist() {
                     </a>
                   </li>
                 </ul>
-              </nav>
+              </nav> */}
             </div>
           </div>
         </div>

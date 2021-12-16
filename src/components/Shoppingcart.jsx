@@ -71,7 +71,7 @@ function Shoppingcart() {
             method="post"
             class="frm_cart_ajax_true frm_cart_page nt_js_cart pr oh "
           >
-            <div class="cart_header">
+            <div class="cart_header" style={{marginBottom:20}}>
               <div class="row al_center">
                 <div class="col-5">Product</div>
                 <div class="col-3 tc">Price</div>
@@ -82,15 +82,16 @@ function Shoppingcart() {
 
             {cartItem.map((item, index) => {
               return (
-                <div key={index} class="cart_items js_cat_items">
+                <div key={index} class="cart_items js_cat_items" style={{marginBottom:20}}>
                   <div class="cart_item js_cart_item">
                     <div class="ld_cart_bar"></div>
                     <div class="row al_center">
                       <div class="col-12 col-md-12 col-lg-5">
                         <div class="page_cart_info flex al_center">
-                          <a href="product-detail-layout-01.html">
+                          <a href={`/productDetails/${item.product?._id}`}>
                             <img
-                              class="lazyload w__100 lz_op_ef"
+                               class="lazyload w__100 lz_op_ef"
+                               style={{width:150,height:150}}
                               src={
                                 item.product ? item.product?.featuredImage : item.featuredImage
                               }
@@ -101,7 +102,7 @@ function Shoppingcart() {
                           </a>
                           <div class="mini_cart_body ml__15">
                             <h5 class="mini_cart_title mg__0 mb__5">
-                              <a href="product-detail-layout-01.html">
+                              <a href={`/productDetails/${item.product?._id}`}>
                                 {item.product
                                   ? item.product?.title
                                   : item.title}

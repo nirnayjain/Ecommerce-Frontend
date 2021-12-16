@@ -15,12 +15,49 @@ function Paymentpage() {
   const history = useHistory();
   const search = useLocation().search;
   const[loading,setLoading]=useState(false)
-  const amount = new URLSearchParams(search).get("amount");
+
+  // const amount = new URLSearchParams(search).get("amount");
   const { id } = useParams();
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const [data, setData] = useState("");
+  const [amount, setAmount] = useState("");
   const [orderData, setOrderData] = useState("");
+  useEffect(() => handlePayment(), []);
+
+  async function handlePayment() {
+    const response = await axios.get(`${API}/api/order/${id}`);
+
+    setOrderData(response.data.order);
+    setAmount(response.data.order.Amount+response.data.order.shipping-response.data.order.amountOff)
+
+    const res = await axios.post(
+      `${API}/api/user/payment_gateway/payumoney`,
+      {
+        txnid: id,
+        amount: amount,
+        productinfo: "Shopping",
+        // firstname: "Nirnay",
+        // email: "nirnayrockjain@gmail.com",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    setData(res.data);
+    // const payment = await axios.patch(`${API}/api/order/update_order/${id}`, {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // });
+    // if (payment) {
+    //   dispatch(delteUserCart());
+    //   history.push("/payment-success");
+    // }
+  }
   const loadScript = (src) => {
 		return new Promise((resolve) => {
 			const script = document.createElement("script");
@@ -45,9 +82,24 @@ function Paymentpage() {
 			return;
 		}
 
+    // const response = await axios.post(
+    //   `${API}/razorpay`,
+    //   {
+
+    //     amount: amount,
+
+    //   },
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   }
+    // );
+
 		const options = {
 			key:"rzp_test_QZl686NiTx6lhk",
-			amount:amount*100,
+			amount: amount * 100,
+
 			currency: "INR",
 			name: "POP",
 			description: "Order",
@@ -81,39 +133,7 @@ const res=	await axios.post( `${API}/api/razorpay/confirmPayment`,{
   else
   history.push(`/payment-failed`)
 };
-  useEffect(() => handlePayment(), []);
 
-  async function handlePayment() {
-    const response = await axios.get(`${API}/api/order/${id}`);
-    console.log(response.data);
-    setOrderData(response.data.order);
-    const res = await axios.post(
-      `${API}/api/user/payment_gateway/payumoney`,
-      {
-        txnid: id,
-        amount: amount,
-        productinfo: "Shopping",
-        // firstname: "Nirnay",
-        // email: "nirnayrockjain@gmail.com",
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    setData(res.data);
-    // const payment = await axios.patch(`${API}/api/order/update_order/${id}`, {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // });
-    // if (payment) {
-    //   dispatch(delteUserCart());
-    //   history.push("/payment-success");
-    // }
-  }
   return (
     <div>
       {loading ?

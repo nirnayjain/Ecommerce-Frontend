@@ -196,7 +196,7 @@ function Checkout() {
             },
           });
           const orderID = order.data.orderId;
-          history.push(`/payment/${orderID}?amount=${(totalPrice-amountOff+shipping).toFixed(1)}`);
+          history.push(`/payment/${orderID}`);
         }
       }
     }
@@ -419,7 +419,7 @@ function Checkout() {
                         <tr className="cart-subtotal cart_item">
                           <th>Subtotal <strong>(Inclusive of Taxes)</strong></th>
                           <td>
-                            <span className="cart_price">Rs. {totalPrice.toFixed(1)}</span>
+                            <span className="cart_price">Rs. {totalPrice.toFixed(2)}</span>
                           </td>
                         </tr>
                         {/* {discount!=null || freeShipping ?
@@ -433,7 +433,7 @@ function Checkout() {
                         <tr className="cart-subtotal cart_item">
                           <th>Discount</th>
                           <td>
-                            <span className="cart_price">Rs. {amountOff.toFixed(1)}</span>
+                            <span className="cart_price">Rs. {amountOff.toFixed(2)}</span>
                           </td>
                         </tr>:""}
 
@@ -450,7 +450,7 @@ function Checkout() {
                           <td>
                             <strong>
                               <span className="cart_price amount">
-                                Rs. {(totalPrice-amountOff+shipping).toFixed(1)}
+                                Rs. {(totalPrice-amountOff+shipping).toFixed(2)}
                               </span>
                             </strong>
                           </td>
