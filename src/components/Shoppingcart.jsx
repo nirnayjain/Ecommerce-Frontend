@@ -88,7 +88,9 @@ function Shoppingcart() {
                     <div class="row al_center">
                       <div class="col-12 col-md-12 col-lg-5">
                         <div class="page_cart_info flex al_center">
-                          <a href={`/productDetails/${item.product?._id}`}>
+                          <a href={ item.product ? `/${item.title}/${item.product?._id}`:
+                          `/${item.title}/${item._id}`
+                        }>
                             <img
                                class="lazyload w__100 lz_op_ef"
                                style={{width:150,height:150}}
@@ -102,7 +104,9 @@ function Shoppingcart() {
                           </a>
                           <div class="mini_cart_body ml__15">
                             <h5 class="mini_cart_title mg__0 mb__5">
-                              <a href={`/productDetails/${item.product?._id}`}>
+                            <a href={ item.product ? `/${item.product?.title.replace(/\s+/g, '-').toLowerCase()}/${item.product?._id}`:
+                          `/${item.title.replace(/\s+/g, '-').toLowerCase()}/${item._id}`
+                        }>
                                 {item.product
                                   ? item.product?.title
                                   : item.title}

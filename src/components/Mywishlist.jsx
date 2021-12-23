@@ -50,7 +50,7 @@ function Mywishlist() {
                       />
 </a>
                     <div style={{ marginLeft: "2rem" }}>
-                      <a href={`/productDetails/${el.product._id}`}>
+                      <a href={`/${el.product.title.replace(/\s+/g, '-').toLowerCase()}/${el.product._id}`}>
                         <p>{el.product.title}</p>
                       </a>
 

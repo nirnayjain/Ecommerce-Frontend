@@ -53,7 +53,7 @@ function Newproducts() {
                           <span>-34%</span>
                         </span>
                       </span> */}
-                      <a className="db" href={`/productDetails/${product._id}`}>
+                      <a className="db" href={`/${product.title.replace(/\s+/g, '-').toLowerCase()}/${product._id}`}>
                         <div
                         style={{width:265,height:320}}
                           className="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__100"

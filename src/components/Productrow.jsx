@@ -49,7 +49,7 @@ function Productrow() {
                   <span class="tc nt_labels pa pe_none cw">
                     <span class="nt_label new">New</span>
                   </span>
-                  <a class="db" href={`/productDetails/${i._id}`}>
+                  <a class="db" href={`/${i.title.replace(/\s+/g, '-').toLowerCase()}/${i._id}`}>
                     <div
                       class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__100"
                       data-bgset={i?.featuredImage}
