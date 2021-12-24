@@ -33,9 +33,7 @@ function Hero() {
                   <div className="caption-wrap caption-w-1 pe_none z_100 tl_md tc">
                     <div className="pa_txts caption">
                       <div className="left_right">
-                        <h4 className="slt4_h4 mg__0 lh__1 f_body kalles-cosmetics__main-slide-01__subtitle">
-                          NEW PRODUCT
-                        </h4>
+                      
                         <div className="slt4_space kalles-cosmetics__main-slide-01__br-02"></div>
                         <h3 className="slt4_h3 lh__1 mg__0 kalles-cosmetics__main-slide-01__title">
                           {item?.featured?.name}
