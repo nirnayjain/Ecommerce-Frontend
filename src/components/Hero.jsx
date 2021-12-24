@@ -33,7 +33,7 @@ function Hero() {
                   <div className="caption-wrap caption-w-1 pe_none z_100 tl_md tc">
                     <div className="pa_txts caption">
                       <div className="left_right">
-                      
+
                         <div className="slt4_space kalles-cosmetics__main-slide-01__br-02"></div>
                         <h3 className="slt4_h3 lh__1 mg__0 kalles-cosmetics__main-slide-01__title">
                           {item?.featured?.name}
@@ -41,7 +41,7 @@ function Hero() {
                         <div className="slt4_space kalles-cosmetics__main-slide-01__br-02"></div>
                         <a
                           className="slt4_btn button pe_auto round_false btn_icon_false kalles-cosmetics__main-slide-01__btn"
-                          href={`/${item.title.replace(/\s+/g, '-').toLowerCase()}/${item?._id}`}
+                          href={`/product/${item.title.replace(/\s+/g, '-').toLowerCase()}/${item?._id}`}
                         >
                           SHOP NOW
                         </a>

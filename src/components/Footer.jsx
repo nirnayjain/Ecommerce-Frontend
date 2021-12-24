@@ -153,7 +153,7 @@ function Footer() {
                         {category.map((item, index) => {
                           return (
                             <li className="menu-item" key={index}>
-                              <a href={`/allProducts/${item.category}`}>{item.category}</a>
+                              <a href={`/allProducts/${item.category.replace(/\s+/g, '-')}`}>{item.category}</a>
                             </li>
                           );
                         })}

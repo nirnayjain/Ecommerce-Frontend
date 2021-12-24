@@ -32,7 +32,7 @@ function Navigation({ active }) {
                     >
                       <div class="dropdown type_mn_link menu-item sub-column-item col-3">
                         <a
-                          href={`/allProducts/${cate.category}`}
+                          href={`/allProducts/${cate.category.replace(/\s+/g, '-')}`}
                           style={{ color: "black", whiteSpace: "nowrap" }}
                         >
                           {cate.category === active ? (
@@ -46,7 +46,7 @@ function Navigation({ active }) {
                           {cate.subCategory.map((subcate) => {
                             return (
                               <a
-                                href={`/shop/${cate.category}/${subcate.category}`}
+                                href={`/shop/${cate.category.replace(/\s+/g, '-')}/${subcate.category.replace(/\s+/g, '-')}`}
 
                               >
                                 {subcate.category}

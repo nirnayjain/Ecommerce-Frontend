@@ -107,7 +107,7 @@ function Productlist({products, setProducts}) {
                     </div>
                     <div class="product-info mt__15">
                       <h3 class="product-title pr fs__14 mg__0 fwm">
-                        <a class="cd chp" href={`/${item.title.replace(/\s+/g, '-').toLowerCase()}/${item._id}`}>
+                        <a class="cd chp" href={`/product/${item.title.replace(/\s+/g, '-').toLowerCase()}/${item._id}`}>
                           {item.title}
                         </a>
                       </h3>

@@ -104,8 +104,8 @@ function Shoppingcart() {
                           </a>
                           <div class="mini_cart_body ml__15">
                             <h5 class="mini_cart_title mg__0 mb__5">
-                            <a href={ item.product ? `/${item.product?.title.replace(/\s+/g, '-').toLowerCase()}/${item.product?._id}`:
-                          `/${item.title.replace(/\s+/g, '-').toLowerCase()}/${item._id}`
+                            <a href={ item.product ? `/product/${item.product?.title.replace(/\s+/g, '-').toLowerCase()}/${item.product?._id}`:
+                          `/product/${item.title.replace(/\s+/g, '-').toLowerCase()}/${item._id}`
                         }>
                                 {item.product
                                   ? item.product?.title

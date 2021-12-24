@@ -82,7 +82,7 @@ function Routes() {
         <Route path="/my-address" exact component={Address}></Route>
         <Route path="/order-details/:id" exact component={Orderdetails}></Route>
         <Route path="/change-password" exact component={Changepassword}></Route>
-        <Route path="/:title/:id" exact component={Productdetails} />
+        <Route path="/product/:title/:id" exact component={Productdetails} />
         {/* change  for product page*/}
 
         <Route path="/allProducts/:category" exact component={Allproductlist} />

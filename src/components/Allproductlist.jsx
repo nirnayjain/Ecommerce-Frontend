@@ -103,7 +103,7 @@ function Allproductlist() {
                             <h3 class="product-title pr fs__14 mg__0 fwm">
                               <a
                                 class="cd chp"
-                                href={`${item.title.replace(/\s+/g, '-').toLowerCase()}/${item._id}`}
+                                href={`/product/${item.title.replace(/\s+/g, '-').toLowerCase()}/${item._id}`}
                               >
                                 {item.title}
                               </a>
