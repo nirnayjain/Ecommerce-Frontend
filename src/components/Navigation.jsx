@@ -58,7 +58,7 @@ function Navigation({ active }) {
                     </li>
                   );
                 })}
-                {category !=undefined &&
+                {/* {category !=undefined &&
                 <>
                  <li
 
@@ -91,7 +91,7 @@ function Navigation({ active }) {
 
                     </li>
                     </>
-                    }
+                    } */}
               </ul>
             </nav>
           </div>

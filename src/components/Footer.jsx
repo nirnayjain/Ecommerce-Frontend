@@ -69,14 +69,14 @@ function Footer() {
           <div className="footer__top_wrap footer_sticky_false footer_collapse_true nt_bg_overlay pr oh pb__30 pt__80">
             <div className="container pr z_100">
               <div className="row">
-                <div className="col-lg-3 col-md-6 col-12 mb__50 order-lg-1 order-1">
+                <div className="col-lg-6 col-md-6 col-12 mb__50 order-lg-1 order-1">
                   <div className="widget widget_text widget_logo">
                     <h3 className="widget-title fwsb flex al_center fl_between fs__16 mg__0 mb__30 dn_md">
                       <span className="txt_title">Get in touch</span>
                       <span className="nav_link_icon ml__5"></span>
                     </h3>
                     <div className="widget_footer">
-                      <div className="footer-contact">
+                      <div className="footer-contact" >
                         <p>
                           <a className="db" href="/">
                             <img
@@ -86,7 +86,7 @@ function Footer() {
                             />
                           </a>
                         </p>
-                        <p>
+                        <p >
                           <i className="pegk pe-7s-map-marker"> </i>
                           <span>
                             {configuration[0]?.address[0].address}
@@ -142,14 +142,14 @@ function Footer() {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-2 col-md-6 col-12 mb__50 order-lg-2 order-1">
+                <div className="col-lg-6 col-md-6 col-12 mb__50 order-lg-2 order-1">
                   <div className="widget widget_nav_menu">
                     <h3 className="widget-title fwsb flex al_center fl_between fs__16 mg__0 mb__30">
-                      <span className="txt_title">Categories</span>
+                      <h2 className="txt_title">Categories</h2>
                       <span className="nav_link_icon ml__5"></span>
                     </h3>
                     <div className="menu_footer widget_footer">
-                      <ul className="menu">
+                      <ul className="menu" style={{display:'flex',gap:20}}>
                         {category.map((item, index) => {
                           return (
                             <li className="menu-item" key={index}>
@@ -161,7 +161,7 @@ function Footer() {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-2 col-md-6 col-12 mb__50 order-lg-3 order-1">
+                {/* <div className="col-lg-2 col-md-6 col-12 mb__50 order-lg-3 order-1">
                   <div className="widget widget_nav_menu">
                     <h3 className="widget-title fwsb flex al_center fl_between fs__16 mg__0 mb__30">
                       <span className="txt_title">Infomation</span>
@@ -183,8 +183,8 @@ function Footer() {
                       </>
                     )}
                   </div>
-                </div>
-                <div className="col-lg-2 col-md-6 col-12 mb__50 order-lg-4 order-1">
+                </div> */}
+                {/* <div className="col-lg-2 col-md-6 col-12 mb__50 order-lg-4 order-1">
                   <div className="widget widget_nav_menu">
                     <h3 className="widget-title fwsb flex al_center fl_between fs__16 mg__0 mb__30">
                       <span className="txt_title">Useful links</span>
@@ -198,23 +198,12 @@ function Footer() {
                       <li className="menu-item">
                           <a href="/blogs">Blog</a>
                         </li>
-                        {/* <li className="menu-item">
-                          <a href="#">Store Location</a>
-                        </li>
-                        <li className="menu-item">
-                          <a href="#">Latest Posts</a>
-                        </li>
-                        <li className="menu-item">
-                          <a href="about-us.html">About Us</a>
-                        </li>
-                        <li className="menu-item">
-                          <a href="#">FAQs</a>
-                        </li> */}
+
                       </ul>
                     </div>
                   </div>
-                </div>
-                <div className="col-lg-3 col-md-6 col-12 mb__50 order-lg-5 order-1">
+                </div> */}
+                {/* <div className="col-lg-3 col-md-6 col-12 mb__50 order-lg-5 order-1">
                   <div className="widget widget_text">
                     <h3 className="widget-title fwsb flex al_center fl_between fs__16 mg__0 mb__30">
                       <span className="txt_title">Newsletter Signup</span>
@@ -256,7 +245,7 @@ function Footer() {
                       </form>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -269,12 +258,12 @@ function Footer() {
             <div className="container pr tc">
               <div className="row">
                 <div className="col-lg-6 col-md-12 col-12 col_1">
-                  Copyright © 2021
-                  <span className="cp">Potions of Paradise</span> All rights
+                  Copyright © 2022 &nbsp;
+                  <span className="cp">Shop India</span> All rights
                   reserved.
                 </div>
                 <div className="col-lg-6 col-md-12 col-12 col_2">
-                  <ul id="footer-menu" className="clearfix">
+                  {/* <ul id="footer-menu" className="clearfix">
                     <li className="menu-item">
                       <a href="/">Shop</a>
                     </li>
@@ -287,7 +276,7 @@ function Footer() {
                     <li className="menu-item">
                       <a href="/blogs">Blog</a>
                     </li>
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
             </div>

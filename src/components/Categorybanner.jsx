@@ -31,7 +31,7 @@ function Categorybanner() {
           <div className="wrap_title des_title_7">
             <h3 className="section-title tc pr flex fl_center al_center fs__24 title_7">
               <span className="mr__10 ml__10">
-                Welcome to Potions of Paradise Natural Skincare
+                Welcome to Shop India
               </span>
             </h3>
             <span className="dn tt_divider">
