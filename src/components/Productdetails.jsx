@@ -246,7 +246,7 @@ function Producdetails() {
                     </div>
                   </div>
                 </div>
-                <div className="extra-link mt__10 fwsb">
+                {/* <div className="extra-link mt__10 fwsb">
                   {productDetailes.delievery != undefined && (
                     <a
                       className="ajax_pp_js cd chp mr__20"
@@ -295,17 +295,7 @@ function Producdetails() {
                     <a href="shop-filter-options.html" className="cg">
                       {productDetailes?.category}
                     </a>
-                    {/* <a href="shop-filter-options.html" className="cg">
-                              Dress
-                            </a>
-                            ,{" "}
-                            <a href="shop-filter-options.html" className="cg">
-                              New Arrival
-                            </a>
-                            ,{" "}
-                            <a href="shop-filter-options.html" className="cg">
-                              Women
-                            </a> */}
+
                   </span>
                   <span className="tagged_as">
                     <span className="cb">Tags:</span>{" "}
@@ -408,7 +398,7 @@ function Producdetails() {
                       </svg>
                     </a>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

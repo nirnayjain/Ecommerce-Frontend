@@ -204,7 +204,7 @@ function Shoppingcart() {
             <div class="cart__footer mt__60">
               <div class="row">
                 <div class="col-12 col-md-6 cart_actions tl_md tc order-md-2 order-2 mb__50">
-                  <label
+                  {/* <label
                     for="CartSpecialInstructions_2"
                     class="cart-note__label dib cd mb__10"
                   >
@@ -216,21 +216,8 @@ function Shoppingcart() {
                     id="CartSpecialInstructions_2"
                     class="cart-note__input"
                     placeholder="How can we help you?"
-                  ></textarea>
-                  {/* <label
-                    for="couponcode"
-                    class="cart-couponcode__label db cd mt__20 mb__10"
-                  >
-                    Coupon:
-                  </label>
-                  <p>Coupon code will work on checkout page</p>
-                  <input
-                    type="text"
-                    name="discount"
-                    id="couponcode"
-                    placeholder="Coupon Code"
-                    class="w-50"
-                  /> */}
+                  ></textarea> */}
+
                 </div>
                 <div class="col-12 tr_md tc order-md-4 order-4 col-md-6">
                   <div class="total row in_flex fl_between al_center cd fs__18 tu">
@@ -268,7 +255,7 @@ function Shoppingcart() {
                       backgroundColor: "#56cfe1",
                       border: "1px solid #56cfe1",
                       width: "50%",
-                      marginTop: "2rem",
+                      margin: "2rem 0rem",
                       color: "white",
                     }}
                     type="button"

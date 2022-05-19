@@ -39,28 +39,28 @@ function Checkout() {
 
 
 
-  const [shipping, setShipping] = useState(0)
+//   const [shipping, setShipping] = useState(0)
 
- useEffect(()=>{
-   if(country.length>0&&state.length>0)
-   getShipmentPrice()
- },[country,state])
- const getShipmentPrice=async()=>{
-  const res = await axios.post(`${API}/api/shipment/get_shipping_price`,
-    {
-      country,
-      state
-    },
-    {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    }
-  )
-!freeShipping &&
-  setShipping(res.data.data)
+//  useEffect(()=>{
+//    if(country.length>0&&state.length>0)
+//    getShipmentPrice()
+//  },[country,state])
+//  const getShipmentPrice=async()=>{
+//   const res = await axios.post(`${API}/api/shipment/get_shipping_price`,
+//     {
+//       country,
+//       state
+//     },
+//     {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//     }
+//   )
+// !freeShipping &&
+//   setShipping(res.data.data)
 
- }
+//  }
   let cartItem = [];
   let totalPrice = 0;
   let totalQuantity = 0;
@@ -95,43 +95,43 @@ function Checkout() {
       category:item.product?item.product?.category:item.category
     });
   });
-  const applyCoupon=async()=>{
-    const res=await axios.post(`${API}/api/coupons/applyCoupon`,
-      {
-        totalPrice,product,code
-      },
-      {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(res)
-    if(res.data.status=="success")
-    {
-     alert.show(res.data.message, { type: "success" });
+  // const applyCoupon=async()=>{
+  //   const res=await axios.post(`${API}/api/coupons/applyCoupon`,
+  //     {
+  //       totalPrice,product,code
+  //     },
+  //     {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   });
+  //   console.log(res)
+  //   if(res.data.status=="success")
+  //   {
+  //    alert.show(res.data.message, { type: "success" });
 
-    if(res.data.message!="Free shipping applied")
-    {
-    setDiscount(res.data.data)
-    setAmountOff(res.data.data)
-    }
-    else
-    {
-    setFreeShipping(true)
-    setDiscount(null)
-    setAmountOff(0)
-    setShipping(0)
-    }
+  //   if(res.data.message!="Free shipping applied")
+  //   {
+  //   setDiscount(res.data.data)
+  //   setAmountOff(res.data.data)
+  //   }
+  //   else
+  //   {
+  //   setFreeShipping(true)
+  //   setDiscount(null)
+  //   setAmountOff(0)
+  //   setShipping(0)
+  //   }
 
-    }
-    else
-    {
-    alert.show(res.data.message, { type: "error" });
-    setCoupon("")
-    setDiscount(null)
-    setAmountOff(0)
-    }
-  }
+  //   }
+  //   else
+  //   {
+  //   alert.show(res.data.message, { type: "error" });
+  //   setCoupon("")
+  //   setDiscount(null)
+  //   setAmountOff(0)
+  //   }
+  // }
 
   let data = {
 
@@ -148,9 +148,9 @@ function Checkout() {
     city,
     orderNote,
     product,
-    shipping,
-    amountOff,
-    couponCode:code,
+    // shipping,
+    // amountOff,
+    // couponCode:code,
     Amount: totalPrice,
     totalQuantity: totalQuantity,
 
@@ -244,7 +244,7 @@ function Checkout() {
                         onChange={(e) => setlastName(e.target.value)}
                       />
                     </p>
-                    <p className="checkout-section__field col-12">
+                    {/* <p className="checkout-section__field col-12">
                       <label for="company">Company name (optional)</label>
                       <input
                         type="text"
@@ -252,7 +252,7 @@ function Checkout() {
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
                       />
-                    </p>
+                    </p> */}
                     <p className="checkout-section__field col-12">
                       <label for="address_country_ship_2">
                         Country / Region*
@@ -390,13 +390,13 @@ function Checkout() {
                         })}
                       </tbody>
                       <tfoot>
-                        <label
+                        {/* <label
                           for="couponcode"
                           className="cart-couponcode__label db cd mt__20 mb__10"
                         >
                           Coupon:
-                        </label>
-                        <div style={{width:50}}>
+                        </label> */}
+                        {/* <div style={{width:50}}>
                           <input
                             type="text"
                             name="discount"
@@ -414,7 +414,7 @@ function Checkout() {
 
                           >
                             Apply
-                          </button>
+                          </button> */}
 
                         <tr className="cart-subtotal cart_item">
                           <th>Subtotal <strong>(Inclusive of Taxes)</strong></th>
@@ -429,20 +429,20 @@ function Checkout() {
                             <span className="cart_price">{code}</span>
                           </td>
                         </tr>:""} */}
-                        {discount!=null?
+                        {/* {discount!=null?
                         <tr className="cart-subtotal cart_item">
                           <th>Discount</th>
                           <td>
                             <span className="cart_price">Rs. {amountOff.toFixed(2)}</span>
                           </td>
-                        </tr>:""}
+                        </tr>:""} */}
 
-                        <tr className="cart_item">
+                        {/* <tr className="cart_item">
                           <th>Shipping</th>
                           <td>
                             <span className="cart_price">Rs. {shipping}.00</span>
                           </td>
-                        </tr>
+                        </tr> */}
 
 
                         <tr className="order-total cart_item">
@@ -450,7 +450,7 @@ function Checkout() {
                           <td>
                             <strong>
                               <span className="cart_price amount">
-                                Rs. {(totalPrice-amountOff+shipping).toFixed(2)}
+                                Rs. {(totalPrice).toFixed(2)}
                               </span>
                             </strong>
                           </td>

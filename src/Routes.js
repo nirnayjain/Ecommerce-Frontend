@@ -47,8 +47,8 @@ function Routes() {
         <Route path="/" exact>
           <Header />
           <Navigation />
-          <Hero />
-         <Productrow />
+          {/* <Hero />
+         <Productrow /> */}
           <Categorybanner />
           <Newproducts />
           <Bottombanner />
